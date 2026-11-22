@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cockpit Practice Log</title>
+<title>Cockpit Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -64,8 +64,8 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 
 /* entries */
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 20px}
-.card{display:flex;flex-direction:column;gap:16px;transition:opacity .35s var(--ease)}
-.thumb{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--stage)}
+.card{display:flex;flex-direction:column;gap:12px;transition:opacity .35s var(--ease)}
+.thumb{position:relative;aspect-ratio:16/9;border-radius:12px;overflow:hidden;background:var(--stage)}
 .thumb .scr{position:absolute;left:10%;right:10%;top:50%;transform:translateY(-50%);border-radius:8px;overflow:hidden;transition:transform .6s var(--out)}
 .card:hover .thumb .scr{transform:translateY(-50%) scale(1.02)}
 .thumb .after{position:absolute;inset:0;clip-path:inset(0 100% 0 0)}
@@ -85,9 +85,9 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .card:hover .thumb .after{animation:none;clip-path:inset(0 0 0 0);transition:clip-path .7s var(--out)}
 .card:hover .thumb .cur{animation:none;opacity:0}
 .card:hover .thumb .lb.b{animation:none;opacity:0}.card:hover .thumb .lb.a{animation:none;opacity:1}
-.meta{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:baseline}
-.meta b{font-weight:400;color:var(--t3);font-size:13px}
-.meta .ttl{font-weight:500}
+.meta{display:flex;align-items:center;gap:10px;min-height:22px}
+.meta b{font-weight:400;color:var(--t3);font-size:13px;line-height:22px}
+.meta .ttl{font-weight:500;line-height:22px}
 .meta .ct{font-size:13px;color:var(--t3)}
 .card.soon{pointer-events:none}
 .card.soon .thumb{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
@@ -217,14 +217,14 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* home: sidebar index + grid */
 .shell{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
 .side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:28px 20px 24px 28px}
-.side .brand{padding:0 8px}
-.desc{text-wrap:balance;margin:12px 0 0;padding:0 8px;font-size:13px;line-height:20px;color:var(--t2)}
-.nav{margin-top:40px;display:flex;flex-direction:column;gap:2px}
+.side .brand{padding:0 10px;height:32px;display:flex;align-items:center;font-size:15px}
+.desc{text-wrap:balance;margin:0;font-size:13px;line-height:20px;color:var(--t2)}
+.nav{margin-top:32px;display:flex;flex-direction:column;gap:2px}
 .nav button{height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-radius:8px;font-size:14px;color:var(--t2);text-align:left;transition:background-color .2s,color .2s}
 .nav button:hover{background:var(--fill);color:var(--ink)}
 .nav button.on{background:var(--fill);color:var(--ink);font-weight:500}
 .nav small{font-size:12px;font-weight:400;color:var(--t3);font-variant-numeric:tabular-nums}.nav small.z{opacity:.5}
-.foot{margin-top:auto;display:flex;flex-direction:column;gap:14px;padding:0 8px}
+.foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;padding:0 10px}
 .foot .pg{display:flex;flex-direction:column;gap:8px}
 .foot .pg i{display:block;height:2px;border-radius:1px;background:var(--line);overflow:hidden}.foot .pg b{display:block;height:100%;background:var(--ink)}
 .foot .row{display:flex;justify-content:space-between;align-items:center;margin-right:-8px}
@@ -313,7 +313,7 @@ body.lock{overflow:hidden}
   .wrap{padding:0 20px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
   .sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.demo{flex:none;padding:64px 16px 16px}.right{overflow:visible;padding:32px 20px 96px}.ctrl{grid-template-columns:1fr 1fr;gap:14px}.ctrl .sl{grid-column:1/-1}.flnav{left:50%;bottom:20px;position:fixed}}
 @media(max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}.side{min-width:0;position:static;height:auto;padding:24px 20px 0}.desc{margin-top:8px}.nav{margin:24px -20px 0;padding:0 20px 4px;flex-direction:row;overflow-x:auto;scrollbar-width:none;position:sticky;top:0}.nav::-webkit-scrollbar{display:none}.nav button{flex:none;gap:6px;height:32px}.foot{display:none}.mainc{padding:24px 20px 96px}}
-@media(max-width:560px){.grid{grid-template-columns:1fr}.meta{grid-template-columns:36px 1fr}.meta .ct{display:none}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
 </head>
@@ -445,10 +445,9 @@ function viewHome(){
   return `
   <div class="shell">
     <aside class="side">
-      <a class="brand" href="#home"><span class="mark"></span>Cockpit Practice Log</a>
-      <p class="desc">100 before/after fixes for AI-made car screens.</p>
+      <a class="brand" href="#home">Cockpit Log</a>
       <nav class="nav" id="nav">${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
-      <div class="foot"><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
+      <div class="foot"><p class="desc">Before/after fixes for AI-made car screens.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
         <div class="row"><span class="lbl13">Peixin</span><button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button></div></div>
     </aside>
     <main class="mainc"><div class="mh"><span id="mTitle">All</span><span class="lbl13 num" id="mCount">${PUBLISHED} published</span></div><div class="grid" id="grid">${gridFor('All')}</div></main>
