@@ -223,9 +223,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nav button{height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:10px;font-size:14px;color:var(--t2);text-align:left;transition:background-color .2s var(--ease),color .2s}
 .nav button:hover{color:var(--ink)}
 .nav{position:relative}
-.navind{position:absolute;left:0;top:0;width:100%;height:36px;border-radius:10px;background:var(--panel);box-shadow:var(--lift);z-index:0;pointer-events:none;opacity:0}
-.navind[data-slide]{transition:transform .24s var(--out),width .24s var(--out)}
-@media(prefers-reduced-motion:reduce){.navind[data-slide]{transition:none}}
+.navind{position:absolute;left:0;top:0;width:100%;height:36px;will-change:top,height;border-radius:10px;background:var(--panel);box-shadow:var(--lift);z-index:0;pointer-events:none;opacity:0}
 .nav button{position:relative;z-index:1}
 .nav button.on{background:none;color:var(--ink);font-weight:500}
 .nav small{font-size:12px;font-weight:400;color:var(--t3);font-variant-numeric:tabular-nums}
@@ -466,13 +464,27 @@ function seg(el,onChange){const ind=$('.ind',el);const place=(b,anim)=>{if(!anim
   el._place=()=>place($('button.on',el),false)}
 addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
-function moveNav(){const ind=$('#navind'),on=$('#nav button.on');if(!ind)return;
-  ind.toggleAttribute('data-slide',!!on&&ind.style.opacity==='1');ind.style.opacity=on?'1':'0';
-  if(on){const row=getComputedStyle($('#nav')).flexDirection==='row';ind.style.height=on.offsetHeight+'px';ind.style.width=(row?on.offsetWidth:$('#nav').clientWidth)+'px';ind.style.transform=row?`translate(${on.offsetLeft}px,${on.offsetTop}px)`:`translateY(${on.offsetTop}px)`}}
-addEventListener('resize',()=>{const i=$('#navind');if(i){i.removeAttribute('data-slide');moveNav()}});
+function slide(el,axis,from,to,ms=380){
+  const P=axis==='y'?['top','height']:['left','width'];const d=to.s-from.s;
+  if(!from.z||Math.abs(d)<1){el.style[P[0]]=to.s+'px';el.style[P[1]]=to.z+'px';return}
+  const lead=0.78,trail=0.32;
+  const mid=d>0?{s:from.s+d*trail,z:(from.s+from.z+d*lead)-(from.s+d*trail)}:{s:from.s+d*lead,z:(from.s+from.z+d*trail)-(from.s+d*lead)};
+  const k=(o,f)=>({[P[0]]:o.s+'px',[P[1]]:o.z+'px',...(f!=null?{offset:f}:{})});
+  el.getAnimations().forEach(a=>a.cancel());
+  el.animate([{...k(from,0),easing:'cubic-bezier(.15,.85,.35,1)'},{...k(mid,.38),easing:'cubic-bezier(.25,1.35,.5,1)'},k(to,1)],{duration:ms,easing:'linear'});
+  el.style[P[0]]=to.s+'px';el.style[P[1]]=to.z+'px';
+}
+let navFrom=null;
+function moveNav(anim){const ind=$('#navind'),on=$('#nav button.on'),nav=$('#nav');if(!ind||!on)return;ind.style.opacity='1';
+  const row=getComputedStyle(nav).flexDirection==='row',ax=row?'x':'y';
+  const to=row?{s:on.offsetLeft,z:on.offsetWidth}:{s:on.offsetTop,z:on.offsetHeight};
+  if(row){ind.style.top=on.offsetTop+'px';ind.style.height=on.offsetHeight+'px';ind.style.width='';}else{ind.style.left='0px';ind.style.width='100%';}
+  if(anim&&navFrom&&navFrom.ax===ax)slide(ind,ax,navFrom,to);else{if(row){ind.style.left=to.s+'px';ind.style.width=to.z+'px'}else{ind.style.top=to.s+'px';ind.style.height=to.z+'px'}}
+  navFrom={...to,ax};}
+addEventListener('resize',()=>moveNav(false));
 function setupHome(){
-  requestAnimationFrame(moveNav);
-  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));moveNav();const c=b.dataset.c,g=$('#grid');
+  requestAnimationFrame(()=>moveNav(false));
+  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));moveNav(true);const c=b.dataset.c,g=$('#grid');
     g.innerHTML=gridFor(c);
     $$('.card',g).forEach(el=>el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:parseFloat(el.style.getPropertyValue('--d'))||0,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
     if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'})});
