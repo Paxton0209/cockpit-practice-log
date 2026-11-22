@@ -45,6 +45,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .prog .bar{width:64px;height:4px;border-radius:2px;background:var(--line);overflow:hidden}
 .prog .bar i{display:block;height:100%;width:0;background:var(--ink);border-radius:2px;transition:width 1.2s var(--out)}
 .prog b{font-weight:500;color:var(--ink)}
+.tl{font-size:14px;color:var(--t2);transition:color .15s}.tl:hover{color:var(--ink)}
 .btn{height:32px;padding:0 14px;border-radius:8px;display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:500}
 .btn.k{background:var(--ink);color:var(--bg)}
 .btn.k:hover{opacity:.88}
@@ -115,7 +116,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px 20px;padding-bottom:40px}
 .card{display:flex;flex-direction:column;gap:12px;text-align:left}
 .thumb{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:var(--stage);transition:box-shadow .35s var(--ease),transform .5s var(--out)}
-.card:hover .thumb{box-shadow:var(--lift);transform:translateY(-3px)}
+.card:hover .thumb{transform:translateY(-2px)}
 .thumb .scr{position:absolute;inset:14% 12%;border-radius:8px;overflow:hidden;background:var(--b2)}
 .thumb .before,.thumb .after{position:absolute;inset:0;display:grid;grid-template-columns:38.2% 1fr}
 .thumb .before{background:var(--b2)}
@@ -137,17 +138,35 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .card.soon .thumb{background:transparent;box-shadow:inset 0 0 0 1.5px var(--line)}
 .card.soon .thumb::after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(135deg,transparent 0 10px,var(--fill) 10px 11px)}
 
+/* chapters track */
+.chap{display:grid;grid-template-columns:repeat(10,minmax(0,1fr));gap:12px;padding:28px 0 32px;box-shadow:inset 0 -1px 0 var(--line)}
+.chap .c{display:flex;flex-direction:column;gap:10px}
+.chap .tk{display:grid;grid-template-columns:repeat(10,1fr);gap:2px}
+.chap .tk i{height:14px;border-radius:2px;background:var(--fill);transition:transform .3s var(--out)}
+.chap .tk i.done{background:var(--ink);opacity:.82}
+.chap .tk i.next{box-shadow:inset 0 0 0 1.5px var(--ink);background:transparent;animation:pulse 1.8s var(--io) infinite}
+.chap .tk i:hover{transform:scaleY(1.35)}
+.chap .nm{font-size:12px;line-height:16px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chap .c.cur .nm{color:var(--ink)}
+.line{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding-top:28px}
+.line .r{font-size:14px;color:var(--t3)}
+.line .r b{font-weight:500;color:var(--ink)}
+/* prompts pair */
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pair .prompt .h{font-size:13px;color:var(--t3);margin-bottom:14px}
+.pair .prompt.k .h{color:var(--ink)}
 /* follow band */
 .follow{margin:24px 0 0;padding:56px 0;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center;box-shadow:inset 0 1px 0 var(--line)}
 .follow .l{display:flex;flex-direction:column;gap:12px}
-footer{padding:28px 0 40px;box-shadow:inset 0 1px 0 var(--line);display:flex;justify-content:space-between;font-size:13px;color:var(--t3)}
+footer{margin-top:80px;padding-bottom:40px;font-size:13px;color:var(--t3)}
+footer .in{display:flex;justify-content:space-between;padding-top:24px;box-shadow:inset 0 1px 0 var(--line)}
 
 /* entry */
 .crumb{display:flex;align-items:center;justify-content:space-between;padding:28px 0 0}
 .crumb a{display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--t2)}
 .crumb a:hover{color:var(--ink)}
 .pn{display:flex;gap:4px}
-.ehead{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:end;padding:32px 0 28px}
+.ehead{display:grid;grid-template-columns:auto 1fr;gap:28px;align-items:end;padding:36px 0 12px}
 .big{font-size:88px;line-height:80px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums}
 .ehead .l{display:flex;flex-direction:column;gap:12px;padding-bottom:8px}
 .tag{display:inline-flex;align-self:flex-start;height:24px;padding:0 9px;border-radius:6px;background:var(--fill);font-size:12px;line-height:24px;color:var(--t2)}
@@ -223,7 +242,7 @@ footer{padding:28px 0 40px;box-shadow:inset 0 1px 0 var(--line);display:flex;jus
 .toast.show{opacity:1;transform:translate(-50%,0)}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
 
-@media(max-width:860px){.wrap{padding:0 20px}.stage{aspect-ratio:4/3}.screen{left:30%;width:42%}.intro,.follow{grid-template-columns:1fr}.track,.blk{grid-template-columns:1fr;gap:12px}.ticks{grid-template-columns:repeat(25,1fr)}.grid{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr}.big{font-size:64px;line-height:60px}.prog .bar{display:none}}
+@media(max-width:860px){.chap{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:20px}.pair{grid-template-columns:1fr}.wrap{padding:0 20px}.stage{aspect-ratio:4/3}.screen{left:30%;width:42%}.intro,.follow{grid-template-columns:1fr}.track,.blk{grid-template-columns:1fr;gap:12px}.ticks{grid-template-columns:repeat(25,1fr)}.grid{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr}.big{font-size:64px;line-height:60px}.prog .bar{display:none}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}.btn.s.hide-sm{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
@@ -232,8 +251,7 @@ footer{padding:28px 0 40px;box-shadow:inset 0 1px 0 var(--line);display:flex;jus
 <header id="hdr"><div class="wrap hd">
   <a class="brand" href="#home"><span class="mark"></span>Cockpit Practice Log</a>
   <span class="sp"></span>
-  <span class="prog num" title="Entries published"><span class="bar"><i id="progBar"></i></span><b id="progN">000</b>/ 100</span>
-  <a class="btn k press" href="#follow">Follow</a>
+  <a class="tl" href="#follow">Follow on X</a>
   <button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button>
 </div></header>
 
@@ -243,9 +261,9 @@ footer{padding:28px 0 40px;box-shadow:inset 0 1px 0 var(--line);display:flex;jus
 
 <script>
 const PUBLISHED=12, TOTAL=100;
-const CATS=['Layout','Controls','Color','Type','Motion','AI'];
+const CHAPTERS=['Layout','Hierarchy','Controls','Color','Type','Icons','Motion','States','Voice & AI','Screens'];
 const rnd=(i,s=1)=>{const x=Math.sin(i*9301+s*49297)*233280;return x-Math.floor(x)};
-const ENTRIES=Array.from({length:TOTAL},(_,i)=>({n:i+1,cat:CATS[Math.floor(rnd(i+1,3)*CATS.length)],w1:55+rnd(i,1)*35,w2:30+rnd(i,2)*35}));
+const ENTRIES=Array.from({length:TOTAL},(_,i)=>({n:i+1,cat:CHAPTERS[Math.floor(i/10)],w1:55+rnd(i,1)*35,w2:30+rnd(i,2)*35}));
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pad=n=>String(n).padStart(3,'0');
 const g=(w,h=10,c='')=>`<span class="g ${c}" style="width:${w};height:${h}px"></span>`;
@@ -271,28 +289,19 @@ function viewHome(){
         <i class="pillar l"></i><i class="pillar r"></i><i class="dash"></i><i class="wheel" id="wheel"></i><i class="console"></i>
         <div class="screen" id="screen">${[0,1,2].map(slide).join('')}<i class="glare" id="glare"></i></div>
       </div>
-      <div class="cap"><div class="t"><span class="n num" id="capN">#${pad(PUBLISHED)}</span>${g('180px',10,'d')}</div><div class="dots" id="dots">${[0,1,2].map(k=>`<button aria-label="Slide ${k+1}"><i></i></button>`).join('')}</div></div>
+      <div class="cap"><div class="t"><span class="n num" id="capN">#${pad(PUBLISHED)}</span></div><div class="dots" id="dots">${[0,1,2].map(k=>`<button aria-label="Slide ${k+1}"><i></i></button>`).join('')}</div></div>
     </div>
+    <div class="line" data-r style="--d:80ms">${g('min(460px,70%)',14,'d')}<span class="r num"><b>${pad(PUBLISHED)}</b> / 100</span></div>
   </section>
 
-  <section class="wrap intro">
-    <div class="l" data-r style="--d:80ms">${g('min(520px,90%)',26,'d')}${g('min(360px,70%)',12)}</div>
-    <div class="acts" data-r style="--d:140ms"><a class="btn k press" href="#entry-${pad(PUBLISHED)}">Latest entry</a><a class="btn s press" href="#follow">Follow the 100</a></div>
-  </section>
+  <section class="wrap"><div class="chap" id="ticks" data-r style="--d:140ms">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${String(ci+1).padStart(2,'0')} ${c}</span></div>`).join('')}</div></section>
 
-  <section class="wrap"><div class="track" data-r style="--d:180ms"><b class="num">${pad(PUBLISHED)} / 100</b><div class="ticks" id="ticks">${ENTRIES.map(e=>`<i class="tick ${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div></div></section>
-
-  <section class="wrap">
-    <div class="bar2"><div class="chips" id="chips"><span class="ind"></span>${['All',...CATS].map((c,i)=>`<button class="${i?'':'on'}" data-c="${c}">${c}</button>`).join('')}</div><span class="sp"></span><span class="count num" id="count">${PUBLISHED} published</span></div>
+  <section class="wrap" style="padding-top:32px">
     <div class="grid" id="grid">${shown.map(card).join('')}</div>
   </section>
-
-  <section class="wrap" id="followSec"><div class="follow" data-r>
-    <div class="l">${g('min(420px,85%)',24,'d')}${g('min(300px,60%)',12)}</div>
-    <div class="acts" style="display:flex;gap:8px"><a class="btn k press" href="#follow">Follow on X</a><a class="btn s press" href="#follow">LinkedIn</a></div>
-  </div></section>
-  <footer class="wrap"><span>Cockpit Practice Log</span><span class="num">${pad(PUBLISHED)} of 100</span></footer>`;
+  ${foot('Follow on X')}`;
 }
+function foot(r){return `<footer class="wrap" id="followSec"><div class="in"><span>Cockpit Practice Log · by Peixin</span><span><a class="tl" href="#follow">${r}</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a class="tl" href="#follow">LinkedIn</a></span></div></footer>`}
 
 function viewEntry(n){
   const e=ENTRIES[n-1]||ENTRIES[0], prev=ENTRIES[n-2], next=ENTRIES[n];
@@ -300,7 +309,8 @@ function viewEntry(n){
   return `
   <section class="wrap">
     <div class="crumb"><a href="#home">${ARROW_L}All entries</a><div class="pn"><a class="ib press" href="${prev?'#entry-'+pad(prev.n):'#home'}" aria-label="Previous">${ARROW_L}</a><a class="ib press" href="${nextLive?'#entry-'+pad(next.n):'#home'}" aria-label="Next">${ARROW_R}</a></div></div>
-    <div class="ehead"><div class="big" data-r>${pad(e.n)}</div><div class="l" data-r style="--d:80ms"><span class="tag">${e.cat}</span>${g('min(560px,95%)',28,'d')}${g('min(380px,70%)',28,'d')}</div></div>
+    <div class="ehead"><div class="big" data-r>${pad(e.n)}</div><div class="l" data-r style="--d:80ms"><span class="tag">${String(Math.floor((e.n-1)/10)+1).padStart(2,'0')} ${e.cat}</span>${g('min(560px,95%)',28,'d')}</div></div>
+    <div class="prin" data-r style="--d:110ms;padding:0 0 32px">${g('min(640px,92%)',16,'dd')}</div>
 
     <div class="cmp" data-r style="--d:140ms">
       <div class="top"><span style="font-weight:500">Before / After</span><span class="sp"></span>
@@ -319,9 +329,11 @@ function viewEntry(n){
       </div>
     </div>
 
-    <div class="blk" data-r><b>Principle</b><div class="prin">${g('92%',22,'dd')}${g('64%',22,'dd')}</div></div>
-    <div class="blk" data-r><b>Prompt</b><div class="prompt"><div class="lines">${[88,72,94,60,80,45].map((w,i)=>g(w+'%',9,i%3===0?'d':'')).join('')}</div>
-      <button class="copy press" id="copyBtn"><span class="s s1"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5V3A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy</span><span class="s s2"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>Copied</span></button></div></div>
+        <div class="blk" data-r><b>Prompt</b><div class="pair">
+      <div class="prompt"><div class="h">Default</div><div class="lines">${[80,64,72].map(w=>g(w+'%',9)).join('')}</div></div>
+      <div class="prompt k"><div class="h">With cockpit rules</div><div class="lines">${[88,72,94,60,80,45].map((w,i)=>g(w+'%',9,i%3===0?'d':'')).join('')}</div>
+      <button class="copy press" id="copyBtn"><span class="s s1"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5V3A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy</span><span class="s s2"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>Copied</span></button></div>
+    </div></div>
     <div class="blk" data-r><b>Why</b><div class="why" id="why"><button><span style="font-weight:500">For practitioners</span><span class="pm"></span></button><div class="body"><div><div class="details">${[0,1,2].map(k=>`<div class="det"><div class="viz"><i class="box" style="width:${[44,30,56][k]}%"></i><i class="dim"></i></div>${g('60%',10,'d')}${g('90%',8)}${g('75%',8)}</div>`).join('')}</div></div></div></div></div>
     <div class="blk" data-r style="box-shadow:none"><b>Rules</b><div class="rules"><span>PR-01</span><span>PR-03</span><span>CT-02</span></div></div>
 
@@ -330,11 +342,7 @@ function viewEntry(n){
       ${nextLive?`<a class="r" href="#entry-${pad(next.n)}"><span class="n">${pad(next.n)}</span><span class="l">${g('80%',10,'d')}${g('50%',8)}</span></a>`:`<a class="r" href="#follow"><span class="n">${pad(PUBLISHED+1)}</span><span class="l"><span style="font-size:14px;color:var(--t2)">Next drop — follow to catch it</span></span></a>`}
     </div>
   </section>
-  <section class="wrap"><div class="follow" data-r style="margin-top:56px">
-    <div class="l">${g('min(420px,85%)',24,'d')}${g('min(300px,60%)',12)}</div>
-    <div class="acts" style="display:flex;gap:8px"><a class="btn k press" href="#follow">Follow on X</a><a class="btn s press" href="#follow">LinkedIn</a></div>
-  </div></section>
-  <footer class="wrap"><span>Cockpit Practice Log</span><span class="num">#${pad(e.n)}</span></footer>`;
+  ${foot('Follow on X')}`;
 }
 
 /* behaviours */
@@ -361,15 +369,10 @@ function setupHome(){
   st.addEventListener('pointerleave',()=>{cab.style.transform='';wh.style.transform='';gl.style.setProperty('--gx','0')});
   // ticks tooltip
   const tip=$('#tip');
-  $('#ticks').addEventListener('pointerover',e=>{const t=e.target.closest('.tick');if(!t)return;const n=+t.dataset.n,r=t.getBoundingClientRect();
+  $('#ticks').addEventListener('pointerover',e=>{const t=e.target.closest('.tk i');if(!t)return;const n=+t.dataset.n,r=t.getBoundingClientRect();
     tip.textContent=`#${pad(n)} · ${n<=PUBLISHED?'Published':n===PUBLISHED+1?'Next drop':'Coming'}`;tip.style.left=r.left+r.width/2+'px';tip.style.top=r.top-30+'px';tip.classList.add('on')});
   $('#ticks').addEventListener('pointerleave',()=>tip.classList.remove('on'));
-  $('#ticks').addEventListener('click',e=>{const t=e.target.closest('.tick.done');if(t)location.hash='entry-'+pad(+t.dataset.n)});
-  // filter
-  seg($('#chips'),b=>{const c=b.dataset.c,cards=$$('#grid .card');const first=new Map(cards.map(x=>[x,x.getBoundingClientRect()]));let n=0;
-    cards.forEach(x=>{const ok=c==='All'||x.dataset.cat===c||x.classList.contains('soon');x.style.display=ok?'':'none';if(ok&&!x.classList.contains('soon'))n++});
-    $('#count').textContent=`${n} published`;
-    cards.filter(x=>x.style.display!=='none').forEach((x,i)=>{const f=first.get(x),l=x.getBoundingClientRect();if(f&&f.width&&(f.left!==l.left||f.top!==l.top))x.animate([{transform:`translate(${f.left-l.left}px,${f.top-l.top}px)`},{transform:'none'}],{duration:560,easing:'cubic-bezier(.22,1,.36,1)'});else if(!f||!f.width)x.animate([{opacity:0,transform:'scale(.97)'},{opacity:1,transform:'none'}],{duration:420,delay:i*25,fill:'backwards',easing:'cubic-bezier(.22,1,.36,1)'})})});
+  $('#ticks').addEventListener('click',e=>{const t=e.target.closest('.tk i.done');if(t)location.hash='entry-'+pad(+t.dataset.n)});
 }
 function setupEntry(){
   const st=$('#cstage');let drag=false;
@@ -387,7 +390,6 @@ function setupEntry(){
 }
 function keyNav(e){if(!location.hash.startsWith('#entry-'))return removeEventListener('keydown',keyNav);if(e.key==='ArrowLeft')$('.pn a:first-child').click();if(e.key==='ArrowRight')$('.pn a:last-child').click()}
 
-function countUp(){const el=$('#progN'),t0=performance.now();const f=t=>{const p=Math.min(1,(t-t0)/1100);el.textContent=pad(Math.round(PUBLISHED*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f);requestAnimationFrame(()=>$('#progBar').style.width=PUBLISHED+'%')}
 
 function route(){
   const h=location.hash.slice(1);
@@ -407,7 +409,7 @@ addEventListener('scroll',()=>$('#hdr').classList.toggle('sc',scrollY>4),{passiv
     const st=document.createElement('style');st.textContent='::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}';document.head.appendChild(st);
     const t=document.startViewTransition(set);t.ready.then(()=>r.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${rad}px at ${x}px ${y}px)`]},{duration:600,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});t.finished.finally(()=>st.remove())}})();
 
-route();countUp();
+route();
 </script>
 </body>
 </html>
