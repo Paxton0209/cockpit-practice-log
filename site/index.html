@@ -390,9 +390,9 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .art{padding:28px 28px 8px}
 .art h2{font-size:18px;line-height:26px;font-weight:600;letter-spacing:-.005em}
 .art .lede{margin:6px 0 0;font-size:14px;line-height:22px;color:var(--t2)}
-.art .bv{display:none}
-.art[data-v=a] .bv[data-for=a],.art[data-v=b] .bv[data-for=b]{display:block;animation:bvIn .32s var(--out) both}
-@keyframes bvIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.bvs{display:grid}
+.bvs>.bv{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .24s ease,transform .36s var(--out),visibility 0s .36s}
+.art[data-v=a] .bv[data-for=a],.art[data-v=b] .bv[data-for=b]{opacity:1;visibility:visible;transform:none;transition:opacity .32s ease .06s,transform .4s var(--out) .06s,visibility 0s}
 .dp{margin:20px 0 0;padding:14px 16px;border-radius:12px;corner-shape:superellipse(1.6);background:var(--stage)}
 .dp span{display:block;font-size:12px;line-height:16px;color:var(--t3)}
 .dp p{margin:4px 0 0;font-size:15px;line-height:22px;color:var(--ink)}
@@ -535,7 +535,7 @@ const FIG_TURN='<svg width="80" height="80" viewBox="0 0 80 80" fill="none"><pat
 const FIG_NEXT='<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M17.6234 19.5497C17.3077 18.08 16.4805 16.7524 15.2658 15.819L10.166 11.8999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#B6B6B7"/><path d="M18.1014 4.41589L22.4347 11.0827C22.6297 11.3825 22.3631 11.7679 22.0138 11.6914L17.9224 10.7953C17.8667 10.7831 17.8091 10.7829 17.7535 10.7948L13.5117 11.6985C13.163 11.7727 12.8986 11.3882 13.093 11.0893L17.4306 4.41588C17.5884 4.17321 17.9437 4.17322 18.1014 4.41589Z" fill="currentColor"/><path d="M17.7664 27.1L17.7662 9.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>';
 const STR=(s,c='#1d1d1f',g='rgba(29,29,31,.35)')=>`<svg width="${s}" height="${s}" viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 15 L10.5 9.5" stroke="${g}" stroke-width="2.6"/><path d="M16 27 V6" stroke="${c}" stroke-width="2.6"/><path d="M11 10.5 L16 5 L21 10.5" stroke="${c}" stroke-width="2.6"/></svg>`;
 const CMP={
-T:{W:640,H:300,ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['The icon wins','A saturated 100 px blue tile is the loudest thing on the panel. The distance comes second.'],['44 px distance','Smaller than the one number a driver needs at a glance.'],['Extra words','“onto”, “THEN STRAIGHT”, “ARRIVAL”: labels and all-caps to read before the facts.'],['Three layers','A grey strip inside a white card, with tiles inside the strip. Boxes, not hierarchy.']],notes:[['One baseline','The number and its unit sit on the same baseline; the street lines up with the number’s left edge.'],['12 px from icon to text','The arrow lives in an 80 px keyline box, then a fixed 12 px gap before the text.'],['Hairline and a soft shadow','A 1 px border at 10% plus a 0 8 16 shadow at 18%. Depth without a heavy outline.'],['Continuous corners','Radius 16 with full corner smoothing, so the curve eases into the straight edge.']],
+T:{W:640,H:300,ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Icon outranks distance','A 100 px blue tile is the loudest element.'],['Distance too small','44 px for the number read at a glance.'],['Extra labels','“onto”, “THEN STRAIGHT”, all caps.'],['Nested boxes','Card, strip, tiles: three layers.']],notes:[['Shared baseline','Number and unit on one baseline; street aligned to the number.'],['12 px icon gap','80 px icon box, fixed 12 px to the text.'],['Hairline + soft shadow','1 px at 10%, shadow 0 8 16 at 18%.'],['Continuous corners','Radius 16, 100% corner smoothing.']],
   html:()=>`<div class="tw"><div class="t1">
   <div class="mn"><span class="mv">${FIG_TURN}</span>
   <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
@@ -663,8 +663,9 @@ function sheetHTML(n){
     </div>
     <article class="art" data-v="a">
       <h2>${e.title}</h2>
+      <div class="bvs">
       <div class="bv" data-for="b">
-        <p class="lede">One plain prompt, the first result, nothing edited.</p>
+        <p class="lede">One-line prompt. First result. No edits.</p>
         <div class="dp"><span>Default prompt</span><p>“${CMP[e.s].ask||p0}”</p></div>
         <ol class="chg">${(CMP[e.s].wrong||S.issues.map(t=>{const m=t.match(/^(.+?[.:])\s(.*)$/);return m?[m[1].replace(/[.:]$/,''),m[2]]:['',t]})).map(([h,t],i)=>`<li><span class="no">${i+1}</span><p>${h?`<b>${h}</b>`:''}${t}</p></li>`).join('')}</ol>
       </div>
@@ -675,6 +676,7 @@ function sheetHTML(n){
         <details class="row"><summary>${CHEV}<b>Parameters</b><span>${S.params.length} values</span></summary><div class="params">${S.params.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join('')}</div></details>
         <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn press" data-copy>Copy</button></summary><pre class="ptxt">${p1}</pre><p class="accp">The default prompt was one line: “${p0}”</p></details>
         <details class="row"><summary>${CHEV}<b>Skill</b><span>dashnote-car-screens</span><button class="cbtn" disabled>Coming soon</button></summary><p class="accp">One install, and your agent follows every Dashnote rule on its own.</p></details>
+      </div>
       </div>
       </div>
     </article></div>
