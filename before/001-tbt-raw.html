@@ -1,25 +1,6 @@
-<!-- Before for entry 001. Clean subagent run (no skills, no tools, no prior prompts), first result, no edits.
+<!-- Before for entry 001. Clean run on the default model (no skills, no tools, no prior prompts), first result, no edits.
 Prompt: "Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme."
 Plus content, the shared turn icon SVG, and an output-format note (one 480x214 HTML fragment, Inter). -->
-<div id="nav" style="width:480px;height:214px;box-sizing:border-box;overflow:hidden;position:relative;background:#F4F6F9;font-family:'Inter',sans-serif;color:#14181F;border-radius:20px;display:flex;flex-direction:column;">
-<style>
-#nav *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
-#nav .main{display:flex;align-items:center;gap:20px;padding:18px 22px 0 20px;flex:1}
-#nav .ico{width:112px;height:112px;border-radius:24px;background:#1F5EFF;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 12px rgba(31,94,255,.25)}
-#nav .ico svg{width:80px;height:80px}
-#nav .dist{font-size:60px;font-weight:700;letter-spacing:-2px;line-height:1;display:flex;align-items:baseline;gap:4px}
-#nav .dist span{font-size:28px;font-weight:600;letter-spacing:0;color:#5A6575}
-#nav .street{margin-top:8px;font-size:26px;font-weight:600;line-height:1.15;color:#14181F;white-space:nowrap}
-#nav .street small{display:block;font-size:13px;font-weight:500;color:#5A6575;letter-spacing:.8px;text-transform:uppercase;margin-bottom:2px}
-#nav .foot{height:62px;margin:0 12px 12px;background:#fff;border-radius:16px;display:flex;align-items:center;padding:0 18px;gap:12px;border:1px solid #E2E7EE}
-#nav .then{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;flex:1}
-#nav .then svg{width:26px;height:26px;color:#14181F}
-#nav .then em{font-style:normal;color:#5A6575;font-weight:500;font-size:15px}
-#nav .sep{width:1px;height:30px;background:#E2E7EE}
-#nav .eta{text-align:right;line-height:1.1}
-#nav .eta b{font-size:24px;font-weight:700;display:block}
-#nav .eta span{font-size:12px;font-weight:500;color:#5A6575;letter-spacing:.8px;text-transform:uppercase}
-</style>
-<div class="main"><div class="ico">[shared turn icon]</div><div><div class="dist">300<span>m</span></div><div class="street"><small>Turn right onto</small>Main Street</div></div></div>
-<div class="foot"><div class="then"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V5M6 11l6-6 6 6"/></svg><em>Then</em>Straight 150 m</div><div class="sep"></div><div class="eta"><b>10:48</b><span>Arrival</span></div></div>
-</div>
+<div class="nav-panel"><style>.nav-panel{box-sizing:border-box;width:480px;height:214px;padding:18px;background:#FFFFFF;border-radius:20px;font-family:Inter,sans-serif;color:#0F172A;display:flex;flex-direction:column;gap:14px;overflow:hidden;box-shadow:0 1px 2px rgba(15,23,42,.06),0 4px 16px rgba(15,23,42,.06);font-feature-settings:"tnum" 1;}.nav-panel *{box-sizing:border-box;margin:0;}.nav-panel .main{display:flex;align-items:center;gap:20px;height:100px;}.nav-panel .tile{flex:none;width:100px;height:100px;border-radius:18px;background:#1D4ED8;color:#FFFFFF;display:flex;align-items:center;justify-content:center;}.nav-panel .tile svg{width:84px;height:84px;display:block;}.nav-panel .info{display:flex;flex-direction:column;gap:4px;min-width:0;}.nav-panel .dist{font-size:44px;line-height:48px;font-weight:700;letter-spacing:-0.02em;}.nav-panel .dist span{font-size:26px;font-weight:600;color:#475569;margin-left:4px;letter-spacing:0;}.nav-panel .street{font-size:24px;line-height:30px;font-weight:600;color:#1E293B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}.nav-panel .strip{height:64px;border-radius:14px;background:#F1F5F9;display:flex;align-items:center;justify-content:space-between;padding:0 18px 0 14px;}.nav-panel .then{display:flex;align-items:center;gap:12px;}.nav-panel .then-icon{width:40px;height:40px;border-radius:10px;background:#FFFFFF;color:#334155;display:flex;align-items:center;justify-content:center;}.nav-panel .label{font-size:13px;line-height:16px;font-weight:500;color:#64748B;text-transform:uppercase;letter-spacing:.06em;}.nav-panel .value{font-size:20px;line-height:24px;font-weight:600;color:#0F172A;}.nav-panel .arrive{text-align:right;}</style>
+<div class="main"><div class="tile">[shared turn icon]</div><div class="info"><p class="dist">300<span>m</span></p><p class="street">onto Main Street</p></div></div>
+<div class="strip"><div class="then"><div class="then-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 20V5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M6 10.5L12 4.5L18 10.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div><p class="label">Then straight</p><p class="value">150 m</p></div></div><div class="arrive"><p class="label">Arrival</p><p class="value">10:48</p></div></div></div>
