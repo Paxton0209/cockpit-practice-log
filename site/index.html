@@ -419,6 +419,13 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .cbtn{flex:none;height:36px;padding:0 14px;border-radius:10px;corner-shape:superellipse(1.6);background:var(--panel);box-shadow:var(--lift);font-size:13px;font-weight:500;color:var(--ink);transition:background-color .2s,color .2s}
 .cbtn.done{background:var(--ink);color:var(--bg);box-shadow:none}
 .cbtn:disabled{box-shadow:none;background:none;color:var(--t3);font-weight:400}
+.row .rbx{overflow:hidden}
+.row.closing .chev{transform:none!important}
+.row .chev{transition:transform .28s cubic-bezier(.2,0,0,1)}
+.cbtn.hi{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px 0 12px;background:var(--ink);color:var(--bg);box-shadow:0 1px 2px rgba(0,0,0,.12),0 4px 12px -4px rgba(0,0,0,.25);transition:background-color .2s,transform .12s,box-shadow .2s}
+.cbtn.hi:hover{box-shadow:0 1px 2px rgba(0,0,0,.14),0 6px 16px -4px rgba(0,0,0,.32)}
+.cbtn.hi.done{background:#1f9d55;color:#fff}
+.row .ptxt{-webkit-mask-image:none}
 .row .params{margin:0 16px 16px 38px;padding:4px 16px;border-radius:10px;corner-shape:superellipse(1.6);background:var(--stage)}
 .params div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:8px 0;font-size:13px;line-height:20px}
 .params div+div{box-shadow:inset 0 1px 0 var(--line)}
@@ -540,7 +547,7 @@ const FIG_TURN='<svg width="80" height="80" viewBox="0 0 80 80" fill="none"><pat
 const FIG_NEXT='<svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M17.6234 19.5497C17.3077 18.08 16.4805 16.7524 15.2658 15.819L10.166 11.8999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#B6B6B7"/><path d="M18.1014 4.41589L22.4347 11.0827C22.6297 11.3825 22.3631 11.7679 22.0138 11.6914L17.9224 10.7953C17.8667 10.7831 17.8091 10.7829 17.7535 10.7948L13.5117 11.6985C13.163 11.7727 12.8986 11.3882 13.093 11.0893L17.4306 4.41588C17.5884 4.17321 17.9437 4.17322 18.1014 4.41589Z" fill="currentColor"/><path d="M17.7664 27.1L17.7662 9.5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>';
 const STR=(s,c='#1d1d1f',g='rgba(29,29,31,.35)')=>`<svg width="${s}" height="${s}" viewBox="0 0 32 32" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M16 15 L10.5 9.5" stroke="${g}" stroke-width="2.6"/><path d="M16 27 V6" stroke="${c}" stroke-width="2.6"/><path d="M11 10.5 L16 5 L21 10.5" stroke="${c}" stroke-width="2.6"/></svg>`;
 const CMP={
-T:{W:640,H:300,ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Icon outranks distance','A 100 px blue tile is the loudest element.'],['Distance too small','44 px for the number read at a glance.'],['Extra labels','“onto”, “THEN STRAIGHT”, all caps.'],['Nested boxes','Card, strip, tiles: three layers.']],notes:[['Shared baseline','Number and unit on one baseline; street aligned to the number.'],['12 px icon gap','80 px icon box, fixed 12 px to the text.'],['Hairline + soft shadow','1 px at 10%, shadow 0 8 16 at 18%.'],['Continuous corners','Radius 16, 100% corner smoothing.']],
+T:{W:640,H:300,ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Icon outranks distance','A 100 px blue tile is the loudest element.'],['Distance too small','44 px for the number read at a glance.'],['Extra labels','“onto”, “THEN STRAIGHT”, all caps.'],['Nested boxes','A strip inside a card, tiles inside the strip.']],notes:[['Shared baseline','Number and unit on one baseline; street aligned to the number.'],['12 px icon gap','80 px icon box, fixed 12 px to the text.'],['Hairline + soft shadow','1 px at 10%, shadow 0 8 16 at 18%.'],['Continuous corners','Radius 16, 100% corner smoothing.']],
   html:()=>`<div class="tw"><div class="t1">
   <div class="mn"><span class="mv">${FIG_TURN}</span>
   <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
@@ -572,12 +579,12 @@ const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,ca
 const PROMPTS={
 T:[`Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.`,
 `Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.
-Structure: top band 142 px (current maneuver), bottom band 72 px ("Then" and "Arrive").
-Top band: 80 px icon box, 12 px gap, then text. Padding 24 / 28.
-Type (Inter): distance 48/56 semibold, unit 40 semibold at 65% on the same baseline; street 28/36 medium, left-aligned to the distance.
-Bottom band: 24/32 medium; labels at 65%, values at 100%; next-turn icon 32 px; background #E2E2E2 at 70%.
-Surface: white at 65%, 1 px inside border rgba(15,23,41,.1), shadow 0 8 16 rgba(28,28,46,.18), radius 16 with full corner smoothing.
-No icon tiles, no all-caps labels, no extra words like "onto" or "Then straight".`]};
+Split it into two bands. The top band is 142 px tall and shows the current turn. The bottom band is 72 px tall and shows the next turn and the arrival time.
+In the top band, put the turn icon in an 80 px box, leave a 12 px gap, then the text. Pad the band 24 px top and bottom, 28 px left and right.
+Set the distance in Inter Semibold 48/56 and the unit in Inter Semibold 40 at 65% opacity, sitting on the same baseline. Set the street name in Inter Medium 28/36, lined up with the left edge of the distance.
+In the bottom band, use Inter Medium 24/32. Labels are 65% opacity and values are 100%. The next-turn icon is 32 px. The band background is #E2E2E2 at 70%.
+Make the panel white at 65%, with a 1 px inside border at rgba(15,23,41,0.1), a 0 8 16 shadow at rgba(28,28,46,0.18), and a 16 px radius with full corner smoothing.
+Don't put the icon in a colored tile, don't use all-caps labels, and don't add words like "onto" or "Then straight".`]};
 function prompts(e){if(PROMPTS[e.s])return PROMPTS[e.s];const t={A:'settings',B:'music player',C:'climate control'}[e.s];return [`Design a ${t} screen for a car's center display.`,
 `Design a ${t} screen for a car center display.
 Canvas: 1920 × 720 px, landscape, read at arm's length while driving.
@@ -678,9 +685,9 @@ function sheetHTML(n){
         <p class="lede">${e.prin}</p>
       <ol class="chg">${(CMP[e.s].notes||[]).map(([h,t],i)=>`<li><span class="no">${i+1}</span><p><b>${h}</b>${t}</p></li>`).join('')}</ol>
       <div class="grp">
-        <details class="row"><summary>${CHEV}<b>Parameters</b><span>${S.params.length} values</span></summary><div class="params">${S.params.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join('')}</div></details>
-        <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn press" data-copy>Copy</button></summary><pre class="ptxt">${p1}</pre><p class="accp">The default prompt was one line: “${p0}”</p></details>
-        <details class="row"><summary>${CHEV}<b>Skill</b><span>dashnote-car-screens</span><button class="cbtn" disabled>Coming soon</button></summary><p class="accp">One install, and your agent follows every Dashnote rule on its own.</p></details>
+        <details class="row"><summary>${CHEV}<b>Parameters</b><span>${S.params.length} values</span></summary><div class="rbx"><div class="params">${S.params.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join('')}</div></div></details>
+        <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn hi press" data-copy><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg><span>Copy prompt</span></button></summary><div class="rbx"><pre class="ptxt">${p1}</pre></div></details>
+        <details class="row"><summary>${CHEV}<b>Skill</b><span>dashnote-car-screens</span><button class="cbtn" disabled>Coming soon</button></summary><div class="rbx"><p class="accp">One install, and your agent follows every Dashnote rule on its own.</p></div></details>
       </div>
       </div>
       </div>
@@ -697,7 +704,11 @@ function wireSheet(){
   seg(sg,b=>{morph(st,b.dataset.v);mem.set('v',b.dataset.v)});
   if(mem.get('v')==='b'){morph(st,'b',true);$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'))}
   $('#dClose').onclick=()=>go('home');
-  $$('[data-copy]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}b.classList.add('done');b.textContent='Copied';setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1400)});
+  $$('[data-copy]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}const t=$('span',b);b.classList.add('done');t.textContent='Copied';clearTimeout(b._t);b._t=setTimeout(()=>{b.classList.remove('done');t.textContent='Copy prompt'},1600)});
+  $$('details.row').forEach(d=>{const sm=$('summary',d),rb=$('.rbx',d);sm.onclick=ev=>{if(ev.target.closest('button'))return;ev.preventDefault();if(RM.matches){d.open=!d.open;return}
+    rb.getAnimations().forEach(a=>a.cancel());
+    if(d.open){const h=rb.offsetHeight;d.classList.add('closing');rb.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0}],{duration:220,easing:'cubic-bezier(.4,0,1,1)'}).onfinish=()=>{d.open=false;d.classList.remove('closing')}}
+    else{d.open=true;const h=rb.offsetHeight;rb.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:320,easing:'cubic-bezier(.2,0,0,1)'});$$(':scope>*',rb).forEach(c=>c.animate([{opacity:0,transform:'translateY(-4px)'},{opacity:1,transform:'none'}],{duration:360,delay:60,easing:'cubic-bezier(.2,0,0,1)',fill:'backwards'}))}}});
 }
 const shRO=new ResizeObserver(()=>{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)));as.forEach(x=>x.cancel())});
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
