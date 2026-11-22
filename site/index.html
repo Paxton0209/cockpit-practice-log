@@ -59,7 +59,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 
 /* intro */
 .intro{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding-top:120px;align-items:end}
-.intro h1{grid-column:1/9;font-size:56px;line-height:64px;font-weight:500}
+.intro h1{grid-column:1/11;font-size:56px;line-height:64px;font-weight:500}
 .intro p{grid-column:1/7;margin-top:24px;font-size:17px;line-height:28px;color:var(--t2)}
 .intro .go{grid-column:10/13;justify-self:end;padding-bottom:4px}
 
@@ -220,6 +220,34 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .cb .cd .pl{margin-top:auto;display:flex;gap:6px}.cb .cd .pl b{height:26px;padding:0 10px;border-radius:13px;background:var(--ssf2);font-size:12px;line-height:26px;font-weight:500}.cb .cd .pl b.on{background:var(--sac);color:#fff}
 .cb .cd svg{margin-top:auto}
 
+/* hero slot (reserved for the live 3D cockpit) */
+.slot{position:relative;aspect-ratio:16/9;border-radius:20px;background:var(--stage);overflow:hidden}
+.slot span{position:absolute;left:24px;bottom:20px}
+.slot time{position:absolute;right:24px;bottom:20px;font:400 13px var(--mono);color:var(--t3)}
+/* two-tone headline */
+.intro h1 em{font-style:normal;color:var(--t3);display:block}
+.idx{font:400 12px/20px var(--mono);color:var(--t3);margin-right:12px}
+/* how it works */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.step{display:flex;flex-direction:column;gap:12px;padding-top:20px;box-shadow:inset 0 2px 0 var(--line);transition:box-shadow .5s var(--out)}
+.step b{font:400 13px var(--mono);color:var(--t3);transition:color .4s}
+.step h3{font-size:20px;line-height:28px;font-weight:500;color:var(--t3);transition:color .4s}
+.step p{font-size:15px;line-height:24px;color:var(--t3);transition:color .4s}
+.step.on{box-shadow:inset 0 2px 0 var(--ink)}.step.on b,.step.on h3{color:var(--ink)}.step.on p{color:var(--t2)}
+/* jump to */
+.jump{display:flex;align-items:center;gap:16px;margin-bottom:40px}
+.card.hide{display:none}
+.card.flash{animation:cf .5s var(--out)}@keyframes cf{from{opacity:0;transform:translateY(8px)}}
+/* glance budget */
+.budget{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:40px}
+.budget div{display:flex;flex-direction:column;gap:6px;padding-top:12px;box-shadow:inset 0 1px 0 var(--line)}
+.budget b{white-space:nowrap;font-size:22px;line-height:28px;font-weight:500;font-variant-numeric:tabular-nums}
+.budget b i{font-style:normal;color:var(--t3);font-weight:400}
+/* prompt tray */
+.tray{margin-top:16px;border-radius:14px;background:var(--stage);padding:4px}
+.tray .in{border-radius:11px;background:var(--panel);box-shadow:0 0 0 1px var(--line);padding:16px 18px}
+.tray .ft{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 8px}
+.tray .ft .copy{height:28px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:0 0 0 1px var(--line);align-items:center}
 /* entry dialog */
 .ov{position:fixed;inset:0;z-index:40;pointer-events:none}
 .ov .scrimx{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s var(--ease)}
@@ -288,7 +316,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .copy.done .s1{transform:translateY(-120%);opacity:0}.copy.done .s2{transform:none;opacity:1}
 .rules{padding-top:14px;font:400 13px var(--mono);color:var(--t2)}
 .note{display:block;padding-top:12px;font-size:13px;color:var(--t3)}
-.tools{position:absolute;right:16px;top:16px;z-index:5;display:flex;gap:2px}
+.tools{position:absolute;right:16px;top:16px;z-index:5;display:flex;gap:2px;padding:3px;border-radius:11px;background:color-mix(in srgb,var(--panel) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
 .flnav{position:absolute;left:30.9%;bottom:84px;z-index:5;transform:translateX(-50%);display:flex;align-items:center;gap:2px;padding:3px;border-radius:999px;background:color-mix(in srgb,var(--panel) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 0 0 1px var(--line);transition:left .5s var(--out)}
 .sheet.full .flnav{left:50%}
 .flnav .ib{border-radius:999px}.flnav .ib:disabled{opacity:.3;pointer-events:none}
@@ -299,6 +327,7 @@ body.lock{overflow:hidden}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
 
 @media(max-width:860px){
+  .steps,.budget{grid-template-columns:1fr}.jump{flex-wrap:wrap}
   .wrap{padding:0 20px}.intro{padding-top:72px}.intro h1{grid-column:1/-1;font-size:36px;line-height:44px}.intro p{grid-column:1/-1}.intro .go{grid-column:1/-1;justify-self:start;margin-top:24px}
   .sec-gap{padding-top:80px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
   .sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.demo{flex:none;padding:64px 16px 16px}.right{overflow:visible;padding:32px 20px 96px}.ctrl{grid-template-columns:1fr 1fr;gap:14px}.ctrl .sl{grid-column:1/-1}.flnav{left:50%;bottom:20px;position:fixed}}
@@ -351,6 +380,7 @@ T:{W:1200,H:560,
   issues:['The distance is 40 px, barely bigger than the street name. The one number you need doesn’t lead.','A full sentence: “Turn right onto Main Street”. In a glance you read a number and a shape, not a sentence.','Lanes, ETA, a speed badge and four buttons. Every extra item takes part of the glance.','A saturated blue header. At night it is the brightest thing in the cabin.'],
   params:[['Distance','150 / unit 100 · 60%'],['Street','76'],['Then · Arrive','60 · 60%'],['Arrow','150'],['Bands','62 / 38'],['Panel','1200 × 560 · r 40']],
   rules:['HR-01','TY-02','LY-03'],
+  budget:[['Things to read','9','5'],['Smallest text, px','17','60'],['Primary, px','40','150']],
   sl:[['Distance',60,180,150,'dz'],['Street',32,96,76,'st']],
   f:(a,b)=>({t:`distance <b>${a}</b> : street <b>${b}</b> = ${(a/b).toFixed(2)}`,bad:a<b*1.6,m:'Distance must lead · HR-01'})},
 A:{W:1920,H:720,
@@ -407,6 +437,8 @@ const DATA=[
 ['A','Toggles you can hit on a bumpy road','51 × 31 is a phone switch. In motion, a finger lands several millimetres off.','Switches at 88 × 52, and the whole row is the hit area.',['Phone toggle','Cockpit toggle']],
 ['B','One primary per screen','Everything asked for attention, so nothing got it.','Pick one primary. Everything else steps down in size, weight or contrast.',['Flat','One primary']],
 ['C','Charts can wait until you park','An air-quality graph looks smart and steals a glance you don’t have.','If it doesn’t change what the driver does next, move it off the main view.',['Chart in view','Chart parked']]];
+const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
+const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['No hierarchy'],['Phone habits'],['Too small','Too much'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['Too much']];
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:CHAPTERS[Math.floor(i/10)],s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
 T:[`Design a turn-by-turn navigation panel for a car's center display.`,
@@ -429,24 +461,27 @@ Ship a day and a night theme; night has no pure-white surfaces.`]}
 const CURSOR='<span class="cur"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l11 5-5 1.6L5.4 13z" fill="#fff" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round"/></svg><b>Peixin</b></span>';
 function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${scr(e.s,'before')}</div><div class="after">${scr(e.s,'after')}</div></div><span class="lb b">Before</span><span class="lb a">After</span>${CURSOR}</div>`}
 function card(e,i){const soon=e.n>PUBLISHED;
-  return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-r style="--d:${(i%3)*70}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">${soon?'<div class="thumb"></div>':thumb(e)}
+  return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-tags="${(TAGS[e.n-1]||[]).join('|')}" data-r style="--d:${(i%3)*70}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">${soon?'<div class="thumb"></div>':thumb(e)}
     <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'':e.title}</span><span class="ct">${soon?'Coming':e.cat}</span></div></a>`}
 const HERO=ENTRIES[0];
 function viewHome(){
   const shown=[ENTRIES[0],...ENTRIES.slice(1,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+2)];
   return `
   <section class="wrap hero" data-r>
-    <div class="shot" id="shot"><img src="cockpit.jpg" alt="" id="shotImg"><div class="screen" id="screen">${scr(HERO.s,'after')}</div><i class="glare" id="glare"></i></div>
+    <div class="slot"><span class="lbl13">Reserved · live cockpit, driving scene, local time</span><time id="clock"></time></div>
     <div class="under"><span class="t"><span class="lbl13 num">${pad(HERO.n)}</span><span>${HERO.title}</span></span><a class="arrow" href="#entry-${pad(HERO.n)}">Open <i>→</i></a></div>
   </section>
   <section class="wrap intro">
-    <h1 data-r style="--d:60ms">100 fixes for AI-made car screens.</h1>
-    <p data-r style="--d:120ms">Same task, same model, two prompts. One gives you a phone app, the other gives you a cockpit. Each entry shows the difference and the prompt behind it.</p>
+    <h1 data-r style="--d:60ms">100 fixes for AI-made car screens.<em>Same task. Same model. Two prompts.</em></h1>
+    <p data-r style="--d:120ms">One prompt gives you a phone app, the other gives you a cockpit. Each entry shows the difference, why it matters at a glance, and the prompt behind it.</p>
     <a class="arrow go" href="#entry-001" data-r style="--d:180ms">Start at 001 <i>→</i></a>
   </section>
-  <section class="wrap sec-gap" data-r><div class="sh"><span class="lbl13">Progress</span><span class="lbl13 num">${PUBLISHED} of ${TOTAL}</span></div>
+  <section class="wrap sec-gap" data-r><div class="sh"><span class="lbl13"><span class="idx">[01]</span>How it works</span><span class="lbl13">Three steps per entry</span></div>
+    <div class="steps" id="steps">${[['Ask like everyone does','One sentence, no rules, a clean session. Whatever comes back first is the Before. No edits.'],['Add the cockpit rules','Same task, same model, plus the rules: canvas, sizes, hierarchy. That is the After.'],['Check it in one second','Glance for one second. If you can’t say what the screen told you, it fails.']].map(([h,t],k)=>`<div class="step ${k?'':'on'}"><b>0${k+1}</b><h3>${h}</h3><p>${t}</p></div>`).join('')}</div></section>
+  <section class="wrap sec-gap" data-r><div class="sh"><span class="lbl13"><span class="idx">[02]</span>Progress</span><span class="lbl13 num">${PUBLISHED} of ${TOTAL}</span></div>
     <div class="chap2" id="ticks">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${String(ci+1).padStart(2,'0')}  ${c}</span></div>`).join('')}</div></section>
-  <section class="wrap sec-gap"><div class="sh" data-r><span class="lbl13">Entries</span><span class="lbl13">Before → after, on loop</span></div>
+  <section class="wrap sec-gap"><div class="sh" data-r><span class="lbl13"><span class="idx">[03]</span>Entries</span><span class="lbl13">Before → after, on loop</span></div>
+    <div class="jump" data-r><span class="lbl13">Jump to</span><div class="chips" id="jump"><span class="ind"></span>${['All',...SYMPTOMS].map((t,k)=>`<button class="${k?'':'on'}" data-t="${t}">${t}</button>`).join('')}</div></div>
     <div class="grid" id="grid">${shown.map(card).join('')}</div></section>
   <footer class="wrap"><span>Cockpit Practice Log</span><span>Peixin</span></footer>`}
 
@@ -475,12 +510,13 @@ function entryHTML(n){
     <span class="lbl13 num">${pad(e.n)} · ${e.cat}</span>
     <h2>${e.title}</h2>
     <p class="prin">${e.prin}</p>
+    ${S.budget?`<div class="budget">${S.budget.map(([k,a,b])=>`<div><span class="lbl13">${k}</span><b>${a} <i>→</i> ${b}</b></div>`).join('')}</div>`:''}
     <section><div class="lbl13">What went wrong</div>${S.issues.map((t,k)=>`<div class="kp"><b>${k+1}</b><span>${t}</span></div>`).join('')}</section>
     <section><div class="lbl13">Parameters</div><div class="params">${S.params.map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div></section>
-    <section><div class="lbl13">Prompt<button class="copy" data-copy><span class="s s1">Copy</span><span class="s s2">Copied</span></button></div>
+    <section><div class="lbl13">Prompt</div>
       <div class="pr"><div class="lbl13">Default</div><pre>${p0}</pre></div>
-      <div class="pr k"><div class="lbl13">With cockpit rules</div><pre>${p1}</pre></div>
-      <span class="note">Same task · same model · only the prompt differs</span></section>
+      <div class="tray"><div class="in pr k" style="box-shadow:0 0 0 1px var(--line)"><div class="lbl13">With cockpit rules</div><pre>${p1}</pre></div>
+        <div class="ft"><span class="lbl13">Same task · same model · only the prompt differs</span><button class="copy" data-copy><span class="s s1">Copy for AI</span><span class="s s2">Copied</span></button></div></div></section>
     <section><div class="lbl13">Rules</div><div class="rules">${S.rules.join('   ·   ')}</div></section>
   </div>
   <div class="tools"><button class="ib press" id="full" aria-label="Focus demo"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg></button><button class="ib press" id="share" aria-label="Copy link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${P.link}</svg></button><button class="ib press" id="close" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></div>
@@ -498,11 +534,10 @@ addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
 function setupHome(){
   $('#hcount').textContent=`${pad(PUBLISHED)} / ${TOTAL}`;
-  $('#screen').onclick=()=>go('entry-'+pad(HERO.n));
-  const sh=$('#shot'),img=$('#shotImg'),scn=$('#screen'),gl=$('#glare');
-  sh.addEventListener('pointermove',e=>{const r=sh.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
-    img.style.transform=`translate(${x*-10}px,${y*-6}px)`;scn.style.transform=`translate(${x*-10}px,${y*-6}px)`;gl.style.setProperty('--gx',`${x*40}%`)});
-  sh.addEventListener('pointerleave',()=>{img.style.transform='';scn.style.transform='';gl.style.setProperty('--gx','0')});
+  const ck=()=>{const d=new Date();$('#clock').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})};ck();setInterval(ck,10000);
+  const st=$$('.step');let si=0;setInterval(()=>{si=(si+1)%st.length;st.forEach((x,k)=>x.classList.toggle('on',k===si))},3200);
+  st.forEach((x,k)=>x.onmouseenter=()=>{si=k;st.forEach((y,j)=>y.classList.toggle('on',j===k))});
+  seg($('#jump'),b=>{const t=b.dataset.t;$$('#grid .card').forEach(c=>{const show=t==='All'?true:(c.dataset.tags||'').split('|').includes(t);c.classList.toggle('hide',!show);if(show){c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')}})});
   const tip=$('#tip');
   $('#ticks').addEventListener('pointerover',e=>{const t=e.target.closest('.tk i');if(!t)return;const n=+t.dataset.n,r=t.getBoundingClientRect();
     tip.textContent=n<=PUBLISHED?`${pad(n)} · ${ENTRIES[n-1].title}`:n===PUBLISHED+1?`${pad(n)} · Next`:`${pad(n)} · Coming`;tip.style.left=r.left+r.width/2+'px';tip.style.top=r.top-30+'px';tip.classList.add('on')});
