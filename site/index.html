@@ -63,7 +63,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .tip.on{opacity:1}
 
 /* entries */
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 24px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 20px}
 .card{display:flex;flex-direction:column;gap:16px;transition:opacity .35s var(--ease)}
 .thumb{position:relative;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:var(--stage)}
 .thumb .scr{position:absolute;left:10%;right:10%;top:50%;transform:translateY(-50%);border-radius:8px;overflow:hidden;transition:transform .6s var(--out)}
@@ -214,19 +214,22 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .tray .in{border-radius:11px;background:var(--panel);box-shadow:0 0 0 1px var(--line);padding:16px 18px}
 .tray .ft{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 8px}
 .tray .ft .copy{height:28px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:0 0 0 1px var(--line);align-items:center}
-/* home */
-.top{padding-top:96px;padding-bottom:56px}
-.top h1{font-size:40px;line-height:48px;font-weight:500}
-.top h1 em{display:block;font-style:normal;color:var(--t3)}
-.tabs{position:sticky;top:64px;z-index:20;background:var(--bg);transition:box-shadow .25s}
-.tabs.stuck{box-shadow:inset 0 -1px 0 var(--line)}
-body:has(.tabs.stuck) header{box-shadow:none}
-.tabs .wrap{padding-top:12px;padding-bottom:12px}
-.tabs .chips{max-width:100%;overflow-x:auto;scrollbar-width:none}
-.tabs .chips::-webkit-scrollbar{display:none}
-.tabs .chips button{display:inline-flex;align-items:center;gap:6px;white-space:nowrap;flex:none}
-.tabs .chips small{font-size:11px;color:var(--t3);font-variant-numeric:tabular-nums}
-#grid{padding-top:32px}
+/* home: sidebar index + grid */
+.shell{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:28px 20px 24px 28px}
+.side .brand{padding:0 8px}
+.desc{text-wrap:balance;margin:12px 0 0;padding:0 8px;font-size:13px;line-height:20px;color:var(--t2)}
+.nav{margin-top:40px;display:flex;flex-direction:column;gap:2px}
+.nav button{height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-radius:8px;font-size:14px;color:var(--t2);text-align:left;transition:background-color .2s,color .2s}
+.nav button:hover{background:var(--fill);color:var(--ink)}
+.nav button.on{background:var(--fill);color:var(--ink);font-weight:500}
+.nav small{font-size:12px;font-weight:400;color:var(--t3);font-variant-numeric:tabular-nums}.nav small.z{opacity:.5}
+.foot{margin-top:auto;display:flex;flex-direction:column;gap:14px;padding:0 8px}
+.foot .pg{display:flex;flex-direction:column;gap:8px}
+.foot .pg i{display:block;height:2px;border-radius:1px;background:var(--line);overflow:hidden}.foot .pg b{display:block;height:100%;background:var(--ink)}
+.foot .row{display:flex;justify-content:space-between;align-items:center;margin-right:-8px}
+.mainc{padding:28px 40px 120px 24px;min-width:0}
+.mh{height:32px;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:500;margin-bottom:24px}
 /* entry dialog */
 .ov{position:fixed;inset:0;z-index:40;pointer-events:none}
 .ov .scrimx{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s var(--ease)}
@@ -309,18 +312,12 @@ body.lock{overflow:hidden}
   .budget{grid-template-columns:1fr}
   .wrap{padding:0 20px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
   .sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.demo{flex:none;padding:64px 16px 16px}.right{overflow:visible;padding:32px 20px 96px}.ctrl{grid-template-columns:1fr 1fr;gap:14px}.ctrl .sl{grid-column:1/-1}.flnav{left:50%;bottom:20px;position:fixed}}
-@media(max-width:860px){.top{padding-top:56px;padding-bottom:32px}.top h1{font-size:30px;line-height:38px}}
+@media(max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}.side{min-width:0;position:static;height:auto;padding:24px 20px 0}.desc{margin-top:8px}.nav{margin:24px -20px 0;padding:0 20px 4px;flex-direction:row;overflow-x:auto;scrollbar-width:none;position:sticky;top:0}.nav::-webkit-scrollbar{display:none}.nav button{flex:none;gap:6px;height:32px}.foot{display:none}.mainc{padding:24px 20px 96px}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}.meta{grid-template-columns:36px 1fr}.meta .ct{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
 </head>
 <body>
-<header id="hdr"><div class="wrap hd">
-  <a class="brand" href="#home"><span class="mark"></span>Cockpit Practice Log</a>
-  <span class="sp"></span>
-  <span class="lbl13 num" id="hcount"></span>
-  <button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button>
-</div></header>
 <main id="app"></main>
 <div class="tip" id="tip"></div>
 <div class="toast" id="toast"></div>
@@ -444,13 +441,18 @@ function card(e,i){const soon=e.n>PUBLISHED;
     <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'':e.title}</span></div></a>`}
 const HERO=ENTRIES[0];
 function viewHome(){
+  const count=c=>c==='All'?PUBLISHED:ENTRIES.filter(e=>e.cat===c&&e.n<=PUBLISHED).length;
   return `
-  <section class="wrap top">
-    <h1 data-r>A car is not a phone.<em>100 fixes for AI-made car screens.</em></h1>
-  </section>
-  <div class="tabs" id="tabsBar"><div class="wrap"><div class="chips" id="tabs"><span class="ind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}">${c}<small>${k?ENTRIES.filter(e=>e.cat===c&&e.n<=PUBLISHED).length:PUBLISHED}</small></button>`).join('')}</div></div></div>
-  <section class="wrap"><div class="grid" id="grid">${gridFor('All')}</div></section>
-  <footer class="wrap"><span>Cockpit Practice Log</span><span>Peixin</span></footer>`}
+  <div class="shell">
+    <aside class="side">
+      <a class="brand" href="#home"><span class="mark"></span>Cockpit Practice Log</a>
+      <p class="desc">100 before/after fixes for AI-made car screens.</p>
+      <nav class="nav" id="nav">${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
+      <div class="foot"><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
+        <div class="row"><span class="lbl13">Peixin</span><button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button></div></div>
+    </aside>
+    <main class="mainc"><div class="mh"><span id="mTitle">All</span><span class="lbl13 num" id="mCount">${PUBLISHED} published</span></div><div class="grid" id="grid">${gridFor('All')}</div></main>
+  </div>`}
 function gridFor(c){
   const list=c==='All'?[...ENTRIES.slice(0,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+3)]:ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=e.n>PUBLISHED;
@@ -505,11 +507,10 @@ function seg(el,onChange){const ind=$('.ind',el);const place=(b,anim)=>{if(!anim
 addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
 function setupHome(){
-  $('#hcount').textContent=`${pad(PUBLISHED)} / ${TOTAL}`;
-  seg($('#tabs'),b=>{const g=$('#grid');g.innerHTML=gridFor(b.dataset.c);
-    $$('.card',g).forEach(c=>c.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:parseFloat(c.style.getPropertyValue('--d'))||0,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
-    b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'})});
-  const bar=$('#tabsBar');addEventListener('scroll',()=>bar.classList.toggle('stuck',bar.getBoundingClientRect().top<=64),{passive:true});
+  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));const c=b.dataset.c,g=$('#grid');
+    g.innerHTML=gridFor(c);$('#mTitle').textContent=c;const n=c==='All'?PUBLISHED:ENTRIES.filter(e=>e.cat===c&&e.n<=PUBLISHED).length;$('#mCount').textContent=c==='All'?`${n} published`:`${n} of 10`;
+    $$('.card',g).forEach(el=>el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:parseFloat(el.style.getPropertyValue('--d'))||0,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
+    if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'})});
 }
 let curN=0;
 function openEntry(n,dir){
@@ -560,12 +561,11 @@ function route(){
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 addEventListener('hashchange',route);
-addEventListener('scroll',()=>$('#hdr').classList.toggle('sc',scrollY>4),{passive:true});
 (()=>{const h=new Date().getHours();document.documentElement.dataset.theme=h>=6&&h<18?'light':'dark';
-  $('#theme').onclick=()=>{const r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark',set=()=>r.dataset.theme=n;
+  document.addEventListener('click',ev=>{if(!ev.target.closest('#theme'))return;const r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark',set=()=>r.dataset.theme=n;
     if(!document.startViewTransition)return set();const b=$('#theme').getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2,rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
     const st=document.createElement('style');st.textContent='::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}';document.head.appendChild(st);
-    const t=document.startViewTransition(set);t.ready.then(()=>r.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${rad}px at ${x}px ${y}px)`]},{duration:600,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});t.finished.finally(()=>st.remove())}})();
+    const t=document.startViewTransition(set);t.ready.then(()=>r.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${rad}px at ${x}px ${y}px)`]},{duration:600,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});t.finished.finally(()=>st.remove())})})();
 route();
 </script>
 </body>
