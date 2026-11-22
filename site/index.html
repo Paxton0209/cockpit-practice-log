@@ -246,12 +246,12 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* entry: one clean column; opens from the clicked cover (spring from Dashline) */
 .ov{position:fixed;inset:0;z-index:40;visibility:hidden}
 .ov.open{visibility:visible}
-.veil{position:absolute;inset:0;background:rgba(245,245,245,.5);-webkit-backdrop-filter:blur(16px) saturate(1.1);backdrop-filter:blur(16px) saturate(1.1);opacity:0;touch-action:none}
-[data-theme=dark] .veil{background:rgba(0,0,0,.5)}
+.veil{position:absolute;inset:0;background:rgba(0,0,0,.06);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;touch-action:none}
+[data-theme=dark] .veil{background:rgba(0,0,0,.35)}
 [data-theme=dark] .seg4 .ind{background:rgba(255,255,255,.12);box-shadow:none}
 .sc{position:fixed;left:0;top:0;corner-shape:superellipse(1.6);background:var(--panel);box-shadow:0 0 0 1px var(--line);overflow:hidden;will-change:transform,width,height}
 .sc i{position:absolute;inset:0;border-radius:inherit;box-shadow:0 16px 52px rgba(0,0,0,.12);opacity:0}
-.sheet2{position:fixed;left:50%;top:calc(50% - 24px);height:calc(100dvh - 96px);width:min(880px,calc(100vw - 48px));transform:translate(-50%,-50%);border-radius:20px;corner-shape:superellipse(1.6);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.sheet2{position:fixed;left:50%;top:50%;height:auto;max-height:calc(100dvh - 96px);width:min(720px,calc(100vw - 48px));transform:translate(-50%,-50%);border-radius:20px;corner-shape:superellipse(1.6);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .sheet2:focus{outline:none}
 .sci{padding:24px 24px 48px}
 .dtop{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 8px 0 12px;margin-bottom:12px}
@@ -259,7 +259,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .dtop .act{display:flex;gap:4px}
 .rb{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--t2);transition:background-color .2s,color .2s}
 .rb:hover{background:var(--fill);color:var(--ink)}.rb:disabled{opacity:.3;pointer-events:none}
-.cstage{position:relative;overflow:hidden;user-select:none;touch-action:none;cursor:ew-resize}
+.cstage{position:relative;overflow:hidden;user-select:none}
 .pane{position:absolute;inset:0}.pane.b{z-index:0}.pane .cs{height:100%}
 .clip{position:absolute;inset:0;z-index:1;clip-path:inset(0 0 0 var(--x,50%))}
 .cstage.anim .clip{transition:clip-path .7s var(--out)}
@@ -272,6 +272,9 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:16px;padding:64px 9% 16px}
 .hero3 .seg4{position:absolute;top:16px;right:16px}
 .hcap{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--t3)}
+.hcap .sb,.cstage[data-v=b]~.hcap .sa{display:none}.cstage[data-v=b]~.hcap .sb{display:inline}
+.cstage .pane{visibility:hidden}.cstage[data-v=a] .pane.a,.cstage[data-v=b] .pane.b{visibility:visible}
+.bare .ecard{box-shadow:none}
 .hero3 .cstage{width:100%;border-radius:10px;corner-shape:superellipse(1.6);box-shadow:0 0 0 1px var(--line),0 20px 40px -24px rgba(0,0,0,.28)}
 .hero3 .handle span{width:28px;height:28px;margin:-14px 0 0 -14px}
 .seg4{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:10px;corner-shape:superellipse(1.6);background:color-mix(in srgb,var(--ink) 6%,transparent)}
@@ -358,10 +361,10 @@ const SW=['#cfcfcf','#b5b5b5','#9c9c9c','#d9d9d9','#a8a8a8','#c2c2c2','#8f8f8f',
 
 const SCENES={
 T:{W:1200,H:560,
-  after:()=>`<div class="px tb"><div class="top">${FORK(150,'var(--stx)')}<div><div class="d">300<small>m</small></div><div class="s">Main Street</div></div></div><div class="bot"><span>Then ${FORK(56,'var(--stx)','var(--st2)')} <b>150 m</b></span><span>Arrive <b>10:48</b></span></div></div>`,
-  before:()=>`<div class="px tbb"><div class="bar">${I('right',72,2.4)}<div class="t"><b>300 m</b><span>Turn right onto Main Street</span></div><div class="lim">50</div></div>
+  after:()=>`<div class="px tb"><div class="top">${FORK(150,'var(--stx)')}<div><div class="d" data-k="d">300<small>m</small></div><div class="s" data-k="s">Main Street</div></div></div><div class="bot"><span>Then ${FORK(56,'var(--stx)','var(--st2)')} <b>150 m</b></span><span data-k="eta">Arrive <b>10:48</b></span></div></div>`,
+  before:()=>`<div class="px tbb"><div class="bar">${I('right',72,2.4)}<div class="t"><b data-k="d">300 m</b><span data-k="s">Turn right onto Main Street</span></div><div class="lim">50</div></div>
     <div class="lanes">${I('left',30,2.2)}${I('up',30,2.2)}<span class="on">${I('up',30,2.2)}</span><span class="on">${I('right',30,2.2)}</span></div>
-    <div class="body"><span class="chip">Then ${I('left',20,2)} Elm Avenue</span><div class="eta"><b>12 min</b><span>4.2 km · ETA 10:48</span></div></div>
+    <div class="body"><span class="chip">Then ${I('left',20,2)} Elm Avenue</span><div class="eta"><b>12 min</b><span data-k="eta">4.2 km · ETA 10:48</span></div></div>
     <div class="btns"><span>Mute</span><span>Overview</span><span>Report</span><span class="end">End route</span></div></div>`,
   marks:[[25,13],[44,24],[50,84],[74,14]],
   issues:['The distance is 40 px, barely bigger than the street name. The one number you need doesn’t lead.','A full sentence: “Turn right onto Main Street”. In a glance you read a number and a shape, not a sentence.','Lanes, ETA, a speed badge and four buttons. Every extra item takes part of the glance.','A saturated blue header. At night it is the brightest thing in the cabin.'],
@@ -371,10 +374,10 @@ T:{W:1200,H:560,
   sl:[['Distance',60,180,150,'dz'],['Street',32,96,76,'st']],
   f:(a,b)=>({t:`distance <b>${a}</b> : street <b>${b}</b> = ${(a/b).toFixed(2)}`,bad:a<b*1.6,m:'Distance must lead · HR-01'})},
 A:{W:1920,H:720,
-  after:()=>`<div class="px sa"><aside><h3>Settings</h3>${[['sun','Display',1],['sound','Sound'],['shield','Driver assist'],['link','Connections'],['car','Vehicle']].map(([i,t,on])=>`<div class="nv ${on?'on':''}">${I(i,32)}${t}</div>`).join('')}</aside>
+  after:()=>`<div class="px sa"><aside><h3 data-k="ttl">Settings</h3>${[['sun','Display',1],['sound','Sound'],['shield','Driver assist'],['link','Connections'],['car','Vehicle']].map(([i,t,on])=>`<div class="nv ${on?'on':''}">${I(i,32)}<span data-k="${t}">${t}</span></div>`).join('')}</aside>
   <section><h4>Display</h4><div class="r">Auto brightness<i class="sw on"></i></div><div class="r">Appearance<div class="sg"><b>Auto</b><b class="on">Day</b><b>Night</b></div></div><div class="r">Brightness<div class="bar2"><i style="width:64%"></i></div></div><div class="r">Screen off when parked<em>5 min ${I('chev',28)}</em></div></section></div>`,
-  before:()=>`<div class="px pb"><div class="col"><div class="st">9:41<i><b></b><b></b><b style="width:24px"></b></i></div><div class="lt">Settings</div>
-  <div class="grp">${[['#ff9500','sun','Display & Brightness','c'],['#ff2d55','sound','Sounds','c'],['#34c759','shield','Driver Assist','t']].map(r=>pbRow(...r)).join('')}</div>
+  before:()=>`<div class="px pb"><div class="col"><div class="st">9:41<i><b></b><b></b><b style="width:24px"></b></i></div><div class="lt" data-k="ttl">Settings</div>
+  <div class="grp">${[['#ff9500','sun','Display','c'],['#ff2d55','sound','Sound','c'],['#34c759','shield','Driver assist','t']].map(r=>pbRow(...r)).join('')}</div>
   <div class="grp">${[['#5856d6','moon','Night Mode','t'],['#8e8e93','lock','Auto-Lock','o'],['#007aff','link','Connections','c']].map(r=>pbRow(...r)).join('')}</div>
   <div class="tb2">${[['home','Home'],['nav','Navigate'],['music','Media'],['grid','Settings',1]].map(([i,t,on])=>`<div class="${on?'on':''}">${I(i,25,1.7)}${t}</div>`).join('')}</div></div></div>`,
   marks:[[15,50],[38.6,18],[61,30],[61.6,93]],
@@ -383,22 +386,22 @@ A:{W:1920,H:720,
   rules:['PR-01','LY-02','CT-04'],sl:[['Row height',40,96,76,'rh'],['Text size',16,36,28,'ts']],
   f:(a,b)=>({t:`row <b>${a}</b> = text line 38 × 2`,bad:a<76||b<22,m:a<76?'Below 76 · PR-01':'Text under 22 · TY-01'})},
 B:{W:1920,H:720,
-  after:()=>`<div class="px sm"><div class="np"><div class="art"></div><div class="tt">Night Drive</div><div class="ar">Mira Okafor · Coastline</div><div class="pg"><i></i></div><div class="tm"><span>1:24</span><span>3:41</span></div>
-  <div class="ctl"><span>${I('prev',40)}</span><span class="pl">${I('pause',44)}</span><span>${I('next',40)}</span></div></div>
+  after:()=>`<div class="px sm"><div class="np"><div class="art" data-k="art"></div><div class="tt" data-k="tt">Night Drive</div><div class="ar">Mira Okafor · Coastline</div><div class="pg"><i></i></div><div class="tm" data-k="tm"><span>1:24</span><span>3:41</span></div>
+  <div class="ctl"><span data-k="pv">${I('prev',40)}</span><span class="pl" data-k="pl">${I('pause',44)}</span><span data-k="nx">${I('next',40)}</span></div></div>
   <div class="qu"><h4>Up next</h4>${[['Low Tide','Mira Okafor'],['Glass Roads','Hollow Pines'],['Weather Report','Ana Sol'],['After Hours','Kei Morita']].map(([t,a],k)=>`<div class="r"><i class="ca"></i><div class="tx">${t}<small>${a}</small></div><em>${['3:12','4:05','2:58','3:33'][k]}</em></div>`).join('')}</div></div>`,
   before:()=>`<div class="px mb"><div class="gr">Good evening</div>${['Recently played','Made for you'].map((s,si)=>`<div class="hh">${s}<span>See all</span></div><div class="row">${[0,1,2,3,4,5,6,7].map(k=>`<div class="cv"><i style="background:${SW[(k+si*3)%8]}"></i><b>${['Night Drive','Low Tide','Glass Roads','Daily Mix 1','Focus','Weather','Coastline','Chill'][(k+si*2)%8]}</b><small>Playlist</small></div>`).join('')}</div>`).join('')}
-  <div class="mp"><i style="background:${SW[0]}"></i><span>Night Drive<br><span style="color:var(--st2)">Mira Okafor</span></span><div class="c">${I('shuffle',18)}${I('prev',20)}${I('play',24)}${I('next',20)}${I('heart',18)}</div><span style="color:var(--st2)">1:24 / 3:41</span></div></div>`,
+  <div class="mp"><i data-k="art" style="background:${SW[0]}"></i><span><span data-k="tt">Night Drive</span><br><span style="color:var(--st2)">Mira Okafor</span></span><div class="c">${I('shuffle',18)}<span data-k="pv">${I('prev',20)}</span><span data-k="pl">${I('play',24)}</span><span data-k="nx">${I('next',20)}</span>${I('heart',18)}</div><span data-k="tm" style="color:var(--st2)">1:24 / 3:41</span></div></div>`,
   marks:[[11,45],[13,8],[50,95.5],[89,40]],
   issues:['160 px covers with 14 px labels. Nothing here reads at a glance.','A greeting and section headers compete for attention and say nothing useful.','Playback squeezed into a 64 px bar with 20 px icons.','Nothing says what is playing now, the one thing the driver needs.'],
   params:[['Queue row','76'],['Play','120 × 96'],['Title','40 / 48'],['Art','264'],['Split','38.2 / 61.8']],
   rules:['HR-01','LY-02','CT-01'],sl:[['Row height',40,96,76,'rh'],['Text size',16,36,28,'ts']],
   f:(a,b)=>({t:`row <b>${a}</b> = text line 38 × 2`,bad:a<76||b<22,m:a<76?'Below 76 · PR-01':'Text under 22 · TY-01'})},
 C:{W:1920,H:720,
-  after:()=>`<div class="px sc2"><div class="zones"><div class="z"><small>Driver</small><b>21.5<sup>°</sup></b></div><div class="mid"><div class="fan">${[1,2,3,4,5].map(k=>`<i class="${k<=3?'on':''}" style="height:${16+k*10}px"></i>`).join('')}</div><span class="mode">Auto · Fan 3</span></div><div class="z r2"><small>Passenger</small><b>22.0<sup>°</sup></b></div></div>
-  <div class="edge"><span>${I('minus',36)}</span><span>${I('plus',36)}</span><span>${I('heat',36)}</span><em></em><span class="on">${I('snow',36)}</span><span>${I('fan',36)}</span><span>${I('defrost',36)}</span><em></em><span>${I('heat',36)}</span><span>${I('minus',36)}</span><span>${I('plus',36)}</span></div></div>`,
+  after:()=>`<div class="px sc2"><div class="zones"><div class="z"><small>Driver</small><b data-k="t">21.5<sup>°</sup></b></div><div class="mid"><div class="fan">${[1,2,3,4,5].map(k=>`<i class="${k<=3?'on':''}" style="height:${16+k*10}px"></i>`).join('')}</div><span class="mode" data-k="f">Auto · Fan 3</span></div><div class="z r2"><small>Passenger</small><b>22.0<sup>°</sup></b></div></div>
+  <div class="edge"><span data-k="m">${I('minus',36)}</span><span data-k="p">${I('plus',36)}</span><span>${I('heat',36)}</span><em></em><span class="on">${I('snow',36)}</span><span>${I('fan',36)}</span><span>${I('defrost',36)}</span><em></em><span>${I('heat',36)}</span><span>${I('minus',36)}</span><span>${I('plus',36)}</span></div></div>`,
   before:()=>`<div class="px cb"><div class="h">Climate Control<small>Adjust your cabin comfort</small></div><div class="gd">
-  <div class="cd"><small>Temperature</small><div class="v">22°C</div><div class="bt"><i>${I('minus',14,2)}</i><i>${I('plus',14,2)}</i></div></div>
-  <div class="cd"><small>Fan speed</small><div class="v">3</div><div class="ln"><i></i></div></div>
+  <div class="cd"><small>Temperature</small><div class="v" data-k="t">21.5°</div><div class="bt"><i data-k="m">${I('minus',14,2)}</i><i data-k="p">${I('plus',14,2)}</i></div></div>
+  <div class="cd"><small>Fan speed</small><div class="v" data-k="f">Auto · Fan 3</div><div class="ln"><i></i></div></div>
   <div class="cd"><small>Seat heating</small><div class="v">Low</div><div class="pl"><b>Off</b><b class="on">Low</b><b>Med</b><b>High</b></div></div>
   <div class="cd"><small>Air quality</small><div class="v">Good</div><svg width="352" height="48" viewBox="0 0 352 48" fill="none" stroke="var(--sac)" stroke-width="2"><path d="M0 34 L40 30 L80 36 L120 20 L160 26 L200 14 L240 22 L280 12 L320 18 L352 8"/></svg></div>
   <div class="cd"><small>Defrost</small><div class="v">Off</div><div class="bt"><span style="width:51px;height:31px;border-radius:16px;background:var(--ssf2)"></span></div></div>
@@ -408,7 +411,7 @@ C:{W:1920,H:720,
   params:[['Edge target','160 × 96'],['Temperature','168'],['Gap','16'],['Bottom inset','24'],['Radius','20']],
   rules:['CT-02','HR-03','LY-05'],sl:[['Target height',40,96,76,'rh'],['Text size',16,36,28,'ts']],
   f:(a,b)=>({t:`target <b>${a+20}</b> = ${a} + 20 ≥ 96`,bad:a<76,m:'Target under 96 · CT-02'})}};
-function pbRow(c,i,t,k){return `<div class="it"><span class="q" style="background:${c}">${I(i,18,2)}</span><span>${t}</span>${k==='c'?`<em>${I('chev',16,2)}</em>`:`<i class="tg ${k==='o'?'off':''}"></i>`}</div>`}
+function pbRow(c,i,t,k){return `<div class="it"><span class="q" style="background:${c}">${I(i,18,2)}</span><span data-k="${t}">${t}</span>${k==='c'?`<em>${I('chev',16,2)}</em>`:`<i class="tg ${k==='o'?'off':''}"></i>`}</div>`}
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
@@ -476,7 +479,7 @@ function reveal(){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIn
 function seg(el,onChange){const ind=$('.ind',el);const place=(b,anim)=>{if(!anim)ind.style.transition='none';ind.style.width=b.offsetWidth+'px';ind.style.transform=`translateX(${b.offsetLeft-3}px)`;if(!anim){ind.offsetWidth;ind.style.transition=''}};
   requestAnimationFrame(()=>place($('button.on',el),false));
   $$('button',el).forEach(b=>b.onclick=()=>{$$('button',el).forEach(o=>o.classList.toggle('on',o===b));place(b,true);onChange&&onChange(b)});
-  el._place=()=>place($('button.on',el),false)}
+  el._place=a=>place($('button.on',el),!!a)}
 addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
 function moveNav(){const navind=$('#navind'),on=$('#nav button.on');if(!navind)return;
@@ -518,13 +521,12 @@ function sheetHTML(n){
       <button class="rb" id="dPrev" aria-label="Previous" ${n<=1?'disabled':''}>${ARROW_L}</button><button class="rb" id="dNext" aria-label="Next" ${n>=PUBLISHED?'disabled':''}>${ARROW_R}</button>
       <button class="rb" id="dClose" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
     <div class="ecard"><div class="hero3">
-      <div class="cstage" id="cstage" style="--x:0%;aspect-ratio:${S.W}/${S.H}">
+      <div class="seg4" id="seg4"><span class="ind"></span><button data-v="b">Before</button><button class="on" data-v="a">After</button></div>
+      <div class="cstage" id="cstage" data-v="a" style="aspect-ratio:${S.W}/${S.H}">
         <div class="pane b">${scr(e.s,'before')}</div>
-        <div class="clip"><div class="pane a">${scr(e.s,'after')}</div></div>
-        <div class="handle"><span><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
+        <div class="pane a">${scr(e.s,'after')}</div>
       </div>
-      <div class="seg4" id="seg4"><span class="ind"></span><button data-x="100">Before</button><button class="on" data-x="0">After</button></div>
-      <p class="hcap mono">drag the line to compare</p>
+      <p class="hcap mono"><span class="sa">${c[1].toLowerCase()}</span><span class="sb">${c[0].toLowerCase()}</span></p>
     </div>
     <article class="art">
       <h2>${e.title}</h2>
@@ -538,21 +540,32 @@ function sheetHTML(n){
     </article></div>
     <nav class="pager">${pv?`<a href="#entry-${pad(pv.n)}"><span>Previous</span><b>${pad(pv.n)} ${pv.title}</b></a>`:'<a class="ph"></a>'}${nx?`<a class="nx" href="#entry-${pad(nx.n)}"><span>Next</span><b>${pad(nx.n)} ${nx.title}</b></a>`:''}</nav>
   </div>`}
+function morph(st,to){
+  if(st.dataset.v===to)return;const from=st.dataset.v;st.dataset.v=to;
+  const P={a:$('.pane.a',st),b:$('.pane.b',st)},F=P[from],T=P[to];
+  st.getAnimations({subtree:true}).forEach(a=>a.cancel());
+  if(RM.matches)return;
+  const K=T.getBoundingClientRect().width/(+$('.cs',T).dataset.w||1),D=560,E='cubic-bezier(.32,.72,0,1)';
+  F.style.visibility=T.style.visibility='visible';
+  T.animate([{opacity:0},{opacity:1}],{duration:D*.7,easing:'ease'});
+  F.animate([{opacity:1},{opacity:0}],{duration:D*.7,easing:'ease'}).onfinish=()=>{F.style.visibility=''};
+  const fm=new Map([...F.querySelectorAll('[data-k]')].map(x=>[x.dataset.k,x]));
+  T.querySelectorAll('[data-k]').forEach(t=>{const f=fm.get(t.dataset.k);if(!f)return;
+    const a=f.getBoundingClientRect(),b=t.getBoundingClientRect();if(!b.height||!a.height)return;
+    const k=a.height/b.height,dx=(a.left-b.left)/K,dy=(a.top-b.top)/K;
+    t.animate([{transformOrigin:'0 0',transform:`translate(${dx}px,${dy}px) scale(${k})`},{transformOrigin:'0 0',transform:'none'}],{duration:D,easing:E});
+    f.animate([{transformOrigin:'0 0',transform:'none'},{transformOrigin:'0 0',transform:`translate(${-dx/k}px,${-dy/k}px) scale(${1/k})`}],{duration:D,easing:E})});
+}
 function wireSheet(){
-  const st=$('#cstage');let drag=false;
-  const setX=(p,a)=>{const v=Math.max(0,Math.min(100,p));st.classList.toggle('anim',!!a);st.classList.toggle('edge',v<=0||v>=100);st.style.setProperty('--x',v+'%')};
-  const fx=ev=>{const r=st.getBoundingClientRect();return (ev.clientX-r.left)/r.width*100};
-  setX(0,false);
-  const sync=v=>{$$('#seg4 button').forEach(b=>b.classList.toggle('on',(+b.dataset.x===100)===(v>50)));$('#seg4')._place()};
-  st.addEventListener('pointerdown',ev=>{drag=true;st.setPointerCapture(ev.pointerId);setX(fx(ev),true);setTimeout(()=>st.classList.remove('anim'),300)});
-  st.addEventListener('pointermove',ev=>{if(drag)setX(fx(ev),false)});
-  st.addEventListener('pointerup',()=>{drag=false;sync(parseFloat(st.style.getPropertyValue('--x')))});
-  seg($('#seg4'),b=>setX(+b.dataset.x,true));
+  const st=$('#cstage'),sg=$('#seg4');
+  const set=v=>{$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v===v));sg._place&&sg._place(true);morph(st,v)};
+  seg(sg,b=>morph(st,b.dataset.v));
+  $$('[data-k]',st).forEach(x=>{if(getComputedStyle(x).display==='inline')x.style.display='inline-block'});
   $('#dClose').onclick=()=>go('home');
   $('#dPrev').onclick=()=>curN>1&&go('entry-'+pad(curN-1));
   $('#dNext').onclick=()=>curN<PUBLISHED&&go('entry-'+pad(curN+1));
   $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}const o=b.innerHTML;b.classList.add('done');b.innerHTML='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>';setTimeout(()=>{b.classList.remove('done');b.innerHTML=o},1400)});
-  setTimeout(()=>{if(!$('#cstage'))return;setX(100,true);sync(100);setTimeout(()=>{setX(0,true);sync(0)},1000)},520);
+  setTimeout(()=>{if($('#cstage')!==st)return;set('b');setTimeout(()=>{if($('#cstage')===st)set('a')},1400)},700);
 }
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
@@ -567,7 +580,7 @@ function openEntry(n){
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});
   const src=srcFor(n);
   if(COMPACT.matches){spring(sh,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);spring(sc,[100],[0],([y])=>({...cstyle(end),transform:`translate(${end[0]}px,${end[1]+y*end[3]/100}px)`}),420,40)}
-  else if(src){const s=spring(sc,src,end,cstyle);const hero=$('.hero3',sh);spring(hero,pose(src,hero.getBoundingClientRect()),[0,0,1],pstyle);
+  else if(src){sh.classList.add('bare');setTimeout(()=>sh.classList.remove('bare'),170);const s=spring(sc,src,end,cstyle);const hero=$('.hero3',sh);spring(hero,pose(src,hero.getBoundingClientRect()),[0,0,1],pstyle);
     rest(sh).forEach(el=>anim(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:260,delay:170,easing:'cubic-bezier(.22,1,.36,1)'}));
     s.onfinish=()=>{if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
   else{anim(sc,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(sh,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(shadow,[{opacity:0},{opacity:1}],{duration:200})}
@@ -580,7 +593,7 @@ function closeEntry(){
   const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||20);
   stop();anim(veil,[{opacity:1},{opacity:0}],{duration:180,easing:'ease-in'});let end;
   if(COMPACT.matches){end=spring(sh,[0],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);anim(sc,[{opacity:1},{opacity:0}],{duration:160})}
-  else if(src){const hero=$('.hero3',sh);rest(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:100,easing:'ease-in'}));
+  else if(src){sh.classList.add('bare');const hero=$('.hero3',sh);rest(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:100,easing:'ease-in'}));
     if(hero){const hr=hero.getBoundingClientRect();if(hr.bottom>0&&hr.top<innerHeight){spring(hero,[0,0,1],pose(src,hr),pstyle);anim(hero,[{opacity:1},{opacity:1,offset:.6},{opacity:0}],{duration:420})}else anim(hero,[{opacity:1},{opacity:0}],{duration:100})}
     end=spring(sc,cur,src,cstyle)}
   else{anim(sc,[{opacity:1},{opacity:0}],{duration:150,easing:'ease-in'});end=anim(sh,[{opacity:1},{opacity:0}],{duration:150,easing:'ease-in'})}
@@ -598,7 +611,7 @@ function route(){
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 addEventListener('hashchange',route);
-(()=>{const h=new Date().getHours(),root=document.documentElement;root.dataset.theme=h>=6&&h<18?'light':'dark';let want=root.dataset.theme,busy=false;
+(()=>{const h=new Date().getHours(),root=document.documentElement;root.dataset.theme='light';let want=root.dataset.theme,busy=false;
   const set=t=>root.dataset.theme=t;
   document.addEventListener('click',async ev=>{const sw=ev.target.closest('#theme');if(!sw)return;want=want==='dark'?'light':'dark';if(busy)return;
     if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches){set(want);return}
