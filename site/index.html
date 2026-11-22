@@ -45,27 +45,8 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 [data-r]{opacity:0;transform:translateY(12px);transition:opacity .8s var(--ease),transform 1s var(--out);transition-delay:var(--d,0ms)}
 [data-r].in{opacity:1;transform:none}
 
-/* hero */
-.hero{padding-top:24px}
-.shot{position:relative;aspect-ratio:16/9;border-radius:20px;overflow:hidden;background:var(--stage)}
-.shot img{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;transition:transform 1.4s var(--out),filter .4s}
-[data-theme=dark] .shot img{filter:brightness(.3) contrast(1.15)}
-.shot .screen{position:absolute;left:38.45%;top:32.36%;width:26.1%;height:28.62%;border-radius:.5%/.8%;background:#0b0b0b;display:grid;place-items:center;cursor:pointer;transition:transform 1.4s var(--out);
-  --sbg:#202020;--ssf:#151515;--ssf2:#2a2a2a;--stx:#f5f5f5;--st2:#8a8a8a;--sln:#262626}
-.shot .screen .cs{width:84%;border-radius:12px}
-.shot .glare{position:absolute;inset:0;background:linear-gradient(115deg,transparent 42%,rgba(255,255,255,.06) 50%,transparent 58%);transform:translateX(var(--gx,0));transition:transform 1.4s var(--out);pointer-events:none}
-.under{display:flex;justify-content:space-between;align-items:baseline;padding-top:16px}
-.under .t{display:flex;gap:12px;align-items:baseline}
 
-/* intro */
-.intro{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:24px;padding-top:120px;align-items:end}
-.intro h1{grid-column:1/11;font-size:56px;line-height:64px;font-weight:500}
-.intro p{grid-column:1/7;margin-top:24px;font-size:17px;line-height:28px;color:var(--t2)}
-.intro .go{grid-column:10/13;justify-self:end;padding-bottom:4px}
 
-/* section head */
-.sh{display:flex;justify-content:space-between;align-items:baseline;padding:16px 0 32px;box-shadow:inset 0 1px 0 var(--line)}
-.sec-gap{padding-top:120px}
 
 /* progress */
 .chap2{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:28px 24px}
@@ -105,7 +86,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .card:hover .thumb .after{animation:none;clip-path:inset(0 0 0 0);transition:clip-path .7s var(--out)}
 .card:hover .thumb .cur{animation:none;opacity:0}
 .card:hover .thumb .lb.b{animation:none;opacity:0}.card:hover .thumb .lb.a{animation:none;opacity:1}
-.meta{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:baseline}
+.meta{display:grid;grid-template-columns:40px 1fr;gap:12px;align-items:baseline}
 .meta b{font-weight:400;color:var(--t3);font-size:13px}
 .meta .ttl{font-weight:500}
 .meta .ct{font-size:13px;color:var(--t3)}
@@ -220,22 +201,6 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .cb .cd .pl{margin-top:auto;display:flex;gap:6px}.cb .cd .pl b{height:26px;padding:0 10px;border-radius:13px;background:var(--ssf2);font-size:12px;line-height:26px;font-weight:500}.cb .cd .pl b.on{background:var(--sac);color:#fff}
 .cb .cd svg{margin-top:auto}
 
-/* hero slot (reserved for the live 3D cockpit) */
-.slot{position:relative;aspect-ratio:16/9;border-radius:20px;background:var(--stage);overflow:hidden}
-.slot span{position:absolute;left:24px;bottom:20px}
-.slot time{position:absolute;right:24px;bottom:20px;font:400 13px var(--mono);color:var(--t3)}
-/* two-tone headline */
-.intro h1 em{font-style:normal;color:var(--t3);display:block}
-.idx{font:400 12px/20px var(--mono);color:var(--t3);margin-right:12px}
-/* how it works */
-.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
-.step{display:flex;flex-direction:column;gap:12px;padding-top:20px;box-shadow:inset 0 2px 0 var(--line);transition:box-shadow .5s var(--out)}
-.step b{font:400 13px var(--mono);color:var(--t3);transition:color .4s}
-.step h3{font-size:20px;line-height:28px;font-weight:500;color:var(--t3);transition:color .4s}
-.step p{font-size:15px;line-height:24px;color:var(--t3);transition:color .4s}
-.step.on{box-shadow:inset 0 2px 0 var(--ink)}.step.on b,.step.on h3{color:var(--ink)}.step.on p{color:var(--t2)}
-/* jump to */
-.jump{display:flex;align-items:center;gap:16px;margin-bottom:40px}
 .card.hide{display:none}
 .card.flash{animation:cf .5s var(--out)}@keyframes cf{from{opacity:0;transform:translateY(8px)}}
 /* glance budget */
@@ -248,6 +213,17 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .tray .in{border-radius:11px;background:var(--panel);box-shadow:0 0 0 1px var(--line);padding:16px 18px}
 .tray .ft{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 8px}
 .tray .ft .copy{height:28px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:0 0 0 1px var(--line);align-items:center}
+/* home, reduced */
+.top{padding-top:96px;text-align:center}
+.top h1{font-size:64px;line-height:72px;font-weight:500}
+.top h1 em{display:block;font-style:normal;color:var(--t3);font-size:24px;line-height:32px;margin-top:16px;font-weight:400}
+.feat{margin-top:72px;border-radius:24px;background:var(--stage);padding:56px 12% 64px}
+.feat .cstage{cursor:ew-resize;box-shadow:0 30px 60px -30px rgba(0,0,0,.25)}
+#hcmp.anim .clip{transition:clip-path var(--dur,.7s) var(--io)}#hcmp.anim .handle{transition:left var(--dur,.7s) var(--io)}
+.hl{display:flex;justify-content:space-between;margin-bottom:14px;font-size:13px;color:var(--t3)}
+.cap2{display:inline-flex;align-items:baseline;gap:12px;margin-top:24px;font-size:15px}
+.cap2 i{font-style:normal;transition:transform .35s var(--out)}.cap2:hover i{transform:translateX(3px)}
+.blk2{padding-top:160px}
 /* entry dialog */
 .ov{position:fixed;inset:0;z-index:40;pointer-events:none}
 .ov .scrimx{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s var(--ease)}
@@ -327,10 +303,10 @@ body.lock{overflow:hidden}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
 
 @media(max-width:860px){
-  .steps,.budget{grid-template-columns:1fr}.jump{flex-wrap:wrap}
-  .wrap{padding:0 20px}.intro{padding-top:72px}.intro h1{grid-column:1/-1;font-size:36px;line-height:44px}.intro p{grid-column:1/-1}.intro .go{grid-column:1/-1;justify-self:start;margin-top:24px}
-  .sec-gap{padding-top:80px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
+  .budget{grid-template-columns:1fr}
+  .wrap{padding:0 20px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
   .sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.demo{flex:none;padding:64px 16px 16px}.right{overflow:visible;padding:32px 20px 96px}.ctrl{grid-template-columns:1fr 1fr;gap:14px}.ctrl .sl{grid-column:1/-1}.flnav{left:50%;bottom:20px;position:fixed}}
+@media(max-width:860px){.top{padding-top:56px}.top h1{font-size:40px;line-height:48px}.top h1 em{font-size:18px;line-height:26px}.feat{margin-top:40px;padding:28px 16px 32px;border-radius:16px}.blk2{padding-top:96px}.cap2{margin-top:20px}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}.meta{grid-template-columns:36px 1fr}.meta .ct{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
@@ -459,30 +435,30 @@ Hierarchy: one primary, readable in a one-second glance.
 Ship a day and a night theme; night has no pure-white surfaces.`]}
 
 const CURSOR='<span class="cur"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l11 5-5 1.6L5.4 13z" fill="#fff" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round"/></svg><b>Peixin</b></span>';
-function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${scr(e.s,'before')}</div><div class="after">${scr(e.s,'after')}</div></div><span class="lb b">Before</span><span class="lb a">After</span>${CURSOR}</div>`}
+function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${scr(e.s,'before')}</div><div class="after">${scr(e.s,'after')}</div></div>${CURSOR}</div>`}
 function card(e,i){const soon=e.n>PUBLISHED;
   return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-tags="${(TAGS[e.n-1]||[]).join('|')}" data-r style="--d:${(i%3)*70}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">${soon?'<div class="thumb"></div>':thumb(e)}
-    <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'':e.title}</span><span class="ct">${soon?'Coming':e.cat}</span></div></a>`}
+    <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'':e.title}</span></div></a>`}
 const HERO=ENTRIES[0];
 function viewHome(){
   const shown=[ENTRIES[0],...ENTRIES.slice(1,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+2)];
   return `
-  <section class="wrap hero" data-r>
-    <div class="slot"><span class="lbl13">Reserved · live cockpit, driving scene, local time</span><time id="clock"></time></div>
-    <div class="under"><span class="t"><span class="lbl13 num">${pad(HERO.n)}</span><span>${HERO.title}</span></span><a class="arrow" href="#entry-${pad(HERO.n)}">Open <i>→</i></a></div>
+  <section class="wrap top">
+    <h1 data-r>A car is not a phone.<em>100 fixes for AI-made car screens.</em></h1>
+    <div class="feat" data-r style="--d:120ms">
+      <div class="hl"><span>Default prompt</span><span>With rules</span></div>
+      <div class="cstage" id="hcmp" style="--x:100%;aspect-ratio:${SCENES[HERO.s].W}/${SCENES[HERO.s].H}">
+        <div class="pane b">${scr(HERO.s,'before')}</div>
+        <div class="clip"><div class="pane a">${scr(HERO.s,'after')}</div></div>
+        <div class="handle"><span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
+      </div>
+    </div>
+    <a class="cap2" href="#entry-${pad(HERO.n)}" data-r style="--d:200ms"><span class="lbl13 num">${pad(HERO.n)}</span>${HERO.title}<i>→</i></a>
   </section>
-  <section class="wrap intro">
-    <h1 data-r style="--d:60ms">100 fixes for AI-made car screens.<em>Same task. Same model. Two prompts.</em></h1>
-    <p data-r style="--d:120ms">One prompt gives you a phone app, the other gives you a cockpit. Each entry shows the difference, why it matters at a glance, and the prompt behind it.</p>
-    <a class="arrow go" href="#entry-001" data-r style="--d:180ms">Start at 001 <i>→</i></a>
+  <section class="wrap blk2" data-r>
+    <div class="chap2" id="ticks">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${c}</span></div>`).join('')}</div>
   </section>
-  <section class="wrap sec-gap" data-r><div class="sh"><span class="lbl13"><span class="idx">[01]</span>How it works</span><span class="lbl13">Three steps per entry</span></div>
-    <div class="steps" id="steps">${[['Ask like everyone does','One sentence, no rules, a clean session. Whatever comes back first is the Before. No edits.'],['Add the cockpit rules','Same task, same model, plus the rules: canvas, sizes, hierarchy. That is the After.'],['Check it in one second','Glance for one second. If you can’t say what the screen told you, it fails.']].map(([h,t],k)=>`<div class="step ${k?'':'on'}"><b>0${k+1}</b><h3>${h}</h3><p>${t}</p></div>`).join('')}</div></section>
-  <section class="wrap sec-gap" data-r><div class="sh"><span class="lbl13"><span class="idx">[02]</span>Progress</span><span class="lbl13 num">${PUBLISHED} of ${TOTAL}</span></div>
-    <div class="chap2" id="ticks">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${String(ci+1).padStart(2,'0')}  ${c}</span></div>`).join('')}</div></section>
-  <section class="wrap sec-gap"><div class="sh" data-r><span class="lbl13"><span class="idx">[03]</span>Entries</span><span class="lbl13">Before → after, on loop</span></div>
-    <div class="jump" data-r><span class="lbl13">Jump to</span><div class="chips" id="jump"><span class="ind"></span>${['All',...SYMPTOMS].map((t,k)=>`<button class="${k?'':'on'}" data-t="${t}">${t}</button>`).join('')}</div></div>
-    <div class="grid" id="grid">${shown.map(card).join('')}</div></section>
+  <section class="wrap blk2"><div class="grid" id="grid">${shown.map(card).join('')}</div></section>
   <footer class="wrap"><span>Cockpit Practice Log</span><span>Peixin</span></footer>`}
 
 function entryHTML(n){
@@ -534,10 +510,15 @@ addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
 function setupHome(){
   $('#hcount').textContent=`${pad(PUBLISHED)} / ${TOTAL}`;
-  const ck=()=>{const d=new Date();$('#clock').textContent=d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'})};ck();setInterval(ck,10000);
-  const st=$$('.step');let si=0;setInterval(()=>{si=(si+1)%st.length;st.forEach((x,k)=>x.classList.toggle('on',k===si))},3200);
-  st.forEach((x,k)=>x.onmouseenter=()=>{si=k;st.forEach((y,j)=>y.classList.toggle('on',j===k))});
-  seg($('#jump'),b=>{const t=b.dataset.t;$$('#grid .card').forEach(c=>{const show=t==='All'?true:(c.dataset.tags||'').split('|').includes(t);c.classList.toggle('hide',!show);if(show){c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')}})});
+  const st=$('#hcmp');let drag=false,touched=false;
+  const setX=(p,anim)=>{st.classList.toggle('anim',!!anim);st.style.setProperty('--x',Math.max(0,Math.min(100,p))+'%')};
+  const fx=ev=>{const r=st.getBoundingClientRect();return (ev.clientX-r.left)/r.width*100};
+  st.addEventListener('pointerdown',ev=>{touched=true;drag=true;st.setPointerCapture(ev.pointerId);setX(fx(ev),true);setTimeout(()=>st.classList.remove('anim'),300)});
+  st.addEventListener('pointermove',ev=>{if(drag)setX(fx(ev),false)});
+  st.addEventListener('pointerup',()=>{drag=false});
+  /* one slow reveal, then rest on the After; re-plays while untouched */
+  const play=()=>{if(touched)return;setX(100,false);setTimeout(()=>{if(!touched){st.style.setProperty('--dur','1.6s');setX(0,true)}},900);setTimeout(()=>{if(!touched)setX(100,true)},5200)};
+  const io=new IntersectionObserver(es=>{if(es[0].isIntersecting){play();clearInterval(st._t);st._t=setInterval(play,8000)}else clearInterval(st._t)},{threshold:.5});io.observe(st);
   const tip=$('#tip');
   $('#ticks').addEventListener('pointerover',e=>{const t=e.target.closest('.tk i');if(!t)return;const n=+t.dataset.n,r=t.getBoundingClientRect();
     tip.textContent=n<=PUBLISHED?`${pad(n)} · ${ENTRIES[n-1].title}`:n===PUBLISHED+1?`${pad(n)} · Next`:`${pad(n)} · Coming`;tip.style.left=r.left+r.width/2+'px';tip.style.top=r.top-30+'px';tip.classList.add('on')});
