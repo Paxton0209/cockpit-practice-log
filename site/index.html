@@ -213,16 +213,18 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .tray .in{border-radius:11px;background:var(--panel);box-shadow:0 0 0 1px var(--line);padding:16px 18px}
 .tray .ft{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 8px}
 .tray .ft .copy{height:28px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:0 0 0 1px var(--line);align-items:center}
-/* home, reduced */
-.top{padding-top:96px;text-align:center}
-.top h1{font-size:64px;line-height:72px;font-weight:500}
-.top h1 em{display:block;font-style:normal;color:var(--t3);font-size:24px;line-height:32px;margin-top:16px;font-weight:400}
-.feat{margin-top:72px;border-radius:24px;background:var(--stage);padding:56px 12% 64px}
-.feat .cstage{cursor:ew-resize;box-shadow:0 30px 60px -30px rgba(0,0,0,.25)}
+/* home */
+.top{padding-top:120px}
+.top h1{max-width:1000px;font-size:56px;line-height:64px;font-weight:500}
+.top h1 em{display:block;font-style:normal;color:var(--t3)}
+.feat{margin-top:96px;display:grid;grid-template-columns:minmax(0,1.618fr) minmax(0,1fr);gap:48px;align-items:end}
+.fstage{aspect-ratio:16/10;border-radius:16px;background:var(--stage);display:grid;place-items:center;padding:0 9%}
+.fstage .cstage{width:100%;box-shadow:0 0 0 1px var(--line),0 24px 48px -28px rgba(0,0,0,.3)}
 #hcmp.anim .clip{transition:clip-path var(--dur,.7s) var(--io)}#hcmp.anim .handle{transition:left var(--dur,.7s) var(--io)}
-.hl{display:flex;justify-content:space-between;margin-bottom:14px;font-size:13px;color:var(--t3)}
-.cap2{display:inline-flex;align-items:baseline;gap:12px;margin-top:24px;font-size:15px}
-.cap2 i{font-style:normal;transition:transform .35s var(--out)}.cap2:hover i{transform:translateX(3px)}
+#hcmp .handle span{width:24px;height:24px;margin:-12px 0 0 -12px}
+.fmeta{display:flex;flex-direction:column;gap:12px;padding-bottom:4px}
+.fmeta h2{font-size:28px;line-height:36px;font-weight:500}
+.fmeta p{font-size:15px;line-height:24px;color:var(--t2);margin-bottom:12px}
 .blk2{padding-top:160px}
 /* entry dialog */
 .ov{position:fixed;inset:0;z-index:40;pointer-events:none}
@@ -306,7 +308,7 @@ body.lock{overflow:hidden}
   .budget{grid-template-columns:1fr}
   .wrap{padding:0 20px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
   .sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.demo{flex:none;padding:64px 16px 16px}.right{overflow:visible;padding:32px 20px 96px}.ctrl{grid-template-columns:1fr 1fr;gap:14px}.ctrl .sl{grid-column:1/-1}.flnav{left:50%;bottom:20px;position:fixed}}
-@media(max-width:860px){.top{padding-top:56px}.top h1{font-size:40px;line-height:48px}.top h1 em{font-size:18px;line-height:26px}.feat{margin-top:40px;padding:28px 16px 32px;border-radius:16px}.blk2{padding-top:96px}.cap2{margin-top:20px}}
+@media(max-width:860px){.top{padding-top:56px}.top h1{font-size:36px;line-height:44px}.feat{margin-top:48px;grid-template-columns:1fr;gap:24px}.blk2{padding-top:96px}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}.meta{grid-template-columns:36px 1fr}.meta .ct{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
@@ -446,14 +448,18 @@ function viewHome(){
   <section class="wrap top">
     <h1 data-r>A car is not a phone.<em>100 fixes for AI-made car screens.</em></h1>
     <div class="feat" data-r style="--d:120ms">
-      <div class="hl"><span>Default prompt</span><span>With rules</span></div>
-      <div class="cstage" id="hcmp" style="--x:100%;aspect-ratio:${SCENES[HERO.s].W}/${SCENES[HERO.s].H}">
+      <div class="fstage"><div class="cstage" id="hcmp" style="--x:100%;aspect-ratio:${SCENES[HERO.s].W}/${SCENES[HERO.s].H}">
         <div class="pane b">${scr(HERO.s,'before')}</div>
         <div class="clip"><div class="pane a">${scr(HERO.s,'after')}</div></div>
-        <div class="handle"><span><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
+        <div class="handle"><span><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
+      </div></div>
+      <div class="fmeta">
+        <span class="lbl13 num">Latest · ${pad(HERO.n)}</span>
+        <h2>${HERO.title}</h2>
+        <p>${HERO.sum}</p>
+        <a class="arrow" href="#entry-${pad(HERO.n)}">Open <i>→</i></a>
       </div>
     </div>
-    <a class="cap2" href="#entry-${pad(HERO.n)}" data-r style="--d:200ms"><span class="lbl13 num">${pad(HERO.n)}</span>${HERO.title}<i>→</i></a>
   </section>
   <section class="wrap blk2" data-r>
     <div class="chap2" id="ticks">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${c}</span></div>`).join('')}</div>
