@@ -269,39 +269,78 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .handle::before{content:"";position:absolute;top:0;bottom:0;left:-.5px;width:1px;background:var(--ink);opacity:.45}
 .handle span{position:absolute;top:50%;left:0;border-radius:50%;background:var(--panel);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 4px 12px rgba(0,0,0,.12);display:grid;place-items:center}
 .ecard{border-radius:16px;corner-shape:superellipse(1.6);box-shadow:0 0 0 1px var(--line)}
-.hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:16px;padding:64px 9% 16px}
-.hero3 .seg4{position:absolute;top:16px;right:16px}
+.hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px 16px 20px}
+
 .hcap{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--t3)}
 .hcap .sb,.cstage[data-v=b]~.hcap .sa{display:none}.cstage[data-v=b]~.hcap .sb{display:inline}
 .cstage .pane{visibility:hidden}.cstage[data-v=a] .pane.a,.cstage[data-v=b] .pane.b{visibility:visible}
 .bare .ecard{box-shadow:none}
-.hero3 .cstage{width:100%;border-radius:10px;corner-shape:superellipse(1.6);box-shadow:0 0 0 1px var(--line),0 20px 40px -24px rgba(0,0,0,.28)}
+.hero3 .cstage{width:100%}
+.kp{display:grid;place-items:center;background:transparent}
+.kp{font-family:var(--font);color:var(--stx)}
+.k-cb{width:400px;height:220px;border-radius:16px;background:var(--ssf);padding:20px 24px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.k-cb small{font-size:13px;color:var(--st2);font-weight:500}
+.k-cb .v{font-size:40px;font-weight:600;margin-top:8px}
+.k-cb .bt{margin-top:auto;display:flex;gap:8px;justify-content:flex-end}
+.k-cb .bt i{width:28px;height:28px;border-radius:50%;background:var(--ssf2);display:grid;place-items:center}
+.k-ca{display:flex;flex-direction:column;align-items:flex-start;gap:4px}
+.k-ca small{font-size:26px;color:var(--st2)}
+.k-ca .v{font-size:168px;line-height:1;font-weight:300;letter-spacing:-.02em}
+.k-ca .bt{margin-top:28px;display:flex;gap:16px}
+.k-ca .bt i{width:200px;height:96px;border-radius:20px;background:var(--ssf);display:grid;place-items:center}
+.k-ab,.k-aa{display:flex;align-items:center;justify-content:space-between;background:var(--ssf)}
+.k-ab{width:390px;height:44px;padding:0 16px;border-radius:10px;font-size:17px}
+.k-aa{width:733px;height:104px;padding:0 32px;border-radius:24px;font-size:28px}
+.kp .sw{position:relative;display:block;width:51px;height:31px;border-radius:99px;background:#34c759}
+.kp .sw::after{content:"";position:absolute;top:2px;left:auto;right:2px;transform:none;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+.k-aa .sw{width:88px;height:52px;background:var(--stx)}
+.k-aa .sw::after{width:44px;height:44px;top:4px;right:4px;background:var(--sbg);box-shadow:none}
+.kp .ka{display:block;background:linear-gradient(140deg,#d9d9d9,#8c8c8c)}
+.k-bb{width:720px;height:64px;padding:0 16px 0 12px;border-radius:12px;background:var(--ssf);display:flex;align-items:center;gap:12px;font-size:14px}
+.k-bb .ka{width:40px;height:40px;border-radius:6px}
+.k-bb .tt{flex:1;font-weight:500}
+.k-bb .c,.k-ba .c{display:flex;align-items:center;gap:16px}
+.k-ba{display:flex;align-items:center;gap:56px}
+.k-ba .ka{width:264px;height:264px;border-radius:24px}
+.k-ba>div{display:flex;flex-direction:column;gap:36px}
+.k-ba .tt{font-size:48px;font-weight:600;line-height:1.1}
+.k-ba .c{gap:40px}
+.k-ba .pl{width:120px;height:96px;border-radius:24px;background:var(--stx);color:var(--sbg);display:grid;place-items:center}
+.k-tb{width:760px;height:180px;padding:0 32px;border-radius:16px;background:#1f6feb;color:#fff;display:flex;align-items:center;gap:22px}
+.k-tb div,.k-ta div{display:flex;flex-direction:column;gap:4px}
+.k-tb b{font-size:40px;font-weight:700;line-height:1.1}
+.k-tb div span{font-size:22px}
+.k-ta{display:flex;align-items:center;gap:40px}
+.k-ta b{font-size:150px;line-height:1;font-weight:600;letter-spacing:-.02em}
+.k-ta b small{font-size:60px;margin-left:8px;color:var(--st2)}
+.k-ta div span{font-size:64px;color:var(--st2);font-weight:500}
+.cstage .cs{background:transparent}
 .hero3 .handle span{width:28px;height:28px;margin:-14px 0 0 -14px}
 .seg4{position:relative;display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:10px;corner-shape:superellipse(1.6);background:color-mix(in srgb,var(--ink) 6%,transparent)}
 .seg4 button{position:relative;z-index:1;height:28px;min-width:64px;padding:0 14px;border-radius:7px;font-size:13px;color:var(--t2);transition:color .2s}
 .seg4 button.on{color:var(--ink)}
 .seg4 .ind{position:absolute;top:3px;left:3px;height:28px;border-radius:7px;corner-shape:superellipse(1.6);background:var(--panel);box-shadow:0 1px 2px rgba(0,0,0,.06),0 0 0 .5px rgba(0,0,0,.06);transition:transform .45s var(--out),width .45s var(--out)}
-.art{padding:24px 24px 8px}
-.art h2{font-size:22px;line-height:30px;font-weight:600}
-.art .lede{margin:6px 0 0;font-size:15px;line-height:24px;color:var(--t2)}
-.say{margin-top:20px;padding-top:16px;box-shadow:inset 0 1px 0 var(--line)}
-.sayh{display:flex;align-items:center;justify-content:space-between;height:28px;font-size:12px;color:var(--t3)}
-.cpy3{width:32px;height:32px;margin-right:-4px;display:grid;place-items:center;border-radius:10px;corner-shape:superellipse(1.6);color:var(--t2);box-shadow:inset 0 0 0 1px var(--line);transition:color .2s,background-color .2s}
-.cpy3:hover{color:var(--ink)}
-.cpy3.done{background:var(--ink);color:var(--bg);box-shadow:none}
-.ptxt{margin:4px 0 0;white-space:pre-wrap;font:400 15px/24px var(--font);color:var(--ink);max-height:120px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
-.more{margin-top:8px;box-shadow:inset 0 1px 0 var(--line)}
-.more summary{display:flex;align-items:center;gap:6px;height:48px;font-size:13px;color:var(--t2);cursor:pointer;list-style:none}
-.more summary::-webkit-details-marker{display:none}
-.more summary svg{transition:transform .2s var(--out)}
-.more[open] summary svg{transform:rotate(180deg)}
-.more ol{margin:0;padding:0 0 16px;list-style:none;counter-reset:k;display:flex;flex-direction:column;gap:8px}
-.more ol li{counter-increment:k;display:grid;grid-template-columns:24px 1fr;font-size:14px;line-height:22px;color:var(--t2)}
-.more ol li::before{content:counter(k);font:400 12px/22px var(--mono);color:var(--t3)}
-.spec{box-shadow:inset 0 1px 0 var(--line)}
-.spec div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:10px 0;font-size:14px;color:var(--t2);box-shadow:inset 0 -1px 0 var(--line)}
-.spec code{font:400 13px var(--mono);color:var(--ink)}
-.pnote{margin:12px 0 20px;font-size:13px;line-height:20px;color:var(--t3)}
+.art{padding:24px 24px 24px}
+.art h2{font-size:17px;line-height:24px;font-weight:600}
+.art .lede{margin:4px 0 0;font-size:14px;line-height:22px;color:var(--t2)}
+.params{margin:20px 0 0;padding:6px 16px;border-radius:12px;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column}
+.params div{display:grid;grid-template-columns:128px 1fr;gap:16px;padding:8px 0;font-size:14px;line-height:20px}
+.params b{font-weight:500;color:var(--ink)}
+.params span{color:var(--t2);font-variant-numeric:tabular-nums}
+.acc{margin-top:8px;border-radius:12px;corner-shape:superellipse(1.6);box-shadow:inset 0 0 0 1px var(--line)}
+.acc:first-of-type{margin-top:16px}
+.acc summary{display:flex;align-items:center;gap:8px;height:52px;padding:0 8px 0 14px;cursor:pointer;list-style:none;font-size:14px}
+.acc summary::-webkit-details-marker{display:none}
+.acc summary b{font-weight:600}
+.acc summary span{flex:1;min-width:0;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acc .chev{flex:none;color:var(--t3);transition:transform .2s var(--out)}
+.acc[open] .chev{transform:rotate(90deg)}
+.cbtn{flex:none;height:36px;padding:0 14px;border-radius:10px;corner-shape:superellipse(1.6);background:var(--panel);box-shadow:var(--lift);font-size:13px;font-weight:500;color:var(--ink);transition:background-color .2s,color .2s}
+.cbtn.done{background:var(--ink);color:var(--bg);box-shadow:none}
+.cbtn:disabled{box-shadow:none;background:none;color:var(--t3);font-weight:400}
+.acc .ptxt{margin:0;padding:4px 16px 16px 36px;white-space:pre-wrap;font:400 13px/21px var(--mono);color:var(--t2)}
+.acc .accp{margin:0;padding:0 16px 16px 36px;font-size:13px;line-height:20px;color:var(--t3)}
+.acc ol{margin:0;padding:0 16px 12px 36px;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:22px;color:var(--t2)}
 .code{position:relative;border-radius:16px;corner-shape:superellipse(1.6);background:var(--stage);box-shadow:inset 0 0 0 1px var(--line)}
 .code pre{margin:0;padding:18px 64px 18px 18px;white-space:pre-wrap;font:400 13px/22px var(--mono);color:var(--ink)}
 .code .cpy2{position:absolute;right:10px;top:10px;height:30px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:var(--lift);font-size:13px;color:var(--t2);transition:color .2s,background-color .2s}
@@ -412,6 +451,17 @@ C:{W:1920,H:720,
   rules:['CT-02','HR-03','LY-05'],sl:[['Target height',40,96,76,'rh'],['Text size',16,36,28,'ts']],
   f:(a,b)=>({t:`target <b>${a+20}</b> = ${a} + 20 ≥ 96`,bad:a<76,m:'Target under 96 · CT-02'})}};
 function pbRow(c,i,t,k){return `<div class="it"><span class="q" style="background:${c}">${I(i,18,2)}</span><span data-k="${t}">${t}</span>${k==='c'?`<em>${I('chev',16,2)}</em>`:`<i class="tg ${k==='o'?'off':''}"></i>`}</div>`}
+const CMP={
+C:{before:()=>`<div class="k-cb"><small data-k="l">Temperature</small><div class="v" data-k="t">21.5°</div><div class="bt"><i data-k="m">${I('minus',14,2)}</i><i data-k="p">${I('plus',14,2)}</i></div></div>`,
+   after:()=>`<div class="k-ca"><small data-k="l">Temperature</small><div class="v" data-k="t">21.5°</div><div class="bt"><i data-k="m">${I('minus',40)}</i><i data-k="p">${I('plus',40)}</i></div></div>`},
+A:{before:()=>`<div class="k-ab"><span data-k="l">Auto brightness</span><i class="sw" data-k="sw"></i></div>`,
+   after:()=>`<div class="k-aa"><span data-k="l">Auto brightness</span><i class="sw" data-k="sw"></i></div>`},
+B:{before:()=>`<div class="k-bb"><i class="ka" data-k="art"></i><span class="tt" data-k="tt">Night Drive</span><span class="c"><span data-k="pv">${I('prev',20)}</span><span data-k="pl">${I('play',24)}</span><span data-k="nx">${I('next',20)}</span></span></div>`,
+   after:()=>`<div class="k-ba"><i class="ka" data-k="art"></i><div><span class="tt" data-k="tt">Night Drive</span><span class="c"><span data-k="pv">${I('prev',44)}</span><span class="pl" data-k="pl">${I('play',48)}</span><span data-k="nx">${I('next',44)}</span></span></div></div>`},
+T:{before:()=>`<div class="k-tb"><span data-k="ar">${I('right',72,2.4)}</span><div><b data-k="d">300 m</b><span data-k="s">Turn right onto Main Street</span></div></div>`,
+   after:()=>`<div class="k-ta"><span data-k="ar">${FORK(150,'currentColor')}</span><div><b data-k="d">300<small>m</small></b><span data-k="s">Main Street</span></div></div>`}};
+const CW=1200,CH=520;
+const cmp=(s,side)=>`<div class="cs" data-w="${CW}" style="aspect-ratio:${CW}/${CH}"><div class="px kp" style="width:${CW}px;height:${CH}px">${CMP[s][side]()}</div></div>`;
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
@@ -513,6 +563,7 @@ const rest=sh=>[...sh.querySelectorAll('.dtop,.art,.pager')];
 const cstyle=([x,y,w,h,r])=>({transform:`translate(${x}px,${y}px)`,width:w+'px',height:h+'px',borderRadius:r+'px'});
 function srcFor(n){const el=anchor?.isConnected&&+anchor.dataset.n===n?anchor:$(`#grid .card[data-n="${n}"]`);const t=el&&$('.thumb',el);if(!t)return null;
   const r=t.getBoundingClientRect();if(r.bottom<=0||r.top>=innerHeight)return null;return rbox(r,16)}
+const CHEV='<svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 4 4-4 4"/></svg>';
 function sheetHTML(n){
   const e=ENTRIES[n-1],S=SCENES[e.s],c=e.cc,[p0,p1]=prompts(e),pv=ENTRIES[n-2],nx=n<PUBLISHED?ENTRIES[n]:null;
   const lead=t=>{const m=t.match(/^(.+?[.:])\s(.*)$/);return m?`<b>${m[1]}</b> ${m[2]}`:t};
@@ -521,22 +572,19 @@ function sheetHTML(n){
       <button class="rb" id="dPrev" aria-label="Previous" ${n<=1?'disabled':''}>${ARROW_L}</button><button class="rb" id="dNext" aria-label="Next" ${n>=PUBLISHED?'disabled':''}>${ARROW_R}</button>
       <button class="rb" id="dClose" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
     <div class="ecard"><div class="hero3">
-      <div class="seg4" id="seg4"><span class="ind"></span><button data-v="b">Before</button><button class="on" data-v="a">After</button></div>
-      <div class="cstage" id="cstage" data-v="a" style="aspect-ratio:${S.W}/${S.H}">
-        <div class="pane b">${scr(e.s,'before')}</div>
-        <div class="pane a">${scr(e.s,'after')}</div>
+      <div class="cstage" id="cstage" data-v="a" style="aspect-ratio:${CW}/${CH}">
+        <div class="pane b">${cmp(e.s,'before')}</div>
+        <div class="pane a">${cmp(e.s,'after')}</div>
       </div>
-      <p class="hcap mono"><span class="sa">${c[1].toLowerCase()}</span><span class="sb">${c[0].toLowerCase()}</span></p>
+      <div class="seg4" id="seg4"><span class="ind"></span><button data-v="b">Before</button><button class="on" data-v="a">After</button></div>
     </div>
     <article class="art">
       <h2>${e.title}</h2>
       <p class="lede">${e.sum} ${e.prin}</p>
-      <div class="say"><div class="sayh"><span>Say to AI</span><button class="cpy3 press" data-copy aria-label="Copy prompt"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg></button></div><pre class="ptxt">${p1}</pre></div>
-      <details class="more"><summary>Why the default failed<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg></summary>
-        <ol>${S.issues.map(t=>`<li><span>${t}</span></li>`).join('')}</ol>
-        <div class="spec">${S.params.map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div>
-        <p class="pnote">The default prompt was one line: “${p0}”</p>
-      </details>
+      <div class="params">${S.params.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join('')}</div>
+      <details class="acc"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn press" data-copy>Copy</button></summary><pre class="ptxt">${p1}</pre></details>
+      <details class="acc"><summary>${CHEV}<b>Skill</b><span>dashnote-car-screens</span><button class="cbtn" disabled>Coming soon</button></summary><p class="accp">One install, and your agent follows every Dashnote rule on its own. Coming once the first 20 entries are out.</p></details>
+      <details class="acc"><summary>${CHEV}<b>Why it works</b><span>What the default prompt got wrong</span></summary><ol>${S.issues.map(t=>`<li>${t}</li>`).join('')}</ol><p class="accp">The default prompt was one line: “${p0}”</p></details>
     </article></div>
     <nav class="pager">${pv?`<a href="#entry-${pad(pv.n)}"><span>Previous</span><b>${pad(pv.n)} ${pv.title}</b></a>`:'<a class="ph"></a>'}${nx?`<a class="nx" href="#entry-${pad(nx.n)}"><span>Next</span><b>${pad(nx.n)} ${nx.title}</b></a>`:''}</nav>
   </div>`}
@@ -564,8 +612,7 @@ function wireSheet(){
   $('#dClose').onclick=()=>go('home');
   $('#dPrev').onclick=()=>curN>1&&go('entry-'+pad(curN-1));
   $('#dNext').onclick=()=>curN<PUBLISHED&&go('entry-'+pad(curN+1));
-  $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}const o=b.innerHTML;b.classList.add('done');b.innerHTML='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>';setTimeout(()=>{b.classList.remove('done');b.innerHTML=o},1400)});
-  setTimeout(()=>{if($('#cstage')!==st)return;set('b');setTimeout(()=>{if($('#cstage')===st)set('a')},1400)},700);
+  $$('[data-copy]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}b.classList.add('done');b.textContent='Copied';setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1400)});
 }
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
