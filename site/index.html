@@ -282,27 +282,28 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bare .ecard{box-shadow:none}
 .hero3 .cstage{width:100%}
 .kp{display:grid;place-items:center;background:transparent}
-.kp{--mz:cubic-bezier(.4,0,.2,1);font-family:var(--font);color:var(--stx)}
-.kp *,.kp *::after{transition-property:border-radius,background-color,color,box-shadow,border-color,padding,gap,font-size,line-height,width,height,max-width,opacity,transform,left,top;transition-duration:.44s;transition-timing-function:var(--mz)}
+.kp{--mz:cubic-bezier(.25,.1,.25,1);font-family:var(--font);color:var(--stx)}
+.kp .t1 *{transition-delay:.04s}
+.kp *,.kp *::after{transition-property:border-radius,background-color,color,box-shadow,border-color,padding,gap,font-size,line-height,width,height,max-width,opacity,transform,left,top;transition-duration:.5s;transition-timing-function:var(--mz)}
 .kp.nt *,.kp.nt *::before,.kp.nt *::after{transition:none!important}
 .tw{position:relative;width:480px;height:214px}
 .t1{position:relative;width:480px;height:214px;display:flex;flex-direction:column;border-radius:16px;corner-shape:superellipse(1.8);background:rgba(255,255,255,.65);box-shadow:0 8px 16px rgba(28,28,46,.18);overflow:hidden;color:#1d1d1f}
 .t1::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(15,23,41,.1);pointer-events:none}
-.t1 .mn{flex:none;height:142px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 28px;background:rgba(31,111,235,0);color:#1d1d1f;transition-delay:.06s}
-.t1 .mv{position:relative;flex:none;width:80px;height:80px;transition-delay:.1s}
+.t1 .mn{flex:none;height:142px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 28px;background:rgba(31,111,235,0);color:#1d1d1f}
+.t1 .mv{position:relative;flex:none;width:80px;height:80px}
 .t1 .mv>span{position:absolute;inset:0;display:grid;place-items:center}
 .t1 .ia{transition-delay:.12s}
 .t1 .ib{opacity:0;color:#fff;transform:scale(1.25)}
 .t1 .tx{display:flex;flex-direction:column;min-width:0}
-.t1 .dd{display:flex;align-items:baseline;gap:4px;transition-delay:.14s}
-.t1 .dd b{font-size:48px;line-height:56px;font-weight:600;transition-delay:.14s}
-.t1 .dd i{font-style:normal;font-size:40px;line-height:56px;font-weight:600;color:rgba(29,29,31,.65);transition-delay:.16s}
-.t1 .st{display:block;font-size:28px;line-height:36px;font-weight:500;white-space:nowrap;transition-delay:.2s}
-.t1 .st em{font-style:normal;display:inline-block;max-width:0;opacity:0;overflow:hidden;vertical-align:bottom;white-space:nowrap;transition-delay:.2s}
-.t1 .bc{flex:none;height:72px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:0 28px;background:rgba(226,226,226,.7);font-size:24px;line-height:32px;font-weight:500;color:rgba(29,29,31,.65);transition-delay:.26s}
+.t1 .dd{display:flex;align-items:baseline;gap:4px}
+.t1 .dd b{font-size:48px;line-height:56px;font-weight:600}
+.t1 .dd i{font-style:normal;font-size:40px;line-height:56px;font-weight:600;color:rgba(29,29,31,.65)}
+.t1 .st{display:block;font-size:28px;line-height:36px;font-weight:500;white-space:nowrap}
+.t1 .st em{font-style:normal;display:inline-block;max-width:0;opacity:0;overflow:hidden;vertical-align:bottom;white-space:nowrap}
+.t1 .bc{flex:none;height:72px;box-sizing:border-box;display:flex;align-items:center;justify-content:space-between;gap:28px;padding:0 28px;background:rgba(226,226,226,.7);font-size:24px;line-height:32px;font-weight:500;color:rgba(29,29,31,.65)}
 .t1 .nx{display:flex;align-items:center;gap:4px}
-.t1 .ni{display:inline-flex;width:32px;height:32px;overflow:hidden;transition-delay:.28s}
-.t1 .nx b{margin-left:-4px;font-weight:500;color:#1d1d1f;transition-delay:.28s}
+.t1 .ni{display:inline-flex;width:32px;height:32px;overflow:hidden}
+.t1 .nx b{margin-left:-4px;font-weight:500;color:#1d1d1f}
 .is-b .t1{border-radius:8px;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.1)}
 .is-b .t1::after{box-shadow:inset 0 0 0 1px rgba(15,23,41,0)}
 .is-b .t1 .mn{gap:18px;background:#1f6feb;color:#fff}
@@ -320,7 +321,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .kp .mk{position:absolute;z-index:4;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#0a7cff;color:#fff;box-shadow:0 0 0 3px rgba(10,124,255,.18);font:600 11px/20px var(--font);font-style:normal;text-align:center;transition:opacity .28s ease var(--md,0s),transform .32s cubic-bezier(.3,1.4,.5,1) var(--md,0s)}
 .kp .an{position:absolute;z-index:3;pointer-events:none;transition:opacity .3s ease .72s}
 .kp .bl{left:120px;top:75px;width:136px;height:0;border-top:1px dashed rgba(10,124,255,.8)}
-.kp .gp{left:108px;top:31px;width:12px;height:80px;background:rgba(10,124,255,.16);transition-delay:.84s}
+.kp .gp{left:108px;top:31px;width:12px;height:80px;background:rgba(10,124,255,.16)}
 .kp.is-b .mk,.kp.is-b .an{opacity:0;transform:scale(.6);transition-delay:0s;transition-duration:.12s}
 .kp.is-b .an{transform:none}
 
@@ -376,7 +377,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .art .lede{margin:6px 0 0;font-size:14px;line-height:22px;color:var(--t2)}
 .chg{margin:24px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:20px 32px}
 .chg li{display:grid;grid-template-columns:20px 1fr;gap:12px;align-items:start}
-.chg .no{width:20px;height:20px;border-radius:50%;background:#0a7cff;color:#fff;font:600 11px/20px var(--font);text-align:center}
+.chg .no{width:20px;height:20px;border-radius:50%;background:var(--fill2);color:var(--t2);font:600 11px/20px var(--font);text-align:center}
 .chg p{margin:0;font-size:13px;line-height:20px;color:var(--t2)}
 .chg b{display:block;font-size:14px;line-height:20px;font-weight:600;color:var(--ink)}
 .grp{margin:28px 0 20px;border-radius:12px;corner-shape:superellipse(1.6);box-shadow:inset 0 0 0 1px var(--line)}
@@ -517,8 +518,7 @@ T:{W:640,H:300,notes:[['One baseline','The number and its unit sit on the same b
   <div class="mn"><span class="mv"><span class="ia">${FIG_TURN}</span><span class="ib">${I('right',56,2.4)}</span></span>
   <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><em>Turn right onto&nbsp;</em>Main Street</span></div></div>
   <div class="bc"><span class="nx"><span>Then</span><span class="ni">${FIG_NEXT}</span><b>150 m</b></span><span>Arrive 10:48</span></div></div>
-  <i class="an bl"></i><i class="an gp"></i>
-  <i class="mk" style="left:266px;top:75px;--md:.72s">1</i><i class="mk" style="left:114px;top:18px;--md:.84s">2</i><i class="mk" style="left:448px;top:214px;--md:.96s">3</i><i class="mk" style="left:6px;top:6px;--md:1.08s">4</i></div>`},
+</div>`},
 C:{W:640,H:360,notes:[['112 px value','The temperature reads at arm’s length; everything else steps back.'],['72 px targets','Minus and plus become full-width buttons on the bottom edge.'],['Quiet label','The label drops to a 22 px caption at 65%.'],['Radius 24','The card joins the same corner family as the other panels.']],html:()=>`<div class="c1" data-ga="radius 24" data-gb="radius 16"><small data-ga="22px" data-gb="13px">Temperature</small><div class="v" data-ga="112px" data-gb="40px">21.5°</div><div class="bt"><i>${I('minus',36)}</i><i>${I('plus',36)}</i></div></div>`},
 A:{W:640,H:220,notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},
 B:{W:640,H:340,notes:[['232 px art','You know what is playing at a glance.'],['40 px title','The one line that matters leads.'],['104 × 88 play','The main action is a real button.'],['32 px rhythm','Prev, play and next sit on one even spacing.']],html:()=>`<div class="b1" data-ga="radius 28" data-gb="radius 12"><i class="ka" data-ga="232" data-gb="48"></i><span class="tt" data-ga="40px" data-gb="15px">Night Drive<small>Mira Okafor</small></span><span class="c"><span class="pv">${I('prev',40)}</span><span class="pl">${I('play',40)}</span><span class="nx2">${I('next',40)}</span></span></div>`}};
