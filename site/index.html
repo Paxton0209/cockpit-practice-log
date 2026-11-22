@@ -626,7 +626,8 @@ function morph(st,to){
 function wireSheet(){
   const st=$('#cstage'),sg=$('#seg4');
   const set=v=>{$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v===v));sg._place&&sg._place(true);morph(st,v)};
-  seg(sg,b=>morph(st,b.dataset.v));
+  seg(sg,b=>{morph(st,b.dataset.v);mem.set('v',b.dataset.v)});
+  if(mem.get('v')==='b'){st.dataset.v='b';$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'))}
   $$('[data-k]',st).forEach(x=>{if(getComputedStyle(x).display==='inline')x.style.display='inline-block'});
   $('#dClose').onclick=()=>go('home');
   $('#dPrev').onclick=()=>curN>1&&go('entry-'+pad(curN-1));
@@ -675,9 +676,11 @@ function route(){
   else closeEntry();
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
-addEventListener('hashchange',route);
-(()=>{const h=new Date().getHours(),root=document.documentElement;root.dataset.theme='light';let want=root.dataset.theme,busy=false;
-  const set=t=>root.dataset.theme=t;
+const mem={get(k){try{return localStorage.getItem('dn:'+k)}catch(_){return null}},set(k,v){try{localStorage.setItem('dn:'+k,v)}catch(_){}}};
+if(!location.hash){const h=mem.get('hash');if(h&&/^#entry-\d{3}$/.test(h))history.replaceState(null,'',h)}
+addEventListener('hashchange',()=>{mem.set('hash',location.hash);route()});
+(()=>{const h=new Date().getHours(),root=document.documentElement;root.dataset.theme=mem.get('theme')==='dark'?'dark':'light';let want=root.dataset.theme,busy=false;
+  const set=t=>{root.dataset.theme=t;mem.set('theme',t)};
   document.addEventListener('click',async ev=>{const sw=ev.target.closest('#theme');if(!sw)return;want=want==='dark'?'light':'dark';if(busy)return;
     if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches){set(want);return}
     busy=true;try{while(root.dataset.theme!==want){const t=want,b=sw.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2,rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y))+180;
