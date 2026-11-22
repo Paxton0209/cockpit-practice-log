@@ -214,56 +214,22 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .tray .in{border-radius:11px;background:var(--panel);box-shadow:0 0 0 1px var(--line);padding:16px 18px}
 .tray .ft{display:flex;justify-content:space-between;align-items:center;padding:10px 12px 8px}
 .tray .ft .copy{height:28px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:0 0 0 1px var(--line);align-items:center}
-/* home: index + one entry */
-:root{--W:min(1280px,calc(100vw - 64px))}
-.frame{position:relative;width:var(--W);margin:0 auto}
-.bar{position:sticky;top:0;z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
-.bar .in{height:72px;display:flex;align-items:center}
-.bar .nm{font-size:18px;font-weight:600}
-.bar .st{margin-left:auto;display:flex;align-items:center;gap:14px;font:400 12px var(--mono);color:var(--t3)}
-.bar .st i{width:1px;height:12px;background:var(--line)}
-.mono{font:400 12px/16px var(--mono);letter-spacing:normal}
-.chips2{display:flex;gap:8px;flex-wrap:wrap;padding:16px 0 40px}
-.chips2 button{height:36px;padding:0 14px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--line);font-size:14px;color:var(--t2);display:inline-flex;align-items:center;gap:6px;transition:box-shadow .2s,color .2s,background-color .2s}
-.chips2 button small{font:400 11px var(--mono);color:var(--t3)}
-.chips2 button:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--t3)}
-.chips2 button.on{background:var(--ink);color:var(--bg);box-shadow:none}.chips2 button.on small{color:var(--bg);opacity:.6}
-.md{display:grid;grid-template-columns:320px minmax(0,1fr);gap:56px;align-items:start;padding-bottom:96px}
-.wheel{position:sticky;top:96px;height:calc(100vh - 140px);overflow-y:auto;scrollbar-width:none;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
-.wheel::-webkit-scrollbar{display:none}
-.wl{display:flex;flex-direction:column;gap:2px;padding:calc(50vh - 120px) 0}
-.wi{display:flex;align-items:center;gap:14px;min-height:48px;padding:0 18px;border-radius:999px;text-align:left;color:var(--t2);transition:background-color .3s var(--ease),color .3s}
-.wi .num{color:var(--t3)}
-.wi .wt{font-size:15px;line-height:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wi:hover{color:var(--ink)}
-.wi.on{background:var(--fill);color:var(--ink)}.wi.on .wt{font-weight:500}
-.wi.soon{color:var(--t3)}
-.det{border-radius:24px;box-shadow:0 0 0 1px var(--line);overflow:hidden;background:var(--panel)}
-.stg{position:relative;background:var(--stage);padding:88px 9% 32px;display:flex;flex-direction:column;align-items:center;gap:28px}
-.stg .cstage{width:100%;border-radius:14px;box-shadow:0 0 0 1px var(--line),0 24px 48px -28px rgba(0,0,0,.28)}
-.stg .handle span{width:28px;height:28px;margin:-14px 0 0 -14px}
-.seg2{position:absolute;right:20px;top:20px;display:inline-flex;gap:2px;padding:4px;border-radius:999px;background:var(--fill)}
-.seg2 button{position:relative;z-index:1;height:32px;padding:0 14px;border-radius:999px;font-size:13px;color:var(--t2);transition:color .2s}
-.seg2 button.on{color:var(--ink)}
-.seg2 .ind{position:absolute;top:4px;left:0;height:32px;border-radius:999px;background:var(--panel);box-shadow:0 1px 3px rgba(0,0,0,.1);transition:transform .45s var(--out),width .45s var(--out)}
-.fml{color:var(--t2)}
-.stg.empty{padding:0;aspect-ratio:16/9;justify-content:center;gap:10px;color:var(--t3)}
-.bd{padding:40px 44px 44px;display:flex;flex-direction:column;gap:14px}
-.bd .eyb{color:var(--t3)}
-.bd h2{font-size:30px;line-height:38px;font-weight:500}.bd h2.muted{color:var(--t3)}
-.bd>p{margin:0;font-size:17px;line-height:28px;color:var(--t2)}
-.lb2{display:block;font-size:13px;color:var(--t3);margin-bottom:10px}
-.say{margin-top:18px;padding-top:24px;box-shadow:inset 0 1px 0 var(--line);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
-.say pre{margin:0;white-space:pre-wrap;font:400 15px/26px var(--font);color:var(--ink)}
-.cpy{width:44px;height:44px;border-radius:50%;box-shadow:inset 0 0 0 1px var(--line);display:grid;place-items:center;color:var(--t2);transition:color .2s,box-shadow .2s}
-.cpy:hover{color:var(--ink);box-shadow:inset 0 0 0 1px var(--t3)}.cpy.done{color:var(--bg);background:var(--ink);box-shadow:none}
-.more{margin-top:12px;box-shadow:inset 0 1px 0 var(--line)}
-.more summary{list-style:none;cursor:pointer;height:56px;display:flex;align-items:center;justify-content:space-between;font-size:14px;color:var(--t2)}
-.more summary::-webkit-details-marker{display:none}
-.more summary i{width:12px;height:12px;position:relative}.more summary i::before,.more summary i::after{content:"";position:absolute;left:0;right:0;top:5px;height:1.5px;background:currentColor;transition:transform .4s var(--out)}.more summary i::after{transform:rotate(90deg)}
-.more[open] summary i::after{transform:rotate(0)}
-.mg{display:grid;grid-template-columns:1fr 1fr;gap:40px;padding:8px 0 8px}
-.dp{margin:0;white-space:pre-wrap;font:400 14px/22px var(--font);color:var(--t2)}
+/* home: sidebar index + grid */
+.shell{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;padding:28px 20px 24px 28px}
+.side .brand{padding:0 10px;height:32px;display:flex;align-items:center;font-size:15px}
+.desc{text-wrap:balance;margin:0;font-size:13px;line-height:20px;color:var(--t2)}
+.nav{margin-top:32px;display:flex;flex-direction:column;gap:2px}
+.nav button{height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 10px;border-radius:8px;font-size:14px;color:var(--t2);text-align:left;transition:background-color .2s,color .2s}
+.nav button:hover{background:var(--fill);color:var(--ink)}
+.nav button.on{background:var(--fill);color:var(--ink);font-weight:500}
+.nav small{font-size:12px;font-weight:400;color:var(--t3);font-variant-numeric:tabular-nums}.nav small.z{opacity:.5}
+.foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;padding:0 10px}
+.foot .pg{display:flex;flex-direction:column;gap:8px}
+.foot .pg i{display:block;height:2px;border-radius:1px;background:var(--line);overflow:hidden}.foot .pg b{display:block;height:100%;background:var(--ink)}
+.foot .row{display:flex;justify-content:space-between;align-items:center;margin-right:-8px}
+.mainc{padding:28px 40px 120px 24px;min-width:0}
+.mh{height:32px;display:flex;justify-content:space-between;align-items:center;font-size:14px;font-weight:500;margin-bottom:24px}
 /* entry dialog */
 .ov{position:fixed;inset:0;z-index:40;pointer-events:none}
 .ov .scrimx{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;transition:opacity .3s var(--ease)}
@@ -346,7 +312,7 @@ body.lock{overflow:hidden}
   .budget{grid-template-columns:1fr}
   .wrap{padding:0 20px}.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid{grid-template-columns:1fr 1fr;gap:40px 16px}
   .sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.demo{flex:none;padding:64px 16px 16px}.right{overflow:visible;padding:32px 20px 96px}.ctrl{grid-template-columns:1fr 1fr;gap:14px}.ctrl .sl{grid-column:1/-1}.flnav{left:50%;bottom:20px;position:fixed}}
-@media(max-width:860px){:root{--W:calc(100vw - 32px)}.md{grid-template-columns:1fr;gap:16px}.wheel{position:static;height:auto;-webkit-mask-image:none;mask-image:none;overflow-x:auto}.wl{flex-direction:row;padding:0}.wi{flex:none;min-height:40px}.wi .wt{max-width:200px}.chips2{flex-wrap:nowrap;overflow-x:auto;padding:8px 0 16px}.chips2 button{flex:none}.stg{padding:64px 16px 20px}.bd{padding:28px 20px 28px}.mg{grid-template-columns:1fr}.bar .st span.num,.bar .st i:first-of-type{display:none}}
+@media(max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}.side{min-width:0;position:static;height:auto;padding:24px 20px 0}.desc{margin-top:8px}.nav{margin:24px -20px 0;padding:0 20px 4px;flex-direction:row;overflow-x:auto;scrollbar-width:none;position:sticky;top:0}.nav::-webkit-scrollbar{display:none}.nav button{flex:none;gap:6px;height:32px}.foot{display:none}.mainc{padding:24px 20px 96px}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
@@ -474,75 +440,24 @@ function card(e,i){const soon=e.n>PUBLISHED;
   return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-tags="${(TAGS[e.n-1]||[]).join('|')}" data-r style="--d:${(i%3)*70}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">${soon?'<div class="thumb"></div>':thumb(e)}
     <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'':e.title}</span></div></a>`}
 const HERO=ENTRIES[0];
-let CUR_C='All', SEL=PUBLISHED;
-function listFor(c){return c==='All'?ENTRIES.slice(0,PUBLISHED+3):ENTRIES.filter(e=>e.cat===c)}
 function viewHome(){
-  const cnt=c=>ENTRIES.filter(x=>x.cat===c&&x.n<=PUBLISHED).length;
+  const count=c=>c==='All'?PUBLISHED:ENTRIES.filter(e=>e.cat===c&&e.n<=PUBLISHED).length;
   return `
-  <div class="bar"><div class="frame"><div class="in"><span class="nm">Dashnote</span><span class="st"><span id="clock"></span><i></i><span class="num">${pad(PUBLISHED)} / ${TOTAL}</span><i></i><button class="ib press" id="theme" aria-label="Day / Night"><svg width="15" height="15" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button></span></div></div></div>
-  <div class="frame">
-    <div class="chips2" id="chips2">${['All',...CHAPTERS].map(c=>`<button class="${c==='All'?'on':''}" data-c="${c}">${c}<small>${c==='All'?PUBLISHED:cnt(c)}</small></button>`).join('')}</div>
-    <div class="md">
-      <nav class="wheel" id="wheel"><div class="wl" id="wl"></div></nav>
-      <article class="det" id="det"></article>
-    </div>
+  <div class="shell">
+    <aside class="side">
+      <a class="brand" href="#home">Dashnote</a>
+      <nav class="nav" id="nav">${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
+      <div class="foot"><p class="desc">Before/after fixes for AI-made car screens.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
+        <div class="row"><span class="lbl13">Peixin</span><button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button></div></div>
+    </aside>
+    <main class="mainc"><div class="mh"><span id="mTitle">All</span><span class="lbl13 num" id="mCount">${PUBLISHED} published</span></div><div class="grid" id="grid">${gridFor('All')}</div></main>
   </div>`}
-function wheelHTML(c){return listFor(c).map(e=>{const soon=e.n>PUBLISHED;return `<button class="wi ${soon?'soon':''}" data-n="${e.n}"><span class="mono num">${pad(e.n)}</span><span class="wt">${soon?'Coming soon':e.title}</span></button>`}).join('')}
-function detailHTML(n){
-  const e=ENTRIES[n-1];
-  if(n>PUBLISHED) return `<div class="stg empty"><span class="mono">${pad(n)} · ${e.cat}</span><span>Coming soon</span></div><div class="bd"><h2 class="muted">Not written yet</h2><p>This entry is on the list. It goes live when the real before and after are ready.</p></div>`;
-  const S=SCENES[e.s],c=e.cc,[p0,p1]=prompts(e);
-  return `
-  <div class="stg">
-    <div class="seg2" id="seg2"><span class="ind"></span><button data-x="100">${c[0]}</button><button class="on" data-x="0">${c[1]}</button></div>
-    <div class="cstage" id="cstage" style="--x:0%;aspect-ratio:${S.W}/${S.H}">
-      <div class="pane b">${scr(e.s,'before')}</div>
-      <div class="clip"><div class="pane a">${scr(e.s,'after')}</div></div>
-      <div class="handle"><span><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
-    </div>
-    <div class="fml mono" id="fml">${S.f(S.sl[0][3],S.sl[1][3]).t.replace(/<\/?b>/g,'')}</div>
-  </div>
-  <div class="bd">
-    <span class="mono eyb">${pad(e.n)} · ${e.cat}</span>
-    <h2>${e.title}</h2>
-    <p>${e.prin}</p>
-    <div class="say"><div><span class="lb2">Say to AI</span><pre>${p1}</pre></div><button class="cpy press" data-copy aria-label="Copy prompt"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5V3A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg></button></div>
-    <details class="more"><summary><span>For practitioners</span><i></i></summary>
-      <div class="mg"><div><span class="lb2">What the default prompt got wrong</span>${S.issues.map((t,k)=>`<div class="kp"><b>${k+1}</b><span>${t}</span></div>`).join('')}</div>
-      <div><span class="lb2">Parameters</span><div class="params">${S.params.map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div>
-      <span class="lb2" style="margin-top:24px">Default prompt</span><pre class="dp">${p0}</pre></div></div>
-    </details>
-  </div>`}
-function select(n,scroll=true){
-  SEL=n;$$('#wl .wi').forEach(b=>b.classList.toggle('on',+b.dataset.n===n));
-  const el=$(`#wl .wi[data-n="${n}"]`);
-  if(el&&scroll){const w=$('#wheel');w.scrollTo({top:el.offsetTop-w.clientHeight/2+el.offsetHeight/2,behavior:'smooth'})}
-  const d=$('#det');d.innerHTML=detailHTML(n);fit(d);
-  d.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
-  if(n<=PUBLISHED) setupDetail();
-  const h='#entry-'+pad(n);if(location.hash!==h)history.replaceState(null,'',h);
-}
-function setupDetail(){
-  const st=$('#cstage');let drag=false;
-  const setX=(p,anim)=>{st.classList.toggle('anim',!!anim);st.style.setProperty('--x',Math.max(0,Math.min(100,p))+'%')};
-  const fx=ev=>{const r=st.getBoundingClientRect();return (ev.clientX-r.left)/r.width*100};
-  st.addEventListener('pointerdown',ev=>{drag=true;st.setPointerCapture(ev.pointerId);setX(fx(ev),true);setTimeout(()=>st.classList.remove('anim'),300)});
-  st.addEventListener('pointermove',ev=>{if(drag)setX(fx(ev),false)});
-  st.addEventListener('pointerup',()=>{drag=false;const v=parseFloat(st.style.getPropertyValue('--x'));$$('#seg2 button').forEach(b=>b.classList.toggle('on',(+b.dataset.x===100)===(v>50)));$('#seg2')._place()});
-  seg($('#seg2'),b=>setX(+b.dataset.x,true));
-  setTimeout(()=>{setX(100,true);setTimeout(()=>setX(0,true),1100)},350);
-  $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText($('.say pre').textContent)}catch(_){}b.classList.add('done');toast('Prompt copied');setTimeout(()=>b.classList.remove('done'),1400)});
-}
-function setupHome(){
-  const ck=()=>{const el=$('#clock');if(el)el.textContent=new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit',hour12:false})};ck();setInterval(ck,10000);
-  const fill=c=>{CUR_C=c;$('#wl').innerHTML=wheelHTML(c);$$('#wl .wi').forEach(b=>b.onclick=()=>select(+b.dataset.n));
-    const first=listFor(c).filter(e=>e.n<=PUBLISHED);select(c==='All'?SEL:(first.length?first[first.length-1].n:listFor(c)[0].n))};
-  $$('#chips2 button').forEach(b=>b.onclick=()=>{$$('#chips2 button').forEach(x=>x.classList.toggle('on',x===b));fill(b.dataset.c)});
-  const m=location.hash.match(/^#entry-(\d{3})$/);if(m)SEL=Math.max(1,Math.min(+m[1],TOTAL));
-  fill('All');
-  addEventListener('keydown',ev=>{if(ev.target.tagName==='INPUT')return;if(ev.key!=='ArrowDown'&&ev.key!=='ArrowUp')return;ev.preventDefault();
-    const ns=listFor(CUR_C).map(e=>e.n),i=ns.indexOf(SEL),j=Math.max(0,Math.min(ns.length-1,i+(ev.key==='ArrowDown'?1:-1)));if(ns[j]!==SEL)select(ns[j])});
-}
+function gridFor(c){
+  const list=c==='All'?[...ENTRIES.slice(0,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+3)]:ENTRIES.filter(e=>e.cat===c);
+  return list.map((e,i)=>{const soon=e.n>PUBLISHED;
+    return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" style="--d:${(i%3)*50}ms"><div class="thumb"></div>
+    <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'Coming':e.title}</span></div></a>`}).join('')}
+
 function entryHTML(n){
   const e=ENTRIES[n-1]||ENTRIES[0],S=SCENES[e.s],c=e.cc,[p0,p1]=prompts(e);
   return `
@@ -590,6 +505,12 @@ function seg(el,onChange){const ind=$('.ind',el);const place=(b,anim)=>{if(!anim
   el._place=()=>place($('button.on',el),false)}
 addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
+function setupHome(){
+  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));const c=b.dataset.c,g=$('#grid');
+    g.innerHTML=gridFor(c);$('#mTitle').textContent=c;const n=c==='All'?PUBLISHED:ENTRIES.filter(e=>e.cat===c&&e.n<=PUBLISHED).length;$('#mCount').textContent=c==='All'?`${n} published`:`${n} of 10`;
+    $$('.card',g).forEach(el=>el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:parseFloat(el.style.getPropertyValue('--d'))||0,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
+    if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'})});
+}
 let curN=0;
 function openEntry(n,dir){
   let ov=$('#ov');
@@ -632,9 +553,10 @@ addEventListener('keydown',e=>{if(!curN)return;if(e.key==='Escape')go('home');if
 
 let homeReady=false;
 function route(){
-  const m=location.hash.match(/^#entry-(\d{3})$/);
-  if(!homeReady){$('#app').innerHTML=viewHome();reveal();setupHome();homeReady=true;return}
-  if(m){const n=Math.max(1,Math.min(+m[1],TOTAL));if(n!==SEL)select(n)}
+  const h=location.hash.slice(1),m=h.match(/^entry-(\d{3})$/);
+  if(!homeReady){$('#app').innerHTML=viewHome();reveal();setupHome();homeReady=true}
+  if(m){const n=Math.max(1,Math.min(+m[1],PUBLISHED));const dir=curN?Math.sign(n-curN):0;if(n!==curN)openEntry(n,dir)}
+  else closeEntry();
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 addEventListener('hashchange',route);
