@@ -307,20 +307,30 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .t1 .eta b{font-weight:500;color:inherit}
 .t1 .w2{display:none}
 .t1 .ni{border-radius:8px;color:#1d1d1f;background:rgba(38,43,52,0);justify-content:center;align-items:center}
-.is-b .t1{border-radius:20px;background:#0f1217;box-shadow:0 8px 16px rgba(28,28,46,0);color:#f4f6f8}
+.t1 .pre{display:block;height:0;opacity:0;overflow:hidden;font-size:13px;line-height:16px;font-weight:500;letter-spacing:.8px;text-transform:uppercase;color:#5a6575}
+.t1 .stw{display:inline-block;max-width:0;opacity:0;overflow:hidden;vertical-align:bottom;white-space:nowrap}
+.t1 .sep{flex:none;width:0;height:30px;background:#e2e7ee;opacity:0}
+.t1 .nx{flex:1}
+.t1 .bc{border:1px solid rgba(226,231,238,0);margin:0}
+.is-b .t1{border-radius:20px;background:#f4f6f9;box-shadow:0 8px 16px rgba(28,28,46,0);color:#14181f}
 .is-b .t1::after{box-shadow:inset 0 0 0 1px rgba(15,23,41,0)}
-.is-b .t1 .mn{height:150px;gap:20px;padding:0 24px;color:#f4f6f8}
-.is-b .t1 .mv{width:104px;height:104px;border-radius:18px;background:#1e6bff;color:#fff}
-.is-b .t1 .tx{gap:6px}
-.is-b .t1 .dd b{font-size:52px;line-height:52px;font-weight:700;letter-spacing:-1.5px}
-.is-b .t1 .dd i{font-size:28px;line-height:52px;color:#aeb6c2}
-.is-b .t1 .st{font-size:24px;line-height:29px;font-weight:600}
-.is-b .t1 .bc{height:64px;padding:0 24px;background:#181c23;box-shadow:inset 0 1px 0 #262b34;font-size:15px;line-height:20px;color:#8b94a3}
-.is-b .t1 .nx{gap:10px}
-.is-b .t1 .ni{background:#262b34;color:#f4f6f8}
-.is-b .t1 .nx b,.is-b .t1 .eta b{margin-left:0;font-size:22px;line-height:28px;font-weight:600;color:#f4f6f8}
-.is-b .t1 .eta{gap:10px}
-.is-b .t1 .w1{display:none}.is-b .t1 .w2{display:inline}
+.is-b .t1 .mn{height:140px;gap:20px;padding:18px 22px 0 20px;color:#14181f}
+.is-b .t1 .mv{width:112px;height:112px;border-radius:24px;background:#1f5eff;color:#fff;box-shadow:0 4px 12px rgba(31,94,255,.25)}
+.is-b .t1 .dd{gap:4px}
+.is-b .t1 .dd b{font-size:60px;line-height:60px;font-weight:700;letter-spacing:-2px}
+.is-b .t1 .dd i{font-size:28px;line-height:60px;color:#5a6575}
+.is-b .t1 .st{margin-top:8px;font-size:26px;line-height:30px;font-weight:600}
+.is-b .t1 .pre{height:18px;opacity:1}
+.is-b .t1 .bc{height:62px;margin:0 12px 12px;padding:0 18px;gap:12px;border-radius:16px;border-color:#e2e7ee;background:#fff;color:#5a6575;font-size:15px;line-height:20px}
+.is-b .t1 .nx{gap:10px;font-size:20px;font-weight:600;color:#14181f}
+.is-b .t1 .tn{order:1;font-size:15px;font-weight:500;color:#5a6575}
+.is-b .t1 .ni{order:0;width:26px;height:26px;color:#14181f}
+.is-b .t1 .nx b{order:2;margin-left:0;font-weight:600;color:#14181f}
+.is-b .t1 .stw{max-width:100px;opacity:1}
+.is-b .t1 .sep{width:1px;opacity:1}
+.is-b .t1 .eta{flex-direction:column;align-items:flex-end;gap:0;line-height:1.1}
+.is-b .t1 .eta b{font-size:24px;line-height:26px;font-weight:700;color:#14181f}
+.is-b .t1 .w1{display:none}.is-b .t1 .w2{display:inline;font-size:12px;line-height:14px;letter-spacing:.8px;text-transform:uppercase}
 .kp .mk{position:absolute;z-index:4;width:20px;height:20px;margin:-10px 0 0 -10px;border-radius:50%;background:#0a7cff;color:#fff;box-shadow:0 0 0 3px rgba(10,124,255,.18);font:600 11px/20px var(--font);font-style:normal;text-align:center;transition:opacity .28s ease var(--md,0s),transform .32s cubic-bezier(.3,1.4,.5,1) var(--md,0s)}
 .kp .an{position:absolute;z-index:3;pointer-events:none;transition:opacity .3s ease .72s}
 .kp .bl{left:120px;top:75px;width:136px;height:0;border-top:1px dashed rgba(10,124,255,.8)}
@@ -519,8 +529,8 @@ const CMP={
 T:{W:640,H:300,notes:[['One baseline','The number and its unit sit on the same baseline; the street lines up with the number’s left edge.'],['12 px from icon to text','The arrow lives in an 80 px keyline box, then a fixed 12 px gap before the text.'],['Hairline and a soft shadow','A 1 px border at 10% plus a 0 8 16 shadow at 18%. Depth without a heavy outline.'],['Continuous corners','Radius 16 with full corner smoothing, so the curve eases into the straight edge.']],
   html:()=>`<div class="tw"><div class="t1">
   <div class="mn"><span class="mv">${FIG_TURN}</span>
-  <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st">Main Street</span></div></div>
-  <div class="bc"><span class="nx"><span>Then</span><span class="ni">${FIG_NEXT}</span><b>150 m</b></span><span class="eta"><span class="w1">Arrive</span><span class="w2">Arrival</span><b>10:48</b></span></div></div>
+  <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><small class="pre">Turn right onto</small>Main Street</span></div></div>
+  <div class="bc"><span class="nx"><span class="tn">Then</span><span class="ni">${FIG_NEXT}</span><b><span class="stw">Straight&nbsp;</span>150 m</b></span><i class="sep"></i><span class="eta"><span class="w1">Arrive</span><b>10:48</b><span class="w2">Arrival</span></span></div></div>
 </div>`},
 C:{W:640,H:360,notes:[['112 px value','The temperature reads at arm’s length; everything else steps back.'],['72 px targets','Minus and plus become full-width buttons on the bottom edge.'],['Quiet label','The label drops to a 22 px caption at 65%.'],['Radius 24','The card joins the same corner family as the other panels.']],html:()=>`<div class="c1" data-ga="radius 24" data-gb="radius 16"><small data-ga="22px" data-gb="13px">Temperature</small><div class="v" data-ga="112px" data-gb="40px">21.5°</div><div class="bt"><i>${I('minus',36)}</i><i>${I('plus',36)}</i></div></div>`},
 A:{W:640,H:220,notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},

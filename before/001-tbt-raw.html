@@ -1,4 +1,25 @@
-<!-- Before for entry 001. Clean subagent run, first result, no edits.
-Prompt: "Design a turn-by-turn navigation panel for a car center display, 480 × 214 px."
-Plus content (300 m Main Street / then straight 150 m / arrive 10:48), the shared turn icon SVG, and an output-format note (one 480x214 HTML fragment, Inter). -->
-<div class="nav-panel"><style>.nav-panel{width:480px;height:214px;box-sizing:border-box;font-family:Inter,sans-serif;background:#0F1217;color:#F4F6F8;border-radius:20px;overflow:hidden;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}.nav-panel *{box-sizing:border-box;margin:0}.nav-panel .np-main{height:150px;display:flex;align-items:center;gap:20px;padding:0 24px}.nav-panel .np-icon{width:104px;height:104px;flex:none;border-radius:18px;background:#1E6BFF;color:#fff;display:flex;align-items:center;justify-content:center}.nav-panel .np-text{display:flex;flex-direction:column;gap:6px;min-width:0}.nav-panel .np-dist{font-size:52px;line-height:1;font-weight:700;letter-spacing:-1.5px;font-variant-numeric:tabular-nums}.nav-panel .np-dist span{font-size:28px;font-weight:600;letter-spacing:0;color:#AEB6C2;margin-left:4px}.nav-panel .np-street{font-size:24px;line-height:1.2;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nav-panel .np-bar{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:#181C23;border-top:1px solid #262B34}.nav-panel .np-then,.nav-panel .np-eta{display:flex;align-items:center;gap:10px}.nav-panel .np-label{font-size:15px;font-weight:500;color:#8B94A3}.nav-panel .np-val{font-size:22px;font-weight:600;font-variant-numeric:tabular-nums}.nav-panel .np-small{width:32px;height:32px;border-radius:8px;background:#262B34;color:#F4F6F8;display:flex;align-items:center;justify-content:center}</style><div class="np-main"><div class="np-icon">[shared turn icon]</div><div class="np-text"><p class="np-dist">300<span>m</span></p><p class="np-street">Main Street</p></div></div><div class="np-bar"><div class="np-then"><span class="np-label">Then</span><div class="np-small"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 17V4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><path d="M5 8.5L10 3.5L15 8.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="np-val">150 m</span></div><div class="np-eta"><span class="np-label">Arrival</span><span class="np-val">10:48</span></div></div></div>
+<!-- Before for entry 001. Clean subagent run (no skills, no tools, no prior prompts), first result, no edits.
+Prompt: "Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme."
+Plus content, the shared turn icon SVG, and an output-format note (one 480x214 HTML fragment, Inter). -->
+<div id="nav" style="width:480px;height:214px;box-sizing:border-box;overflow:hidden;position:relative;background:#F4F6F9;font-family:'Inter',sans-serif;color:#14181F;border-radius:20px;display:flex;flex-direction:column;">
+<style>
+#nav *{box-sizing:border-box;margin:0;padding:0;font-family:'Inter',sans-serif}
+#nav .main{display:flex;align-items:center;gap:20px;padding:18px 22px 0 20px;flex:1}
+#nav .ico{width:112px;height:112px;border-radius:24px;background:#1F5EFF;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 4px 12px rgba(31,94,255,.25)}
+#nav .ico svg{width:80px;height:80px}
+#nav .dist{font-size:60px;font-weight:700;letter-spacing:-2px;line-height:1;display:flex;align-items:baseline;gap:4px}
+#nav .dist span{font-size:28px;font-weight:600;letter-spacing:0;color:#5A6575}
+#nav .street{margin-top:8px;font-size:26px;font-weight:600;line-height:1.15;color:#14181F;white-space:nowrap}
+#nav .street small{display:block;font-size:13px;font-weight:500;color:#5A6575;letter-spacing:.8px;text-transform:uppercase;margin-bottom:2px}
+#nav .foot{height:62px;margin:0 12px 12px;background:#fff;border-radius:16px;display:flex;align-items:center;padding:0 18px;gap:12px;border:1px solid #E2E7EE}
+#nav .then{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:600;flex:1}
+#nav .then svg{width:26px;height:26px;color:#14181F}
+#nav .then em{font-style:normal;color:#5A6575;font-weight:500;font-size:15px}
+#nav .sep{width:1px;height:30px;background:#E2E7EE}
+#nav .eta{text-align:right;line-height:1.1}
+#nav .eta b{font-size:24px;font-weight:700;display:block}
+#nav .eta span{font-size:12px;font-weight:500;color:#5A6575;letter-spacing:.8px;text-transform:uppercase}
+</style>
+<div class="main"><div class="ico">[shared turn icon]</div><div><div class="dist">300<span>m</span></div><div class="street"><small>Turn right onto</small>Main Street</div></div></div>
+<div class="foot"><div class="then"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V5M6 11l6-6 6 6"/></svg><em>Then</em>Straight 150 m</div><div class="sep"></div><div class="eta"><b>10:48</b><span>Arrival</span></div></div>
+</div>
