@@ -424,8 +424,14 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .row .chev{transition:transform .28s cubic-bezier(.2,0,0,1)}
 .cbtn.hi{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px 0 12px;background:var(--ink);color:var(--bg);box-shadow:0 1px 2px rgba(0,0,0,.12),0 4px 12px -4px rgba(0,0,0,.25);transition:background-color .2s,transform .12s,box-shadow .2s}
 .cbtn.hi:hover{box-shadow:0 1px 2px rgba(0,0,0,.14),0 6px 16px -4px rgba(0,0,0,.32)}
-.cbtn.hi.done{background:#1f9d55;color:#fff}
 .row .ptxt{-webkit-mask-image:none}
+.cbtn.hi{display:grid;place-items:center}
+.cbtn.hi .cp-idle,.cbtn.hi .cp-result{grid-area:1/1;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:inherit;flex:none;overflow:visible}
+.cbtn.hi .cp-result{opacity:0}
+.cbtn.hi .cp-result svg{width:14px;height:14px;flex:none}
+.cbtn.hi .cp-result path{stroke-dasharray:1;stroke-dashoffset:0}
+.cbtn.hi .cp-result span{color:inherit}
+.cbtn.hi[data-copy-state=failure] .cp-result svg{display:none}
 .row .params{margin:0 16px 16px 38px;padding:4px 16px;border-radius:10px;corner-shape:superellipse(1.6);background:var(--stage)}
 .params div{display:grid;grid-template-columns:120px 1fr;gap:16px;padding:8px 0;font-size:13px;line-height:20px}
 .params div+div{box-shadow:inset 0 1px 0 var(--line)}
@@ -561,7 +567,7 @@ const cmp=(s,v)=>{const C=CMP[s];return `<div class="cs ${v}" data-w="${C.W}" st
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
-['T','Turn-by-turn: one number, one shape','Ask for a navigation panel and AI writes a sentence. A driver needs a distance and an arrow.','In a one-second glance you read one number and one shape. Everything else steps back.',['Phone nav','Glance nav']],
+['T','One number, one shape','Ask for a navigation panel and AI writes a sentence. A driver needs a distance and an arrow.','In a one-second glance you read one number and one shape. Everything else steps back.',['Phone nav','Glance nav']],
 ['B','Now playing beats a wall of covers','AI makes a streaming home page. In the car, the driver needs one thing: what’s on.','The current state is the hero. Browsing is secondary and can wait until you park.',['Cover grid','Now playing']],
 ['C','Climate lives on the bottom edge','Cards in the middle look tidy and are hard to reach on a bumpy road.','Put the most-used controls where a hand can rest and steady itself: the bottom edge.',['Floating cards','Edge controls']],
 ['A','Rows are 76 px, not 44','Phone row height is the thing AI copies into the car most often.','Row = text line × 2. With 28 / 38 type, that is 76 px.',['44 px rows','76 px rows']],
@@ -686,7 +692,7 @@ function sheetHTML(n){
       <ol class="chg">${(CMP[e.s].notes||[]).map(([h,t],i)=>`<li><span class="no">${i+1}</span><p><b>${h}</b>${t}</p></li>`).join('')}</ol>
       <div class="grp">
         <details class="row"><summary>${CHEV}<b>Parameters</b><span>${S.params.length} values</span></summary><div class="rbx"><div class="params">${S.params.map(([k,v])=>`<div><b>${k}</b><span>${v}</span></div>`).join('')}</div></div></details>
-        <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn hi press" data-copy><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg><span>Copy prompt</span></button></summary><div class="rbx"><pre class="ptxt">${p1}</pre></div></details>
+        <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn hi" data-copy type="button" aria-label="Copy prompt"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy prompt</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></summary><div class="rbx"><pre class="ptxt">${p1}</pre></div></details>
         <details class="row"><summary>${CHEV}<b>Skill</b><span>dashnote-car-screens</span><button class="cbtn" disabled>Coming soon</button></summary><div class="rbx"><p class="accp">One install, and your agent follows every Dashnote rule on its own.</p></div></details>
       </div>
       </div>
@@ -698,19 +704,47 @@ function morph(st,to,quiet){
   if(quiet){st.classList.add('q');st.dataset.v=to;st.offsetWidth;st.classList.remove('q')}else st.dataset.v=to;
   const ar=$('.art');if(ar)ar.dataset.v=to;
 }
+
+const COPY_TIMING={out:100,in:120,labelDelay:40,tickDelay:80,tick:180,hold:1000,returnOut:100,returnIn:180};
+let copyAudio,copyNoiseBuffer;
+function prepareCopyAudio(){try{const A=window.AudioContext||window.webkitAudioContext;if(!A)return;copyAudio??=new A();if(copyAudio.state==='suspended')copyAudio.resume().catch(()=>{})}catch(_){}}
+function playCopyTap(){try{const audio=copyAudio;if(!audio||audio.state!=='running')return;
+  if(!copyNoiseBuffer){copyNoiseBuffer=audio.createBuffer(1,Math.ceil(audio.sampleRate*.03),audio.sampleRate);const d=copyNoiseBuffer.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1}
+  const t=audio.currentTime;const noise=audio.createBufferSource(),filter=audio.createBiquadFilter(),ng=audio.createGain();
+  noise.buffer=copyNoiseBuffer;filter.type='bandpass';filter.frequency.value=3200;filter.Q.value=2.5;
+  ng.gain.setValueAtTime(0,t);ng.gain.linearRampToValueAtTime(.22,t+.001);ng.gain.exponentialRampToValueAtTime(.0001,t+.03);
+  noise.connect(filter).connect(ng).connect(audio.destination);noise.start(t);noise.stop(t+.03);
+  const tone=audio.createOscillator(),tg=audio.createGain();tone.type='sine';tone.frequency.setValueAtTime(180,t);tone.frequency.exponentialRampToValueAtTime(90,t+.03);
+  tg.gain.setValueAtTime(0,t);tg.gain.linearRampToValueAtTime(.08,t+.001);tg.gain.exponentialRampToValueAtTime(.0001,t+.03);
+  tone.connect(tg).connect(audio.destination);tone.start(t);tone.stop(t+.03);
+  noise.onended=()=>{noise.disconnect();filter.disconnect();ng.disconnect()};tone.onended=()=>{tone.disconnect();tg.disconnect()};}catch(_){}}
+async function copyPrompt(btn){
+  if(btn._req)return;btn._req=1;prepareCopyAudio();
+  const text=$('.ptxt').textContent;let ok=false;
+  try{await navigator.clipboard.writeText(text);ok=true}catch(_){const f=document.activeElement,ta=document.createElement('textarea');ta.value=text;ta.readOnly=true;ta.style.cssText='position:fixed;left:-9999px;top:0;opacity:0';document.body.append(ta);ta.select();try{ok=document.execCommand('copy')}catch(_){}ta.remove();if(f?.isConnected)f.focus({preventScroll:true})}
+  btn._req=0;
+  const idle=$('.cp-idle',btn),res=$('.cp-result',btn),tick=$('path',res),lab=$('span',res),T=COPY_TIMING;
+  const replay=Boolean(btn.dataset.copyState);const fi=replay?+getComputedStyle(idle).opacity:1,fr=replay?+getComputedStyle(res).opacity:0;
+  (btn._t||[]).forEach(clearTimeout);(btn._a||[]).forEach(a=>a.cancel());btn._t=[];btn._a=[];
+  const fade=(el,a,b,d,dl=0,e='ease')=>{const x=el.animate([{opacity:a},{opacity:b}],{duration:d,delay:dl,fill:'both',easing:e});btn._a.push(x);return x};
+  btn.dataset.copyState=ok?'success':'failure';lab.textContent=ok?'Copied':'Blocked';
+  fade(idle,fi,0,T.out);fade(res,fr,1,T.in,T.labelDelay);
+  if(ok){if(!RM.matches)btn._a.push(tick.animate([{strokeDashoffset:1},{strokeDashoffset:0}],{duration:T.tick,delay:T.tickDelay,fill:'both',easing:'cubic-bezier(.65,0,.35,1)'}));btn._t.push(setTimeout(playCopyTap,T.tickDelay))}
+  btn._t.push(setTimeout(()=>{btn._a.forEach(a=>a.cancel());btn._a=[];const eo='cubic-bezier(.23,1,.32,1)';fade(res,1,0,T.returnOut,0,eo);const inc=fade(idle,0,1,T.returnIn,0,eo);inc.onfinish=()=>{if(btn._a.includes(inc)){btn._a.forEach(a=>a.cancel());btn._a=[];delete btn.dataset.copyState}}},T.tickDelay+T.tick+T.hold));
+}
 function wireSheet(){
   const st=$('#cstage'),sg=$('#seg4');
   const set=v=>{$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v===v));sg._place&&sg._place(true);morph(st,v)};
   seg(sg,b=>{morph(st,b.dataset.v);mem.set('v',b.dataset.v)});
   if(mem.get('v')==='b'){morph(st,'b',true);$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'))}
   $('#dClose').onclick=()=>go('home');
-  $$('[data-copy]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}const t=$('span',b);b.classList.add('done');t.textContent='Copied';clearTimeout(b._t);b._t=setTimeout(()=>{b.classList.remove('done');t.textContent='Copy prompt'},1600)});
+  $$('[data-copy]').forEach(b=>b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();copyPrompt(b)});
   $$('details.row').forEach(d=>{const sm=$('summary',d),rb=$('.rbx',d);sm.onclick=ev=>{if(ev.target.closest('button'))return;ev.preventDefault();if(RM.matches){d.open=!d.open;return}
     rb.getAnimations().forEach(a=>a.cancel());
-    if(d.open){const h=rb.offsetHeight;d.classList.add('closing');rb.animate([{height:h+'px',opacity:1},{height:'0px',opacity:0}],{duration:220,easing:'cubic-bezier(.4,0,1,1)'}).onfinish=()=>{d.open=false;d.classList.remove('closing')}}
-    else{d.open=true;const h=rb.offsetHeight;rb.animate([{height:'0px',opacity:0},{height:h+'px',opacity:1}],{duration:320,easing:'cubic-bezier(.2,0,0,1)'});$$(':scope>*',rb).forEach(c=>c.animate([{opacity:0,transform:'translateY(-4px)'},{opacity:1,transform:'none'}],{duration:360,delay:60,easing:'cubic-bezier(.2,0,0,1)',fill:'backwards'}))}}});
+    if(d.open){d.classList.add('closing');rb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:140,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).onfinish=()=>{d.open=false;d.classList.remove('closing');rb.getAnimations().forEach(a=>a.cancel())}}
+    else{d.open=true;rb.animate([{opacity:0,transform:'translateY(-6px)'},{opacity:1,transform:'none'}],{duration:280,easing:'cubic-bezier(.2,0,0,1)'})}}});
 }
-const shRO=new ResizeObserver(()=>{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)));as.forEach(x=>x.cancel())});
+let roF=0;const shRO=new ResizeObserver(()=>{cancelAnimationFrame(roF);roF=requestAnimationFrame(()=>{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)));as.forEach(x=>x.cancel())})});
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
   document.body.appendChild(ov);$('#veil').onclick=()=>go('home');shRO.observe($('#sheet2'));return ov}
