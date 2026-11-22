@@ -258,7 +258,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .dtop .act{display:flex;gap:4px}
 .rb{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:var(--t2);transition:background-color .2s,color .2s}
 .rb:hover{background:var(--fill);color:var(--ink)}.rb:disabled{opacity:.3;pointer-events:none}
-.cstage{position:relative;overflow:hidden;user-select:none;-webkit-touch-callout:none}
+.cstage{position:relative;overflow:hidden;user-select:none;touch-action:none;cursor:ew-resize}
 .pane{position:absolute;inset:0}.pane.b{z-index:0}.pane .cs{height:100%}
 .clip{position:absolute;inset:0;z-index:1;clip-path:inset(0 0 0 var(--x,50%))}
 .cstage.anim .clip{transition:clip-path .7s var(--out)}
@@ -267,36 +267,42 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .handle{transition:opacity .25s var(--ease)}.cstage.edge .handle{opacity:0}.cstage:hover .handle{opacity:1}
 .handle::before{content:"";position:absolute;top:0;bottom:0;left:-.5px;width:1px;background:var(--ink);opacity:.45}
 .handle span{position:absolute;top:50%;left:0;border-radius:50%;background:var(--panel);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 4px 12px rgba(0,0,0,.12);display:grid;place-items:center}
-.hero3{position:relative;border-radius:16px;corner-shape:superellipse(1.6);background:var(--stage);box-shadow:inset 0 0 0 1px var(--line);padding:48px 9%}
-.cstage{cursor:pointer}
-.cstage .pane.a{z-index:1;transition:opacity .28s var(--ease)}
-.cstage.peek .pane.a{opacity:0}
-.cstage:focus-visible{outline:1.5px solid var(--t3);outline-offset:4px}
-.hcap{position:absolute;left:0;right:0;bottom:16px;margin:0;display:flex;justify-content:center;gap:12px;font-size:12px;line-height:16px;color:var(--t3);pointer-events:none}
-.hcap b{font-weight:500;color:var(--t2);margin-right:4px}
-.hcap .sb,.cstage.peek~.hcap .sa{display:none}
-.cstage.peek~.hcap .sb{display:inline}
-.hcap i{font-style:normal}
-.hcap i::before{content:"·";margin-right:12px}
+.ecard{border-radius:16px;corner-shape:superellipse(1.6);box-shadow:0 0 0 1px var(--line)}
+.hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:16px;padding:64px 9% 16px}
+.hero3 .seg4{position:absolute;top:16px;right:16px}
+.hcap{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--t3)}
 .hero3 .cstage{width:100%;border-radius:10px;corner-shape:superellipse(1.6);box-shadow:0 0 0 1px var(--line),0 20px 40px -24px rgba(0,0,0,.28)}
 .hero3 .handle span{width:28px;height:28px;margin:-14px 0 0 -14px}
-.art{max-width:640px;margin:0 auto;padding:40px 0 0}
-.art h2{font-size:32px;line-height:40px;font-weight:600}
-.art .lede{margin:12px 0 0;font-size:18px;line-height:30px;color:var(--t2)}
-.art h3{margin:40px 0 12px;font-size:13px;line-height:20px;font-weight:400;color:var(--t3)}
-.art ol{margin:0;padding:0;list-style:none;counter-reset:k;display:flex;flex-direction:column;gap:12px}
-.art ol li{counter-increment:k;display:grid;grid-template-columns:28px 1fr;font-size:16px;line-height:27px;color:var(--t2)}
-.art ol li::before{content:counter(k);font:400 13px/27px var(--mono);color:var(--t3)}
-.art ol li b{color:var(--ink);font-weight:500}
+.seg4{position:relative;display:inline-flex;gap:2px;padding:3px;border-radius:999px;background:color-mix(in srgb,var(--ink) 6%,transparent)}
+.seg4 button{position:relative;z-index:1;height:26px;padding:0 12px;border-radius:999px;font-size:12px;color:var(--t2);transition:color .2s}
+.seg4 button.on{color:var(--ink)}
+.seg4 .ind{position:absolute;top:3px;left:0;height:26px;border-radius:999px;background:var(--panel);box-shadow:0 1px 3px rgba(0,0,0,.1);transition:transform .45s var(--out),width .45s var(--out)}
+.art{padding:24px 24px 8px}
+.art h2{font-size:22px;line-height:30px;font-weight:600}
+.art .lede{margin:6px 0 0;font-size:15px;line-height:24px;color:var(--t2)}
+.say{margin-top:20px;padding-top:16px;box-shadow:inset 0 1px 0 var(--line)}
+.sayh{display:flex;align-items:center;justify-content:space-between;height:28px;font-size:12px;color:var(--t3)}
+.cpy3{width:32px;height:32px;margin-right:-4px;display:grid;place-items:center;border-radius:10px;corner-shape:superellipse(1.6);color:var(--t2);box-shadow:inset 0 0 0 1px var(--line);transition:color .2s,background-color .2s}
+.cpy3:hover{color:var(--ink)}
+.cpy3.done{background:var(--ink);color:var(--bg);box-shadow:none}
+.ptxt{margin:4px 0 0;white-space:pre-wrap;font:400 15px/24px var(--font);color:var(--ink);max-height:120px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
+.more{margin-top:8px;box-shadow:inset 0 1px 0 var(--line)}
+.more summary{display:flex;align-items:center;gap:6px;height:48px;font-size:13px;color:var(--t2);cursor:pointer;list-style:none}
+.more summary::-webkit-details-marker{display:none}
+.more summary svg{transition:transform .2s var(--out)}
+.more[open] summary svg{transform:rotate(180deg)}
+.more ol{margin:0;padding:0 0 16px;list-style:none;counter-reset:k;display:flex;flex-direction:column;gap:8px}
+.more ol li{counter-increment:k;display:grid;grid-template-columns:24px 1fr;font-size:14px;line-height:22px;color:var(--t2)}
+.more ol li::before{content:counter(k);font:400 12px/22px var(--mono);color:var(--t3)}
 .spec{box-shadow:inset 0 1px 0 var(--line)}
-.spec div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:12px 0;font-size:14px;color:var(--t2);box-shadow:inset 0 -1px 0 var(--line)}
-.spec div:last-child{box-shadow:inset 0 -1px 0 var(--line)}.spec code{font:400 13px var(--mono);color:var(--ink)}
-.pnote{margin:0 0 12px;font-size:14px;line-height:22px;color:var(--t3)}
+.spec div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:10px 0;font-size:14px;color:var(--t2);box-shadow:inset 0 -1px 0 var(--line)}
+.spec code{font:400 13px var(--mono);color:var(--ink)}
+.pnote{margin:12px 0 20px;font-size:13px;line-height:20px;color:var(--t3)}
 .code{position:relative;border-radius:16px;corner-shape:superellipse(1.6);background:var(--stage);box-shadow:inset 0 0 0 1px var(--line)}
 .code pre{margin:0;padding:18px 64px 18px 18px;white-space:pre-wrap;font:400 13px/22px var(--mono);color:var(--ink)}
 .code .cpy2{position:absolute;right:10px;top:10px;height:30px;padding:0 12px;border-radius:8px;background:var(--panel);box-shadow:var(--lift);font-size:13px;color:var(--t2);transition:color .2s,background-color .2s}
 .code .cpy2:hover{color:var(--ink)}.code .cpy2.done{background:var(--ink);color:var(--bg);box-shadow:none}
-.pager{max-width:640px;margin:48px auto 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pager{margin:24px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .pager a{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border-radius:16px;corner-shape:superellipse(1.6);box-shadow:inset 0 0 0 1px var(--line);transition:box-shadow .2s}
 .pager a:hover{box-shadow:inset 0 0 0 1px var(--t3)}
 .pager a.nx{text-align:right}
@@ -305,8 +311,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 body.lock{overflow:hidden}
 .toast{position:fixed;left:50%;bottom:28px;z-index:60;height:36px;padding:0 14px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:13px;display:flex;align-items:center;opacity:0;transform:translate(-50%,8px);transition:opacity .2s,transform .45s var(--out);pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:620px){.sheet2{left:0;right:0;bottom:0;top:auto;height:min(92dvh,760px);width:auto;transform:none;border-radius:20px 20px 0 0}.sci{padding:12px 16px 40px}.hero3{padding:40px 16px}
-.hcap{bottom:12px}.art{padding-top:28px}.art h2{font-size:26px;line-height:34px}.pager{grid-template-columns:1fr}}
+@media(max-width:620px){.sheet2{left:0;right:0;bottom:0;top:auto;height:min(92dvh,760px);width:auto;transform:none;border-radius:20px 20px 0 0}.sci{padding:12px 16px 40px}.hero3{padding:52px 16px 12px;gap:12px}.hero3 .seg4{top:12px;right:12px}.art{padding:20px 16px 4px}.art h2{font-size:20px;line-height:28px}.pager{grid-template-columns:1fr}}
 @property --theme-reveal-progress{syntax:"<length>";inherits:false;initial-value:0px}
 ::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition{pointer-events:none}
@@ -511,38 +516,42 @@ function sheetHTML(n){
     <div class="dtop"><span class="mono">${pad(e.n)} · ${e.cat}</span><span class="act">
       <button class="rb" id="dPrev" aria-label="Previous" ${n<=1?'disabled':''}>${ARROW_L}</button><button class="rb" id="dNext" aria-label="Next" ${n>=PUBLISHED?'disabled':''}>${ARROW_R}</button>
       <button class="rb" id="dClose" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
-    <div class="hero3">
-      <div class="cstage" id="cstage" role="button" tabindex="0" aria-pressed="false" aria-label="Hold to see the before version" style="aspect-ratio:${S.W}/${S.H}">
+    <div class="ecard"><div class="hero3">
+      <div class="cstage" id="cstage" style="--x:0%;aspect-ratio:${S.W}/${S.H}">
         <div class="pane b">${scr(e.s,'before')}</div>
-        <div class="pane a">${scr(e.s,'after')}</div>
+        <div class="clip"><div class="pane a">${scr(e.s,'after')}</div></div>
+        <div class="handle"><span><svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
       </div>
-      <p class="hcap" aria-live="polite"><span class="sa"><b>After</b> ${c[1]}</span><span class="sb"><b>Before</b> ${c[0]}</span><i>Hold to compare</i></p>
+      <div class="seg4" id="seg4"><span class="ind"></span><button data-x="100">Before</button><button class="on" data-x="0">After</button></div>
+      <p class="hcap mono">drag the line to compare</p>
     </div>
     <article class="art">
       <h2>${e.title}</h2>
       <p class="lede">${e.sum} ${e.prin}</p>
-      <h3>What the default prompt got wrong</h3>
-      <ol>${S.issues.map(t=>`<li><span>${t}</span></li>`).join('')}</ol>
-      <h3>Parameters</h3>
-      <div class="spec">${S.params.map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div>
-      <h3>Prompt</h3>
-      <p class="pnote">Paste it into Claude, Cursor or v0. The default prompt was one line: “${p0}”</p>
-      <div class="code"><pre>${p1}</pre><button class="cpy2 press" data-copy>Copy</button></div>
-    </article>
+      <div class="say"><div class="sayh"><span>Say to AI</span><button class="cpy3 press" data-copy aria-label="Copy prompt"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5a1.5 1.5 0 0 0-1.5-1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg></button></div><pre class="ptxt">${p1}</pre></div>
+      <details class="more"><summary>Why the default failed<svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m4 6 4 4 4-4"/></svg></summary>
+        <ol>${S.issues.map(t=>`<li><span>${t}</span></li>`).join('')}</ol>
+        <div class="spec">${S.params.map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div>
+        <p class="pnote">The default prompt was one line: “${p0}”</p>
+      </details>
+    </article></div>
     <nav class="pager">${pv?`<a href="#entry-${pad(pv.n)}"><span>Previous</span><b>${pad(pv.n)} ${pv.title}</b></a>`:'<a class="ph"></a>'}${nx?`<a class="nx" href="#entry-${pad(nx.n)}"><span>Next</span><b>${pad(nx.n)} ${nx.title}</b></a>`:''}</nav>
   </div>`}
 function wireSheet(){
-  const st=$('#cstage');
-  const peek=v=>{st.classList.toggle('peek',v);st.setAttribute('aria-pressed',v)};
-  st.addEventListener('pointerdown',ev=>{st.setPointerCapture(ev.pointerId);peek(true)});
-  ['pointerup','pointercancel','lostpointercapture'].forEach(t=>st.addEventListener(t,()=>peek(false)));
-  st.addEventListener('keydown',ev=>{if(ev.key===' '||ev.key==='Enter'){ev.preventDefault();if(!ev.repeat)peek(true)}});
-  st.addEventListener('keyup',ev=>{if(ev.key===' '||ev.key==='Enter')peek(false)});
+  const st=$('#cstage');let drag=false;
+  const setX=(p,a)=>{const v=Math.max(0,Math.min(100,p));st.classList.toggle('anim',!!a);st.classList.toggle('edge',v<=0||v>=100);st.style.setProperty('--x',v+'%')};
+  const fx=ev=>{const r=st.getBoundingClientRect();return (ev.clientX-r.left)/r.width*100};
+  setX(0,false);
+  const sync=v=>{$$('#seg4 button').forEach(b=>b.classList.toggle('on',(+b.dataset.x===100)===(v>50)));$('#seg4')._place()};
+  st.addEventListener('pointerdown',ev=>{drag=true;st.setPointerCapture(ev.pointerId);setX(fx(ev),true);setTimeout(()=>st.classList.remove('anim'),300)});
+  st.addEventListener('pointermove',ev=>{if(drag)setX(fx(ev),false)});
+  st.addEventListener('pointerup',()=>{drag=false;sync(parseFloat(st.style.getPropertyValue('--x')))});
+  seg($('#seg4'),b=>setX(+b.dataset.x,true));
   $('#dClose').onclick=()=>go('home');
   $('#dPrev').onclick=()=>curN>1&&go('entry-'+pad(curN-1));
   $('#dNext').onclick=()=>curN<PUBLISHED&&go('entry-'+pad(curN+1));
-  $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText($('.code pre').textContent)}catch(_){}b.classList.add('done');b.textContent='Copied';setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1400)});
-  setTimeout(()=>{if(!$('#cstage'))return;peek(true);setTimeout(()=>peek(false),1100)},620);
+  $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}const o=b.innerHTML;b.classList.add('done');b.innerHTML='<svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>';setTimeout(()=>{b.classList.remove('done');b.innerHTML=o},1400)});
+  setTimeout(()=>{if(!$('#cstage'))return;setX(100,true);sync(100);setTimeout(()=>{setX(0,true);sync(0)},1000)},520);
 }
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
