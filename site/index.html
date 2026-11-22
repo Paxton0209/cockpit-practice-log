@@ -119,7 +119,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .card:hover .thumb{transform:translateY(-2px)}
 .thumb .scr{position:absolute;inset:14% 12%;border-radius:8px;overflow:hidden;background:var(--b2)}
 .thumb .before,.thumb .after{position:absolute;inset:0;display:grid;grid-template-columns:38.2% 1fr}
-.thumb .before{background:var(--b2)}
+.thumb .before{background:var(--b2);display:block}
 .thumb .before i{display:block}
 .thumb .before .bx{margin:12%;border-radius:12px;background:var(--b3)}
 .thumb .after{clip-path:inset(0 100% 0 0);transition:clip-path .7s var(--out)}
@@ -151,6 +151,33 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .line{display:flex;align-items:baseline;justify-content:space-between;gap:24px;padding-top:28px}
 .line .r{font-size:14px;color:var(--t3)}
 .line .r b{font-weight:500;color:var(--ink)}
+/* generous track with chapters */
+.chap2{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:20px 16px}
+.chap2 .c{display:flex;flex-direction:column;gap:10px}
+.chap2 .tk{display:grid;grid-template-columns:repeat(10,1fr);gap:4px}
+.chap2 .tk i{height:22px;border-radius:3px;background:var(--fill);transition:transform .3s var(--out)}
+.chap2 .tk i.done{background:var(--ink);opacity:.85}
+.chap2 .tk i.next{background:transparent;box-shadow:inset 0 0 0 1.5px var(--ink);animation:pulse 1.8s var(--io) infinite}
+.chap2 .tk i:hover{transform:scaleY(1.3)}
+.chap2 .nm{font-size:12px;line-height:16px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chap2 .c.cur .nm{color:var(--ink)}
+/* Before = phone app scaled up */
+.phone{position:absolute;inset:0;background:var(--b2);display:flex;justify-content:center}
+.phone .col{width:34%;height:100%;background:var(--b1);display:flex;flex-direction:column;gap:5%;padding:5% 3% 0;position:relative}
+.phone .col .hd{height:7%;display:flex;justify-content:space-between;align-items:center}
+.phone .col .hd i{display:block;height:45%;border-radius:2px;background:var(--b3)}
+.phone .col .r{height:7%;display:flex;align-items:center;justify-content:space-between;gap:6%;padding:0 4%;border-radius:4px;background:var(--panel);box-shadow:0 2px 6px rgba(0,0,0,.06)}
+.phone .col .r i{display:block;height:28%;border-radius:2px;background:var(--b2)}
+.phone .col .r .ic{width:8%;height:50%;border-radius:3px;background:var(--b3)}
+.phone .col .r .sw{width:13%;height:42%;border-radius:99px;background:var(--b3)}
+.phone .col .tab{position:absolute;left:0;right:0;bottom:0;height:9%;background:var(--panel);display:flex;justify-content:space-around;align-items:center}
+.phone .col .tab i{width:9%;height:40%;border-radius:3px;background:var(--b3)}
+.mk{position:absolute;z-index:1;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:var(--ink);color:var(--bg);font-size:12px;line-height:22px;text-align:center;font-weight:500;box-shadow:0 0 0 3px color-mix(in srgb,var(--bg) 70%,transparent);animation:pop .5s var(--out) both;animation-delay:var(--d,0ms)}
+@keyframes pop{from{transform:scale(.4);opacity:0}}
+.issues{display:flex;flex-direction:column;gap:12px;padding:16px 20px 20px;box-shadow:inset 0 1px 0 var(--line)}
+.issues .it{display:grid;grid-template-columns:22px 1fr;gap:12px;align-items:center}
+.issues .it b{width:22px;height:22px;border-radius:50%;background:var(--fill);font-size:12px;line-height:22px;text-align:center;font-weight:500}
+.model{font-size:13px;color:var(--t3)}
 /* prompts pair */
 .pair{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .pair .prompt .h{font-size:13px;color:var(--t3);margin-bottom:14px}
@@ -177,7 +204,7 @@ footer .in{display:flex;justify-content:space-between;padding-top:24px;box-shado
 .cmp .top .sp{flex:1}
 .cstage{position:relative;aspect-ratio:16/9;margin:10px;border-radius:10px;overflow:hidden;background:var(--stage);user-select:none;touch-action:none;cursor:ew-resize}
 .pane{position:absolute;inset:6% 8%;border-radius:10px;overflow:hidden;display:grid;grid-template-columns:38.2% 1fr}
-.pane.b{background:var(--b2);grid-template-columns:1fr}
+.pane.b{background:var(--b2);grid-template-columns:1fr;z-index:0}
 .pane.b .ph{padding:6%;display:grid;grid-template-columns:1fr 1fr;gap:5%}
 .pane.b .ph i{border-radius:20px;background:var(--b3)}
 .pane.a .sc{background:linear-gradient(180deg,var(--b3),var(--b2))}
@@ -242,7 +269,7 @@ footer .in{display:flex;justify-content:space-between;padding-top:24px;box-shado
 .toast.show{opacity:1;transform:translate(-50%,0)}
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
 
-@media(max-width:860px){.chap{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:20px}.pair{grid-template-columns:1fr}.wrap{padding:0 20px}.stage{aspect-ratio:4/3}.screen{left:30%;width:42%}.intro,.follow{grid-template-columns:1fr}.track,.blk{grid-template-columns:1fr;gap:12px}.ticks{grid-template-columns:repeat(25,1fr)}.grid{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr}.big{font-size:64px;line-height:60px}.prog .bar{display:none}}
+@media(max-width:860px){.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.chap{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:20px}.pair{grid-template-columns:1fr}.wrap{padding:0 20px}.stage{aspect-ratio:4/3}.screen{left:30%;width:42%}.intro,.follow{grid-template-columns:1fr}.track,.blk{grid-template-columns:1fr;gap:12px}.ticks{grid-template-columns:repeat(25,1fr)}.grid{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr}.big{font-size:64px;line-height:60px}.prog .bar{display:none}}
 @media(max-width:560px){.grid{grid-template-columns:1fr}.btn.s.hide-sm{display:none}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:1ms!important}[data-r]{opacity:1;transform:none}}
 </style>
@@ -270,7 +297,8 @@ const g=(w,h=10,c='')=>`<span class="g ${c}" style="width:${w};height:${h}px"></
 const ARROW_L='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>';
 const ARROW_R='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>';
 
-function thumb(e){return `<div class="thumb"><div class="scr"><div class="before"><i class="bx"></i><i class="bx"></i></div><div class="after"><i class="sc"></i><div class="ap"><i style="width:${e.w1}%"></i><i style="width:${e.w2+20}%"></i><i class="a"></i><i style="width:${e.w2}%"></i></div></div></div><span class="lbl b">Before</span><span class="lbl a">After</span></div>`}
+function phone(marks){return `<div class="phone"><div class="col"><div class="hd"><i style="width:40%"></i><i style="width:14%"></i></div>${[62,48,70,40,56].map((w,k)=>`<div class="r"><span class="ic"></span><i style="flex:1;max-width:${w}%"></i><span class="${k%2?'sw':'ic'}"></span></div>`).join('')}<div class="tab"><i></i><i></i><i></i><i></i></div></div></div>`+(marks?[[17,50,'1'],[37,26,'2'],[63,37,'3'],[50,95,'4']].map(([x,y,n],i)=>`<span class="mk" style="left:${x}%;top:${y}%;--d:${400+i*120}ms">${n}</span>`).join(''):'')}
+function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${phone(false)}</div><div class="after"><i class="sc"></i><div class="ap"><i style="width:${e.w1}%"></i><i style="width:${e.w2+20}%"></i><i class="a"></i><i style="width:${e.w2}%"></i></div></div></div><span class="lbl b">Before</span><span class="lbl a">After</span></div>`}
 function card(e,i){
   const soon=e.n>PUBLISHED;
   return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-cat="${e.cat}" data-r style="--d:${(i%3)*60}ms">
@@ -291,10 +319,14 @@ function viewHome(){
       </div>
       <div class="cap"><div class="t"><span class="n num" id="capN">#${pad(PUBLISHED)}</span></div><div class="dots" id="dots">${[0,1,2].map(k=>`<button aria-label="Slide ${k+1}"><i></i></button>`).join('')}</div></div>
     </div>
-    <div class="line" data-r style="--d:80ms">${g('min(460px,70%)',14,'d')}<span class="r num"><b>${pad(PUBLISHED)}</b> / 100</span></div>
   </section>
 
-  <section class="wrap"><div class="chap" id="ticks" data-r style="--d:140ms">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${String(ci+1).padStart(2,'0')} ${c}</span></div>`).join('')}</div></section>
+  <section class="wrap intro">
+    <div class="l" data-r style="--d:80ms">${g('min(520px,90%)',26,'d')}${g('min(360px,70%)',12)}</div>
+    <div class="acts" data-r style="--d:140ms"><a class="btn k press" href="#entry-${pad(PUBLISHED)}">Latest entry</a><a class="btn s press" href="#follow">Follow the 100</a></div>
+  </section>
+
+  <section class="wrap"><div class="track" data-r style="--d:180ms"><b class="num">${pad(PUBLISHED)} / 100</b><div class="chap2" id="ticks">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${String(ci+1).padStart(2,'0')} ${c}</span></div>`).join('')}</div></div></section>
 
   <section class="wrap" style="padding-top:32px">
     <div class="grid" id="grid">${shown.map(card).join('')}</div>
@@ -314,19 +346,20 @@ function viewEntry(n){
 
     <div class="cmp" data-r style="--d:140ms">
       <div class="top"><span style="font-weight:500">Before / After</span><span class="sp"></span>
-        <div class="chips" id="cmpSeg"><span class="ind"></span><button data-x="0">Before</button><button class="on" data-x="50">Split</button><button data-x="100">After</button></div>
+        <div class="chips" id="cmpSeg"><span class="ind"></span><button data-x="100">Before</button><button class="on" data-x="50">Split</button><button data-x="0">After</button></div>
       </div>
       <div class="cstage" id="cstage" style="--x:50%">
-        <div class="pane b"><div class="ph"><i></i><i></i><i></i><i></i></div></div>
+        <div class="pane b" style="display:block">${phone(true)}</div>
         <div class="clip"><div class="pane a"><i class="sc"></i><div class="ap">
           <div class="row"><i style="width:38%"></i><span class="sw"></span></div>
           <div class="row"><i style="width:30%"></i><span class="sw"></span></div>
           <div class="seg"><i class="on"></i><i></i><i></i></div>
           <div class="row"><i style="width:44%"></i><i style="width:12%"></i></div>
         </div></div></div>
-        <span class="plab b">Before</span><span class="plab a">After</span>
+        <span class="plab b">Before · default prompt</span><span class="plab a">After · with rules</span>
         <div class="handle"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
       </div>
+      <div class="issues">${[1,2,3,4].map(n=>`<div class="it"><b>${n}</b>${g((40+rnd(n,9)*40)+'%',9)}</div>`).join('')}<span class="model">Same task · same model · only the prompt differs</span></div>
     </div>
 
         <div class="blk" data-r><b>Prompt</b><div class="pair">
@@ -383,7 +416,7 @@ function setupEntry(){
   st.addEventListener('pointerup',()=>{drag=false});
   seg($('#cmpSeg'),b=>setX(+b.dataset.x,true));
   // intro sweep to show the idea
-  setTimeout(()=>{setX(22,true);setTimeout(()=>setX(50,true),800)},700);
+  setTimeout(()=>{setX(80,true);setTimeout(()=>setX(55,true),900)},700);
   $('#copyBtn').onclick=async()=>{const b=$('#copyBtn');try{await navigator.clipboard.writeText('Prompt placeholder')}catch(_){}b.classList.add('done');const t=$('#toast');t.classList.add('show');setTimeout(()=>{b.classList.remove('done');t.classList.remove('show')},1500)};
   $('#why>button').onclick=()=>$('#why').classList.toggle('open');
   addEventListener('keydown',keyNav);
