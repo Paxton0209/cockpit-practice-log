@@ -278,6 +278,24 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .hero3 .cstage{width:100%}
 .kp{display:grid;place-items:center;background:transparent}
 .kp{font-family:var(--font);color:var(--stx)}
+.k-tq{width:560px;border-radius:12px;overflow:hidden;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.08)}
+.k-tq .hd{height:112px;padding:0 24px;background:#1f6feb;color:#fff;display:flex;align-items:center;gap:18px}
+.k-tq .hd div{display:flex;flex-direction:column;gap:2px}
+.k-tq .hd b{font-size:32px;line-height:38px;font-weight:700}
+.k-tq .hd div span{font-size:18px;line-height:24px}
+.k-tq .ft{height:48px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;font-size:15px;color:#6b6b6b}
+.k-tp{width:480px;border-radius:16px;background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);border:2px solid rgba(29,29,31,.05);box-shadow:0 8px 16px rgba(28,28,46,.18);overflow:hidden;color:#1d1d1f}
+.k-tp .mn{display:flex;gap:12px;align-items:center;padding:24px 28px}
+.k-tp .mv{width:80px;height:80px;display:grid!important;place-items:center}
+.k-tp .tx{display:flex;flex-direction:column;min-width:0}
+.k-tp .dd{display:flex;gap:4px;align-items:baseline}
+.k-tp .dd b{font-size:48px;line-height:56px;font-weight:600}
+.k-tp .dd i{font-style:normal;font-size:40px;line-height:56px;font-weight:600;color:rgba(29,29,31,.65)}
+.k-tp .tx>span{font-size:28px;line-height:36px;font-weight:500;max-width:328px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.k-tp .bc{height:72px;padding:12px 28px;display:flex;align-items:center;justify-content:space-between;background:rgba(237,237,237,.7);font-size:28px;line-height:36px;font-weight:500;color:rgba(29,29,31,.65)}
+.k-tp .nx{display:flex!important;align-items:center;gap:8px}
+.k-tp .nx b{display:flex;align-items:center;gap:2px;font-weight:500;color:#1d1d1f}
+.k-tp .nx b svg{margin:0 3px}
 .k-cb{width:400px;height:220px;border-radius:16px;background:var(--ssf);padding:20px 24px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.06)}
 .k-cb small{font-size:13px;color:var(--st2);font-weight:500}
 .k-cb .v{font-size:40px;font-weight:600;margin-top:8px}
@@ -458,10 +476,11 @@ A:{before:()=>`<div class="k-ab"><span data-k="l">Auto brightness</span><i class
    after:()=>`<div class="k-aa"><span data-k="l">Auto brightness</span><i class="sw" data-k="sw"></i></div>`},
 B:{before:()=>`<div class="k-bb"><i class="ka" data-k="art"></i><span class="tt" data-k="tt">Night Drive</span><span class="c"><span data-k="pv">${I('prev',20)}</span><span data-k="pl">${I('play',24)}</span><span data-k="nx">${I('next',20)}</span></span></div>`,
    after:()=>`<div class="k-ba"><i class="ka" data-k="art"></i><div><span class="tt" data-k="tt">Night Drive</span><span class="c"><span data-k="pv">${I('prev',44)}</span><span class="pl" data-k="pl">${I('play',48)}</span><span data-k="nx">${I('next',44)}</span></span></div></div>`},
-T:{before:()=>`<div class="k-tb"><span data-k="ar">${I('right',72,2.4)}</span><div><b data-k="d">300 m</b><span data-k="s">Turn right onto Main Street</span></div></div>`,
-   after:()=>`<div class="k-ta"><span data-k="ar">${FORK(150,'currentColor')}</span><div><b data-k="d">300<small>m</small></b><span data-k="s">Main Street</span></div></div>`}};
+T:{W:720,H:340,
+   before:()=>`<div class="k-tq"><div class="hd"><span data-k="ar">${I('right',56,2.4)}</span><div><b data-k="d">300 m</b><span data-k="s">Turn right onto Main Street</span></div></div><div class="ft"><span data-k="nx">Then right in 150 m</span><span data-k="eta">ETA 10:48</span></div></div>`,
+   after:()=>`<div class="k-tp"><div class="mn"><span class="mv" data-k="ar">${FORK(64,'#1d1d1f','rgba(29,29,31,.4)')}</span><div class="tx"><div class="dd"><b data-k="d">300</b><i>m</i></div><span data-k="s">Main Street</span></div></div><div class="bc"><span class="nx" data-k="nx">Then <b>${FORK(26,'#1d1d1f','rgba(29,29,31,.4)')}150 m</b></span><span data-k="eta">Arrive 10:48</span></div></div>`}};
 const CW=1200,CH=520;
-const cmp=(s,side)=>`<div class="cs" data-w="${CW}" style="aspect-ratio:${CW}/${CH}"><div class="px kp" style="width:${CW}px;height:${CH}px">${CMP[s][side]()}</div></div>`;
+const cmp=(s,side)=>{const W=CMP[s].W||CW,H=CMP[s].H||CH;return `<div class="cs" data-w="${W}" style="aspect-ratio:${W}/${H}"><div class="px kp" style="width:${W}px;height:${H}px">${CMP[s][side]()}</div></div>`};
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
@@ -572,7 +591,7 @@ function sheetHTML(n){
       <button class="rb" id="dPrev" aria-label="Previous" ${n<=1?'disabled':''}>${ARROW_L}</button><button class="rb" id="dNext" aria-label="Next" ${n>=PUBLISHED?'disabled':''}>${ARROW_R}</button>
       <button class="rb" id="dClose" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
     <div class="ecard"><div class="hero3">
-      <div class="cstage" id="cstage" data-v="a" style="aspect-ratio:${CW}/${CH}">
+      <div class="cstage" id="cstage" data-v="a" style="aspect-ratio:${CMP[e.s].W||CW}/${CMP[e.s].H||CH}">
         <div class="pane b">${cmp(e.s,'before')}</div>
         <div class="pane a">${cmp(e.s,'after')}</div>
       </div>
@@ -627,12 +646,12 @@ function openEntry(n){
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});
   const src=srcFor(n);
   if(COMPACT.matches){spring(sh,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);spring(sc,[100],[0],([y])=>({...cstyle(end),transform:`translate(${end[0]}px,${end[1]+y*end[3]/100}px)`}),420,40)}
-  else if(src){sh.classList.add('bare');setTimeout(()=>sh.classList.remove('bare'),170);const s=spring(sc,src,end,cstyle);const hero=$('.hero3',sh);spring(hero,pose(src,hero.getBoundingClientRect()),[0,0,1],pstyle);
-    rest(sh).forEach(el=>anim(el,[{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:260,delay:170,easing:'cubic-bezier(.22,1,.36,1)'}));
+  else if(src){sh.classList.add('bare');setTimeout(()=>sh.classList.remove('bare'),170);const s=spring(sc,src,end,cstyle);const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};spring(ci,pose(src,cv),[0,0,1],pstyle);
+    anim(ci,[{opacity:0},{opacity:1}],{duration:200,delay:30,easing:'ease-out',fill:'backwards'});
     s.onfinish=()=>{if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
   else{anim(sc,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(sh,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(shadow,[{opacity:0},{opacity:1}],{duration:200})}
 }
-function finish(){stop();const ov=$('#ov');ov.classList.remove('open');document.body.classList.remove('lock');$('#sheet2').innerHTML='';lens='closed';
+function finish(){stop();const ov=$('#ov');$('#sheet2').style.overflow='';ov.classList.remove('open');document.body.classList.remove('lock');$('#sheet2').innerHTML='';lens='closed';
   const f=anchor?.isConnected?anchor:null;curN=0;anchor=null;if(f)f.focus({preventScroll:true})}
 function closeEntry(){
   if(lens!=='open')return;lens='closing';
@@ -640,8 +659,7 @@ function closeEntry(){
   const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||20);
   stop();anim(veil,[{opacity:1},{opacity:0}],{duration:180,easing:'ease-in'});let end;
   if(COMPACT.matches){end=spring(sh,[0],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);anim(sc,[{opacity:1},{opacity:0}],{duration:160})}
-  else if(src){sh.classList.add('bare');const hero=$('.hero3',sh);rest(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:100,easing:'ease-in'}));
-    if(hero){const hr=hero.getBoundingClientRect();if(hr.bottom>0&&hr.top<innerHeight){spring(hero,[0,0,1],pose(src,hr),pstyle);anim(hero,[{opacity:1},{opacity:1,offset:.6},{opacity:0}],{duration:420})}else anim(hero,[{opacity:1},{opacity:0}],{duration:100})}
+  else if(src){sh.classList.add('bare');const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};sh.style.overflow='hidden';spring(ci,[0,0,1],pose(src,cv),pstyle);anim(ci,[{opacity:1},{opacity:0}],{duration:120,easing:'ease-in',fill:'forwards'});
     end=spring(sc,cur,src,cstyle)}
   else{anim(sc,[{opacity:1},{opacity:0}],{duration:150,easing:'ease-in'});end=anim(sh,[{opacity:1},{opacity:0}],{duration:150,easing:'ease-in'})}
   end.onfinish=finish;
