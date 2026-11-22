@@ -221,8 +221,13 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .side .brand{display:block;padding:0 12px;font-size:17px;line-height:17px;font-weight:600}
 .nav{margin-top:39px;display:flex;flex-direction:column;gap:2px}
 .nav button{height:36px;display:flex;align-items:center;justify-content:space-between;padding:0 12px;border-radius:10px;font-size:14px;color:var(--t2);text-align:left;transition:background-color .2s var(--ease),color .2s}
-.nav button:hover{background:color-mix(in srgb,var(--ink) 4%,transparent);color:var(--ink)}
-.nav button.on{background:var(--panel);color:var(--ink);font-weight:500;box-shadow:var(--lift)}
+.nav button:hover{color:var(--ink)}
+.nav{position:relative}
+.navind{position:absolute;left:0;top:0;width:100%;height:36px;border-radius:10px;background:var(--panel);box-shadow:var(--lift);z-index:0;pointer-events:none;opacity:0}
+.navind[data-slide]{transition:transform .24s var(--out),width .24s var(--out)}
+@media(prefers-reduced-motion:reduce){.navind[data-slide]{transition:none}}
+.nav button{position:relative;z-index:1}
+.nav button.on{background:none;color:var(--ink);font-weight:500}
 .nav small{font-size:12px;font-weight:400;color:var(--t3);font-variant-numeric:tabular-nums}
 .nav small.z{visibility:hidden}
 .foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;padding:0 12px}
@@ -241,10 +246,11 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* entry: one clean column; opens from the clicked cover (spring from Dashline) */
 .ov{position:fixed;inset:0;z-index:40;visibility:hidden}
 .ov.open{visibility:visible}
-.veil{position:absolute;inset:0;background:color-mix(in srgb,var(--bg) 70%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0}
+.veil{position:absolute;inset:0;background:rgba(0,0,0,.15);opacity:0;touch-action:none}
+[data-theme=dark] .veil{background:rgba(0,0,0,.55)}
 .sc{position:fixed;left:0;top:0;background:var(--panel);box-shadow:0 0 0 1px var(--line);overflow:hidden;will-change:transform,width,height}
-.sc i{position:absolute;inset:0;border-radius:inherit;box-shadow:0 2px 6px rgba(0,0,0,.04),0 40px 100px -30px rgba(0,0,0,.28);opacity:0}
-.sheet2{position:fixed;left:50%;top:32px;bottom:32px;width:min(880px,calc(100vw - 48px));transform:translateX(-50%);border-radius:24px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.sc i{position:absolute;inset:0;border-radius:inherit;box-shadow:0 16px 52px rgba(0,0,0,.12);opacity:0}
+.sheet2{position:fixed;left:50%;top:calc(50% - 24px);height:calc(100dvh - 96px);width:min(880px,calc(100vw - 48px));transform:translate(-50%,-50%);border-radius:10px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .sheet2:focus{outline:none}
 .sci{padding:24px 24px 48px}
 .dtop{display:flex;align-items:center;justify-content:space-between;height:40px;padding:0 8px 0 12px;margin-bottom:12px}
@@ -293,8 +299,14 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 body.lock{overflow:hidden}
 .toast{position:fixed;left:50%;bottom:28px;z-index:60;height:36px;padding:0 14px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:13px;display:flex;align-items:center;opacity:0;transform:translate(-50%,8px);transition:opacity .2s,transform .45s var(--out);pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:620px){.sheet2{left:0;right:0;bottom:0;top:48px;width:auto;transform:none;border-radius:20px 20px 0 0}.sci{padding:12px 16px 40px}.hero3{padding:24px 16px;gap:16px}.art{padding-top:28px}.art h2{font-size:26px;line-height:34px}.pager{grid-template-columns:1fr}}
-::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
+@media(max-width:620px){.sheet2{left:0;right:0;bottom:0;top:auto;height:min(92dvh,760px);width:auto;transform:none;border-radius:10px 10px 0 0}.sci{padding:12px 16px 40px}.hero3{padding:24px 16px;gap:16px}.art{padding-top:28px}.art h2{font-size:26px;line-height:34px}.pager{grid-template-columns:1fr}}
+@property --theme-reveal-progress{syntax:"<length>";inherits:false;initial-value:0px}
+::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
+::view-transition{pointer-events:none}
+.theme-changing,.theme-changing *{transition:none!important}
+.theme-changing::view-transition-old(root){z-index:1}
+.theme-changing::view-transition-new(root){z-index:2;mask-image:radial-gradient(circle at var(--theme-reveal-x) var(--theme-reveal-y),#fff calc(var(--theme-reveal-progress) - 160px),transparent var(--theme-reveal-progress));animation:theme-reveal 400ms cubic-bezier(.65,0,.35,1) both}
+@keyframes theme-reveal{from{--theme-reveal-progress:0px;opacity:.5}to{--theme-reveal-progress:var(--theme-reveal-radius);opacity:1}}
 
 @media(max-width:860px){.grid{grid-template-columns:1fr 1fr;gap:40px 16px}}
 @media(max-width:860px){.shell{grid-template-columns:minmax(0,1fr)}.side{min-width:0;position:sticky;top:0;z-index:20;height:auto;padding:16px 16px 0;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:inset 0 -1px 0 var(--line)}.side .brand{padding:0 4px}.nav{margin:12px -16px 0;padding:0 12px 12px;flex-direction:row;overflow-x:auto;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{flex:none;gap:6px;height:32px}.nav small.z{display:none}.foot{display:none}.mainc{padding:24px 16px 96px}.tgl{position:fixed;top:12px;right:12px;z-index:21}.mh{flex-direction:column;align-items:flex-start;gap:8px;margin-bottom:24px}.mh h1{font-size:24px;line-height:32px}}
@@ -432,7 +444,7 @@ function viewHome(){
   <div class="shell">
     <aside class="side">
       <a class="brand" href="#home">Dashnote</a>
-      <nav class="nav" id="nav">${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'All entries':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
+      <nav class="nav" id="nav"><span class="navind" id="navind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'All entries':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
       <div class="foot"><p class="desc">A notebook on designing car screens with AI.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
         <span class="lbl13">Peixin</span></div>
     </aside>
@@ -454,8 +466,13 @@ function seg(el,onChange){const ind=$('.ind',el);const place=(b,anim)=>{if(!anim
   el._place=()=>place($('button.on',el),false)}
 addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
+function moveNav(){const ind=$('#navind'),on=$('#nav button.on');if(!ind)return;
+  ind.toggleAttribute('data-slide',!!on&&ind.style.opacity==='1');ind.style.opacity=on?'1':'0';
+  if(on){const row=getComputedStyle($('#nav')).flexDirection==='row';ind.style.height=on.offsetHeight+'px';ind.style.width=(row?on.offsetWidth:$('#nav').clientWidth)+'px';ind.style.transform=row?`translate(${on.offsetLeft}px,${on.offsetTop}px)`:`translateY(${on.offsetTop}px)`}}
+addEventListener('resize',()=>{const i=$('#navind');if(i){i.removeAttribute('data-slide');moveNav()}});
 function setupHome(){
-  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));const c=b.dataset.c,g=$('#grid');
+  requestAnimationFrame(moveNav);
+  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));moveNav();const c=b.dataset.c,g=$('#grid');
     g.innerHTML=gridFor(c);
     $$('.card',g).forEach(el=>el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:parseFloat(el.style.getPropertyValue('--d'))||0,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
     if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'})});
@@ -528,10 +545,10 @@ function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('d
   document.body.appendChild(ov);$('#veil').onclick=()=>go('home');return ov}
 function openEntry(n){
   const ov=ensureOv(),sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),shadow=$('#sc i');
-  if(lens==='open'){curN=n;sh.innerHTML=sheetHTML(n);fit(sh);wireSheet();sh.scrollTop=0;anim(sh.firstElementChild,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'});return}
+  if(lens==='open'){curN=n;sh.innerHTML=sheetHTML(n);fit(sh);wireSheet();sh.scrollTop=0;anim(sh.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
   if(lens==='closing'){stop();}
   curN=n;sh.innerHTML=sheetHTML(n);fit(sh);ov.classList.add('open');document.body.classList.add('lock');lens='open';sh.scrollTop=0;sh.focus({preventScroll:true});
-  const end=rbox(sh.getBoundingClientRect(),24);Object.assign(sc.style,cstyle(end));wireSheet();
+  const end=rbox(sh.getBoundingClientRect(),10);Object.assign(sc.style,cstyle(end));wireSheet();
   if(RM.matches){veil.style.opacity=1;shadow.style.opacity=1;return}
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});
   const src=srcFor(n);
@@ -546,7 +563,7 @@ function finish(){stop();const ov=$('#ov');ov.classList.remove('open');document.
 function closeEntry(){
   if(lens!=='open')return;lens='closing';
   if(RM.matches){finish();return}
-  const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||24);
+  const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||10);
   stop();anim(veil,[{opacity:1},{opacity:0}],{duration:180,easing:'ease-in'});let end;
   if(COMPACT.matches){end=spring(sh,[0],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);anim(sc,[{opacity:1},{opacity:0}],{duration:160})}
   else if(src){const hero=$('.hero3',sh);rest(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:100,easing:'ease-in'}));
@@ -567,11 +584,13 @@ function route(){
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 addEventListener('hashchange',route);
-(()=>{const h=new Date().getHours();document.documentElement.dataset.theme=h>=6&&h<18?'light':'dark';
-  document.addEventListener('click',ev=>{if(!ev.target.closest('#theme'))return;const r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark',set=()=>r.dataset.theme=n;
-    if(!document.startViewTransition)return set();const b=$('#theme').getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2,rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
-    const st=document.createElement('style');st.textContent='::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}';document.head.appendChild(st);
-    const t=document.startViewTransition(set);t.ready.then(()=>r.animate({clipPath:[`circle(0 at ${x}px ${y}px)`,`circle(${rad}px at ${x}px ${y}px)`]},{duration:300,easing:'cubic-bezier(.65,0,.35,1)',pseudoElement:'::view-transition-new(root)'})).catch(()=>{});t.finished.finally(()=>st.remove())})})();
+(()=>{const h=new Date().getHours(),root=document.documentElement;root.dataset.theme=h>=6&&h<18?'light':'dark';let want=root.dataset.theme,busy=false;
+  const set=t=>root.dataset.theme=t;
+  document.addEventListener('click',async ev=>{const sw=ev.target.closest('#theme');if(!sw)return;want=want==='dark'?'light':'dark';if(busy)return;
+    if(!document.startViewTransition||matchMedia('(prefers-reduced-motion: reduce)').matches){set(want);return}
+    busy=true;try{while(root.dataset.theme!==want){const t=want,b=sw.getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2,rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y))+180;
+      root.style.setProperty('--theme-reveal-x',x+'px');root.style.setProperty('--theme-reveal-y',y+'px');root.style.setProperty('--theme-reveal-radius',rad+'px');
+      let tr;try{root.classList.add('theme-changing');tr=document.startViewTransition(()=>set(t));await tr.ready;await tr.finished}catch{if(root.dataset.theme!==t)set(t)}finally{if(tr)await tr.finished.catch(()=>{});root.classList.remove('theme-changing')}}}finally{busy=false}})})();
 route();
 </script>
 </body>
