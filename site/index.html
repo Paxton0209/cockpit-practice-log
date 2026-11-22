@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cockpit Practice Log — wireframe</title>
+<title>Cockpit Practice Log</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -359,6 +359,124 @@ footer .in{display:flex;justify-content:space-between;padding-top:24px;box-shado
 body.lock{overflow:hidden}
 @media(max-width:860px){.sheet{width:100vw;height:100vh;border-radius:0;grid-template-columns:1fr;grid-template-rows:auto auto;overflow-y:auto}.left{min-height:auto}.left .demo{flex:none;padding:60px 12px 12px}.left .cstage{max-height:none}.right{overflow:visible;padding:28px 20px 96px}.ctrl{grid-template-columns:1fr;gap:14px}.flnav{left:50%;bottom:20px;position:fixed}}
 
+
+/* ── visual pass: real cockpit screens rendered at 1920 × 720 and scaled ── */
+:root,[data-theme=light]{--sbg:#f3f3f1;--ssf:#fff;--ssf2:#e6e6e4;--stx:#1d1d1f;--st2:rgba(29,29,31,.56);--sln:rgba(29,29,31,.09);--sac:#0a7cff}
+[data-theme=dark]{--sbg:#0b0b0c;--ssf:#1a1a1c;--ssf2:#2a2a2d;--stx:#f2f2f4;--st2:rgba(242,242,244,.54);--sln:rgba(242,242,244,.08);--sac:#2b8fff}
+.cs{position:relative;width:100%;aspect-ratio:8/3;overflow:hidden;background:var(--sbg);border-radius:inherit}
+.px{position:absolute;left:0;top:0;width:1920px;height:720px;transform-origin:0 0;transform:scale(var(--k,.25));font-family:var(--font);color:var(--stx);background:var(--sbg);letter-spacing:normal;line-height:1.3}
+.px h3,.px h4,.px p{margin:0}
+/* A · settings · after */
+.px.sa{display:grid;grid-template-columns:733px 1fr}
+.sa aside{padding:48px 32px 48px 48px;display:flex;flex-direction:column;gap:8px}
+.sa h3{margin:0 0 20px 20px;font-size:40px;line-height:56px;font-weight:600}
+.sa .nv{height:calc(var(--rh,76)*1px);display:flex;align-items:center;gap:20px;padding:0 20px;border-radius:16px;font-size:calc(var(--ts,28)*1px);color:var(--st2);transition:height .25s var(--out)}
+.sa .nv.on{background:var(--ssf);color:var(--stx);box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.sa section{background:var(--ssf);padding:48px 56px;display:flex;flex-direction:column;gap:12px}
+.sa h4{margin:0 0 20px;font-size:32px;line-height:56px;font-weight:600}
+.px .r{height:calc(var(--rh,76)*1px);display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 16px 0 28px;border-radius:16px;background:var(--sbg);font-size:calc(var(--ts,28)*1px);transition:height .25s var(--out)}
+.px .r em{font-style:normal;color:var(--st2);display:flex;align-items:center;gap:6px;padding-right:8px}
+.px .sw{flex:none;width:88px;height:52px;border-radius:26px;background:var(--ssf2);position:relative}
+.px .sw::after{content:"";position:absolute;left:4px;top:4px;width:44px;height:44px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.18)}
+.px .sw.on{background:var(--sac)}.px .sw.on::after{left:40px}
+.px .sg{display:flex;height:60px;padding:4px;border-radius:14px;background:var(--ssf2)}
+.px .sg b{width:124px;display:grid;place-items:center;border-radius:11px;font-size:24px;font-weight:500;color:var(--st2)}
+.px .sg b.on{background:var(--ssf);color:var(--stx);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.px .bar{width:440px;height:12px;border-radius:6px;background:var(--ssf2);margin-right:8px}
+.px .bar i{display:block;height:100%;border-radius:6px;background:var(--stx)}
+/* A · settings · before (phone app) */
+.px.pb{background:var(--ssf);display:flex;justify-content:center}
+.pb .col{position:relative;width:390px;height:720px;background:var(--sbg);padding:0 16px;font-size:17px;line-height:22px}
+.pb .st{height:44px;display:flex;justify-content:space-between;align-items:center;padding:0 14px;font-size:15px;font-weight:600}
+.pb .st i{display:flex;gap:4px}.pb .st i b{width:16px;height:10px;border-radius:2px;background:var(--stx)}
+.pb .lt{font-size:34px;line-height:41px;font-weight:700;margin:6px 0 16px 4px}
+.pb .grp{background:var(--ssf);border-radius:10px;overflow:hidden;margin-bottom:24px}
+.pb .it{height:44px;display:flex;align-items:center;gap:12px;padding:0 14px;box-shadow:inset 0 -1px 0 var(--sln)}
+.pb .it:last-child{box-shadow:none}
+.pb .it .q{width:29px;height:29px;border-radius:7px;display:grid;place-items:center;color:#fff}
+.pb .it span{flex:1}.pb .it em{font-style:normal;color:var(--st2);display:flex;align-items:center;gap:2px}
+.pb .tg{width:51px;height:31px;border-radius:16px;background:#34c759;position:relative}
+.pb .tg::after{content:"";position:absolute;left:22px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.2)}
+.pb .tg.off{background:var(--ssf2)}.pb .tg.off::after{left:2px}
+.pb .tb{position:absolute;left:0;right:0;bottom:0;height:83px;background:var(--ssf);display:flex;justify-content:space-around;padding-top:8px;box-shadow:inset 0 1px 0 var(--sln)}
+.pb .tb div{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:10px;line-height:12px;color:var(--st2)}.pb .tb .on{color:var(--sac)}
+/* B · media · after */
+.px.sm{display:grid;grid-template-columns:733px 1fr}
+.sm .np{padding:48px;display:flex;flex-direction:column}
+.sm .art{width:264px;height:264px;border-radius:24px;background:linear-gradient(140deg,#f2a65a,#e2555a 48%,#6a3fd0);box-shadow:0 20px 40px -18px rgba(0,0,0,.45)}
+.sm .tt{margin-top:28px;font-size:40px;line-height:48px;font-weight:600}
+.sm .ar{font-size:26px;line-height:34px;color:var(--st2)}
+.sm .pg{margin-top:24px;height:8px;border-radius:4px;background:var(--ssf2)}.sm .pg i{display:block;height:100%;width:38%;border-radius:4px;background:var(--stx)}
+.sm .tm{display:flex;justify-content:space-between;margin-top:10px;font-size:20px;color:var(--st2);font-variant-numeric:tabular-nums}
+.sm .ctl{margin-top:auto;display:flex;align-items:center;gap:24px}
+.sm .ctl span{width:96px;height:96px;border-radius:24px;display:grid;place-items:center;background:var(--ssf)}
+.sm .ctl span.pl{width:120px;height:96px;background:var(--stx);color:var(--sbg)}
+.sm .qu{background:var(--ssf);padding:48px 56px;display:flex;flex-direction:column;gap:12px}
+.sm h4{margin:0 0 20px;font-size:32px;line-height:56px;font-weight:600}
+.sm .r{padding-left:12px}.sm .r .ca{flex:none;width:56px;height:56px;border-radius:12px}
+.sm .r .tx{flex:1;display:flex;flex-direction:column;line-height:1.2}.sm .r .tx small{font-size:20px;color:var(--st2)}
+.sm .r.on{background:color-mix(in srgb,var(--sac) 12%,var(--sbg))}
+/* B · media · before (streaming home page) */
+.px.mb{padding:40px 48px;background:var(--sbg)}
+.mb .gr{font-size:28px;line-height:34px;font-weight:700}
+.mb .sh{margin:24px 0 12px;font-size:16px;font-weight:600;display:flex;justify-content:space-between;width:1448px}
+.mb .sh span{font-size:13px;font-weight:500;color:var(--st2)}
+.mb .row{display:flex;gap:24px}
+.mb .cv{width:160px}.mb .cv i{display:block;width:160px;height:160px;border-radius:8px}
+.mb .cv b{display:block;margin-top:8px;font-size:14px;font-weight:500;line-height:18px}.mb .cv small{font-size:12px;color:var(--st2)}
+.mb .mp{position:absolute;left:0;right:0;bottom:0;height:64px;background:var(--ssf);box-shadow:inset 0 1px 0 var(--sln);display:flex;align-items:center;gap:16px;padding:0 24px;font-size:13px}
+.mb .mp i{width:40px;height:40px;border-radius:6px}
+.mb .mp .c{margin:0 auto;display:flex;gap:18px;align-items:center;color:var(--stx)}
+/* C · climate · after */
+.px.sc2{display:flex;flex-direction:column}
+.sc2 .zones{flex:1;display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;padding:0 72px}
+.sc2 .z{display:flex;flex-direction:column;gap:4px}.sc2 .z.r2{align-items:flex-end}
+.sc2 .z small{font-size:26px;color:var(--st2)}
+.sc2 .z b{font-size:168px;line-height:1;font-weight:300;font-variant-numeric:tabular-nums}
+.sc2 .z b sup{font-size:64px;vertical-align:top;line-height:1.3;margin-left:6px;color:var(--st2)}
+.sc2 .mid{display:flex;flex-direction:column;align-items:center;gap:20px}
+.sc2 .fan{display:flex;gap:10px;align-items:flex-end;height:64px}.sc2 .fan i{width:20px;border-radius:5px;background:var(--ssf2)}.sc2 .fan i.on{background:var(--stx)}
+.sc2 .mode{height:52px;padding:0 24px;border-radius:26px;background:var(--ssf);font-size:24px;line-height:52px;font-weight:500}
+.sc2 .edge{display:flex;gap:16px;padding:0 24px 24px;justify-content:space-between}
+.sc2 .edge span{flex:1;height:calc(var(--rh,76)*1px + 20px);border-radius:20px;background:var(--ssf);display:grid;place-items:center;transition:height .25s var(--out)}
+.sc2 .edge span.on{background:var(--sac);color:#fff}.sc2 .edge span.ht{color:#ff7a2e}
+.sc2 .edge em{flex:none;width:24px}
+/* C · climate · before (card dashboard) */
+.px.cb{padding:40px 336px;background:var(--sbg)}
+.cb .h{font-size:22px;line-height:28px;font-weight:700}.cb .h small{display:block;font-size:14px;font-weight:400;color:var(--st2)}
+.cb .gd{margin-top:32px;display:grid;grid-template-columns:repeat(3,400px);gap:24px}
+.cb .cd{height:220px;border-radius:16px;background:var(--ssf);padding:20px 24px;display:flex;flex-direction:column;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.cb .cd>small{font-size:13px;color:var(--st2);font-weight:500}
+.cb .cd .v{font-size:40px;font-weight:600;margin-top:8px}
+.cb .cd .bt{margin-top:auto;display:flex;gap:8px;justify-content:flex-end}
+.cb .cd .bt i{width:28px;height:28px;border-radius:50%;background:var(--ssf2);display:grid;place-items:center}
+.cb .cd .ln{margin-top:auto;height:4px;border-radius:2px;background:var(--ssf2)}.cb .cd .ln i{display:block;height:100%;width:60%;border-radius:2px;background:var(--sac)}
+.cb .cd .pl{margin-top:auto;display:flex;gap:6px}.cb .cd .pl b{height:26px;padding:0 10px;border-radius:13px;background:var(--ssf2);font-size:12px;line-height:26px;font-weight:500}.cb .cd .pl b.on{background:var(--sac);color:#fff}
+.cb .cd svg.sp{margin-top:auto}
+/* placements */
+.thumb .scr{inset:auto 7%;top:50%;transform:translateY(-50%);aspect-ratio:8/3;border-radius:8px;background:none;box-shadow:0 10px 24px -14px rgba(0,0,0,.35)}
+.thumb .before,.thumb .after{display:block;background:none}
+.slide{display:block}
+.screen{left:33%;top:27%;width:34%;aspect-ratio:8/3;cursor:pointer;--sbg:#0b0b0c;--ssf:#1a1a1c;--ssf2:#2a2a2d;--stx:#f2f2f4;--st2:rgba(242,242,244,.54);--sln:rgba(242,242,244,.08);--sac:#2b8fff}
+.cstage{aspect-ratio:8/3;border-radius:14px;box-shadow:0 18px 40px -22px rgba(0,0,0,.4)}
+.pane{inset:0;border-radius:0;display:block}
+.pane.a{display:block;background:none}
+.left .demo{padding:64px 40px 16px}
+/* type */
+.intro h1{margin:0;font-size:40px;line-height:48px;font-weight:500}
+.intro p{margin:0;max-width:560px;font-size:17px;line-height:26px;color:var(--t2)}
+.meta .ttl{font-size:15px;line-height:22px;font-weight:500;color:var(--ink)}
+.cap .t{flex-direction:row;align-items:baseline;gap:10px}.cap .tt{font-size:14px;color:var(--ink);font-weight:500}
+.right h2{font-size:28px;line-height:36px;font-weight:500}
+.right .prin{font-size:17px;line-height:26px;color:var(--t2);gap:0}
+.kp p{margin:0;padding-top:1px;font-size:14px;line-height:22px;color:var(--t2)}
+.right .prompt pre{margin:0;white-space:pre-wrap;font:400 13px/20px var(--font);color:var(--t2);padding-right:84px}
+.right .prompt.k pre{color:var(--ink)}
+.right .prompt .h{font-size:12px;color:var(--t3);margin-bottom:8px}
+.note{font-size:12px;color:var(--t3)}
+.plabs{display:flex;justify-content:space-between;margin-bottom:10px;font-size:13px;color:var(--t3)}
+@media(max-width:860px){.intro h1{font-size:30px;line-height:38px}}
+
 ::view-transition-old(root),::view-transition-new(root){animation-duration:.25s}
 
 @media(max-width:860px){.chap2{grid-template-columns:repeat(2,minmax(0,1fr))}.chap{grid-template-columns:repeat(5,minmax(0,1fr));row-gap:20px}.pair{grid-template-columns:1fr}.wrap{padding:0 20px}.stage{aspect-ratio:4/3}.screen{left:30%;width:42%}.intro,.follow{grid-template-columns:1fr}.track,.blk{grid-template-columns:1fr;gap:12px}.ticks{grid-template-columns:repeat(25,1fr)}.grid{grid-template-columns:1fr 1fr}.details{grid-template-columns:1fr}.big{font-size:64px;line-height:60px}.prog .bar{display:none}}
@@ -370,7 +488,6 @@ body.lock{overflow:hidden}
 <header id="hdr"><div class="wrap hd">
   <a class="brand" href="#home"><span class="mark"></span>Cockpit Practice Log</a>
   <span class="sp"></span>
-  <a class="tl" href="#follow">Follow on X</a>
   <button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button>
 </div></header>
 
@@ -381,24 +498,99 @@ body.lock{overflow:hidden}
 <script>
 const PUBLISHED=12, TOTAL=100;
 const CHAPTERS=['Layout','Hierarchy','Controls','Color','Type','Icons','Motion','States','Voice & AI','Screens'];
-const rnd=(i,s=1)=>{const x=Math.sin(i*9301+s*49297)*233280;return x-Math.floor(x)};
-const ENTRIES=Array.from({length:TOTAL},(_,i)=>({n:i+1,cat:CHAPTERS[Math.floor(i/10)],w1:55+rnd(i,1)*35,w2:30+rnd(i,2)*35}));
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pad=n=>String(n).padStart(3,'0');
-const g=(w,h=10,c='')=>`<span class="g ${c}" style="width:${w};height:${h}px"></span>`;
 const ARROW_L='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>';
 const ARROW_R='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 3.5 4.5 4.5L6 12.5"/></svg>';
 
-function phone(marks){return `<div class="phone"><div class="col"><div class="hd"><i style="width:40%"></i><i style="width:14%"></i></div>${[62,48,70,40,56].map((w,k)=>`<div class="r"><span class="ic"></span><i style="flex:1;max-width:${w}%"></i><span class="${k%2?'sw':'ic'}"></span></div>`).join('')}<div class="tab"><i></i><i></i><i></i><i></i></div></div></div>`+(marks?[[17,50,'1'],[37,26,'2'],[63,37,'3'],[50,95,'4']].map(([x,y,n],i)=>`<span class="mk" style="left:${x}%;top:${y}%;--d:${400+i*120}ms">${n}</span>`).join(''):'')}
-function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${phone(false)}</div><div class="after"><i class="sc"></i><div class="ap"><i style="width:${e.w1}%"></i><i style="width:${e.w2+20}%"></i><i class="a"></i><i style="width:${e.w2}%"></i></div></div></div><span class="lbl b">Before</span><span class="lbl a">After</span><span class="cur"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l11 5-5 1.6L5.4 13z" fill="#fff" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round"/></svg><b>Peixin</b></span></div>`}
+/* icons */
+const P={sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M2.5 12h2M19.5 12h2M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/>',
+sound:'<path d="M4 9.5v5h3.5L12 18V6L7.5 9.5z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/>',
+car:'<path d="M5 16v-4.5L7 7h10l2 4.5V16"/><path d="M3.5 16h17v2.5h-17z"/>',
+link:'<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1"/><path d="M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
+shield:'<path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/>',
+chev:'<path d="m9 6 6 6-6 6"/>',lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',moon:'<path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/>',
+play:'<path d="M8 5v14l11-7z" fill="currentColor"/>',pause:'<path d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z" fill="currentColor" stroke="none"/>',
+prev:'<path d="M18 6v12l-9-6z" fill="currentColor"/><path d="M6 6v12"/>',next:'<path d="M6 6v12l9-6z" fill="currentColor"/><path d="M18 6v12"/>',
+fan:'<circle cx="12" cy="12" r="1.6"/><path d="M12 10.4C12 6 14 4 16 4.5s1.5 4-4 5.9M13.6 12c4.4 0 6.4 2 5.9 4s-4 1.5-5.9-4M12 13.6c0 4.4-2 6.4-4 5.9s-1.5-4 4-5.9M10.4 12C6 12 4 10 4.5 8s4-1.5 5.9 4"/>',
+heat:'<path d="M8 4c-2 3 2 5 0 8s2 5 0 8M12.5 4c-2 3 2 5 0 8s2 5 0 8M17 4c-2 3 2 5 0 8s2 5 0 8"/>',
+defrost:'<path d="M4 14c3-6 13-6 16 0"/><path d="M8 19v-3M12 19v-4M16 19v-3"/>',snow:'<path d="M12 3v18M4.2 7.5l15.6 9M4.2 16.5l15.6-9"/>',
+plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',home:'<path d="M4 11l8-7 8 7v9H4z"/>',
+music:'<path d="M9 18V5l11-2v13"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="17.5" cy="16" r="2.5"/>',nav:'<path d="M12 2.5l7 18.5-7-4-7 4z"/>',
+grid:'<path d="M4 4h7v7H4zM13 4h7v7h-7zM4 13h7v7H4zM13 13h7v7h-7z"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+shuffle:'<path d="M4 7h3l10 10h3M4 17h3l3-3M14 10l3-3h3M18 4l2 3-2 3M18 14l2 3-2 3"/>',heart:'<path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/>'};
+const I=(n,s=24,w=1.8)=>`<svg width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round">${P[n]}</svg>`;
+const AG=['linear-gradient(140deg,#f2a65a,#e2555a 48%,#6a3fd0)','linear-gradient(140deg,#5ee7c3,#2a7cf6)','linear-gradient(140deg,#ffd36e,#ff7a59)','linear-gradient(140deg,#c3c7d0,#5b6273)','linear-gradient(140deg,#ff9ac2,#8a5cf6)','linear-gradient(140deg,#7ad37a,#1f8a70)','linear-gradient(140deg,#3b3f58,#11131c)','linear-gradient(140deg,#ffb36b,#c2410c)'];
+
+/* three scenes · before = what the default prompt gives · after = with cockpit rules */
+const SCENES={
+A:{after:()=>`<div class="px sa"><aside><h3>Settings</h3>${[['sun','Display',1],['sound','Sound'],['shield','Driver assist'],['link','Connections'],['car','Vehicle']].map(([i,t,on])=>`<div class="nv ${on?'on':''}">${I(i,32)}${t}</div>`).join('')}</aside>
+  <section><h4>Display</h4><div class="r">Auto brightness<i class="sw on"></i></div><div class="r">Appearance<div class="sg"><b>Auto</b><b class="on">Day</b><b>Night</b></div></div><div class="r">Brightness<div class="bar"><i style="width:64%"></i></div></div><div class="r">Screen off when parked<em>5 min ${I('chev',28)}</em></div></section></div>`,
+  before:()=>`<div class="px pb"><div class="col"><div class="st">9:41<i><b></b><b></b><b style="width:24px"></b></i></div><div class="lt">Settings</div>
+  <div class="grp">${[['#ff9500','sun','Display & Brightness','c'],['#ff2d55','sound','Sounds','c'],['#34c759','shield','Driver Assist','t']].map(r=>pbRow(...r)).join('')}</div>
+  <div class="grp">${[['#5856d6','moon','Night Mode','t'],['#8e8e93','lock','Auto-Lock','o'],['#007aff','link','Connections','c']].map(r=>pbRow(...r)).join('')}</div>
+  <div class="tb">${[['home','Home'],['nav','Navigate'],['music','Media'],['grid','Settings',1]].map(([i,t,on])=>`<div class="${on?'on':''}">${I(i,25,1.7)}${t}</div>`).join('')}</div></div></div>`,
+  marks:[[15,50],[38.6,18],[61,30],[61.6,93]],
+  issues:['A 390 px column floats in a 1920 px screen. Most of the display does nothing.','44 px rows and 17 px text: sized for a thumb 30 cm away, not a hand at arm’s length.','51 × 31 toggles. Hard to hit when the road moves under you.','A fake 9:41 status bar and a phone tab bar. The car already owns both.'],
+  params:[['Row','76 px'],['Text line','28 / 38'],['Switch','88 × 52'],['Split','733 / 1187 · 38.2%'],['Radius','16 › 11']],
+  rules:['PR-01','LY-02','CT-04'],task:'settings'},
+B:{after:()=>`<div class="px sm"><div class="np"><div class="art"></div><div class="tt">Night Drive</div><div class="ar">Mira Okafor · Coastline</div><div class="pg"><i></i></div><div class="tm"><span>1:24</span><span>3:41</span></div>
+  <div class="ctl"><span>${I('prev',40)}</span><span class="pl">${I('pause',44)}</span><span>${I('next',40)}</span></div></div>
+  <div class="qu"><h4>Up next</h4>${[['Low Tide','Mira Okafor',1],['Glass Roads','Hollow Pines'],['Weather Report','Ana Sol'],['After Hours','Kei Morita']].map(([t,a,on],k)=>`<div class="r ${on?'on':''}"><i class="ca" style="background:${AG[k+1]}"></i><div class="tx">${t}<small>${a}</small></div><em>${['3:12','4:05','2:58','3:33'][k]}</em></div>`).join('')}</div></div>`,
+  before:()=>`<div class="px mb"><div class="gr">Good evening</div>${['Recently played','Made for you'].map((s,si)=>`<div class="sh">${s}<span>See all</span></div><div class="row">${[0,1,2,3,4,5,6,7].map(k=>`<div class="cv"><i style="background:${AG[(k+si*3)%8]}"></i><b>${['Night Drive','Low Tide','Glass Roads','Daily Mix 1','Focus','Weather','Coastline','Chill'][(k+si*2)%8]}</b><small>Playlist</small></div>`).join('')}</div>`).join('')}
+  <div class="mp"><i style="background:${AG[0]}"></i><span>Night Drive<br><span style="color:var(--st2)">Mira Okafor</span></span><div class="c">${I('shuffle',18)}${I('prev',20)}${I('play',24)}${I('next',20)}${I('heart',18)}</div><span style="color:var(--st2)">1:24 / 3:41</span></div></div>`,
+  marks:[[11,45],[13,8],[50,95.5],[89,40]],
+  issues:['160 px covers with 14 px labels. Nothing here reads at a glance.','A greeting and section headers compete for attention and say nothing useful.','Playback squeezed into a 64 px bar with 20 px icons.','Nothing says what is playing now, the one thing the driver needs.'],
+  params:[['Queue row','76 px'],['Play','120 × 96'],['Title','40 / 48'],['Art','264 px'],['Split','38.2 / 61.8']],
+  rules:['HR-01','LY-02','CT-01'],task:'music player'},
+C:{after:()=>`<div class="px sc2"><div class="zones"><div class="z"><small>Driver</small><b>21.5<sup>°</sup></b></div><div class="mid"><div class="fan">${[1,2,3,4,5].map(k=>`<i class="${k<=3?'on':''}" style="height:${16+k*10}px"></i>`).join('')}</div><span class="mode">Auto · Fan 3</span></div><div class="z r2"><small>Passenger</small><b>22.0<sup>°</sup></b></div></div>
+  <div class="edge"><span>${I('minus',36)}</span><span>${I('plus',36)}</span><span class="ht">${I('heat',36)}</span><em></em><span class="on">${I('snow',36)}</span><span>${I('fan',36)}</span><span>${I('defrost',36)}</span><em></em><span>${I('heat',36)}</span><span>${I('minus',36)}</span><span>${I('plus',36)}</span></div></div>`,
+  before:()=>`<div class="px cb"><div class="h">Climate Control<small>Adjust your cabin comfort</small></div><div class="gd">
+  <div class="cd"><small>Temperature</small><div class="v">22°C</div><div class="bt"><i>${I('minus',14,2)}</i><i>${I('plus',14,2)}</i></div></div>
+  <div class="cd"><small>Fan speed</small><div class="v">3</div><div class="ln"><i></i></div></div>
+  <div class="cd"><small>Seat heating</small><div class="v">Low</div><div class="pl"><b>Off</b><b class="on">Low</b><b>Med</b><b>High</b></div></div>
+  <div class="cd"><small>Air quality</small><div class="v">Good</div><svg class="sp" width="352" height="48" viewBox="0 0 352 48" fill="none" stroke="var(--sac)" stroke-width="2"><path d="M0 34 L40 30 L80 36 L120 20 L160 26 L200 14 L240 22 L280 12 L320 18 L352 8"/></svg></div>
+  <div class="cd"><small>Defrost</small><div class="v">Off</div><div class="bt"><span class="tgx" style="width:51px;height:31px;border-radius:16px;background:var(--ssf2)"></span></div></div>
+  <div class="cd"><small>Air flow</small><div class="v">Auto</div><div class="pl"><b class="on">Auto</b><b>Face</b><b>Feet</b><b>Both</b></div></div></div></div>`,
+  marks:[[39,40],[17.5,6],[36.5,56],[86,50]],
+  issues:['28 px + and − buttons. The most-used control is the smallest thing on screen.','Controls float mid-screen instead of resting on the bottom edge, where a hand can steady itself.','An air-quality chart gets the same weight as temperature.','Six equal cards. No hierarchy, so the eye has to search.'],
+  params:[['Edge target','160 × 96'],['Temperature','168 px'],['Gap','16'],['Bottom inset','24'],['Radius','20']],
+  rules:['CT-02','HR-03','LY-05'],task:'climate control'}};
+function pbRow(c,i,t,k){return `<div class="it"><span class="q" style="background:${c}">${I(i,18,2)}</span><span>${t}</span>${k==='c'?`<em>${I('chev',16,2)}</em>`:`<i class="tg ${k==='o'?'off':''}"></i>`}</div>`}
+const scr=(s,side)=>`<div class="cs">${SCENES[s][side]()}</div>`;
+
+const DATA=[
+['A','A phone app, stretched to 15 inches','Ask for a car settings screen and you get an iPhone list floating in the middle.','Design for the canvas you actually have: 1920 × 720 at arm’s length, not 390 px in your hand.',['Phone column','Full canvas']],
+['B','Now playing beats a wall of covers','AI makes a streaming home page. In the car, the driver needs one thing: what’s on.','The current state is the hero. Browsing is secondary and can wait until you park.',['Cover grid','Now playing']],
+['C','Climate lives on the bottom edge','Cards in the middle look tidy and are hard to reach on a bumpy road.','Put the most-used controls where a hand can rest and steady itself: the bottom edge.',['Floating cards','Edge controls']],
+['A','Rows are 76 px, not 44','Phone row height is the thing AI copies into the car most often.','Row = text line × 2. With 28 / 38 type, that is 76 px.',['44 px rows','76 px rows']],
+['B','Split at 38 / 62, not 50 / 50','Even halves make two equal masters. The golden split gives one side the lead.','Use 38.2 / 61.8 for context and content. The larger side is where the eye lands.',['Even halves','38 / 62']],
+['C','The temperature is the headline','When every card is the same size, nothing is important.','Size by how often it is used and how fast it must be read.',['Equal cards','Headline']],
+['A','Drop the fake 9:41','AI loves a phone status bar. The car already has one, and it isn’t yours.','Never draw system chrome the vehicle owns: status bar, tab bar, home indicator.',['Phone chrome','Car chrome']],
+['B','Big controls, and only a few','Five 20 px icons in a mini player, or three you can hit without looking.','Fewer, larger targets. Primary 120 × 96, secondary 96.',['Mini player','Three targets']],
+['C','+ and − are the primary actions','AI makes the most-used button the smallest thing on screen.','Frequency sets size. The control you touch every drive gets the biggest target.',['28 px buttons','96 px targets']],
+['A','Toggles you can hit on a bumpy road','51 × 31 is a phone switch. In motion, a finger lands several millimetres off.','Switches at 88 × 52, and the whole row is the hit area.',['Phone toggle','Cockpit toggle']],
+['B','One primary per screen','Everything asked for attention, so nothing got it.','Pick one primary. Everything else steps down in size, weight or contrast.',['Flat','One primary']],
+['C','Charts can wait until you park','An air-quality graph looks smart and steals a glance you don’t have.','If it doesn’t change what the driver does next, move it off the main view.',['Chart in view','Chart parked']]];
+const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:CHAPTERS[Math.floor(i/10)],s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
+function prompts(e){const t=SCENES[e.s].task;return [`Design a ${t} screen for a car's center display. Make it clean and modern.`,
+`Design a ${t} screen for a car center display.
+Canvas: 1920 × 720 px, landscape, read at arm's length while driving.
+Layout: split 38.2 / 61.8. No phone status bar or tab bar; the car owns those.
+Touch: rows and targets ≥ 76 px, switches 88 × 52, frequent controls rest on the bottom edge.
+Type: body 28 / 38, titles 32–40, nothing under 20 px.
+Hierarchy: one primary, readable in a one-second glance.
+Ship a day and a night theme; night has no pure-white surfaces.`]}
+
+const CURSOR='<span class="cur"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1l11 5-5 1.6L5.4 13z" fill="#fff" stroke="#1d1d1f" stroke-width="1.1" stroke-linejoin="round"/></svg><b>Peixin</b></span>';
+function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${scr(e.s,'before')}</div><div class="after">${scr(e.s,'after')}</div></div><span class="lbl b">Before</span><span class="lbl a">After</span>${CURSOR}</div>`}
 function card(e,i){
   const soon=e.n>PUBLISHED;
-  return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-cat="${e.cat}" data-r style="--d:${(i%3)*60}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">
+  return `<a class="card ${soon?'soon':''}" href="#entry-${pad(e.n)}" data-r style="--d:${(i%3)*60}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">
     ${soon?'<div class="thumb"></div>':thumb(e)}
-    <div class="meta"><div class="top"><b class="num">#${pad(e.n)}</b><span>${soon?'Coming':e.cat}</span></div>${g(e.w1+'%',10,soon?'':'d')}${soon?'':g(e.w2+'%',8)}</div></a>`;
+    <div class="meta"><div class="top"><b class="num">#${pad(e.n)}</b><span>${soon?'Coming':e.cat}</span></div>${soon?'':`<span class="ttl">${e.title}</span>`}</div></a>`;
 }
-function slide(k){return `<div class="slide" data-i="${k}"><i class="sc"></i><div class="ap">${[0,1,2,3].map(j=>`<i style="height:12%;width:${45+rnd(j,k+2)*45}%" class="${j===2?'a':''}"></i>`).join('')}</div></div>`}
-
+const HERO=[PUBLISHED,PUBLISHED-1,PUBLISHED-2].map(n=>ENTRIES[n-1]);
 function viewHome(){
   const latest=ENTRIES.slice(0,PUBLISHED).reverse();
   const shown=[...latest,...ENTRIES.slice(PUBLISHED,PUBLISHED+3)];
@@ -407,44 +599,32 @@ function viewHome(){
     <div class="stage" id="stage" data-r>
       <div class="cabin" id="cabin">
         <i class="pillar l"></i><i class="pillar r"></i><i class="dash"></i><i class="wheel" id="wheel"></i><i class="console"></i>
-        <div class="screen" id="screen">${[0,1,2].map(slide).join('')}<i class="glare" id="glare"></i></div>
+        <div class="screen" id="screen">${HERO.map((e,k)=>`<div class="slide" data-i="${k}">${scr(e.s,'after')}</div>`).join('')}<i class="glare" id="glare"></i></div>
       </div>
-      <div class="cap"><div class="t"><span class="n num" id="capN">#${pad(PUBLISHED)}</span></div><div class="dots" id="dots">${[0,1,2].map(k=>`<button aria-label="Slide ${k+1}"><i></i></button>`).join('')}</div></div>
+      <div class="cap"><div class="t"><span class="n num" id="capN">#${pad(PUBLISHED)}</span><span class="tt" id="capT">${HERO[0].title}</span></div><div class="dots" id="dots">${HERO.map((_,k)=>`<button aria-label="Slide ${k+1}"><i></i></button>`).join('')}</div></div>
     </div>
   </section>
-
   <section class="wrap intro">
-    <div class="l" data-r style="--d:80ms">${g('min(520px,90%)',26,'d')}${g('min(360px,70%)',12)}</div>
-    <div class="acts" data-r style="--d:140ms"><a class="btn k press" href="#entry-${pad(PUBLISHED)}">Latest entry</a><a class="btn s press" href="#follow">Follow the 100</a></div>
+    <div class="l" data-r style="--d:80ms"><h1>100 fixes for AI-made car screens.</h1><p>Same task, same model, two prompts. One gives you a phone app, the other gives you a cockpit. Each entry shows the difference and the prompt behind it.</p></div>
+    <div class="acts" data-r style="--d:140ms"><a class="btn k press" href="#entry-${pad(PUBLISHED)}">Open latest</a><a class="btn s press" href="#entry-001">Start at 001</a></div>
   </section>
-
   <section class="wrap"><div class="track" data-r style="--d:180ms"><b class="num">${pad(PUBLISHED)} / 100</b><div class="chap2" id="ticks">${CHAPTERS.map((c,ci)=>`<div class="c ${Math.floor(PUBLISHED/10)===ci?'cur':''}"><div class="tk">${ENTRIES.slice(ci*10,ci*10+10).map(e=>`<i class="${e.n<=PUBLISHED?'done':e.n===PUBLISHED+1?'next':''}" data-n="${e.n}"></i>`).join('')}</div><span class="nm">${String(ci+1).padStart(2,'0')} ${c}</span></div>`).join('')}</div></div></section>
-
-  <section class="wrap" style="padding-top:32px">
-    <div class="grid" id="grid">${shown.map(card).join('')}</div>
-  </section>
-  ${foot('Follow on X')}`;
+  <section class="wrap" style="padding-top:32px"><div class="grid" id="grid">${shown.map(card).join('')}</div></section>
+  <footer class="wrap"><div class="in"><span>Cockpit Practice Log</span><span>Peixin · 2026</span></div></footer>`;
 }
-function foot(r){return `<footer class="wrap" id="followSec"><div class="in"><span>Cockpit Practice Log · by Peixin</span><span><a class="tl" href="#follow">${r}</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a class="tl" href="#follow">LinkedIn</a></span></div></footer>`}
 
-const CONCEPTS=[['Phone size','Cockpit size'],['Flat','Hierarchy'],['Tiny controls','Inline controls'],['Inverted','Dimmed accent'],['Phone type','Cockpit type']];
 function entryHTML(n){
-  const e=ENTRIES[n-1]||ENTRIES[0], c=CONCEPTS[(n-1)%CONCEPTS.length];
+  const e=ENTRIES[n-1]||ENTRIES[0], S=SCENES[e.s], c=e.cc, [p0,p1]=prompts(e);
   const copyBtn=`<button class="copy press" data-copy><span class="s s1"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5V3A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy</span><span class="s s2"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m3.5 8.5 3 3 6-7"/></svg>Copied</span></button>`;
   return `
   <div class="left">
     <div class="demo">
       <div class="ctop"><div class="chips" id="cmpSeg"><span class="ind"></span><button data-x="100">${c[0]}</button><button class="on" data-x="50">Split</button><button data-x="0">${c[1]}</button></div></div>
+      <div class="plabs"><span>Default prompt</span><span>With rules</span></div>
       <div class="cstage" id="cstage" style="--x:50%">
-        <div class="pane b" style="display:block">${phone(true)}</div>
-        <div class="clip"><div class="pane a" id="paneA"><i class="sc"></i><div class="ap">
-          <div class="row"><i style="width:38%"></i><span class="sw"></span></div>
-          <div class="row"><i style="width:30%"></i><span class="sw"></span></div>
-          <div class="seg"><i class="on"></i><i></i><i></i></div>
-          <div class="row"><i style="width:44%"></i><i style="width:12%"></i></div>
-        </div></div></div>
-        <span class="plab b">Default prompt</span><span class="plab a">With rules</span>
-        <div class="handle"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
+        <div class="pane b">${scr(e.s,'before')}${S.marks.map(([x,y],i)=>`<span class="mk" style="left:${x}%;top:${y}%;--d:${400+i*120}ms">${i+1}</span>`).join('')}</div>
+        <div class="clip"><div class="pane a" id="paneA">${scr(e.s,'after')}</div></div>
+                <div class="handle"><span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 4 2 8l4 4M10 4l4 4-4 4"/></svg></span></div>
         <div class="gmask"><i class="ring" id="ring"></i></div><span class="gq">What did you catch in one second?</span>
       </div>
       <div class="formula"><span>row <b id="fRow">76</b> = text line 38 × 2</span><span class="st" id="fSt">OK</span></div>
@@ -456,20 +636,25 @@ function entryHTML(n){
   </div>
   <div class="right">
     <span class="eyebrow num">${pad(e.n)} · ${e.cat}</span>
-    <h2>${g('92%',26,'d')}${g('60%',26,'d')}</h2>
-    <div class="tags"><span>${e.cat}</span><span>${CHAPTERS[(e.n+2)%10]}</span></div>
-    <div class="prin">${g('100%',12,'dd')}${g('70%',12,'dd')}</div>
-    <div class="sec"><h4>What went wrong</h4>${[1,2,3,4].map(k=>`<div class="kp"><b>${k}</b><div>${g((60+rnd(k,4)*35)+'%',9,'d')}${g((40+rnd(k,5)*45)+'%',8)}</div></div>`).join('')}</div>
-    <div class="sec"><h4>Parameters</h4><div class="params">${[['Row','76 px'],['Text line','28 / 38'],['Switch','52 × 32'],['Track','64 = 56 + 4'],['Radius','20 › 16 › 12']].map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div></div>
+    <h2>${e.title}</h2>
+    <p class="prin">${e.prin}</p>
+    <div class="sec"><h4>What went wrong</h4>${S.issues.map((t,k)=>`<div class="kp"><b>${k+1}</b><p>${t}</p></div>`).join('')}</div>
+    <div class="sec"><h4>Parameters</h4><div class="params">${S.params.map(([k,v])=>`<div><span>${k}</span><code>${v}</code></div>`).join('')}</div></div>
     <div class="sec"><h4>Prompt</h4>
-      <div class="prompt"><div class="h">Default</div><div class="lines">${[80,64].map(w=>g(w+'%',9)).join('')}</div></div>
-      <div class="prompt k"><div class="h">With cockpit rules</div><div class="lines">${[88,72,94,60,80,45].map((w,i)=>g(w+'%',9,i%3===0?'d':'')).join('')}</div>${copyBtn}</div>
+      <div class="prompt"><div class="h">Default</div><pre>${p0}</pre></div>
+      <div class="prompt k"><div class="h">With cockpit rules</div><pre>${p1}</pre>${copyBtn}</div>
+      <span class="note">Same task · same model · only the prompt differs</span>
     </div>
-    <div class="sec"><h4>Rules</h4><div class="rules"><span>PR-01</span><span>PR-03</span><span>CT-02</span></div></div>
+    <div class="sec"><h4>Rules</h4><div class="rules">${S.rules.map(r=>`<span>${r}</span>`).join('')}</div></div>
   </div>
-  <div class="tools"><button class="ib press" id="full" aria-label="Focus demo"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg></button><button class="ib press" id="share" aria-label="Share on X"><svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M12.2 1.5h2.2L9.6 7l5.6 7.5h-4.4L7.4 10l-3.9 4.5H1.3l5.1-5.9L1 1.5h4.5l3.1 4.1Zm-.8 11.7h1.2L4.7 2.7H3.4Z"/></svg></button><button class="ib press" id="close" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></div>
+  <div class="tools"><button class="ib press" id="full" aria-label="Focus demo"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg></button><button class="ib press" id="share" aria-label="Copy link"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${P.link}</svg></button><button class="ib press" id="close" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></div>
   <div class="flnav"><button class="ib press" id="prevE" aria-label="Previous">${ARROW_L}</button><span>${pad(e.n)} / ${pad(PUBLISHED)}</span><button class="ib press" id="nextE" aria-label="Next">${ARROW_R}</button></div>`;
 }
+
+/* scale every 1920 × 720 screen to its box */
+const ro=new ResizeObserver(es=>es.forEach(x=>x.target.style.setProperty('--k',x.contentRect.width/1920)));
+const fit=(root=document)=>$$('.cs',root).forEach(c=>ro.observe(c));
+const toast=t=>{const el=$('#toast');el.textContent=t;el.classList.add('show');clearTimeout(el._t);el._t=setTimeout(()=>el.classList.remove('show'),1400)};
 
 /* behaviours */
 function reveal(){const io=new IntersectionObserver(es=>es.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}}),{rootMargin:'0px 0px -8% 0px'});$$('[data-r]').forEach(el=>io.observe(el))}
@@ -481,31 +666,29 @@ addEventListener('resize',()=>$$('.chips').forEach(c=>c._place&&c._place()));
 
 let carT;
 function setupHome(){
-  // count-up progress
-  // carousel
   const slides=$$('.slide'),dots=$$('#dots button');let k=0;
-  const show=i=>{k=i;slides.forEach((s,j)=>s.classList.toggle('on',j===i));dots.forEach((d,j)=>{d.classList.remove('on');void d.offsetWidth;d.classList.toggle('on',j===i)});$('#capN').textContent='#'+pad(PUBLISHED-i);
-    $('#capN').animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'none'}],{duration:400,easing:'cubic-bezier(.22,1,.36,1)'})};
-  show(0);clearInterval(carT);carT=setInterval(()=>{if(!document.body.contains(slides[0]))return clearInterval(carT);show((k+1)%slides.length)},4200);
-  dots.forEach((d,i)=>d.onclick=()=>{show(i);clearInterval(carT);carT=setInterval(()=>show((k+1)%slides.length),4200)});
-  // camera drift
+  const show=i=>{k=i;slides.forEach((s,j)=>s.classList.toggle('on',j===i));dots.forEach((d,j)=>{d.classList.remove('on');void d.offsetWidth;d.classList.toggle('on',j===i)});
+    $('#capN').textContent='#'+pad(HERO[i].n);$('#capT').textContent=HERO[i].title;
+    $('.cap .t').animate([{opacity:0,transform:'translateY(4px)'},{opacity:1,transform:'none'}],{duration:400,easing:'cubic-bezier(.22,1,.36,1)'})};
+  const loop=()=>{clearInterval(carT);carT=setInterval(()=>show((k+1)%slides.length),4200)};
+  show(0);loop();dots.forEach((d,i)=>d.onclick=()=>{show(i);loop()});
+  $('#screen').onclick=()=>go('entry-'+pad(HERO[k].n));
   const st=$('#stage'),cab=$('#cabin'),wh=$('#wheel'),gl=$('#glare');
   st.addEventListener('pointermove',e=>{const r=st.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
     cab.style.transform=`rotateY(${x*5}deg) rotateX(${-y*3}deg) scale(1.02)`;wh.style.transform=`rotate(${x*-6}deg)`;gl.style.setProperty('--gx',`${x*60}%`)});
   st.addEventListener('pointerleave',()=>{cab.style.transform='';wh.style.transform='';gl.style.setProperty('--gx','0')});
-  // ticks tooltip
   const tip=$('#tip');
-  $('#ticks').addEventListener('pointerover',e=>{const t=e.target.closest('.tk i');if(!t)return;const n=+t.dataset.n,r=t.getBoundingClientRect();
-    tip.textContent=`#${pad(n)} · ${n<=PUBLISHED?'Published':n===PUBLISHED+1?'Next drop':'Coming'}`;tip.style.left=r.left+r.width/2+'px';tip.style.top=r.top-30+'px';tip.classList.add('on')});
+  $('#ticks').addEventListener('pointerover',e=>{const t=e.target.closest('.tk i');if(!t)return;const n=+t.dataset.n,r=t.getBoundingClientRect(),en=ENTRIES[n-1];
+    tip.textContent=n<=PUBLISHED?`#${pad(n)} · ${en.title}`:n===PUBLISHED+1?`#${pad(n)} · Next drop`:`#${pad(n)} · Coming`;tip.style.left=r.left+r.width/2+'px';tip.style.top=r.top-30+'px';tip.classList.add('on')});
   $('#ticks').addEventListener('pointerleave',()=>tip.classList.remove('on'));
-  $('#ticks').addEventListener('click',e=>{const t=e.target.closest('.tk i.done');if(t)location.hash='entry-'+pad(+t.dataset.n)});
+  $('#ticks').addEventListener('click',e=>{const t=e.target.closest('.tk i.done');if(t)go('entry-'+pad(+t.dataset.n))});
 }
 let curN=0;
 function openEntry(n,dir){
   let ov=$('#ov');
   if(!ov){ov=document.createElement('div');ov.className='ov';ov.id='ov';ov.innerHTML='<div class="scrimx"></div><div class="sheet" id="sheet"></div>';document.body.appendChild(ov);ov.querySelector('.scrimx').onclick=()=>go('home')}
   const sh=$('#sheet'),wasOpen=ov.classList.contains('open');
-  const fill=()=>{const full=sh.classList.contains('full');sh.innerHTML=entryHTML(n);curN=n;setupEntry()};
+  const fill=()=>{sh.innerHTML=entryHTML(n);curN=n;fit(sh);setupEntry()};
   if(wasOpen&&dir){[$('.right',sh),$('.demo',sh)].forEach(x=>x&&x.animate([{opacity:1,transform:'none'},{opacity:0,transform:`translateX(${dir*-16}px)`}],{duration:160,easing:'ease-in',fill:'forwards'}));
     setTimeout(()=>{fill();[$('.right',sh),$('.demo',sh)].forEach(x=>x.animate([{opacity:0,transform:`translateX(${dir*16}px)`},{opacity:1,transform:'none'}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'}))},160)}
   else{fill();requestAnimationFrame(()=>requestAnimationFrame(()=>ov.classList.add('open')))}
@@ -524,17 +707,17 @@ function setupEntry(){
   setTimeout(()=>{setX(80,true);setTimeout(()=>setX(55,true),900)},700);
   seg($('#modeSeg'),b=>{const d=$('.demo');d.dataset.theme=b.dataset.m;d.animate([{filter:'blur(3px)',opacity:.7},{filter:'blur(0)',opacity:1}],{duration:420,easing:'ease-out'})});
   const rh=$('#rh'),ts=$('#ts'),pa=$('#paneA');
-  const upd=()=>{const v=+rh.value;pa.style.setProperty('--rh',v);$('#rhO').textContent=v+' px';rh.style.setProperty('--p',((v-40)/56*100)+'%');
+  const upd=()=>{const v=+rh.value,t=+ts.value;pa.style.setProperty('--rh',v);pa.style.setProperty('--ts',t);$('#rhO').textContent=v+' px';rh.style.setProperty('--p',((v-40)/56*100)+'%');
     const f=$('#fRow');if(f.textContent!=String(v)){f.textContent=v;f.animate([{transform:'translateY(-3px)',opacity:.4},{transform:'none',opacity:1}],{duration:260,easing:'ease-out'})}
-    const bad=v<76,stb=$('#fSt');stb.classList.toggle('bad',bad);stb.textContent=bad?'Below 76 · PR-01':'OK';
-    const t=+ts.value;$('#tsO').textContent=t+' px';ts.style.setProperty('--p',((t-16)/20*100)+'%');$$('#paneA .row i:first-child').forEach(i=>i.style.height=(28*t/28)+'%')};
+    const bad=v<76||t<22,stb=$('#fSt');stb.classList.toggle('bad',bad);stb.textContent=v<76?'Below 76 · PR-01':t<22?'Text under 22 · TY-01':'OK';
+    $('#tsO').textContent=t+' px';ts.style.setProperty('--p',((t-16)/20*100)+'%')};
   rh.oninput=upd;ts.oninput=upd;upd();
-  $('#glance').onclick=()=>{if(st.classList.contains('glancing'))return;setX(0,true);st.classList.add('glancing');const ring=$('#ring'),t0=performance.now();
+  $('#glance').onclick=()=>{if(st.classList.contains('glancing'))return;setX(100,true);st.classList.add('glancing');const ring=$('#ring'),t0=performance.now();
     const tick=t=>{const p=Math.min(1,(t-t0)/1000);ring.style.setProperty('--a',p*360+'deg');if(p<1)requestAnimationFrame(tick);else{st.classList.add('blurred');setTimeout(()=>{st.classList.remove('glancing','blurred');ring.style.setProperty('--a','0deg');setX(50,true)},2200)}};requestAnimationFrame(tick)};
-  $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText('Prompt placeholder')}catch(_){}b.classList.add('done');const t=$('#toast');t.textContent='Prompt copied';t.classList.add('show');setTimeout(()=>{b.classList.remove('done');t.classList.remove('show')},1500)});
+  $$('[data-copy]').forEach(b=>b.onclick=async()=>{try{await navigator.clipboard.writeText($('.prompt.k pre').textContent)}catch(_){}b.classList.add('done');toast('Prompt copied');setTimeout(()=>b.classList.remove('done'),1500)});
   $('#close').onclick=()=>go('home');
   $('#full').onclick=()=>$('#sheet').classList.toggle('full');
-  $('#share').onclick=()=>{const t=$('#toast');t.textContent='Share on X';t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1200)};
+  $('#share').onclick=async()=>{try{await navigator.clipboard.writeText(location.href)}catch(_){}toast('Link copied')};
   $('#prevE').onclick=()=>curN>1&&go('entry-'+pad(curN-1));
   $('#nextE').onclick=()=>curN<PUBLISHED&&go('entry-'+pad(curN+1));
   $('#prevE').disabled=curN<=1;$('#nextE').disabled=curN>=PUBLISHED;
@@ -544,15 +727,14 @@ addEventListener('keydown',e=>{if(!curN)return;if(e.key==='Escape')go('home');if
 let homeReady=false;
 function route(){
   const h=location.hash.slice(1),m=h.match(/^entry-(\d{3})$/);
-  if(!homeReady){$('#app').innerHTML=viewHome();reveal();setupHome();setupLoops();homeReady=true}
+  if(!homeReady){$('#app').innerHTML=viewHome();fit();reveal();setupHome();setupLoops();homeReady=true}
   if(m){const n=Math.max(1,Math.min(+m[1],PUBLISHED));const dir=curN?Math.sign(n-curN):0;if(n!==curN)openEntry(n,dir)}
-  else{closeEntry();if(h==='follow'){$('#followSec').scrollIntoView({behavior:'smooth'})}}
+  else closeEntry();
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 addEventListener('hashchange',route);
 addEventListener('scroll',()=>$('#hdr').classList.toggle('sc',scrollY>4),{passive:true});
 
-/* theme: follows local time like the Codex cockpit, toggle with circular reveal */
 (()=>{const h=new Date().getHours();document.documentElement.dataset.theme=h>=6&&h<18?'light':'dark';
   $('#theme').onclick=()=>{const r=document.documentElement,n=r.dataset.theme==='dark'?'light':'dark',set=()=>r.dataset.theme=n;
     if(!document.startViewTransition)return set();const b=$('#theme').getBoundingClientRect(),x=b.left+b.width/2,y=b.top+b.height/2,rad=Math.hypot(Math.max(x,innerWidth-x),Math.max(y,innerHeight-y));
