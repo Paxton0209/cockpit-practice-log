@@ -282,6 +282,11 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bare .ecard{box-shadow:none}
 .hero3 .cstage{width:100%}
 .kp{display:grid;place-items:center;background:transparent}
+.cstage .cs{transition:opacity .38s cubic-bezier(.2,0,0,1)}
+.cstage .cs.b{position:absolute;inset:0}
+.cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;pointer-events:none}
+.cstage.q .cs{transition:none}
+
 .kp{--mz:cubic-bezier(.25,.1,.25,1);font-family:var(--font);color:var(--stx)}
 .kp .t1 *{transition-delay:.04s}
 .kp *,.kp *::after{transition-property:border-radius,background-color,color,box-shadow,border-color,padding,gap,font-size,line-height,width,height,max-width,opacity,transform,left,top;transition-duration:.5s;transition-timing-function:var(--mz)}
@@ -391,8 +396,8 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .art h2{font-size:18px;line-height:26px;font-weight:600;letter-spacing:-.005em}
 .art .lede{margin:6px 0 0;font-size:14px;line-height:22px;color:var(--t2)}
 .bvs{display:grid}
-.bvs>.bv{grid-area:1/1;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .24s ease,transform .36s var(--out),visibility 0s .36s}
-.art[data-v=a] .bv[data-for=a],.art[data-v=b] .bv[data-for=b]{opacity:1;visibility:visible;transform:none;transition:opacity .32s ease .06s,transform .4s var(--out) .06s,visibility 0s}
+.bvs>.bv{grid-area:1/1;opacity:0;visibility:hidden;transition:opacity .2s cubic-bezier(.4,0,1,1),visibility 0s .2s}
+.art[data-v=a] .bv[data-for=a],.art[data-v=b] .bv[data-for=b]{opacity:1;visibility:visible;transition:opacity .32s cubic-bezier(0,0,.2,1) .08s,visibility 0s}
 .dp{margin:20px 0 0;padding:14px 16px;border-radius:12px;corner-shape:superellipse(1.6);background:var(--stage)}
 .dp span{display:block;font-size:12px;line-height:16px;color:var(--t3)}
 .dp p{margin:4px 0 0;font-size:15px;line-height:22px;color:var(--ink)}
@@ -545,7 +550,7 @@ C:{W:640,H:360,notes:[['112 px value','The temperature reads at arm’s length; 
 A:{W:640,H:220,notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},
 B:{W:640,H:340,notes:[['232 px art','You know what is playing at a glance.'],['40 px title','The one line that matters leads.'],['104 × 88 play','The main action is a real button.'],['32 px rhythm','Prev, play and next sit on one even spacing.']],html:()=>`<div class="b1" data-ga="radius 28" data-gb="radius 12"><i class="ka" data-ga="232" data-gb="48"></i><span class="tt" data-ga="40px" data-gb="15px">Night Drive<small>Mira Okafor</small></span><span class="c"><span class="pv">${I('prev',40)}</span><span class="pl">${I('play',40)}</span><span class="nx2">${I('next',40)}</span></span></div>`}};
 const CW=1200,CH=520;
-const cmp=s=>{const C=CMP[s];return `<div class="cs" data-w="${C.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp" style="width:${C.W}px;height:${C.H}px">${C.html()}</div></div>`};
+const cmp=(s,v)=>{const C=CMP[s];return `<div class="cs ${v}" data-w="${C.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp nt ${v==='b'?'is-b':''}" style="width:${C.W}px;height:${C.H}px">${C.html()}</div></div>`};
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
@@ -653,11 +658,11 @@ function sheetHTML(n){
   const lead=t=>{const m=t.match(/^(.+?[.:])\s(.*)$/);return m?`<b>${m[1]}</b> ${m[2]}`:t};
   return `<div class="sci">
     <div class="dtop"><span class="mono">${pad(e.n)} · ${e.cat}</span><span class="act">
-      <button class="rb" id="dPrev" aria-label="Previous" ${n<=1?'disabled':''}>${ARROW_L}</button><button class="rb" id="dNext" aria-label="Next" ${n>=PUBLISHED?'disabled':''}>${ARROW_R}</button>
+      
       <button class="rb" id="dClose" aria-label="Close"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
     <div class="ecard"><div class="hero3">
       <div class="cstage" id="cstage" data-v="a" style="aspect-ratio:${CMP[e.s].W||CW}/${CMP[e.s].H||CH}">
-        ${cmp(e.s)}
+        ${cmp(e.s,'a')}${cmp(e.s,'b')}
       </div>
       <div class="seg4" id="seg4"><span class="ind"></span><button data-v="b">Before</button><button class="on" data-v="a">After</button></div>
     </div>
@@ -680,12 +685,11 @@ function sheetHTML(n){
       </div>
       </div>
     </article></div>
-    <nav class="pager">${pv?`<a href="#entry-${pad(pv.n)}"><span>Previous</span><b>${pad(pv.n)} ${pv.title}</b></a>`:'<a class="ph"></a>'}${nx?`<a class="nx" href="#entry-${pad(nx.n)}"><span>Next</span><b>${pad(nx.n)} ${nx.title}</b></a>`:''}</nav>
   </div>`}
 function morph(st,to,quiet){
-  if(st.dataset.v===to)return;st.dataset.v=to;const ar=$('.art');if(ar)ar.dataset.v=to;const k=$('.kp',st);
-  if(quiet||RM.matches){k.classList.add('nt');k.classList.toggle('is-b',to==='b');k.offsetWidth;k.classList.remove('nt');return}
-  k.classList.toggle('is-b',to==='b');
+  if(st.dataset.v===to)return;
+  if(quiet){st.classList.add('q');st.dataset.v=to;st.offsetWidth;st.classList.remove('q')}else st.dataset.v=to;
+  const ar=$('.art');if(ar)ar.dataset.v=to;
 }
 function wireSheet(){
   const st=$('#cstage'),sg=$('#seg4');
@@ -693,8 +697,6 @@ function wireSheet(){
   seg(sg,b=>{morph(st,b.dataset.v);mem.set('v',b.dataset.v)});
   if(mem.get('v')==='b'){morph(st,'b',true);$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'))}
   $('#dClose').onclick=()=>go('home');
-  $('#dPrev').onclick=()=>curN>1&&go('entry-'+pad(curN-1));
-  $('#dNext').onclick=()=>curN<PUBLISHED&&go('entry-'+pad(curN+1));
   $$('[data-copy]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}b.classList.add('done');b.textContent='Copied';setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1400)});
 }
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
