@@ -13,6 +13,7 @@ This repo is the working notebook for the project: product decisions, research, 
 | [docs/03-research-and-references.md](docs/03-research-and-references.md) | Reference sites, competitors, platform landscape |
 | [docs/04-content-plan.md](docs/04-content-plan.md) | Entry template, cadence, first entries, post formats |
 | [docs/05-open-questions.md](docs/05-open-questions.md) | Things still to decide or check |
+| `site/` | Website wireframe v0.1: home (3D stage placeholder, 100-entry progress, list) and entry page |
 | `prototypes/cockpit-mcp/` | MCP server v0.1: 79 rules, tokens, components, layout checker (zero dependencies) |
 | `prototypes/library-site-v3/` | Earlier library website prototype (superseded, kept for reference) |
 
