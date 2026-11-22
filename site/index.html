@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cockpit Log</title>
+<title>Dashnote</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
@@ -445,7 +445,7 @@ function viewHome(){
   return `
   <div class="shell">
     <aside class="side">
-      <a class="brand" href="#home">Cockpit Log</a>
+      <a class="brand" href="#home">Dashnote</a>
       <nav class="nav" id="nav">${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
       <div class="foot"><p class="desc">Before/after fixes for AI-made car screens.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
         <div class="row"><span class="lbl13">Peixin</span><button class="ib press" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button></div></div>

@@ -1,4 +1,4 @@
-# Cockpit Practice Log
+# Dashnote (formerly Cockpit Practice Log)
 
 > A practice log on designing in-car interfaces with AI — what AI gets wrong, how to fix it, and the prompt that does it.
 
