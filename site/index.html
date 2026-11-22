@@ -282,9 +282,9 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bare .ecard{box-shadow:none}
 .hero3 .cstage{width:100%}
 .kp{display:grid;place-items:center;background:transparent}
-.cstage .cs{transition:opacity .38s cubic-bezier(.2,0,0,1)}
+.cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
-.cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;pointer-events:none}
+.cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;transform:scale(.97);filter:blur(6px);pointer-events:none}
 .cstage.q .cs{transition:none}
 
 .kp{--mz:cubic-bezier(.25,.1,.25,1);font-family:var(--font);color:var(--stx)}
@@ -570,14 +570,14 @@ const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['No hierarchy'],['Phone habits'],['Too small','Too much'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['Too much']];
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:CHAPTERS[Math.floor(i/10)],s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
-T:[`Design a turn-by-turn navigation panel for a car's center display.`,
-`Design a turn-by-turn (TBT) navigation panel for a car center display.
-Canvas: one panel, 1200 × 560 px, read in a one-second glance while driving.
-Content, largest to smallest: maneuver arrow + distance, street name, then the next maneuver and arrival time. Nothing else.
-Type: distance 150 px bold with the unit at 100 px, 60% opacity; street 76 px; bottom row 60 px, 60% opacity.
-Structure: two bands, 62 / 38. Top band = the current maneuver. Bottom band = "Then" and "Arrive".
-No sentences ("Turn right onto…"), no buttons, no ETA chips, no lane strip, no saturated header color.
-Ship a day and a night theme; night has no pure-white surfaces.`]};
+T:[`Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.`,
+`Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.
+Structure: top band 142 px (current maneuver), bottom band 72 px ("Then" and "Arrive").
+Top band: 80 px icon box, 12 px gap, then text. Padding 24 / 28.
+Type (Inter): distance 48/56 semibold, unit 40 semibold at 65% on the same baseline; street 28/36 medium, left-aligned to the distance.
+Bottom band: 24/32 medium; labels at 65%, values at 100%; next-turn icon 32 px; background #E2E2E2 at 70%.
+Surface: white at 65%, 1 px inside border rgba(15,23,41,.1), shadow 0 8 16 rgba(28,28,46,.18), radius 16 with full corner smoothing.
+No icon tiles, no all-caps labels, no extra words like "onto" or "Then straight".`]};
 function prompts(e){if(PROMPTS[e.s])return PROMPTS[e.s];const t={A:'settings',B:'music player',C:'climate control'}[e.s];return [`Design a ${t} screen for a car's center display.`,
 `Design a ${t} screen for a car center display.
 Canvas: 1920 × 720 px, landscape, read at arm's length while driving.
@@ -699,9 +699,10 @@ function wireSheet(){
   $('#dClose').onclick=()=>go('home');
   $$('[data-copy]').forEach(b=>b.onclick=async ev=>{ev.preventDefault();ev.stopPropagation();try{await navigator.clipboard.writeText($('.ptxt').textContent)}catch(_){}b.classList.add('done');b.textContent='Copied';setTimeout(()=>{b.classList.remove('done');b.textContent='Copy'},1400)});
 }
+const shRO=new ResizeObserver(()=>{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)));as.forEach(x=>x.cancel())});
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
-  document.body.appendChild(ov);$('#veil').onclick=()=>go('home');return ov}
+  document.body.appendChild(ov);$('#veil').onclick=()=>go('home');shRO.observe($('#sheet2'));return ov}
 function openEntry(n){
   const ov=ensureOv(),sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),shadow=$('#sc i');
   if(lens==='open'){curN=n;sh.innerHTML=sheetHTML(n);fit(sh);wireSheet();sh.scrollTop=0;anim(sh.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
