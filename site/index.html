@@ -459,10 +459,13 @@ body.dim .shell{filter:blur(4px)}
 .svgbtn .cp-result{opacity:0}.svgbtn .cp-result svg{width:13px;height:13px}.svgbtn .cp-result path{stroke-dasharray:1;stroke-dashoffset:0}
 .ecard:has(.cstage[data-v=b]) .svgbtn{opacity:0;pointer-events:none}
 .htools{width:100%;display:flex;align-items:center;justify-content:center;margin-top:8px}
-.cmpt{display:flex;flex-direction:column;gap:2px;margin:0 -12px}
-.cr{display:grid;grid-template-columns:1fr 24px 1fr;align-items:start;gap:8px;padding:10px 12px;border-radius:10px;font-size:14px;line-height:20px;transition:background-color .18s ease-out}
-.cr span{color:var(--t3)}.cr i{font-style:normal;color:var(--t3);text-align:center}.cr b{display:block;font-weight:500;color:var(--ink)}.cr em{display:block;margin-top:2px;font-style:normal;font-size:13px;line-height:18px;color:var(--t2)}
+.cmpt{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 -12px}
+.cr{display:flex;flex-direction:column;padding:12px;border-radius:12px;corner-shape:superellipse(1.6);transition:background-color .18s ease-out}
+.cr span{font-size:12px;line-height:16px;color:var(--t3);text-decoration:line-through;text-decoration-color:color-mix(in srgb,var(--t3) 60%,transparent)}
+.cr b{margin-top:6px;font-size:14px;line-height:20px;font-weight:500;color:var(--ink)}
+.cr em{margin-top:2px;font-style:normal;font-size:13px;line-height:18px;color:var(--t2)}
 .cr:hover{background:var(--fill2)}
+@media(max-width:620px){.cmpt{grid-template-columns:1fr}}
 .chip{flex:1;min-width:0;font-size:12px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pfoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px 16px 38px;font-size:12px;line-height:16px;color:var(--t3)}
 .phead{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 12px 0 16px;font-size:14px}.phead b{font-weight:600}
@@ -737,7 +740,7 @@ function sheetHTML(n){
     </div>
     <article class="art" data-v="a">
       <div class="cmpt" id="cmpt">
-        ${(CMP[e.s].wrong||[]).slice(0,3).map(([h],i)=>`<div class="cr"><span>${h}</span><i>→</i><div><b>${((CMP[e.s].notes||[])[i]||['',''])[0]}</b><em>${((CMP[e.s].notes||[])[i]||['',''])[1]}</em></div></div>`).join('')}
+        ${(CMP[e.s].wrong||[]).slice(0,3).map(([h],i)=>`<div class="cr"><span>${h}</span><b>${((CMP[e.s].notes||[])[i]||['',''])[0]}</b><em>${((CMP[e.s].notes||[])[i]||['',''])[1]}</em></div>`).join('')}
       </div>
       <div class="grp">
         <div class="phead"><b>Prompt</b><button class="cbtn hi" data-copy type="button" aria-label="Copy prompt"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy prompt</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></div><div class="pclamp"><pre class="ptxt">${p1}</pre></div>
