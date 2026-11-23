@@ -436,6 +436,10 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .row .chev{transition:transform .28s cubic-bezier(.2,0,0,1)}
 .cbtn.hi{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 14px 0 12px;background:var(--ink);color:var(--bg);box-shadow:0 1px 2px rgba(0,0,0,.12),0 4px 12px -4px rgba(0,0,0,.25);transition:background-color .2s,transform .12s,box-shadow .2s}
 .cbtn.hi:hover{box-shadow:0 1px 2px rgba(0,0,0,.14),0 6px 16px -4px rgba(0,0,0,.32)}
+.pclamp{position:relative;max-height:140px;overflow:hidden;-webkit-mask-image:linear-gradient(#000 45%,transparent);mask-image:linear-gradient(#000 45%,transparent);transition:max-height .4s cubic-bezier(.2,0,0,1)}
+.pclamp.full{max-height:1200px;-webkit-mask-image:none;mask-image:none}
+.pmore{display:block;margin:2px 0 14px 38px;font-size:13px;line-height:20px;font-weight:500;color:var(--ink)}
+.pmore:hover{text-decoration:underline;text-underline-offset:3px}
 .row .ptxt{-webkit-mask-image:none}
 .cbtn.hi{display:grid;place-items:center}
 .cbtn.hi .cp-idle,.cbtn.hi .cp-result{grid-area:1/1;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;color:inherit;flex:none;overflow:visible}
@@ -460,7 +464,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .params div+div{box-shadow:inset 0 1px 0 var(--line)}
 .params b{font-weight:500;color:var(--ink)}
 .params span{color:var(--t2);font-variant-numeric:tabular-nums}
-.row .ptxt{margin:0;padding:0 16px 12px 38px;white-space:pre-wrap;font:400 12.5px/20px var(--mono);color:var(--t2)}
+.row .ptxt{margin:0;padding:0 16px 8px 38px;white-space:pre-wrap;font:400 12.5px/20px var(--mono);color:var(--t2)}
 .row .accp{margin:0;padding:0 16px 16px 38px;font-size:13px;line-height:20px;color:var(--t3)}
 .code{position:relative;border-radius:16px;corner-shape:superellipse(1.6);background:var(--stage);box-shadow:inset 0 0 0 1px var(--line)}
 .code pre{margin:0;padding:18px 64px 18px 18px;white-space:pre-wrap;font:400 13px/22px var(--mono);color:var(--ink)}
@@ -712,7 +716,7 @@ function sheetHTML(n){
       <div class="bv" data-for="a">
         <div class="kv">${(CMP[e.s].notes||[]).slice(0,3).map(([h,t])=>`<div class="kr"><b>${h}</b><span>${t}</span></div>`).join('')}</div>
         <div class="grp">
-          <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn hi" data-copy type="button" aria-label="Copy prompt"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy prompt</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></summary><div class="rbx"><pre class="ptxt">${p1}</pre></div></details>
+          <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn hi" data-copy type="button" aria-label="Copy prompt"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy prompt</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></summary><div class="rbx"><div class="pclamp"><pre class="ptxt">${p1}</pre></div><button class="pmore" type="button">Show full prompt</button></div></details>
           ${CMP[e.s].svg?`<div class="row srow"><div class="sum0"><svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5.5h10M3 10.5h10" opacity="0"/></svg><b>SVG</b><span>Exported from Figma, 480 × 214</span><button class="cbtn sec" data-copy="svg" type="button" aria-label="Copy SVG"><span class="cp-idle">Copy SVG</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></div></div>`:''}
         </div>
         ${CMP[e.s].tested?`<p class="tst">${CMP[e.s].tested}</p>`:''}
@@ -760,6 +764,7 @@ function wireSheet(){
   if(mem.get('v')==='b'){morph(st,'b',true);$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'))}
   $('#dClose').onclick=()=>go('home');
   $$('[data-copy]').forEach(b=>b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();copyPrompt(b,b.dataset.copy==='svg'?CMP[ENTRIES[curN-1].s].svg:$('.ptxt').textContent)});
+  $$('.pmore').forEach(b=>b.onclick=()=>{const c=b.previousElementSibling,open=c.classList.toggle('full');b.textContent=open?'Show less':'Show full prompt'});
   $$('details.row').forEach(d=>{const sm=$('summary',d),rb=$('.rbx',d);sm.onclick=ev=>{if(ev.target.closest('button'))return;ev.preventDefault();if(RM.matches){d.open=!d.open;return}
     rb.getAnimations().forEach(a=>a.cancel());
     if(d.open){d.classList.add('closing');rb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:140,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).onfinish=()=>{d.open=false;d.classList.remove('closing');rb.getAnimations().forEach(a=>a.cancel())}}
