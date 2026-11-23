@@ -467,15 +467,9 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .comparison thead th{color:var(--t2)}
 .comparison thead th[aria-current=true]{font-weight:600;color:var(--ink)}
 .comparison tbody tr{border-top:1px solid var(--line)}
-.comparison tbody th{padding:0 4px}
+.comparison tbody th{font-weight:500}
 .comparison td{color:var(--t2);overflow-wrap:anywhere}
 .comparison tbody td.is-current{color:var(--ink)}
-.comparison button{width:100%;min-height:44px;padding:6px 8px;text-align:left;font-size:13px;line-height:18px;font-weight:500;border-radius:8px;text-decoration:underline dotted var(--t3);text-underline-offset:3px}
-.comparison button:hover,.comparison button[aria-pressed=true]{background:var(--fill2)}
-.cstage[data-part=icon] [data-part=icon],
-.cstage[data-part=distance] [data-part=distance],
-.cstage[data-part=secondary] [data-part=secondary]{outline:2px solid #1b71e4;outline-offset:-2px}
-.cstage[data-part=icon] [data-part=icon]{outline-offset:3px}
 .art .sample-note{margin:10px 0 0;color:var(--t2);font-size:12px;line-height:18px}
 .grp .prompt-row{position:relative}
 .grp .prompt-row summary{min-height:52px;height:auto;padding:8px 156px 8px 16px}
@@ -489,11 +483,10 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .test-note{margin:12px 0 16px;color:var(--t2);font-size:12px;line-height:18px}
 .test-note summary{width:fit-content;min-height:32px;display:list-item;cursor:pointer;font-weight:500;color:var(--ink);align-content:center}
 .test-note p{margin:4px 0 8px}
-.prompt-row .cbtn:focus-visible,.comparison button:focus-visible{outline-offset:-2px}
+.prompt-row .cbtn:focus-visible{outline-offset:-2px}
 @media(max-width:440px){
   .comparison th,.comparison td{padding-inline:8px}
   .comparison th:first-child{width:32%}
-  .comparison button{padding-inline:4px}
   .grp .prompt-row summary>span{display:none}
   .prompt-row .ptxt,.prompt-row .prompt-label{padding-left:16px}
 }
@@ -616,14 +609,14 @@ const SVG_T="<svg width=\"512\" height=\"246\" viewBox=\"0 0 512 246\" fill=\"no
 const CMP={
 T:{W:640,H:300,name:'Turn-by-turn panel',svg:SVG_T,
   changes:[
-    ['icon','Turn icon','100 px blue tile','80 px icon box, no tile'],
-    ['distance','Distance','44 px value, 26 px unit','48 px value, 40 px unit'],
-    ['secondary','Next turn and ETA','Stacked labels','One line for both']
+    ['Turn icon','100 px blue tile','80 px icon box, no tile'],
+    ['Distance','44 px value, 26 px unit','48 px value, 40 px unit'],
+    ['Next turn and ETA','Stacked labels','One line for both']
   ],
   html:()=>`<div class="tw"><div class="t1">
-  <div class="mn"><span class="mv" data-part="icon">${FIG_TURN}</span>
-  <div class="tx"><div class="dd" data-part="distance"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
-  <div class="bc" data-part="secondary"><span class="nx"><span class="ni">${FIG_NEXT}</span><span class="nxt"><span class="tn">Then<span class="stw">&nbsp;straight</span></span><b>150 m</b></span></span><span class="eta"><span class="w1">Arrive</span><b>10:48</b><span class="w2">Arrival</span></span></div></div>
+  <div class="mn"><span class="mv">${FIG_TURN}</span>
+  <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
+  <div class="bc"><span class="nx"><span class="ni">${FIG_NEXT}</span><span class="nxt"><span class="tn">Then<span class="stw">&nbsp;straight</span></span><b>150 m</b></span></span><span class="eta"><span class="w1">Arrive</span><b>10:48</b><span class="w2">Arrival</span></span></div></div>
 </div>`},
 C:{W:640,H:360,name:'Climate control',notes:[['112 px value','The temperature reads at arm’s length; everything else steps back.'],['72 px targets','Minus and plus become full-width buttons on the bottom edge.'],['Quiet label','The label drops to a 22 px caption at 65%.'],['Radius 24','The card joins the same corner family as the other panels.']],html:()=>`<div class="c1" data-ga="radius 24" data-gb="radius 16"><small data-ga="22px" data-gb="13px">Temperature</small><div class="v" data-ga="112px" data-gb="40px">21.5°</div><div class="bt"><i>${I('minus',36)}</i><i>${I('plus',36)}</i></div></div>`},
 A:{W:640,H:220,name:'Settings row',notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},
@@ -741,8 +734,8 @@ function changeTable(changes) {
   return `<section class="comparison" aria-label="What changed">
     <table>
       <thead><tr><th scope="col">What changed</th><th scope="col" data-side="b">Before</th><th scope="col" data-side="a" aria-current="true">After</th></tr></thead>
-      <tbody>${changes.map(([part,label,before,after]) => `<tr>
-        <th scope="row"><button type="button" data-highlight="${part}" aria-controls="cstage" aria-pressed="false">${label}</button></th>
+      <tbody>${changes.map(([label,before,after]) => `<tr>
+        <th scope="row">${label}</th>
         <td data-side="b">${before}</td><td data-side="a" class="is-current">${after}</td>
       </tr>`).join('')}</tbody>
     </table>
@@ -866,12 +859,6 @@ function wireSheet(){
   seg(sg,button=>{
     setView(button.dataset.v);
     mem.set('v',button.dataset.v);
-  });
-  const highlightButtons=$$('[data-highlight]');
-  highlightButtons.forEach(button=>button.onclick=()=>{
-    const part=st.dataset.part===button.dataset.highlight ? '' : button.dataset.highlight;
-    st.dataset.part=part;
-    highlightButtons.forEach(item=>item.setAttribute('aria-pressed',String(item.dataset.highlight===part)));
   });
   $('#dClose').onclick=()=>go('home');
   $$('[data-copy]').forEach(button=>button.onclick=()=>{
