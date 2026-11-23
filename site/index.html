@@ -252,12 +252,12 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* entry: one clean column; opens from the clicked cover (spring from Dashline) */
 .ov{position:fixed;inset:0;z-index:40;visibility:hidden}
 .ov.open{visibility:visible}
-.veil{position:absolute;inset:0;background:rgba(0,0,0,.06);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px);opacity:0;touch-action:none}
+.veil{position:absolute;inset:0;background:rgba(0,0,0,.06);opacity:0;touch-action:none}
 [data-theme=dark] .veil{background:rgba(0,0,0,.35)}
 [data-theme=dark] .seg4 .ind{background:rgba(255,255,255,.12);box-shadow:none}
 .sc{position:fixed;left:0;top:0;corner-shape:superellipse(1.6);background:var(--panel);box-shadow:0 0 0 1px var(--line);overflow:hidden;will-change:transform,width,height}
 .sc i{position:absolute;inset:0;border-radius:inherit;box-shadow:0 16px 52px rgba(0,0,0,.12);opacity:0}
-.sheet2{position:fixed;left:50%;top:50%;height:auto;max-height:calc(100dvh - 96px);width:min(720px,calc(100vw - 48px));transform:translate(-50%,-50%);border-radius:20px;corner-shape:superellipse(1.6);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.sheet2{position:fixed;left:50%;top:48px;height:auto;max-height:calc(100dvh - 96px);width:min(720px,calc(100vw - 48px));transform:translateX(-50%);border-radius:20px;corner-shape:superellipse(1.6);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .sheet2:focus{outline:none}
 .sci{padding:16px 24px 24px}
 .dtop{display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 0 0 4px;margin-bottom:16px}
@@ -282,6 +282,8 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bare .ecard{box-shadow:none}
 .hero3 .cstage{width:100%}
 .kp{display:grid;place-items:center;background:transparent}
+#app>.shell,.shell{transition:filter .24s cubic-bezier(.2,0,0,1)}
+body.dim .shell{filter:blur(4px)}
 .cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
 .cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;transform:scale(.97);filter:blur(6px);pointer-events:none}
@@ -776,15 +778,15 @@ function wireSheet(){
     if(d.open){d.classList.add('closing');rb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:140,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).onfinish=()=>{d.open=false;d.classList.remove('closing');rb.getAnimations().forEach(a=>a.cancel())}}
     else{d.open=true;rb.animate([{opacity:0,transform:'translateY(-6px)'},{opacity:1,transform:'none'}],{duration:280,easing:'cubic-bezier(.2,0,0,1)'})}}});
 }
-let roF=0;const shRO=new ResizeObserver(()=>{cancelAnimationFrame(roF);roF=requestAnimationFrame(()=>{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)));as.forEach(x=>x.cancel())})});
+const shRO=new ResizeObserver(()=>{{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;as.forEach(x=>x.cancel());sc.style.transition='height .3s cubic-bezier(.2,0,0,1)';Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)))}});
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
   document.body.appendChild(ov);$('#veil').onclick=()=>go('home');shRO.observe($('#sheet2'));return ov}
-function openEntry(n){
+function openEntry(n){{const c=$('#sc');if(c)c.style.transition=''}
   const ov=ensureOv(),sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),shadow=$('#sc i');
   if(lens==='open'){curN=n;sh.innerHTML=sheetHTML(n);fit(sh);wireSheet();sh.scrollTop=0;anim(sh.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
   if(lens==='closing'){stop();}
-  curN=n;sh.innerHTML=sheetHTML(n);fit(sh);ov.classList.add('open');document.body.classList.add('lock');lens='open';sh.scrollTop=0;sh.focus({preventScroll:true});
+  curN=n;sh.innerHTML=sheetHTML(n);fit(sh);ov.classList.add('open');document.body.classList.add('lock','dim');lens='open';sh.scrollTop=0;sh.focus({preventScroll:true});
   const end=rbox(sh.getBoundingClientRect(),20);Object.assign(sc.style,cstyle(end));wireSheet();
   if(RM.matches){veil.style.opacity=1;shadow.style.opacity=1;return}
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});veil.style.opacity=1;
@@ -797,7 +799,7 @@ function openEntry(n){
 }
 function finish(){stop();const ov=$('#ov');$('#veil').style.opacity='';$('#sheet2').style.overflow='';ov.classList.remove('open');document.body.classList.remove('lock');$('#sheet2').innerHTML='';lens='closed';
   const f=anchor?.isConnected?anchor:null;curN=0;anchor=null;if(f)f.focus({preventScroll:true})}
-function closeEntry(){
+function closeEntry(){document.body.classList.remove('dim');{const c=$('#sc');if(c)c.style.transition=''}
   if(lens!=='open')return;lens='closing';
   if(RM.matches){finish();return}
   const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||20);
