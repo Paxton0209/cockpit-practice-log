@@ -1,0 +1,7 @@
+Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.
+Split it into two bands. The top band is 142 px tall and shows the current turn. The bottom band is 72 px tall and shows the next turn and the arrival time.
+In the top band, put the turn icon in an 80 px box, leave a 12 px gap, then the text. Pad the band 24 px top and bottom, 28 px left and right.
+Set the distance in Inter Semibold 48/56 and the unit in Inter Semibold 40 at 65% opacity, sitting on the same baseline. Set the street name in Inter Medium 28/36, lined up with the left edge of the distance.
+In the bottom band, use Inter Medium 24/32. Write "Then", the 32 px next-turn icon, then "150 m", with 4 px between "Then" and the icon and no gap between the icon and "150 m". "Then" is 65% opacity and "150 m" is 100%. "Arrive 10:48" sits on the right, all at 65%. The band background is #E2E2E2 at 70%.
+Make the panel white at 65%, with a 1 px inside border at rgba(15,23,41,0.1), a 0 8 16 shadow at rgba(28,28,46,0.18), and a 16 px radius with full corner smoothing.
+Don't put the icon in a colored tile, don't use all-caps labels, and don't add words like "onto" or "Then straight".
