@@ -427,7 +427,7 @@ body.dim .shell{filter:blur(4px)}
 .row summary::-webkit-details-marker{display:none}
 .row summary b{font-weight:600}
 .row summary span{flex:1;min-width:0;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.row .chev{flex:none;color:var(--t3);transition:transform .2s var(--out)}
+.row .chev{flex:none;color:var(--t3);transition:transform .24s ease-out}
 .row[open] .chev{transform:rotate(90deg)}
 .row summary:not(:has(.cbtn)){padding-right:16px}
 .cbtn{flex:none;height:36px;padding:0 14px;border-radius:10px;corner-shape:superellipse(1.6);background:var(--panel);box-shadow:var(--lift);font-size:13px;font-weight:500;color:var(--ink);transition:background-color .2s,color .2s}
@@ -783,8 +783,8 @@ function wireSheet(){
   $$('.pclamp').forEach(c=>{const f=()=>c.classList.toggle('end',c.scrollTop+c.clientHeight>=c.scrollHeight-2);c.addEventListener('scroll',f,{passive:true});new ResizeObserver(f).observe(c)});
   $$('details.row').forEach(d=>{const sm=$('summary',d),rb=$('.rbx',d);sm.onclick=ev=>{if(ev.target.closest('button'))return;ev.preventDefault();if(RM.matches){d.open=!d.open;return}
     rb.getAnimations().forEach(a=>a.cancel());
-    if(d.open){d.classList.add('closing');rb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:140,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).onfinish=()=>{d.open=false;d.classList.remove('closing');rb.getAnimations().forEach(a=>a.cancel())}}
-    else{d.open=true;rb.animate([{opacity:0,transform:'translateY(-6px)'},{opacity:1,transform:'none'}],{duration:280,easing:'cubic-bezier(.2,0,0,1)'})}}});
+    if(d.open){d.classList.add('closing');rb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:160,easing:'ease-out',fill:'forwards'}).onfinish=()=>{d.open=false;d.classList.remove('closing');rb.getAnimations().forEach(a=>a.cancel())}}
+    else{d.open=true;rb.animate([{opacity:0,transform:'translateY(-6px)'},{opacity:1,transform:'none'}],{duration:240,easing:'ease-out'})}}});
 }
 const shRO=new ResizeObserver(()=>{{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;as.forEach(x=>x.cancel());sc.style.transition='height .3s cubic-bezier(.2,0,0,1)';Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)))}});
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
