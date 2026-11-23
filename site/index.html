@@ -404,7 +404,8 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bv[data-for=b] .chg{margin-bottom:20px}
 .dname{display:flex;align-items:center;gap:8px;font-size:15px;line-height:22px;font-weight:600;color:var(--ink)}
 .dname i{font-style:normal;font:500 11px/18px var(--mono);padding:0 6px;border-radius:6px;background:var(--fill2);color:var(--t2)}
-.kv{margin:16px 0 0;padding:4px 20px;border-radius:12px;corner-shape:superellipse(1.6);background:var(--stage)}
+.lede+.kv{margin-top:16px}
+.kv{margin:0;padding:4px 20px;border-radius:12px;corner-shape:superellipse(1.6);background:var(--stage)}
 @media(max-width:620px){.kr{grid-template-columns:1fr!important;gap:2px!important}}
 .kr{display:grid;grid-template-columns:160px 1fr;gap:16px;padding:13px 0;font-size:14px;line-height:21px}
 .kr+.kr{box-shadow:inset 0 1px 0 var(--line)}
@@ -709,7 +710,6 @@ function sheetHTML(n){
         <div class="kv"><div class="kr kp0"><b>Prompt</b><span>“${CMP[e.s].ask||p0}”</span></div>${(CMP[e.s].wrong||[]).slice(0,3).map(([h,t])=>`<div class="kr"><b>${h}</b><span>${t}</span></div>`).join('')}</div>
       </div>
       <div class="bv" data-for="a">
-        <p class="lede">${e.prin}</p>
         <div class="kv">${(CMP[e.s].notes||[]).slice(0,3).map(([h,t])=>`<div class="kr"><b>${h}</b><span>${t}</span></div>`).join('')}</div>
         <div class="grp">
           <details class="row"><summary>${CHEV}<b>Prompt</b><span>Paste it into Claude, Cursor or v0</span><button class="cbtn hi" data-copy type="button" aria-label="Copy prompt"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy prompt</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></summary><div class="rbx"><pre class="ptxt">${p1}</pre></div></details>
