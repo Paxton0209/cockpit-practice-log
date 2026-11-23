@@ -703,6 +703,8 @@ const pstyle=([x,y,k])=>({transform:`translate(${x}px,${y}px) scale(${k})`,trans
 const rest=sh=>[...sh.querySelectorAll('.dtop,.art,.pager')];
 const clipf=S=>([x,y,w,h,r])=>({clipPath:`inset(${y-S.top}px ${S.right-x-w}px ${S.bottom-y-h}px ${x-S.left}px round ${r}px)`});
 const cstyle=([x,y,w,h,r])=>({transform:`translate(${x}px,${y}px)`,width:w+'px',height:h+'px',borderRadius:r+'px'});
+function thumbFor(n){const el=anchor?.isConnected&&+anchor.dataset.n===n?anchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
+function ghost(n,on){const t=thumbFor(n);if(t)t.style.visibility=on?'hidden':''}
 function srcFor(n){const el=anchor?.isConnected&&+anchor.dataset.n===n?anchor:$(`#grid .card[data-n="${n}"]`);const t=el&&$('.thumb',el);if(!t)return null;
   const r=t.getBoundingClientRect();if(r.bottom<=0||r.top>=innerHeight)return null;return rbox(r,16)}
 const CHEV='<svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 4 4-4 4"/></svg>';
@@ -798,12 +800,12 @@ function openEntry(n){{const c=$('#sc');if(c)c.style.transition=''}
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});veil.style.opacity=1;
   const src=srcFor(n);
   if(COMPACT.matches){spring(sh,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);spring(sc,[100],[0],([y])=>({...cstyle(end),transform:`translate(${end[0]}px,${end[1]+y*end[3]/100}px)`}),420,40)}
-  else if(src){sh.classList.add('bare');setTimeout(()=>sh.classList.remove('bare'),170);const s=spring(sc,src,end,cstyle);{const S=sh.getBoundingClientRect(),cl=spring(sh,src,end,clipf(S));cl.onfinish=()=>cl.cancel()}const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};spring(ci,pose(src,cv),[0,0,1],pstyle);
+  else if(src){sh.classList.add('bare');setTimeout(()=>sh.classList.remove('bare'),170);ghost(n,1);const s=spring(sc,src,end,cstyle);{const S=sh.getBoundingClientRect(),cl=spring(sh,src,end,clipf(S));cl.onfinish=()=>cl.cancel()}const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};spring(ci,pose(src,cv),[0,0,1],pstyle);
     anim(ci,[{opacity:0},{opacity:1}],{duration:200,delay:30,easing:'ease-out',fill:'backwards'});
-    s.onfinish=()=>{if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
+    s.onfinish=()=>{ghost(n,0);if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
   else{anim(sc,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(sh,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(shadow,[{opacity:0},{opacity:1}],{duration:200})}
 }
-function finish(){stop();const ov=$('#ov');$('#veil').style.opacity='';$('#sheet2').style.overflow='';ov.classList.remove('open');document.body.classList.remove('lock');$('#sheet2').innerHTML='';lens='closed';
+function finish(){stop();$$('#grid .thumb').forEach(t=>t.style.visibility='');const ov=$('#ov');$('#veil').style.opacity='';$('#sheet2').style.overflow='';ov.classList.remove('open');document.body.classList.remove('lock');$('#sheet2').innerHTML='';lens='closed';
   const f=anchor?.isConnected?anchor:null;curN=0;anchor=null;if(f)f.focus({preventScroll:true})}
 function closeEntry(){document.body.classList.remove('dim');{const c=$('#sc');if(c)c.style.transition=''}
   if(lens!=='open')return;lens='closing';
@@ -811,7 +813,7 @@ function closeEntry(){document.body.classList.remove('dim');{const c=$('#sc');if
   const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||20);
   stop();anim(veil,[{opacity:1},{opacity:0}],{duration:180,easing:'ease-in'});let end;
   if(COMPACT.matches){end=spring(sh,[0],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);anim(sc,[{opacity:1},{opacity:0}],{duration:160})}
-  else if(src){sh.classList.add('bare');const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};sh.style.overflow='hidden';spring(ci,[0,0,1],pose(src,cv),pstyle);anim(ci,[{opacity:1},{opacity:0}],{duration:120,easing:'ease-in',fill:'forwards'});
+  else if(src){ghost(curN,1);sh.classList.add('bare');const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};sh.style.overflow='hidden';spring(ci,[0,0,1],pose(src,cv),pstyle);anim(ci,[{opacity:1},{opacity:0}],{duration:120,easing:'ease-in',fill:'forwards'});
     spring(sh,cur,src,clipf(sh.getBoundingClientRect()));end=spring(sc,cur,src,cstyle)}
   else{anim(sc,[{opacity:1},{opacity:0}],{duration:150,easing:'ease-in'});end=anim(sh,[{opacity:1},{opacity:0}],{duration:150,easing:'ease-in'})}
   end.onfinish=finish;
