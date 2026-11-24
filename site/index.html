@@ -124,6 +124,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .thumb.cov .cs .px{background:transparent}
 .meta .ct{font-size:13px;color:var(--t3)}
 .card.soon{pointer-events:none}
+.nav button.soon{color:var(--t3);cursor:default;pointer-events:none}.nav button.soon small{font-size:11px;color:var(--t3)}
 .card.soon .thumb{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
 .card.soon .ttl{color:var(--t3);font-weight:400}
 .card .thumb{transition:box-shadow .35s var(--ease),transform .6s var(--out)}.card:not(.soon):hover .thumb{box-shadow:var(--lift2);transform:translateY(-2px)}
@@ -324,6 +325,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bare .ecard{border-color:transparent}
 .hero3 .cstage{width:100%}.hero3 .cstage .cs.a{margin:-20px 0}.hero3 .cstage .cs.b{inset:-20px 0}
 .kp{display:grid;place-items:center;background:transparent}
+.kp.top{place-items:start center}
 /* the page blur behind an open entry lives on the veil (backdrop-filter, composited), so only its opacity animates: animating filter on the whole page re-rasterised every cover each frame and made open/close stutter */
 .cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
@@ -645,9 +647,11 @@ body.lock{overflow:hidden}
 <div class="toast" id="toast"></div>
 
 <script>
-const PUBLISHED=18, TOTAL=100;
+const PUBLISHED=7, TOTAL=100;
 const CDESC={All:'Before/after fixes for AI-made car screens, one rule at a time.',Layout:'Canvas, splits and where things sit on a wide screen.',Hierarchy:'What gets read first in a one-second glance.',Controls:'Targets a moving hand can actually hit.',Color:'Contrast for day, night and glare.',Type:'Sizes and weights read at arm’s length.',Icons:'Shapes that read without labels.',Motion:'Movement that informs, never distracts.',States:'Loading, empty, error and disabled, in the car.','Voice & AI':'Say it once; the screen answers with the right amount.',Screens:'Full screens, put together.'};
-const CHAPTERS=['Layout','Hierarchy','Controls','Color','Type','Icons','Motion','States','Voice & AI','Screens'];
+/* sidebar: what's published, by where it lives in the car; the rest is announced as coming soon */
+const CHAPTERS=['Navigation','Settings'],SOON=['Media','Climate','Driving assist','Voice & AI'];
+const CAT_OF={nav:'Navigation',inf:'Settings',veh:'Settings'};
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pad=n=>String(n).padStart(3,'0');
 const ARROW_L='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>';
@@ -813,7 +817,7 @@ const TRIPBAR_B=`<div class="trip-bar" role="region" aria-label="Trip summary">
   </button>
 </div>`;
 const CMP={
-O:{W:1245,H:698,name:'Opening tiles',cover:1,ask:'Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Content, exactly: a section title “Openings” and three controls, Frunk, Trunk and Charge port, each with its icon. Nothing else.',wrong:[['Blue strokes in the icons','Each icon draws its moving part in blue.'],['Labels at 15 px','Under 30 px icons, in a tile 152 px tall.'],['Icons in grey circles','A 48 px well around every icon.']],notes:[['One colour for icons','Icon and label share the quiet secondary grey.'],['Labels at 24 px','Centred under the icon in a 156 px tile.'],['Icons at 72 px, no well','2 px strokes, straight on the tile.']],
+O:{W:1245,H:698,cv:{W:900,top:0},name:'Opening tiles',cover:1,ask:'Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Content, exactly: a section title “Openings” and three controls, Frunk, Trunk and Charge port, each with its icon. Nothing else.',wrong:[['Blue strokes in the icons','Each icon draws its moving part in blue.'],['Labels at 15 px','Under 30 px icons, in a tile 152 px tall.'],['Icons in grey circles','A 48 px well around every icon.']],notes:[['One colour for icons','Icon and label share the quiet secondary grey.'],['Labels at 24 px','Centred under the icon in a 156 px tile.'],['Icons at 72 px, no well','2 px strokes, straight on the tile.']],
   html:()=>`<div class="st"><div class="lh s">Openings</div><div class="tg"><div class="tb">${IC.hood}Frunk</div><div class="tb">${IC.trunk}Trunk</div><div class="tb">${IC.port}Charge port</div></div></div>`,
   before:()=>`<div class="openings">
   <style>
@@ -884,7 +888,7 @@ O:{W:1245,H:698,name:'Opening tiles',cover:1,ask:'Design controls for opening th
     </button>
   </div>
 </div>`},
-L:{W:1479,H:830,name:'Locks',cover:1,ask:'Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.',wrong:[['Labels at 18 px','15 px lines under them, below a 28 px bold title.'],['Options in 17 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines between the switches, in a second card.']],notes:[['Labels at 28 px','Lines at 24 px and 65%. The section label steps back.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
+L:{W:1479,H:830,cv:{W:900,top:1},name:'Locks',cover:1,ask:'Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.',wrong:[['Labels at 18 px','15 px lines under them, below a 28 px bold title.'],['Options in 17 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines between the switches, in a second card.']],notes:[['Labels at 28 px','Lines at 24 px and 65%. The section label steps back.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
   html:()=>`<div class="st"><div class="lh s">Locks</div><div class="card"><div class="ch">Child lock<div class="seg"><i>Off</i><i>Left</i><i>Right</i><i class="on">Both</i></div></div><div class="rw"><span class="tx">Window lock<span class="m">Disable rear window switches</span></span><i class="sw off"></i></div><div class="rw"><span class="tx">Walk-away lock<span class="m">Lock when your phone key leaves</span></span><i class="sw"></i></div><div class="rw"><span class="tx">Unlock on park<span class="m">Unlock all doors in Park</span></span><i class="sw"></i></div></div></div>`,
   before:()=>`<div class="locks-panel">
 <style>
@@ -944,7 +948,7 @@ L:{W:1479,H:830,name:'Locks',cover:1,ask:'Design a locks settings section for a 
   </div>
 </div>
 </div>`},
-M:{W:1434,H:804,name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.',wrong:[['Two buttons a row','A blue Open and a red Uninstall on all four rows.'],['Names set in 22 px','Smaller than the 30 px bold title above them.'],['Gradient icon tiles','Green, blue, purple and orange gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','The section label steps back to 24 px at 65%.'],['Colour only in the icon','Filled icons on a soft grey tile, one hue each.']],
+M:{W:1434,H:804,cv:{W:900,top:1},name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.',wrong:[['Two buttons a row','A blue Open and a red Uninstall on all four rows.'],['Names set in 22 px','Smaller than the 30 px bold title above them.'],['Gradient icon tiles','Green, blue, purple and orange gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','The section label steps back to 24 px at 65%.'],['Colour only in the icon','Filled icons on a soft grey tile, one hue each.']],
   html:()=>`<div class="st"><div class="lh">Apps</div><div class="card"><div class="rw"><span class="ai">${IC.phoneF}</span><span class="tx">Phone</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.maps}</span><span class="tx">Maps</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.layers}</span><span class="tx">Task master</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.radio}</span><span class="tx">FM</span><span class="ib">${IC.trash}</span></div></div></div>`,
   before:()=>`<div class="car-apps">
   <style>
@@ -1095,7 +1099,7 @@ M:{W:1434,H:804,name:'App list',cover:1,ask:'Design an installed apps list for a
     </li>
   </ul>
 </div>`},
-U:{W:1245,H:698,name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26, lines at 19','The lines under them in a thinner, lighter grey.'],['Switch at 76 × 44','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28, lines at 24','Both Medium; the line at 65% of the text colour.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 24 px.']],
+U:{W:1245,H:698,cv:{W:900,top:0},name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26, lines at 19','The lines under them in a thinner, lighter grey.'],['Switch at 76 × 44','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28, lines at 24','Both Medium; the line at 65% of the text colour.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 24 px.']],
   html:()=>`<div class="st"><div class="card"><div class="rw"><span class="tx">Auto-update<span class="m">Installs new versions in the background</span></span><i class="sw"></i></div><div class="rw"><span class="tx">User agreements<span class="m">Terms of service and privacy policy</span></span><span class="cv">${IC.chevR}</span></div></div></div>`,
   before:()=>`<div class="aus-card">
   <style>
@@ -1154,7 +1158,7 @@ U:{W:1245,H:698,name:'Update settings',cover:1,ask:'Design an app update setting
     </span>
   </button>
 </div>`},
-R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word per difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
+R:{W:1640,H:920,cv:{W:700,top:1},cw:560,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word per difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
   html:()=>`<div class="nv rs"><div class="hd"><span class="back">${IC.back}</span><b>Robo Base</b></div>${ROUTE('18 min','',1)}${ROUTE('21 min','No tolls')}${ROUTE('24 min','Fewer turns')}<div class="act"><span class="btn p">Start route</span><span class="btn s">Preferences</span></div></div>`,
   before:()=>`<div class="rsp">
   <style>
@@ -1314,7 +1318,7 @@ R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection pan
     </button>
   </div>
 </div>`},
-P:{W:1640,H:920,name:'Place details',cover:1,ask:'Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.',wrong:[['Reviews before the road','Stars, review count and a charger table come before how far it is.'],['Status in four colours','Green, amber and red pills, slot bars and a battery glyph.'],['Three button styles','A blue button with a shadow, plus two outlined squares.']],notes:[['The drive comes first','3.3 km, 12 min and arrival charge, in one box under the name.'],['Facts as quiet chips','Charger power and entrances are neutral chips. Only “Preferred” is blue.'],['One primary action','Directions spans the panel. Call and save sit as icons in the header.']],
+P:{W:1640,H:920,cv:{W:700,top:1},cw:560,name:'Place details',cover:1,ask:'Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.',wrong:[['Reviews before the road','Stars, review count and a charger table come before how far it is.'],['Status in four colours','Green, amber and red pills, slot bars and a battery glyph.'],['Three button styles','A blue button with a shadow, plus two outlined squares.']],notes:[['The drive comes first','3.3 km, 12 min and arrival charge, in one box under the name.'],['Facts as quiet chips','Charger power and entrances are neutral chips. Only “Preferred” is blue.'],['One primary action','Directions spans the panel. Call and save sit as icons in the header.']],
   html:()=>`<div class="nv pl"><div class="hd"><span class="back">${IC.back}</span><span class="ic">${IC.phone}${IC.bookmark}</span></div><div class="inf"><div class="nm"><b>Robo Base</b><span class="m">Yecheng Rd, Jiading</span></div><div class="tags"><i class="in">Preferred</i><i>PPA</i><i>120 kW</i></div></div><div class="rp"><span class="d">${IC.turn}3.3 km, 12 min</span><span class="m">Arrival 46%</span></div><div class="sub"><div><i>Parking</i><i>North gate</i><i>East gate</i></div><div><i>South gate</i><i>Entrance B</i><i>Drop-off</i></div></div><div class="hr">${IC.clock}<div><span>Open, 12:00–24:00</span><span class="m">Mon–Fri 08:00–22:00, Sat 08:00–22:00</span></div></div><div class="act"><span class="btn p">Directions</span></div></div>`,
   before:()=>`<div class="pd-root" role="dialog" aria-labelledby="pd-title">
 <style>
@@ -1447,21 +1451,13 @@ A:{W:640,H:220,name:'Settings row',notes:[['104 px row','A target you can hit wh
 B:{W:640,H:340,name:'Now playing',notes:[['232 px art','You know what is playing at a glance.'],['40 px title','The one line that matters leads.'],['104 × 88 play','The main action is a real button.'],['32 px rhythm','Prev, play and next sit on one even spacing.']],html:()=>`<div class="b1" data-ga="radius 28" data-gb="radius 12"><i class="ka" data-ga="232" data-gb="48"></i><span class="tt" data-ga="40px" data-gb="15px">Night Drive<small>Mira Okafor</small></span><span class="c"><span class="pv">${I('prev',40)}</span><span class="pl">${I('play',40)}</span><span class="nx2">${I('next',40)}</span></span></div>`}};
 const CW=1200,CH=520;
 const cmp=(s,v)=>{const C=CMP[s];return `<div class="cs ${v}" data-w="${C.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp nt ${v==='b'?(C.before?'is-o':'is-b'):''}" style="width:${C.W}px;height:${C.H}px">${v==='b'&&C.before?C.before():C.html(v)}</div></div>`};
+/* covers frame for reading, not for completeness: wide or tall components get a tighter canvas (cv.W), so body text lands near 11 px on a home card; tall ones start at the top and run off the bottom. The sheet keeps the full fit, and the flight between them rides the difference (coverPose). */
+const cvOf=s=>{const C=CMP[s],c=C.cv;if(!c)return null;const W=c.W,H=Math.round(W*C.H/C.W);return {W,H,top:c.top,P:Math.round((W-(C.cw||772))/2)}};
+const cmpCover=s=>{const C=CMP[s],v=cvOf(s);if(!v)return cmp(s,'a');return `<div class="cs a" data-w="${v.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp nt${v.top?' top':''}" style="width:${v.W}px;height:${v.H}px${v.top?`;padding-top:${v.P}px`:''}">${C.html('a')}</div></div>`};
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
 ['T','One number, one shape','Ask for a navigation panel and AI writes a sentence. A driver needs a distance and an arrow.','One glance tells you how far and which way. Everything else steps back.',['Phone nav','Glance nav']],
-['B','Now playing beats a wall of covers','AI makes a streaming home page. In the car, the driver needs one thing: what’s on.','The current state is the hero. Browsing is secondary and can wait until you park.',['Cover grid','Now playing']],
-['C','Climate lives on the bottom edge','Cards in the middle look tidy and are hard to reach on a bumpy road.','Put the most-used controls where a hand can rest and steady itself: the bottom edge.',['Floating cards','Edge controls']],
-['A','Rows are 76 px, not 44','Phone row height is the thing AI copies into the car most often.','Row = text line × 2. With 28 / 38 type, that is 76 px.',['44 px rows','76 px rows']],
-['B','Split at 38 / 62, not 50 / 50','Even halves make two equal masters. The golden split gives one side the lead.','Use 38.2 / 61.8 for context and content. The larger side is where the eye lands.',['Even halves','38 / 62']],
-['C','The temperature is the headline','When every card is the same size, nothing is important.','Size by how often it is used and how fast it must be read.',['Equal cards','Headline']],
-['A','Drop the fake 9:41','AI loves a phone status bar. The car already has one, and it isn’t yours.','Never draw system chrome the vehicle owns: status bar, tab bar, home indicator.',['Phone chrome','Car chrome']],
-['B','Big controls, and only a few','Five 20 px icons in a mini player, or three you can hit without looking.','Fewer, larger targets. Primary 120 × 96, secondary 96.',['Mini player','Three targets']],
-['C','+ and − are the primary actions','AI makes the most-used button the smallest thing on screen.','Frequency sets size. The control you touch every drive gets the biggest target.',['28 px buttons','96 px targets']],
-['A','Toggles you can hit on a bumpy road','51 × 31 is a phone switch. In motion, a finger lands several millimetres off.','Switches at 88 × 52, and the whole row is the hit area.',['Phone toggle','Cockpit toggle']],
-['B','One primary per screen','Everything asked for attention, so nothing got it.','Pick one primary. Everything else steps down in size, weight or contrast.',['Flat','One primary']],
-['C','Charts can wait until you park','An air-quality graph looks smart and steals a glance you don’t have.','If it doesn’t change what the driver does next, move it off the main view.',['Chart in view','Chart parked']],
 ['R','Compare routes by time','AI adds a mini map, traffic bars and a tag on every route. The driver is comparing three numbers.','Time leads. One word says how the others differ, and the best route is already picked.',['Route cards','Time first']],
 ['P','The drive before the details','AI opens a destination with stars, reviews and a charger table. The driver wants to know how far it is.','Distance, time and arrival charge come first. Everything else is a quiet chip.',['Review card','Drive first']],
 ['M','A row opens its app','Ask for an app list and AI gives every row a blue Open and a red Uninstall button.','Tap the row to open the app. One quiet trash icon is the only button.',['Two buttons a row','One tap a row']],
@@ -1469,11 +1465,11 @@ const DATA=[
 ['O','A one-shot action is a tile','AI draws small icons in grey circles, with a blue stroke for the moving part.','Each opening is a tile: one 72 px icon over one word. Tap the tile and it opens.',['Icons in wells','72 px icons']],
 ['L','Four options lie flat','AI sets the labels at 18 px, the options at 17 px and rules every row.','Labels at 28, options in 28 px type, and 108 px rows without dividers.',['18 px labels','28 px labels']]];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
-const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['No hierarchy'],['Phone habits'],['Too small','Too much'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['Too much'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits']];
+const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',13:'nav',14:'nav',2:'med',8:'med',3:'cli',6:'cli',9:'cli',4:'veh',7:'veh',10:'veh',5:'inf',11:'inf',12:'inf',15:'inf',16:'inf',17:'veh',18:'veh'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh'};
 const ctxOf=n=>CTX[n]||'nav';
-const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:CHAPTERS[Math.floor(i/10)],s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
+const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
 M:[`Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.`,
 `Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
@@ -1549,7 +1545,7 @@ function viewHome(){
   <div class="shell">
     <aside class="side">
       <a class="brand" href="#home">Dashnote</a>
-      <nav class="nav" id="nav"><span class="navind" id="navind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'All entries':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}</nav>
+      <nav class="nav" id="nav"><span class="navind" id="navind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'All entries':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}${SOON.map(c=>`<button class="soon" disabled><span>${c}</span><small>Soon</small></button>`).join('')}</nav>
       <div class="foot"><p class="desc">A notebook on designing car screens with AI.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
         <span class="lbl13">Peixin</span></div>
     </aside>
@@ -1558,7 +1554,7 @@ function viewHome(){
 function gridFor(c){
   const list=c==='All'?[ENTRIES[0],...ENTRIES.slice(1,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+3)]:ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=e.n>PUBLISHED,C=!soon&&CMP[e.s]&&CMP[e.s].cover?CMP[e.s]:null;
-    return `<a class="card ${soon?'soon':''}${C?' hc':''}" data-n="${e.n}" href="#entry-${pad(e.n)}" style="--d:${(i%3)*50}ms"><div class="thumb${C?' cov':''}" data-ctx="${ctxOf(e.n)}">${C?cmp(e.s,'a'):''}</div>
+    return `<a class="card ${soon?'soon':''}${C?' hc':''}" data-n="${e.n}" href="#entry-${pad(e.n)}" style="--d:${(i%3)*50}ms"><div class="thumb${C?' cov':''}" data-ctx="${ctxOf(e.n)}">${C?cmpCover(e.s):''}</div>
     <div class="meta"><b class="num">${pad(e.n)}</b>${C?`<span class="ttl">${C.name}</span>`:`<span class="ttl">${soon?'Coming soon':e.title}</span>`}</div></a>`}).join('')}
 
 const ro=new ResizeObserver(es=>es.forEach(x=>x.target.style.setProperty('--k',x.contentRect.width/+x.target.dataset.w)));
@@ -1627,6 +1623,11 @@ function sourceFor(n,rest){const t=thumbFor(n);if(!t)return null;if(rest){t.styl
   const r=t.getBoundingClientRect();if(!r.width||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth)return null;return {glyph:r,cell:r}}
 // The dialog surface and the copy ride the same spring.
 // Counter-scale only the stage to preserve its uniform cover-to-stage path.
+function coverPose(stage,from,to){
+  const e=ENTRIES[curN-1],v=e&&cvOf(e.s),root=$('.cs.a .kp',stage)?.firstElementChild;if(!v||!root)return null;
+  const C=CMP[e.s],r=C.W/v.W,ch=root.offsetHeight,dy=v.top?r*(v.P+ch/2)-C.H/2:0;
+  return lensSpring(root,from,to,x=>{const t=1-Math.max(0,Math.min(1,x[7]));return {transform:`translateY(${dy*t}px) scale(${1+(r-1)*t})`}});
+}
 function springDialog(fromCard,toCard,fromArt,toArt,restCard,restArt,fromSurface=1,toSurface=1){
   const sheet=$('#sheet2'),stage=$('.hero3',sheet);
   const from=[...cardPose(fromCard,restCard),...lensPose(fromArt,restArt),fromSurface];
@@ -1652,8 +1653,8 @@ function springDialog(fromCard,toCard,fromArt,toArt,restCard,restArt,fromSurface
   /* the sheet lifts the component 26 px above the toggle; the cover centres it. Ride the lift on the same spring
      (surface alpha: 0 at the cover, 1 in the sheet) so it doesn't snap when the flight lands. */
   const cstage=$('.cstage',stage),lift=lensSpring(cstage,from,to,v=>({transform:`translate(-50%,calc(-50% - ${26*Math.max(0,v[7])}px))`}));
-  const start=document.timeline.currentTime;
-  surface.startTime=start;artwork.startTime=start;lift.startTime=start;
+  const cover=coverPose(stage,from,to),start=document.timeline.currentTime;
+  surface.startTime=start;artwork.startTime=start;lift.startTime=start;if(cover)cover.startTime=start;
   return surface;
 }
 const CHEV='<svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 4 4-4 4"/></svg>';

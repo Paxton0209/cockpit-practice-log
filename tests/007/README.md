@@ -1,4 +1,4 @@
-# 018 · Before
+# 007 · Before
 
 `before.html` is the first answer from a fresh Claude Opus 5.5 subagent (Claude app) with no prior context, told not to use tools (it made no tool calls), to this one line plus the output note:
 

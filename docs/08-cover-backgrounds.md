@@ -30,11 +30,11 @@ v0.4.0: each palette is now one family of neighbouring hues (the way information
 
 | Context | Entries | Light | Dark |
 |---|---|---|---|
-| Navigation (`nav`) | 001, 013, 014 | `#e0e7ea` `#b4d3e6` `#8ab6bf` `#d3e6e4` · sky, teal, pale aqua | `#090c0e` `#1a2126` `#173a47` `#0d1113` · deep teal |
-| Media (`med`) | 002, 008 | `#ecdcdc` `#f3b3a6` `#d293a6` `#f3d6cc` · coral pink, rose, peach | `#0c0a0c` `#211c21` `#4a2035` `#120f11` · wine |
-| Climate (`cli`) | 003, 006, 009 | `#dde7e0` `#b3dbc6` `#8db8a8` `#dcebd8` · mint, sage | `#090c0b` `#17221e` `#173d35` `#0d1110` · pine |
-| Vehicle & controls (`veh`) | 004, 007, 010, 017, 018 | `#e3e4e6` `#d3d5d9` `#a8acb2` `#ececee` · light grey, a cool graphite corner | `#0a0b0c` `#1b1c1f` `#28323f` `#0f1012` · steel (warm turns brown at night) |
-| Information & layout (`inf`) | 005, 011, 012, 015, 016 | `#dfe1f0` `#c2c7f5` `#8ea3dc` `#e5d5ef` · periwinkle, lilac | `#0a0a0f` `#1c1d28` `#30357a` `#0f1016` · indigo |
+| Navigation (`nav`) | 001, 002, 003 | `#e0e7ea` `#b4d3e6` `#8ab6bf` `#d3e6e4` · sky, teal, pale aqua | `#090c0e` `#1a2126` `#173a47` `#0d1113` · deep teal |
+| Media (`med`) | — | `#ecdcdc` `#f3b3a6` `#d293a6` `#f3d6cc` · coral pink, rose, peach | `#0c0a0c` `#211c21` `#4a2035` `#120f11` · wine |
+| Climate (`cli`) | — | `#dde7e0` `#b3dbc6` `#8db8a8` `#dcebd8` · mint, sage | `#090c0b` `#17221e` `#173d35` `#0d1110` · pine |
+| Vehicle & controls (`veh`) | 006, 007 | `#e3e4e6` `#d3d5d9` `#a8acb2` `#ececee` · light grey, a cool graphite corner | `#0a0b0c` `#1b1c1f` `#28323f` `#0f1012` · steel (warm turns brown at night) |
+| Information & layout (`inf`) | 004, 005 | `#dfe1f0` `#c2c7f5` `#8ea3dc` `#e5d5ef` · periwinkle, lilac | `#0a0a0f` `#1c1d28` `#30357a` `#0f1016` · indigo |
 
 When a new entry doesn't fit a context, map it to the closest one in `CTX`. Don't add a sixth context until at least 3 entries need it.
 
@@ -43,3 +43,7 @@ When a new entry doesn't fit a context, map it to the closest one in `CTX`. Don'
 - Read "300 m" at thumbnail size (about 350 px wide) without squinting, in both themes.
 - The component is the brightest thing in a light cover, and a step lighter than the background in a dark cover.
 - Put all five side by side: they should look like one set.
+
+## Framing on the home grid
+
+Covers frame for reading, not completeness. A component whose body text would drop below about 11 px on a 350 px home card gets a tighter cover canvas (`cv.W` in `CMP`): settings cards 900, nav panels 700. Tall components start at the top (`cv.top`) and run off the bottom edge. The sheet keeps the full fit; the open/close flight scales the component between the two framings (`coverPose`), so nothing jumps when it lands.

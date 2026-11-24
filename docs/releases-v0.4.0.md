@@ -1,23 +1,24 @@
-Four settings components join Dashnote: 015–018. The turn-by-turn entry is now the panel alone.
+Dashnote is trimmed to what's confirmed: seven entries, sorted by where they live in the car.
 
-**New entries**
-- 015 App list: a row opens its app; one trash icon is the only button. Filled app icons, one colour each.
-- 016 Update settings: two 108 px rows, a label, its line and its control. No divider.
-- 017 Opening tiles: Frunk, Trunk and Charge port as tiles, from the library settings page.
-- 018 Locks: the child lock as a flat four-way control and three 108 px switch rows.
+**Entries**
+- 001 Turn-by-turn panel: now the panel alone, without the trip summary bar.
+- 002 Route selection, 003 Place details (were 013, 014).
+- 004 App list: a row opens its app; one trash icon is the only button.
+- 005 Update settings: two 108 px rows, a label, its line and its control, no divider.
+- 006 Opening tiles: Frunk, Trunk and Charge port as 72 px-icon tiles.
+- 007 Locks: the child lock as a flat four-way control and three 108 px switch rows.
 
-Each Before is the first answer from a clean, tool-less session to an ask that fixes the content, so Before and After show the same things and only the design differs (`tests/0NN/`). Light and dark use the file's modes. Canvases are sized per component so wide components don't sit small on the cover.
+The old placeholder entries (the earlier 002–012 scenes) are gone; everything after 007 is "Coming soon". Befores for 004–007 come from clean, tool-less sessions given an ask that fixes the content, so only the design differs (`tests/0NN/`).
 
-**Changes**
-- Cards use 24 px top and bottom padding (the library `list-card` too), so the outer edge matches the row rhythm.
-- Cover palettes: one family of neighbouring hues per context, each in its own part of the wheel (navigation sky–teal, climate mint–sage, vehicle light grey, media coral–rose, information periwinkle–lilac). See `docs/08-cover-backgrounds.md`.
-- 001 shows only the turn-by-turn panel; the trip summary bar and its prompt lines are gone.
-- Devices is parked (Before kept in `tests/_parked/devices/`) while the selected style is decided. The earlier 015–024 plan is archived in `tests/_archive-plan-015-024/`.
+**Home**
+- Sidebar: All entries, Navigation, Settings; Media, Climate, Driving assist and Voice & AI are marked Soon.
+- Covers are framed for reading: wide and tall components get a tighter canvas so their text is legible on the card; the sheet keeps the full view and the flight scales between the two.
+- Cover palettes: one family of neighbouring hues per context (navigation sky–teal, settings periwinkle–lilac and light grey). Dark covers stay darker than the dark card.
+- Open/close is smoother: the page blur moved to the veil (backdrop-filter), and the flight no longer animates filters or layout.
 
 **Figma**
-- New filled icons built from the library's own line icons: `nav/navigation_filled`, `general/layers_filled`, `media/radio_filled`, `part/phone_filled`.
-- `general/delete` redrawn as one path at the 24 px ink size, so the lid and body no longer overlap.
-- Settings page: Locks switch rows show their subtitle and are 108 px.
+- Cards: 24 px top and bottom padding (library `list-card` too); switch rows 108 px with their line.
+- New filled icons built from the library's line icons: `nav/navigation_filled`, `general/layers_filled`, `media/radio_filled`, `part/phone_filled`. `general/delete` redrawn as one path.
 
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
