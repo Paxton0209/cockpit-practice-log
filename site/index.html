@@ -470,7 +470,6 @@ body.dim .shell{filter:blur(4px)}
 .cr em{padding-left:20px}
 .cr b{margin-top:10px;font-size:14px;line-height:20px;font-weight:500;color:var(--ink)}
 .cr em{margin-top:2px;font-style:normal;font-size:13px;line-height:18px;color:var(--t2)}
-.cr:hover{background:var(--fill2)}
 @media(max-width:620px){.cmpt{grid-template-columns:1fr}}
 .chip{flex:1;min-width:0;font-size:12px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pfoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px 16px 38px;font-size:12px;line-height:16px;color:var(--t3)}
@@ -816,7 +815,6 @@ function wireSheet(){
   const set=v=>{$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v===v));sg._place&&sg._place(true);morph(st,v)};
   seg(sg,b=>{morph(st,b.dataset.v);mem.set('v',b.dataset.v)});
   if(mem.get('v')==='b'){morph(st,'b',true);$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'))}
-  {const t=$('#cmpt');if(t){let back=null;$$('.cr',t).forEach(r=>r.addEventListener('mouseenter',()=>{if(back===null)back=st.dataset.v;set('b')}));t.addEventListener('mouseleave',()=>{if(back!==null){set(back);back=null}})}}
   $('#dClose').onclick=()=>go('home');
   $$('[data-copy]').forEach(b=>b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();copyPrompt(b,b.dataset.copy==='svg'?CMP[ENTRIES[curN-1].s].svg:$('.ptxt').textContent)});
   $$('.pclamp').forEach(c=>{const f=()=>c.classList.toggle('end',c.scrollTop+c.clientHeight>=c.scrollHeight-2);c.addEventListener('scroll',f,{passive:true});new ResizeObserver(f).observe(c)});
