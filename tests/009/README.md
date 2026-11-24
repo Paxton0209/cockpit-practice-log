@@ -8,4 +8,4 @@
 
 The ask fixes the content and the size, so Before and After are the same box and only the design differs. Kept as returned; on the site the Google Fonts @import is dropped.
 
-The After follows the Figma file UI/UX Library (light and dark variables).
+The After follows the Figma file UI/UX Library (light and dark variables); the Figma component was updated to the same metrics.
