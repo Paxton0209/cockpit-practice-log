@@ -397,7 +397,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 [data-theme=dark] .cov .kp:not(.is-b) .st{--fg:#fff;--mfg:rgba(255,255,255,.6);--card:#262628;--edge:rgba(255,255,255,.08);--tile:rgba(255,255,255,.05);--ctl:rgba(255,255,255,.09);--pri:#0c6fd2;--pri-e:#0a84ff;--sh:rgba(0,0,0,.3);--hl:rgba(255,255,255,.08);--ok:#32d74b;--acc:#0a84ff;--warn:#ffb340;--sel:rgba(255,255,255,.14);--off:rgba(255,255,255,.4);--sh2:rgba(0,0,0,.3)}
 .st *{box-sizing:border-box;margin:0}.st svg{display:block;flex:none}
 .st .lh{height:55px;padding-top:12px;font-size:24px;line-height:32px;color:var(--mfg)}.st .lh.s{height:32px;padding-top:0}
-.st .card{display:flex;flex-direction:column;padding:24px 8px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 2px var(--edge),inset 0 1px 0 var(--hl),0 1px 2px var(--sh);overflow:hidden}
+.st .card{display:flex;flex-direction:column;gap:0;padding:24px 8px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 2px var(--edge),inset 0 1px 0 var(--hl),0 1px 2px var(--sh);overflow:hidden}
 .st .rw{height:108px;display:flex;align-items:center;gap:20px;padding:0 32px}
 .st .ai{width:68px;height:68px;border-radius:16px;background:var(--tile);display:grid;place-items:center}
 .st .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
@@ -670,6 +670,14 @@ body.lock{overflow:hidden}
 .st.sr .sr-i{width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:var(--mfg)}
 .st.sr .sr-t{flex:1;display:flex;flex-direction:column;gap:4px}.st.sr .sr-m{display:flex;gap:16px;font-size:24px;line-height:32px}.st.sr .sr-m span{color:var(--mfg)}
 .st.sr .sr-a{display:flex;margin-top:4px}.st.sr .sr-a svg{width:68px;height:68px}
+
+/* presence: the hairline and card shadow from the library, plus a soft ambient layer that survives the stage scaling the component to ~50% */
+.st,.nv{--amb:rgba(15,23,41,.08)}
+[data-theme=dark] .cov .kp:not(.is-b) .st,[data-theme=dark] .cov .kp:not(.is-b) .nv{--amb:rgba(0,0,0,.45)}
+.st .card,.st .tl,.st .tb,.st.sr{box-shadow:inset 0 0 0 2px var(--edge),inset 0 1px 0 var(--hl),0 2px 4px var(--sh),0 16px 40px var(--amb)}
+.st.dg{box-shadow:inset 0 0 0 2px var(--glass),0 2px 4px var(--sh),0 24px 56px var(--amb)}
+.st.kb{box-shadow:inset 0 0 0 2px var(--glass),0 16px 40px var(--amb)}
+.nv{box-shadow:inset 0 0 0 2px var(--edge),0 2px 4px var(--sh),0 16px 40px var(--amb)}
 </style>
 </head>
 <body>
@@ -853,7 +861,7 @@ const TRIPBAR_B=`<div class="trip-bar" role="region" aria-label="Trip summary">
   </button>
 </div>`;
 const CMP={
-D:{W:1245,H:698,cv:{W:900,top:0},name:'Confirm dialog',cover:1,ask:'Design a confirmation dialog for a car screen, 672 × 320 px, light theme. Content, exactly: a close button, the title “Dialog title”, the line “One or two lines that explain what happens next.”, and two actions, Confirm and Cancel. Nothing else.',wrong:[['Close in the corner','A left-aligned phone sheet.'],['Body at 24 px','The line under the title reads small.'],['80 px buttons','Taller and rounder than the library.']],notes:[['Centred column','Close on the left, title and line centred.'],['Line at 28/36','Two lines at 65% under a 32 px title.'],['68 px buttons','Two equal halves, 16 px apart, radius 16.']],
+D:{W:960,H:538,cv:{W:900,top:0},name:'Confirm dialog',cover:1,ask:'Design a confirmation dialog for a car screen, 672 × 320 px, light theme. Content, exactly: a close button, the title “Dialog title”, the line “One or two lines that explain what happens next.”, and two actions, Confirm and Cancel. Nothing else.',wrong:[['Close in the corner','A left-aligned phone sheet.'],['Body at 24 px','The line under the title reads small.'],['80 px buttons','Taller and rounder than the library.']],notes:[['Centred column','Close on the left, title and line centred.'],['Line at 28/36','Two lines at 65% under a 32 px title.'],['68 px buttons','Two equal halves, 16 px apart, radius 16.']],
   html:()=>`<div class="st dg"><span class="dg-x">${IC.xClose}</span><p class="dg-t">Dialog title</p><p class="dg-b">One or two lines that explain what happens next.</p><div class="dg-a"><i class="dg-p">Confirm</i><i>Cancel</i></div></div>`,
   before:()=>`<div class="cd-root" role="dialog" aria-modal="true" aria-labelledby="cd-title" aria-describedby="cd-desc">
   <style>
@@ -1120,7 +1128,7 @@ K:{W:1600,H:897,cv:{W:1260,top:0},name:'Search keyboard',cover:1,ask:'Design an 
     Search
   </button>
 </div>`},
-S:{W:1245,H:698,cv:{W:700,top:0},name:'Result row',cover:1,ask:'Design a search result row for a car navigation screen, 566 × 116 px, light theme. Content, exactly: the result number 1, the place “Robo Base”, its distance “3.3 km” and address “Yecheng Rd, Jiading”, a button to add it as a stop and a button to go there. Nothing else.',wrong:[['Meta at 17 px','Distance and address become fine print.'],['A filled blue Go','Every row in the list gets a loud button.'],['Index in a badge','An 18 px number in a grey circle.']],notes:[['Meta at 24 px','Distance at 100%, address at 65%.'],['Two 68 px icons','Add stop and Go, no fills.'],['Index at 28 px','The name’s size, at 65%.']],
+S:{W:810,H:454,cv:{W:700,top:0},name:'Result row',cover:1,ask:'Design a search result row for a car navigation screen, 566 × 116 px, light theme. Content, exactly: the result number 1, the place “Robo Base”, its distance “3.3 km” and address “Yecheng Rd, Jiading”, a button to add it as a stop and a button to go there. Nothing else.',wrong:[['Meta at 17 px','Distance and address become fine print.'],['A filled blue Go','Every row in the list gets a loud button.'],['Index in a badge','An 18 px number in a grey circle.']],notes:[['Meta at 24 px','Distance at 100%, address at 65%.'],['Two 68 px icons','Add stop and Go, no fills.'],['Index at 28 px','The name’s size, at 65%.']],
   html:()=>`<div class="st sr"><span class="sr-i">1</span><span class="sr-t">Robo Base<span class="sr-m">3.3 km<span>Yecheng Rd, Jiading</span></span></span><span class="sr-a">${IC.pinAdd}${IC.goTurn}</span></div>`,
   before:()=>`<div class="nav-result" role="listitem">
   <style>
@@ -1163,7 +1171,7 @@ S:{W:1245,H:698,cv:{W:700,top:0},name:'Result row',cover:1,ask:'Design a search 
     </button>
   </div>
 </div>`},
-O:{W:1245,H:698,cv:{W:900,top:0},name:'Opening tiles',cover:1,ask:'Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 156 px, light theme. Content, exactly: three controls, Frunk, Trunk and Charge port, each with its icon. No title. Nothing else.',wrong:[['Icons in grey circles','A 60 px well around every icon.'],['Labels at 16 px','Semibold, under 34 px icons.'],['Strokes at 1.8 px','Thinner than the library’s 2 px line.']],notes:[['Icons straight on tile','No well. The tile itself is the button.'],['Labels at 24 px','Centred under the icon in a 156 px tile.'],['72 px icons, 3 px line','The library icons, at tile size.']],
+O:{W:1104,H:619,cv:{W:900,top:0},name:'Opening tiles',cover:1,ask:'Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 156 px, light theme. Content, exactly: three controls, Frunk, Trunk and Charge port, each with its icon. No title. Nothing else.',wrong:[['Icons in grey circles','A 60 px well around every icon.'],['Labels at 16 px','Semibold, under 34 px icons.'],['Strokes at 1.8 px','Thinner than the library’s 2 px line.']],notes:[['Icons straight on tile','No well. The tile itself is the button.'],['Labels at 24 px','Centred under the icon in a 156 px tile.'],['72 px icons, 3 px line','The library icons, at tile size.']],
   html:()=>`<div class="st"><div class="tg"><div class="tb">${IC.hood}Frunk</div><div class="tb">${IC.trunk}Trunk</div><div class="tb">${IC.port}Charge port</div></div></div>`,
   before:()=>`<div class="vc-access">
   <style>
@@ -1237,7 +1245,7 @@ O:{W:1245,H:698,cv:{W:900,top:0},name:'Opening tiles',cover:1,ask:'Design contro
     <span class="lbl">Charge port</span>
   </button>
 </div>`},
-L:{W:1363,H:765,cv:{W:900,top:1},name:'Locks',cover:1,ask:'Design a locks settings card for a car settings screen, 772 × 520 px, light theme. Content, exactly: “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). No title. Nothing else.',wrong:[['Labels at 20 px semibold','16 px lines under them.'],['Options in 18 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines under the child lock and between switches.']],notes:[['Labels at 28 px','Lines at 24 px and 65%.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
+L:{W:1190,H:667,cv:{W:900,top:1},name:'Locks',cover:1,ask:'Design a locks settings card for a car settings screen, 772 × 520 px, light theme. Content, exactly: “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). No title. Nothing else.',wrong:[['Labels at 20 px semibold','16 px lines under them.'],['Options in 18 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines under the child lock and between switches.']],notes:[['Labels at 28 px','Lines at 24 px and 65%.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
   html:()=>`<div class="st"><div class="card"><div class="ch">Child lock<div class="seg"><i>Off</i><i>Left</i><i>Right</i><i class="on">Both</i></div></div><div class="rw"><span class="tx">Window lock<span class="m">Disable rear window switches</span></span><i class="sw off"></i></div><div class="rw"><span class="tx">Walk-away lock<span class="m">Lock when your phone key leaves</span></span><i class="sw"></i></div><div class="rw"><span class="tx">Unlock on park<span class="m">Unlock all doors in Park</span></span><i class="sw"></i></div></div></div>`,
   before:()=>`<div class="lk-card">
 <style>
@@ -1281,7 +1289,7 @@ L:{W:1363,H:765,cv:{W:900,top:1},name:'Locks',cover:1,ask:'Design a locks settin
     </div>
   </div>
 </div>`},
-M:{W:1258,H:706,cv:{W:900,top:1},name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 480 px, light theme. Content, exactly: four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. No title. Nothing else.',wrong:[['Two buttons a row','A black Open and a red Uninstall on all four rows.'],['Names set in 22 px','Semibold, beside 60 px gradient tiles.'],['Gradient icon tiles','Green, blue, orange and purple gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','One line per app in a 108 px row.'],['Colour only in the icon','Filled icons on a soft grey tile.']],
+M:{W:1104,H:619,cv:{W:900,top:1},name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 480 px, light theme. Content, exactly: four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. No title. Nothing else.',wrong:[['Two buttons a row','A black Open and a red Uninstall on all four rows.'],['Names set in 22 px','Semibold, beside 60 px gradient tiles.'],['Gradient icon tiles','Green, blue, orange and purple gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','One line per app in a 108 px row.'],['Colour only in the icon','Filled icons on a soft grey tile.']],
   html:()=>`<div class="st"><div class="card"><div class="rw"><span class="ai">${IC.phoneF}</span><span class="tx">Phone</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.maps}</span><span class="tx">Maps</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.layers}</span><span class="tx">Task master</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.radio}</span><span class="tx">FM</span><span class="ib">${IC.trash}</span></div></div></div>`,
   before:()=>`<div class="apps-root">
 <style>
@@ -1329,7 +1337,7 @@ M:{W:1258,H:706,cv:{W:900,top:1},name:'App list',cover:1,ask:'Design an installe
   <div class="actions"><button class="open" aria-label="Open FM">Open</button><button class="uninstall" aria-label="Uninstall FM">Uninstall</button></div>
 </div>
 </div>`},
-U:{W:1245,H:698,cv:{W:900,top:0},name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26, lines at 19','The lines under them in a thinner, lighter grey.'],['Switch at 76 × 44','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28, lines at 24','Both Medium; the line at 65% of the text colour.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 24 px.']],
+U:{W:1104,H:619,cv:{W:900,top:0},name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26, lines at 19','The lines under them in a thinner, lighter grey.'],['Switch at 76 × 44','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28, lines at 24','Both Medium; the line at 65% of the text colour.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 24 px.']],
   html:()=>`<div class="st"><div class="card"><div class="rw"><span class="tx">Auto-update<span class="m">Installs new versions in the background</span></span><i class="sw"></i></div><div class="rw"><span class="tx">User agreements<span class="m">Terms of service and privacy policy</span></span><span class="cv">${IC.chevR}</span></div></div></div>`,
   before:()=>`<div class="aus-card">
   <style>
@@ -1388,7 +1396,7 @@ U:{W:1245,H:698,cv:{W:900,top:0},name:'Update settings',cover:1,ask:'Design an a
     </span>
   </button>
 </div>`},
-R:{W:1640,H:920,cv:{W:700,top:1},cw:560,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word per difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
+R:{W:1445,H:810,cv:{W:700,top:1},cw:560,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word per difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
   html:()=>`<div class="nv rs"><div class="hd"><span class="back">${IC.back}</span><b>Robo Base</b></div>${ROUTE('18 min','',1)}${ROUTE('21 min','No tolls')}${ROUTE('24 min','Fewer turns')}<div class="act"><span class="btn p">Start route</span><span class="btn s">Preferences</span></div></div>`,
   before:()=>`<div class="rsp">
   <style>
@@ -1548,7 +1556,7 @@ R:{W:1640,H:920,cv:{W:700,top:1},cw:560,name:'Route selection',cover:1,ask:'Desi
     </button>
   </div>
 </div>`},
-P:{W:1640,H:920,cv:{W:700,top:1},cw:560,name:'Place details',cover:1,ask:'Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.',wrong:[['Reviews before the road','Stars, review count and a charger table come before how far it is.'],['Status in four colours','Green, amber and red pills, slot bars and a battery glyph.'],['Three button styles','A blue button with a shadow, plus two outlined squares.']],notes:[['The drive comes first','3.3 km, 12 min and arrival charge, in one box under the name.'],['Facts as quiet chips','Charger power and entrances are neutral chips. Only “Preferred” is blue.'],['One primary action','Directions spans the panel. Call and save sit as icons in the header.']],
+P:{W:1512,H:848,cv:{W:700,top:1},cw:560,name:'Place details',cover:1,ask:'Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.',wrong:[['Reviews before the road','Stars, review count and a charger table come before how far it is.'],['Status in four colours','Green, amber and red pills, slot bars and a battery glyph.'],['Three button styles','A blue button with a shadow, plus two outlined squares.']],notes:[['The drive comes first','3.3 km, 12 min and arrival charge, in one box under the name.'],['Facts as quiet chips','Charger power and entrances are neutral chips. Only “Preferred” is blue.'],['One primary action','Directions spans the panel. Call and save sit as icons in the header.']],
   html:()=>`<div class="nv pl"><div class="hd"><span class="back">${IC.back}</span><span class="ic">${IC.phone}${IC.bookmark}</span></div><div class="inf"><div class="nm"><b>Robo Base</b><span class="m">Yecheng Rd, Jiading</span></div><div class="tags"><i class="in">Preferred</i><i>PPA</i><i>120 kW</i></div></div><div class="rp"><span class="d">${IC.turn}3.3 km, 12 min</span><span class="m">Arrival 46%</span></div><div class="sub"><div><i>Parking</i><i>North gate</i><i>East gate</i></div><div><i>South gate</i><i>Entrance B</i><i>Drop-off</i></div></div><div class="hr">${IC.clock}<div><span>Open, 12:00–24:00</span><span class="m">Mon–Fri 08:00–22:00, Sat 08:00–22:00</span></div></div><div class="act"><span class="btn p">Directions</span></div></div>`,
   before:()=>`<div class="pd-root" role="dialog" aria-labelledby="pd-title">
 <style>
@@ -1670,7 +1678,7 @@ P:{W:1640,H:920,cv:{W:700,top:1},cw:560,name:'Place details',cover:1,ask:'Design
     </button>
   </div>
 </div>`},
-T:{W:760,H:420,name:'Turn-by-turn panel',cover:1,ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Blue tile steals the eye','A 100 px blue tile is the loudest thing on the panel.'],['Distance at only 44 px','44 px for the one number read at a glance.'],['Caps and filler add noise','“onto”, all-caps labels, a strip inside the card.']],notes:[['Icon steps back','Plain black icon, no tile. The distance leads.'],['Distance at 48 px','Unit on the same baseline, street lined up under it.'],['Only the facts','No extra words or caps. Two bands, a hairline and a soft shadow.']],
+T:{W:706,H:396,name:'Turn-by-turn panel',cover:1,ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Blue tile steals the eye','A 100 px blue tile is the loudest thing on the panel.'],['Distance at only 44 px','44 px for the one number read at a glance.'],['Caps and filler add noise','“onto”, all-caps labels, a strip inside the card.']],notes:[['Icon steps back','Plain black icon, no tile. The distance leads.'],['Distance at 48 px','Unit on the same baseline, street lined up under it.'],['Only the facts','No extra words or caps. Two bands, a hairline and a soft shadow.']],
   html:(v)=>`<div class="tstack"><div class="tw"><div class="t1">
   <div class="mn"><span class="mv">${FIG_TURN}</span>
   <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
@@ -1877,7 +1885,7 @@ function coverPose(stage,from,to){
   const C=CMP[e.s],r=C.W/v.W,ch=root.offsetHeight,dy=v.top?r*(v.P+ch/2)-C.H/2:0;
   const a=lensSpring(root,from,to,x=>{const t=1-Math.max(0,Math.min(1,x[7]));return {transform:`translateY(${dy*t}px) scale(${1+(r-1)*t})`}});
   /* the cover fades its cropped bottom edge; grow the same fade on the way down so the landing doesn't pop */
-  if(v.top){const kp=root.parentElement,m=x=>{const f=96*(1-Math.max(0,Math.min(1,x[7])));const g=`linear-gradient(#000 calc(100% - ${f}px),${f>1?'transparent':'#000'})`;return {maskImage:g,webkitMaskImage:g}};
+  if(v.top){const kp=root.parentElement,m=x=>{const f=96*r*(1-Math.max(0,Math.min(1,x[7])));const g=`linear-gradient(#000 calc(100% - ${f}px),${f>1?'transparent':'#000'})`;return {maskImage:g,webkitMaskImage:g}};
     const b=lensSpring(kp,from,to,m);a.startTime=document.timeline.currentTime;b.startTime=a.startTime}
   return a;
 }
