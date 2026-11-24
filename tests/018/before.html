@@ -1,0 +1,199 @@
+<div class="seat-climate" aria-label="Seat climate controls">
+  <style>
+    .seat-climate, .seat-climate * { box-sizing: border-box; }
+    .seat-climate {
+      width: 772px;
+      height: 200px;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      padding: 12px;
+      background: #eef1f5;
+      color: #182231;
+      font-family: Inter, system-ui, sans-serif;
+      color-scheme: light;
+    }
+    .seat-climate .seat {
+      position: relative;
+      min-inline-size: 0;
+      margin: 0;
+      padding: 48px 12px 12px;
+      border: 1px solid #d9e0e8;
+      border-radius: 16px;
+      background: #fff;
+    }
+    .seat-climate legend {
+      position: absolute;
+      top: 13px;
+      left: 15px;
+      padding: 0;
+      font-size: 18px;
+      font-weight: 650;
+      line-height: 26px;
+      letter-spacing: -.02em;
+    }
+    .seat-climate .options {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      height: 100%;
+    }
+    .seat-climate .mode {
+      --accent: #963912;
+      --surface: #fff3eb;
+      --selected: #963912;
+      display: grid;
+      grid-template-rows: auto 48px;
+      align-content: space-between;
+      gap: 6px;
+      padding: 9px 8px 8px;
+      border-radius: 11px;
+      background: var(--surface);
+      color: var(--accent);
+    }
+    .seat-climate .vent {
+      --accent: #185c91;
+      --surface: #edf6ff;
+      --selected: #185c91;
+    }
+    .seat-climate .mode-title {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-left: 2px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .seat-climate svg {
+      width: 17px;
+      height: 17px;
+      flex: none;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .seat-climate .levels {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 4px;
+    }
+    .seat-climate label {
+      position: relative;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .seat-climate input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: 0;
+      opacity: 0;
+    }
+    .seat-climate label span {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      background: #fff;
+      color: var(--accent);
+      font-size: 16px;
+      font-weight: 650;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .seat-climate input:checked + span {
+      background: var(--selected);
+      color: #fff;
+    }
+    .seat-climate input:focus-visible + span {
+      outline: 2px solid #182231;
+      outline-offset: 2px;
+    }
+    .seat-climate .off {
+      --accent: #4a5666;
+      --selected: #273547;
+      position: absolute;
+      top: 2px;
+      right: 11px;
+      width: 60px;
+      height: 44px;
+    }
+    .seat-climate .off span {
+      height: 29px;
+      border-color: #d9e0e8;
+      border-radius: 20px;
+      font-size: 13px;
+    }
+    .seat-climate .off input:checked + span { border-color: var(--selected); }
+  </style>
+
+  <fieldset class="seat">
+    <legend>Driver</legend>
+    <label class="off">
+      <input type="radio" name="seat-climate-driver" value="off" aria-label="Off" checked>
+      <span aria-hidden="true">Off</span>
+    </label>
+    <div class="options">
+      <div class="mode">
+        <div class="mode-title">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16c-4-4 4-6 0-12m6 12c-4-4 4-6 0-12m6 12c-4-4 4-6 0-12"/></svg>
+          Heating
+        </div>
+        <div class="levels">
+          <label><input type="radio" name="seat-climate-driver" value="heat-1" aria-label="Heating level 1"><span aria-hidden="true">1</span></label>
+          <label><input type="radio" name="seat-climate-driver" value="heat-2" aria-label="Heating level 2"><span aria-hidden="true">2</span></label>
+          <label><input type="radio" name="seat-climate-driver" value="heat-3" aria-label="Heating level 3"><span aria-hidden="true">3</span></label>
+        </div>
+      </div>
+      <div class="mode vent">
+        <div class="mode-title">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 6H13a2 2 0 1 0-2-2M2.5 10h14a2 2 0 1 1-2 2m-12 2H9a2 2 0 1 1-2 2"/></svg>
+          Ventilation
+        </div>
+        <div class="levels">
+          <label><input type="radio" name="seat-climate-driver" value="vent-1" aria-label="Ventilation level 1"><span aria-hidden="true">1</span></label>
+          <label><input type="radio" name="seat-climate-driver" value="vent-2" aria-label="Ventilation level 2"><span aria-hidden="true">2</span></label>
+          <label><input type="radio" name="seat-climate-driver" value="vent-3" aria-label="Ventilation level 3"><span aria-hidden="true">3</span></label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+
+  <fieldset class="seat">
+    <legend>Passenger</legend>
+    <label class="off">
+      <input type="radio" name="seat-climate-passenger" value="off" aria-label="Off" checked>
+      <span aria-hidden="true">Off</span>
+    </label>
+    <div class="options">
+      <div class="mode">
+        <div class="mode-title">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 16c-4-4 4-6 0-12m6 12c-4-4 4-6 0-12m6 12c-4-4 4-6 0-12"/></svg>
+          Heating
+        </div>
+        <div class="levels">
+          <label><input type="radio" name="seat-climate-passenger" value="heat-1" aria-label="Heating level 1"><span aria-hidden="true">1</span></label>
+          <label><input type="radio" name="seat-climate-passenger" value="heat-2" aria-label="Heating level 2"><span aria-hidden="true">2</span></label>
+          <label><input type="radio" name="seat-climate-passenger" value="heat-3" aria-label="Heating level 3"><span aria-hidden="true">3</span></label>
+        </div>
+      </div>
+      <div class="mode vent">
+        <div class="mode-title">
+          <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 6H13a2 2 0 1 0-2-2M2.5 10h14a2 2 0 1 1-2 2m-12 2H9a2 2 0 1 1-2 2"/></svg>
+          Ventilation
+        </div>
+        <div class="levels">
+          <label><input type="radio" name="seat-climate-passenger" value="vent-1" aria-label="Ventilation level 1"><span aria-hidden="true">1</span></label>
+          <label><input type="radio" name="seat-climate-passenger" value="vent-2" aria-label="Ventilation level 2"><span aria-hidden="true">2</span></label>
+          <label><input type="radio" name="seat-climate-passenger" value="vent-3" aria-label="Ventilation level 3"><span aria-hidden="true">3</span></label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</div>
