@@ -1,0 +1,240 @@
+<div class="park-picker" lang="en" aria-label="Automatic parking spot picker">
+  <style>
+    .park-picker, .park-picker * { box-sizing: border-box; }
+    .park-picker {
+      width: 560px;
+      height: 520px;
+      display: grid;
+      grid-template-rows: 68px 1fr 102px;
+      overflow: hidden;
+      border: 1px solid #dce1e5;
+      border-radius: 22px;
+      background: #f9fafb;
+      color: #18232b;
+      font: 500 14px/1.4 Inter, system-ui, sans-serif;
+      position: relative;
+    }
+    .park-picker button { font: inherit; }
+    .park-picker header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 0 24px;
+      background: #fff;
+      border-bottom: 1px solid #e4e8eb;
+    }
+    .park-picker .park-icon {
+      display: grid;
+      place-items: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: #e1eee9;
+      color: #115541;
+      font-size: 20px;
+      font-weight: 750;
+    }
+    .park-picker h1 { margin: 0; font-size: 21px; letter-spacing: -.55px; }
+    .park-picker .park-speed {
+      margin-left: auto;
+      font-size: 13px;
+      color: #495962;
+      font-variant-numeric: tabular-nums;
+    }
+    .park-picker .park-speed strong { color: #18232b; font-size: 19px; }
+    .park-picker .park-content { padding: 19px 24px 16px; min-height: 0; }
+    .park-picker .park-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 0 0 12px;
+    }
+    .park-picker h2 { margin: 0; font-size: 20px; letter-spacing: -.5px; }
+    .park-picker .park-count { color: #43545e; font-size: 13px; }
+    .park-picker .park-map {
+      position: relative;
+      height: 268px;
+      overflow: hidden;
+      isolation: isolate;
+      border: 1px solid #d9e0e3;
+      border-radius: 15px;
+      background: #e9edef;
+    }
+    .park-picker .park-plan { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .park-picker input {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      opacity: 0;
+      margin: 0;
+    }
+    .park-picker .park-bay {
+      position: absolute;
+      top: 13%;
+      width: 14.8%;
+      height: 37%;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 5px;
+      border: 1.5px solid #78968a;
+      border-radius: 9px;
+      background: #f4fbf7;
+      color: #115541;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 720;
+      touch-action: manipulation;
+    }
+    .park-picker .park-bay-a { left: 26.3%; }
+    .park-picker .park-bay-b { left: 59.1%; }
+    .park-picker .park-check {
+      display: grid;
+      place-items: center;
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid #78968a;
+      border-radius: 50%;
+      font-size: 14px;
+      color: transparent;
+    }
+    .park-picker input:checked + .park-bay {
+      border: 2px solid #146047;
+      background: #d8f1e4;
+    }
+    .park-picker input:checked + .park-bay .park-check {
+      color: #fff;
+      border-color: #146047;
+      background: #146047;
+    }
+    .park-picker input:focus-visible + .park-bay,
+    .park-picker button:focus-visible { outline: 3px solid #0067ae; outline-offset: 3px; }
+    .park-picker .park-location {
+      position: absolute;
+      left: 14px;
+      bottom: 13px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #364750;
+      font-size: 12px;
+    }
+    .park-picker .park-location::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #314f64;
+    }
+    .park-picker footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid #e4e8eb;
+      background: #fff;
+      padding: 0 24px;
+    }
+    .park-picker .park-detail strong { display: block; font-size: 17px; }
+    .park-picker .park-detail span { display: block; margin-top: 4px; color: #495962; font-size: 13px; }
+    .park-picker button {
+      border: 0;
+      border-radius: 11px;
+      min-height: 52px;
+      padding: 0 19px;
+      background: #145742;
+      color: white;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      touch-action: manipulation;
+    }
+    .park-picker button:active { background: #0c4332; }
+    .park-picker .park-action { display: flex; align-items: center; gap: 13px; }
+    .park-picker .park-secondary { background: #e1eee9; color: #115541; }
+    .park-picker .park-secondary:active { background: #cfe4da; }
+    .park-picker .park-dialog {
+      width: 362px;
+      border: 1px solid #d9e0e3;
+      border-radius: 16px;
+      padding: 22px;
+      color: #18232b;
+      background: #fff;
+    }
+    .park-picker .park-dialog::backdrop { background: #18232b55; }
+    .park-picker .park-dialog p { margin: 8px 0 20px; color: #495962; }
+    .park-picker .park-dialog form { display: flex; justify-content: flex-end; }
+  </style>
+
+  <header>
+    <span class="park-icon" aria-hidden="true">P</span>
+    <h1>Automatic parking</h1>
+    <span class="park-speed"><strong>0</strong> km/h</span>
+  </header>
+
+  <section class="park-content" aria-label="Parking map">
+    <div class="park-heading">
+      <h2>Choose a parking spot</h2>
+      <span class="park-count">2 spots available</span>
+    </div>
+
+    <div class="park-map" role="radiogroup" aria-label="Available parking spots"
+      onchange="this.closest('.park-picker').querySelector('[data-selected]').textContent = 'Spot ' + event.target.value + ' selected'">
+      <svg class="park-plan" viewBox="0 0 510 268" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#e0e6e8" d="M0 0h510v142H0z"/>
+        <path fill="none" stroke="#fafcfd" stroke-width="3" d="M34 142V26H476V142M50 142V26m83 116V26m83 116V26m83 116V26m83 116V26m83 116V26"/>
+        <path fill="none" stroke="#c5ced3" stroke-width="1" d="M0 145h510"/>
+        <path fill="none" stroke="#ccd5d9" stroke-width="2" stroke-dasharray="13 11" d="M0 194h510"/>
+        <g fill="#a8b6be" stroke="#e0e6e8" stroke-width="2">
+          <rect x="70" y="43" width="43" height="87" rx="13"/>
+          <rect x="236" y="43" width="43" height="87" rx="13"/>
+          <rect x="402" y="43" width="43" height="87" rx="13"/>
+        </g>
+        <g fill="#758892">
+          <path id="park-picker-glass" d="M77 68q14-8 29 0l2 12q-16-5-33 0zm-2 38q16 5 33 0l-2 9q-14 6-29 0z"/>
+          <path d="M243 68q14-8 29 0l2 12q-16-5-33 0zm-2 38q16 5 33 0l-2 9q-14 6-29 0z"/>
+          <path d="M409 68q14-8 29 0l2 12q-16-5-33 0zm-2 38q16 5 33 0l-2 9q-14 6-29 0z"/>
+        </g>
+        <g transform="translate(256 213) rotate(90)">
+          <rect x="-25" y="-48" width="50" height="96" rx="16" fill="#ccd9e0"/>
+          <rect x="-21" y="-44" width="42" height="88" rx="13" fill="#314f64" stroke="#fff" stroke-width="2"/>
+          <path fill="#a9c2d1" d="M-14-23q14-8 28 0l2 13q-16-5-32 0zm-2 36q16 5 32 0l-2 12q-14 6-28 0z"/>
+          <path fill="#dceaf1" d="M-14-36h8v3h-8zm20 0h8v3H6z"/>
+          <path fill="#f3a6a6" d="M-14 34h8v3h-8zm20 0h8v3H6z"/>
+        </g>
+      </svg>
+
+      <input type="radio" name="park-picker-spot" id="park-picker-a" value="A" checked>
+      <label class="park-bay park-bay-a" for="park-picker-a" aria-label="Spot A">
+        <span class="park-check" aria-hidden="true">✓</span>A
+      </label>
+      <input type="radio" name="park-picker-spot" id="park-picker-b" value="B">
+      <label class="park-bay park-bay-b" for="park-picker-b" aria-label="Spot B">
+        <span class="park-check" aria-hidden="true">✓</span>B
+      </label>
+
+      <span class="park-location">Your vehicle</span>
+    </div>
+  </section>
+
+  <footer>
+    <div class="park-detail">
+      <strong data-selected aria-live="polite">Spot A selected</strong>
+      <span>Perpendicular parking</span>
+    </div>
+    <button class="park-action" type="button" onclick="this.closest('.park-picker').querySelector('dialog').showModal()">
+      Start parking
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 12h15m-6-6 6 6-6 6"/>
+      </svg>
+    </button>
+  </footer>
+
+  <dialog class="park-dialog" aria-labelledby="park-picker-dialog-title">
+    <h2 id="park-picker-dialog-title">Parking preview</h2>
+    <p>Automatic parking is unavailable in this preview.</p>
+    <form method="dialog">
+      <button class="park-secondary" autofocus>Back to spots</button>
+    </form>
+  </dialog>
+</div>
