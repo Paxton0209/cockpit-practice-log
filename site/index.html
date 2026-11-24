@@ -94,11 +94,13 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .meta{display:flex;align-items:baseline;gap:10px;min-height:24px;padding:0 2px}
 .meta b{font:400 12px/24px var(--mono);color:var(--t3)}
 .meta .ttl{font-size:15px;font-weight:500;line-height:24px}
-.thumb.cov{box-shadow:none;background:
+.thumb.cov,.hero3.cov{background:
   radial-gradient(90% 80% at 12% 8%,var(--cv1) 0%,transparent 60%),
   radial-gradient(90% 90% at 92% 100%,var(--cv2) 0%,transparent 62%),
   radial-gradient(70% 70% at 78% 12%,var(--cv3) 0%,transparent 60%),var(--cv0)}
-.thumb.cov::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:var(--grain);mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.thumb.cov,.hero3.cov{box-shadow:none}
+.hero3.cov{isolation:isolate;overflow:hidden}.hero3.cov>*{position:relative;z-index:1}.hero3.cov .cstage{z-index:1}
+.thumb.cov::after,.hero3.cov::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:var(--grain);mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .thumb.cov .cs{z-index:1;background:transparent}
 .thumb.cov .cs{position:absolute;left:50%;top:50%;width:104%;transform:translate(-50%,-50%)}
 .thumb.cov .cs .px{background:transparent}
@@ -744,7 +746,7 @@ function sheetHTML(n){
     <div class="dtop"><span class="dname">${CMP[e.s].name||e.title}<i class="mono">${pad(e.n)}</i></span><span class="act">
       
       <button class="rb xbtn" id="dClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
-    <div class="ecard"><div class="hero3">
+    <div class="ecard"><div class="hero3${CMP[e.s]&&CMP[e.s].cover?" cov":""}">
       <div class="cstage" id="cstage" data-v="a" style="height:${(CMP[e.s].H||CH)-40}px">
         ${cmp(e.s,'a')}${cmp(e.s,'b')}
       </div>
@@ -824,7 +826,6 @@ function wireSheet(){
   const st=$('#cstage'),sg=$('#seg4');
   const set=v=>{$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v===v));sg._place&&sg._place(true);morph(st,v)};
   seg(sg,b=>morph(st,b.dataset.v));
-  morph(st,'b',true);$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v==='b'));
   $('#dClose').onclick=()=>go('home');
   $$('[data-copy]').forEach(b=>b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();copyPrompt(b,b.dataset.copy==='svg'?CMP[ENTRIES[curN-1].s].svg:$('.ptxt').textContent)});
   $$('.pclamp').forEach(c=>{const f=()=>c.classList.toggle('end',c.scrollTop+c.clientHeight>=c.scrollHeight-2);c.addEventListener('scroll',f,{passive:true});new ResizeObserver(f).observe(c)});
