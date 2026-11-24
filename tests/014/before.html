@@ -1,0 +1,159 @@
+<div class="rsp">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    .rsp{
+      --ink:#0F1A2A; --ink-2:#4A5668; --ink-3:#7C8796; --line:#E3E8EF;
+      --bg:#FFFFFF; --soft:#F4F6F9; --blue:#1F6FEB; --blue-soft:#EAF2FF;
+      --green:#1E9E5A; --amber:#E39A12; --red:#D9433A;
+      width:560px; height:648px; box-sizing:border-box; padding:22px 24px 24px;
+      background:var(--bg); border-radius:28px; font-family:'Inter',system-ui,sans-serif;
+      color:var(--ink); display:flex; flex-direction:column; gap:14px;
+      box-shadow:0 1px 2px rgba(15,26,42,.06),0 12px 40px rgba(15,26,42,.12);
+      -webkit-font-smoothing:antialiased; overflow:hidden;
+    }
+    .rsp *{box-sizing:border-box;margin:0}
+    .rsp-head{display:flex;align-items:center;gap:14px;height:56px;flex:none}
+    .rsp-dest-ico{width:48px;height:48px;border-radius:14px;background:var(--blue-soft);display:grid;place-items:center;flex:none}
+    .rsp-dest{flex:1;min-width:0}
+    .rsp-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+    .rsp-title{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .rsp-title span{font-weight:500;color:var(--ink-2)}
+    .rsp-close{width:52px;height:52px;border-radius:50%;border:none;background:var(--soft);display:grid;place-items:center;cursor:pointer;flex:none}
+    .rsp-close:hover{background:#E9EDF2}
+
+    .rsp-map{position:relative;height:142px;flex:none;border-radius:18px;overflow:hidden;background:#EAEFF4}
+    .rsp-map svg{display:block}
+    .rsp-chip{position:absolute;font-size:13px;font-weight:700;padding:5px 9px;border-radius:9px;background:#fff;color:var(--ink-2);box-shadow:0 1px 3px rgba(15,26,42,.18);line-height:1}
+    .rsp-chip.on{background:var(--blue);color:#fff}
+
+    .rsp-list{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0}
+    .rsp-route{all:unset;box-sizing:border-box;flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 14px;
+      padding:12px 18px 12px 18px;border-radius:18px;border:2px solid var(--line);background:#fff;cursor:pointer;transition:border-color .15s,background .15s}
+    .rsp-route:hover{border-color:#C9D2DE}
+    .rsp-route.on{border-color:var(--blue);background:var(--blue-soft)}
+    .rsp-top{display:flex;align-items:baseline;gap:10px;min-width:0}
+    .rsp-time{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
+    .rsp-time small{font-size:16px;font-weight:600;margin-left:2px}
+    .rsp-diff{font-size:14px;font-weight:600;color:var(--ink-3)}
+    .rsp-tag{font-size:12px;font-weight:700;padding:4px 8px;border-radius:7px;line-height:1;align-self:center}
+    .rsp-tag.best{background:var(--blue);color:#fff}
+    .rsp-tag.eco{background:#E3F5EB;color:#13703F}
+    .rsp-tag.toll{background:#FFF2DC;color:#8A5A00}
+    .rsp-meta{grid-column:1;font-size:14px;color:var(--ink-2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .rsp-meta b{color:var(--ink);font-weight:600}
+    .rsp-traffic{grid-column:1;display:flex;height:5px;border-radius:3px;overflow:hidden;gap:2px}
+    .rsp-traffic i{display:block;height:100%}
+    .g{background:var(--green)} .a{background:var(--amber)} .r{background:var(--red)}
+    .rsp-side{grid-column:2;grid-row:1 / span 3;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+    .rsp-arr{font-size:13px;color:var(--ink-3);font-weight:500;text-align:right}
+    .rsp-arr b{display:block;font-size:18px;color:var(--ink);font-weight:700}
+    .rsp-radio{width:26px;height:26px;border-radius:50%;border:2px solid #C3CCD8;display:grid;place-items:center;background:#fff}
+    .rsp-route.on .rsp-radio{border-color:var(--blue);background:var(--blue)}
+
+    .rsp-foot{display:flex;gap:12px;height:64px;flex:none}
+    .rsp-go{flex:1;border:none;border-radius:18px;background:var(--blue);color:#fff;font:700 20px 'Inter',sans-serif;
+      display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 6px 16px rgba(31,111,235,.32)}
+    .rsp-go:hover{background:#1A62D1}
+    .rsp-go span{font-weight:500;opacity:.85}
+    .rsp-opt{width:64px;border:none;border-radius:18px;background:var(--soft);display:grid;place-items:center;cursor:pointer}
+    .rsp-opt:hover{background:#E9EDF2}
+  </style>
+
+  <!-- Header -->
+  <div class="rsp-head">
+    <div class="rsp-dest-ico">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1v-8.5Z" fill="#1F6FEB"/></svg>
+    </div>
+    <div class="rsp-dest">
+      <div class="rsp-eyebrow">Routes to</div>
+      <div class="rsp-title">Home <span>· 42 Linden Avenue</span></div>
+    </div>
+    <button class="rsp-close" aria-label="Close">
+      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M5 5l10 10M15 5 5 15" stroke="#4A5668" stroke-width="2.2" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+
+  <!-- Map preview -->
+  <div class="rsp-map">
+    <svg width="512" height="142" viewBox="0 0 512 142">
+      <rect width="512" height="142" fill="#EAEFF4"/>
+      <path d="M330 0c20 30 60 40 70 70s-10 50 10 72h102V0Z" fill="#D5E6F5"/>
+      <rect x="150" y="12" width="70" height="36" rx="8" fill="#DCEBDD"/>
+      <rect x="250" y="96" width="56" height="30" rx="8" fill="#DCEBDD"/>
+      <g stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round">
+        <path d="M0 70h512"/><path d="M120 0v142"/><path d="M240 0v142"/><path d="M0 30c120 0 200 20 320 10"/><path d="M0 120c160-10 300 10 512-4"/><path d="M380 0c-10 50 10 100 0 142"/>
+      </g>
+      <!-- Alternate routes -->
+      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M44 104 C90 120 160 128 240 122 S380 116 420 98 455 60 464 40" stroke="#fff" stroke-width="9"/>
+        <path d="M44 104 C90 120 160 128 240 122 S380 116 420 98 455 60 464 40" stroke="#9AA6B4" stroke-width="5"/>
+        <path d="M44 104 C60 70 90 34 150 30 S300 26 350 30 440 34 464 40" stroke="#fff" stroke-width="9"/>
+        <path d="M44 104 C60 70 90 34 150 30 S300 26 350 30 440 34 464 40" stroke="#9AA6B4" stroke-width="5"/>
+        <!-- Selected route -->
+        <path d="M44 104 C100 90 150 72 240 70 S360 72 400 62 450 48 464 40" stroke="#fff" stroke-width="11"/>
+        <path d="M44 104 C100 90 150 72 240 70 S360 72 400 62 450 48 464 40" stroke="#1F6FEB" stroke-width="7"/>
+      </g>
+      <circle cx="44" cy="104" r="9" fill="#fff"/><circle cx="44" cy="104" r="6" fill="#1F6FEB"/>
+      <path d="M464 16c-8 0-14 6-14 14 0 10 14 22 14 22s14-12 14-22c0-8-6-14-14-14Z" fill="#0F1A2A"/>
+      <circle cx="464" cy="30" r="5" fill="#fff"/>
+    </svg>
+    <div class="rsp-chip on" style="left:212px;top:44px">24 min</div>
+    <div class="rsp-chip" style="left:128px;top:6px">29 min</div>
+    <div class="rsp-chip" style="left:300px;top:100px">31 min</div>
+  </div>
+
+  <!-- Route options -->
+  <div class="rsp-list" role="radiogroup" aria-label="Route options">
+    <button class="rsp-route on" role="radio" aria-checked="true">
+      <div class="rsp-top">
+        <div class="rsp-time">24<small>min</small></div>
+        <span class="rsp-tag best">Fastest</span>
+      </div>
+      <div class="rsp-meta"><b>18.4 km</b> · via A100 &amp; Ringstraße</div>
+      <div class="rsp-traffic"><i class="g" style="flex:5"></i><i class="a" style="flex:1.4"></i><i class="g" style="flex:3"></i></div>
+      <div class="rsp-side">
+        <div class="rsp-arr">Arrive<b>18:42</b></div>
+        <div class="rsp-radio"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7.2 5.8 10 11 4" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+    </button>
+
+    <button class="rsp-route" role="radio" aria-checked="false">
+      <div class="rsp-top">
+        <div class="rsp-time">29<small>min</small></div>
+        <span class="rsp-diff">+5 min</span>
+        <span class="rsp-tag eco">Eco · −12% fuel</span>
+      </div>
+      <div class="rsp-meta"><b>16.1 km</b> · via Parkweg &amp; city center</div>
+      <div class="rsp-traffic"><i class="g" style="flex:3"></i><i class="a" style="flex:2"></i><i class="r" style="flex:.8"></i><i class="g" style="flex:3"></i></div>
+      <div class="rsp-side">
+        <div class="rsp-arr">Arrive<b>18:47</b></div>
+        <div class="rsp-radio"></div>
+      </div>
+    </button>
+
+    <button class="rsp-route" role="radio" aria-checked="false">
+      <div class="rsp-top">
+        <div class="rsp-time">31<small>min</small></div>
+        <span class="rsp-diff">+7 min</span>
+        <span class="rsp-tag toll">Toll road · €2.40</span>
+      </div>
+      <div class="rsp-meta"><b>23.7 km</b> · via E45 riverside motorway</div>
+      <div class="rsp-traffic"><i class="g" style="flex:7"></i><i class="a" style="flex:.8"></i><i class="g" style="flex:1.5"></i></div>
+      <div class="rsp-side">
+        <div class="rsp-arr">Arrive<b>18:49</b></div>
+        <div class="rsp-radio"></div>
+      </div>
+    </button>
+  </div>
+
+  <!-- Actions -->
+  <div class="rsp-foot">
+    <button class="rsp-opt" aria-label="Route options">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A5668" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
+    </button>
+    <button class="rsp-go">
+      <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2 20 21l-8-4-8 4 8-19Z" fill="#fff"/></svg>
+      Start <span>· 24 min</span>
+    </button>
+  </div>
+</div>
