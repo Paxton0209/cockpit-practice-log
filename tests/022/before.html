@@ -1,0 +1,176 @@
+<div class="nearby-places-card" aria-label="Voice assistant results for kid-friendly places nearby">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;650;700&display=swap');
+
+    .nearby-places-card,
+    .nearby-places-card * {
+      box-sizing: border-box;
+    }
+
+    .nearby-places-card {
+      width: 560px;
+      height: 420px;
+      padding: 23px 26px;
+      overflow: hidden;
+      border: 1px solid #dce5e1;
+      border-radius: 24px;
+      background: #f5f8f6;
+      color: #172a23;
+      font: 500 16px/1.35 Inter, sans-serif;
+      color-scheme: light;
+    }
+
+    .nearby-places-card svg {
+      display: block;
+      flex: none;
+    }
+
+    .nearby-places-card .assistant-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #215e47;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .nearby-places-card h2 {
+      margin: 7px 0 3px;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.16;
+      letter-spacing: -1px;
+    }
+
+    .nearby-places-card p {
+      margin: 0;
+      color: #4b6057;
+    }
+
+    .nearby-places-card ul {
+      display: grid;
+      gap: 8px;
+      margin: 17px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nearby-places-card li {
+      display: grid;
+      grid-template-columns: 46px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 12px;
+      min-height: 79px;
+      padding: 9px 13px;
+      border: 1px solid #dce5e1;
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .nearby-places-card li:first-child {
+      border-color: #a8c9b8;
+      background: #ebf5ef;
+    }
+
+    .nearby-places-card .place-icon {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      border-radius: 12px;
+      background: #d8ebdf;
+      color: #245b45;
+    }
+
+    .nearby-places-card li:nth-child(2) .place-icon {
+      background: #f3e9d7;
+      color: #725219;
+    }
+
+    .nearby-places-card li:nth-child(3) .place-icon {
+      background: #e7edf8;
+      color: #3b557f;
+    }
+
+    .nearby-places-card strong {
+      display: block;
+      font-size: 19px;
+      font-weight: 650;
+      line-height: 1.2;
+      letter-spacing: -.35px;
+    }
+
+    .nearby-places-card .detail {
+      display: block;
+      margin-top: 4px;
+      color: #4b6057;
+      font-size: 14px;
+    }
+
+    .nearby-places-card .travel {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+  </style>
+
+  <header>
+    <div class="assistant-label">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+        <path d="M4 10v4m4-7v10m4-13v16m4-13v10m4-7v4"/>
+      </svg>
+      Voice assistant
+    </div>
+    <h2>Kid-friendly places nearby</h2>
+    <p>Three places within a 12-minute drive.</p>
+  </header>
+
+  <ul aria-label="Places, nearest first">
+    <li>
+      <span class="place-icon">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 20h18M5 20V8h8v12M4 8l5-5 5 5m-1 4h3l5 8M8 12h2m-2 4h2"/>
+        </svg>
+      </span>
+      <div>
+        <strong>Maple Grove Playground</strong>
+        <span class="detail">Swings, slides &amp; picnic tables</span>
+      </div>
+      <div class="travel">
+        <strong>4 min</strong>
+        <span class="detail">0.8 mi</span>
+      </div>
+    </li>
+
+    <li>
+      <span class="place-icon">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 3h6m-5 0v7l-5 8a2 2 0 0 0 2 3h10a2 2 0 0 0 2-3l-5-8V3M8 15h8"/>
+        </svg>
+      </span>
+      <div>
+        <strong>Discovery Kids Museum</strong>
+        <span class="detail">Hands-on exhibits &amp; toddler play area</span>
+      </div>
+      <div class="travel">
+        <strong>8 min</strong>
+        <span class="detail">2.1 mi</span>
+      </div>
+    </li>
+
+    <li>
+      <span class="place-icon">
+        <svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="m12 3 5 6h-2l4 5H5l4-5H7l5-6Zm0 11v6m-8 0h16"/>
+        </svg>
+      </span>
+      <div>
+        <strong>Willow Creek Park</strong>
+        <span class="detail">Stroller-friendly trails &amp; duck pond</span>
+      </div>
+      <div class="travel">
+        <strong>12 min</strong>
+        <span class="detail">3.4 mi</span>
+      </div>
+    </li>
+  </ul>
+</div>
