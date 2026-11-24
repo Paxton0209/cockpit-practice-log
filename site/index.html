@@ -284,6 +284,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 [data-theme=dark] .veil{background:rgba(0,0,0,.35)}
 [data-theme=dark] .seg4 .ind{background:rgba(255,255,255,.12);box-shadow:none}
 @property --dialog-surface-opacity{syntax:"<number>";inherits:true;initial-value:1}
+@property --lift{syntax:"<length>";inherits:false;initial-value:26px}
 @property --dialog-copy-opacity{syntax:"<number>";inherits:true;initial-value:1}
 .sheet2{position:fixed;left:50%;top:48px;width:min(720px,calc(100vw - 48px));transform:translateX(-50%);transform-origin:top left;isolation:isolate;border-radius:20px;corner-shape:superellipse(1.6);will-change:transform,filter}
 /* one element owns the motion: the surface is drawn by the sheet itself (Dashline .sheet::before) */
@@ -313,7 +314,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .ecard .hero3 .cstage{position:absolute;left:50%;top:50%;width:640px;transform:translate(-50%,-50%)}
 .ecard .hero3 .htools{position:absolute;left:0;right:0;bottom:16px;margin:0}
 /* centre the component in the space above the Before/After toggle (16 px inset + 36 px control), so tall panels don't sink onto it */
-@media(min-width:621px){.ecard .hero3 .cstage{top:calc(50% - 26px)}}
+@media(min-width:621px){.ecard .hero3 .cstage{top:calc(50% - var(--lift,26px))}}
 .hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px}
 
 .hcap{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--t3)}
@@ -351,6 +352,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .ts{width:480px;height:64px;align-items:center;justify-content:space-between;padding:0 12px 0 16px;border-radius:12px}
 .ts .l{display:flex;align-items:center;gap:4px}.ts .rem{display:flex;align-items:center;gap:16px}
 .ts .u{display:flex;align-items:center;gap:2px}.ts .du{display:flex;align-items:center;gap:4px}
+.tstack{display:flex;flex-direction:column;gap:8px}
 .ts .end{width:112px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--strong)}
 /* 014 route selection */
 .rs{width:560px;height:648px;flex-direction:column;gap:16px;padding:24px;border-radius:24px}
@@ -694,9 +696,9 @@ turn:'<svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M16.0
 clock:'<svg width="48" height="48" viewBox="0 0 48 48" fill="none" style="color:var(--mfg)"><path d="M36 24C36 30.6274 30.6274 36 24 36C17.3726 36 12 30.6274 12 24C12 17.3726 17.3726 12 24 12C30.6274 12 36 17.3726 36 24Z" stroke-width="2" stroke="currentColor"/><path d="M24 17V22.8676C24 23.5701 24.3686 24.2212 24.971 24.5826L29 27" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>'};
 const ROUTE=(t,side,on)=>`<div class="opt${on?' on':''}"><div class="id"><span class="t">${t}</span>${on?'<span class="tag">Top</span>':`<span class="m">${side}</span>`}</div><div class="mt"><span><span>12 km</span><span>¥ 0 toll</span></span>46% on arrival</div></div>`;
 const CMP={
-S:{W:640,H:200,name:'Trip summary',cover:1,ask:'Design a trip summary bar for a car navigation screen, showing remaining distance, remaining time and an end-navigation action, 480 × 64 px, light theme.',wrong:[['Labels under every number','“REMAINING”, “DISTANCE”, “ARRIVAL” in 11 px caps.'],['Numbers too small','24 px values with 14 px units in a 64 px bar.'],['End shouts in red','A red button with an ×, the loudest thing in the bar.']],notes:[['Numbers need no labels','226 km and 2 h 29 min explain themselves.'],['One size, 24 / 32','Numbers at full ink, units at 65%. One line, one size.'],['End stays quiet','A neutral 112 × 40 button on the right edge, away from the numbers.']],
-  html:()=>`<div class="nv ts"><div class="l">${IC.chev}<div class="rem"><span class="u">226<span class="m">km</span></span><span class="du"><span class="u">2<span class="m">h</span></span><span class="u">29<span class="m">min</span></span></span></div></div><span class="end">End</span></div>`,
-  before:()=>`<div class="trip-bar" role="region" aria-label="Trip summary">
+S:{W:760,H:420,name:'Trip summary',cover:1,ask:'Design a trip summary bar for a car navigation screen, showing remaining distance, remaining time and an end-navigation action, 480 × 64 px, light theme.',wrong:[['Labels under every number','“REMAINING”, “DISTANCE”, “ARRIVAL” in 11 px caps.'],['Numbers too small','24 px values with 14 px units in a 64 px bar.'],['End shouts in red','A red button with an ×, the loudest thing in the bar.']],notes:[['Numbers need no labels','226 km and 2 h 29 min explain themselves.'],['One size, 24 / 32','Numbers at full ink, units at 65%. One line, one size.'],['End stays quiet','A neutral 112 × 40 button on the right edge, away from the numbers.']],
+  html:()=>`<div class="tstack">${CMP.T.html()}<div class="nv ts"><div class="l">${IC.chev}<div class="rem"><span class="u">226<span class="m">km</span></span><span class="du"><span class="u">2<span class="m">h</span></span><span class="u">29<span class="m">min</span></span></span></div></div><span class="end">End</span></div></div>`,
+  before:()=>`<div class="tstack">${CMP.T.html()}<div class="trip-bar" role="region" aria-label="Trip summary">
   <style>
     .trip-bar {
       --bg: #FFFFFF;
@@ -759,7 +761,7 @@ S:{W:640,H:200,name:'Trip summary',cover:1,ask:'Design a trip summary bar for a 
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
     End
   </button>
-</div>`},
+</div></div>`},
 R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word for the difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
   html:()=>`<div class="nv rs"><div class="hd"><span class="back">${IC.back}</span><b>Robo Base</b></div>${ROUTE('18 min','',1)}${ROUTE('21 min','No tolls')}${ROUTE('24 min','Fewer turns')}<div class="act"><span class="btn p">Start route</span><span class="btn s">Preferences</span></div></div>`,
   before:()=>`<div class="rsp">
@@ -1052,7 +1054,7 @@ C:{W:640,H:360,name:'Climate control',notes:[['112 px value','The temperature re
 A:{W:640,H:220,name:'Settings row',notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},
 B:{W:640,H:340,name:'Now playing',notes:[['232 px art','You know what is playing at a glance.'],['40 px title','The one line that matters leads.'],['104 × 88 play','The main action is a real button.'],['32 px rhythm','Prev, play and next sit on one even spacing.']],html:()=>`<div class="b1" data-ga="radius 28" data-gb="radius 12"><i class="ka" data-ga="232" data-gb="48"></i><span class="tt" data-ga="40px" data-gb="15px">Night Drive<small>Mira Okafor</small></span><span class="c"><span class="pv">${I('prev',40)}</span><span class="pl">${I('play',40)}</span><span class="nx2">${I('next',40)}</span></span></div>`}};
 const CW=1200,CH=520;
-const cmp=(s,v)=>{const C=CMP[s];return `<div class="cs ${v}" data-w="${C.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp nt ${v==='b'?'is-b':''}" style="width:${C.W}px;height:${C.H}px">${v==='b'&&C.before?C.before():C.html()}</div></div>`};
+const cmp=(s,v)=>{const C=CMP[s];return `<div class="cs ${v}" data-w="${C.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp nt ${v==='b'?(C.before?'is-o':'is-b'):''}" style="width:${C.W}px;height:${C.H}px">${v==='b'&&C.before?C.before():C.html()}</div></div>`};
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
 const DATA=[
@@ -1236,8 +1238,11 @@ function springDialog(fromCard,toCard,fromArt,toArt,restCard,restArt,fromSurface
     transform:`translate(${(cx+gx-x)/sx-cx}px,${(cy+gy-y)/sy-cy}px) scale(${g/sx},${g/sy})`,
     borderRadius:`${STAGE_R/g}px`
   }));
+  /* the sheet lifts the component 26 px above the toggle; the cover centres it. Ride the lift on the same spring
+     (surface alpha: 0 at the cover, 1 in the sheet) so it doesn't snap when the flight lands. */
+  const cstage=$('.cstage',stage),lift=lensSpring(cstage,from,to,v=>({'--lift':`${26*Math.max(0,v[7])}px`}));
   const start=document.timeline.currentTime;
-  surface.startTime=start;artwork.startTime=start;
+  surface.startTime=start;artwork.startTime=start;lift.startTime=start;
   return surface;
 }
 const CHEV='<svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 4 4-4 4"/></svg>';
