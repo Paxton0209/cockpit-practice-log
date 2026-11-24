@@ -99,17 +99,17 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
   radial-gradient(90% 90% at 92% 100%,var(--cv2) 0%,transparent 62%),
   radial-gradient(70% 70% at 78% 12%,var(--cv3) 0%,transparent 60%),var(--cv0)}
 .thumb.cov,.hero3.cov{box-shadow:none}
-:root[data-theme=dark]{--cv0:#0e1215;--cv1:#263038;--cv2:#1b4250;--cv3:#121719;--grain:.12} /* must outrank the :root defaults below */
+:root[data-theme=dark]{--cv0:#090c0e;--cv1:#1a2126;--cv2:#173a47;--cv3:#0d1113;--grain:.12} /* must outrank the :root defaults below */
 /* cover backgrounds: one shoot, five contexts. Same three lights, grain and light direction; only the colours change.
    cv0 base · cv1 top-left light · cv2 bottom-right · cv3 top-right. Dark: clean cool near-black, one neutral key light, one context colour. */
 [data-ctx=med]{--cv0:#ecdcdc;--cv1:#f3b3a6;--cv2:#d293a6;--cv3:#f3d6cc}
 [data-ctx=cli]{--cv0:#dde7e0;--cv1:#b3dbc6;--cv2:#8db8a8;--cv3:#dcebd8}
 [data-ctx=veh]{--cv0:#e3e4e6;--cv1:#d3d5d9;--cv2:#a8acb2;--cv3:#ececee}
 [data-ctx=inf]{--cv0:#dfe1f0;--cv1:#c2c7f5;--cv2:#8ea3dc;--cv3:#e5d5ef}
-[data-theme=dark] [data-ctx=med]{--cv0:#120f12;--cv1:#2e2b2f;--cv2:#5a2740;--cv3:#181416}
-[data-theme=dark] [data-ctx=cli]{--cv0:#0e1312;--cv1:#213a33;--cv2:#1d4a40;--cv3:#121816}
-[data-theme=dark] [data-ctx=veh]{--cv0:#101112;--cv1:#2e2f31;--cv2:#3a3c40;--cv3:#161718}
-[data-theme=dark] [data-ctx=inf]{--cv0:#0f1016;--cv1:#2a2c38;--cv2:#3a3f86;--cv3:#14151d}
+[data-theme=dark] [data-ctx=med]{--cv0:#0c0a0c;--cv1:#211c21;--cv2:#4a2035;--cv3:#120f11}
+[data-theme=dark] [data-ctx=cli]{--cv0:#090c0b;--cv1:#17221e;--cv2:#173d35;--cv3:#0d1110}
+[data-theme=dark] [data-ctx=veh]{--cv0:#0a0b0c;--cv1:#1b1c1f;--cv2:#28323f;--cv3:#0f1012}
+[data-theme=dark] [data-ctx=inf]{--cv0:#0a0a0f;--cv1:#1c1d28;--cv2:#30357a;--cv3:#0f1016}
 /* on a dark cover the After panel is the dark variant (the Before stays as AI made it) */
 [data-theme=dark] .cov .kp:not(.is-b) .t1{background:rgba(44,44,46,.7);box-shadow:0 8px 16px rgba(0,0,0,.36);color:#fff}
 [data-theme=dark] .cov .kp:not(.is-b) .t1::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
