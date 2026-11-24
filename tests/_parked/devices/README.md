@@ -1,8 +1,8 @@
-# 019 · Before
+# 017 · Before
 
 `before.html` is the first answer from a fresh Claude Opus 5.5 subagent (Claude app) with no prior context, told not to use tools (it made no tool calls), to this one line plus the output note:
 
-> Design a locks settings section for a car settings screen, with child lock options Off, Left, Right and Both, and switches for window lock, walk-away lock and unlock on park, 772 × 436 px, light theme.
+> Design a Bluetooth devices section for a car media screen, showing the connected phone that is now playing and an option to add a device, 772 × 307 px, light theme.
 >
 > Output: reply with one self-contained HTML snippet — a single root <div> with its own <style> inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
 

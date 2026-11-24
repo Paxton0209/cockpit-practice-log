@@ -1,116 +1,91 @@
-<div class="ia-root">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-    .ia-root{width:772px;height:499px;box-sizing:border-box;padding:24px 28px;background:#F4F6F9;font-family:'Inter',system-ui,sans-serif;color:#0F172A;display:flex;flex-direction:column;gap:16px;border-radius:20px;overflow:hidden}
-    .ia-root *{box-sizing:border-box}
-    .ia-head{display:flex;align-items:center;gap:14px;height:48px}
-    .ia-back{width:48px;height:48px;border-radius:14px;border:none;background:#fff;box-shadow:0 1px 2px rgba(15,23,42,.08);display:grid;place-items:center;cursor:pointer;color:#0F172A}
-    .ia-back:hover{background:#EEF2F7}
-    .ia-title{flex:1}
-    .ia-title h1{margin:0;font-size:22px;font-weight:700;letter-spacing:-.01em}
-    .ia-title p{margin:2px 0 0;font-size:13px;color:#64748B;font-weight:500}
-    .ia-chip{font-size:13px;font-weight:600;color:#2563EB;background:#E8F0FE;padding:8px 14px;border-radius:999px}
-    .ia-list{background:#fff;border-radius:18px;box-shadow:0 1px 3px rgba(15,23,42,.06);list-style:none;margin:0;padding:0 20px}
-    .ia-row{display:flex;align-items:center;gap:16px;height:84px;border-bottom:1px solid #EEF1F5}
-    .ia-row:last-child{border-bottom:none}
-    .ia-icon{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;flex-shrink:0}
-    .ia-phone{background:linear-gradient(145deg,#34D399,#10B981)}
-    .ia-maps{background:linear-gradient(145deg,#60A5FA,#2563EB)}
-    .ia-task{background:linear-gradient(145deg,#FBBF24,#F59E0B)}
-    .ia-fm{background:linear-gradient(145deg,#F472B6,#DB2777)}
-    .ia-info{flex:1;min-width:0}
-    .ia-name{font-size:17px;font-weight:600;margin:0}
-    .ia-meta{font-size:13px;color:#64748B;margin:4px 0 0;display:flex;gap:8px;align-items:center}
-    .ia-dot{width:3px;height:3px;border-radius:50%;background:#CBD5E1}
-    .ia-actions{display:flex;gap:10px}
-    .ia-btn{height:44px;min-width:108px;padding:0 18px;border-radius:12px;font:600 15px 'Inter',sans-serif;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:background .15s,border-color .15s}
-    .ia-open{background:#2563EB;color:#fff;border:none}
-    .ia-open:hover{background:#1D4ED8}
-    .ia-un{background:#fff;color:#DC2626;border:1.5px solid #F3C7C7}
-    .ia-un:hover{background:#FEF2F2;border-color:#EF9A9A}
-    .ia-btn:focus-visible,.ia-back:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
-    .ia-foot{display:flex;align-items:center;gap:14px;height:32px;font-size:13px;color:#64748B;font-weight:500}
-    .ia-bar{flex:1;height:8px;border-radius:999px;background:#E2E8F0;overflow:hidden;display:flex}
-    .ia-bar span{height:100%}
-  </style>
+<div class="apps-panel">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+.apps-panel{
+  --bg:#F4F5F7;--card:#FFFFFF;--ink:#14161A;--muted:#5F6672;--line:#E6E8EC;
+  --primary:#1F5EFF;--primary-press:#1849C7;--danger:#C62828;--danger-bg:#FDECEC;
+  box-sizing:border-box;width:772px;height:531px;padding:28px 32px;
+  background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--ink);
+  display:flex;flex-direction:column;gap:20px;
+  -webkit-font-smoothing:antialiased;
+}
+.apps-panel *{box-sizing:border-box;}
+.apps-panel h2{margin:0;font-size:30px;line-height:36px;font-weight:700;letter-spacing:-0.01em;}
+.apps-panel ul{
+  list-style:none;margin:0;padding:0 24px;flex:1;
+  background:var(--card);border-radius:20px;
+  box-shadow:0 1px 2px rgba(20,22,26,.06),0 4px 16px rgba(20,22,26,.04);
+  display:flex;flex-direction:column;
+}
+.apps-panel li{
+  flex:1;display:flex;align-items:center;gap:20px;
+  border-bottom:1px solid var(--line);
+}
+.apps-panel li:last-child{border-bottom:0;}
+.apps-panel .icon{
+  width:56px;height:56px;border-radius:16px;flex:none;
+  display:grid;place-items:center;
+}
+.apps-panel .icon svg{width:30px;height:30px;}
+.apps-panel .phone{background:#1FA855;}
+.apps-panel .maps{background:#2F7BF5;}
+.apps-panel .tasks{background:#7A4DF0;}
+.apps-panel .fm{background:#F0632F;}
+.apps-panel .name{flex:1;font-size:22px;font-weight:600;line-height:28px;}
+.apps-panel .actions{display:flex;gap:12px;}
+.apps-panel button{
+  font:inherit;font-size:18px;font-weight:600;height:56px;min-width:132px;padding:0 24px;
+  border-radius:14px;border:0;cursor:pointer;transition:background-color .15s,transform .1s;
+}
+.apps-panel button:active{transform:scale(.97);}
+.apps-panel button:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
+.apps-panel .open{background:var(--primary);color:#fff;}
+.apps-panel .open:hover{background:var(--primary-press);}
+.apps-panel .uninstall{background:var(--danger-bg);color:var(--danger);}
+.apps-panel .uninstall:hover{background:#FADADA;}
+</style>
 
-  <div class="ia-head">
-    <button class="ia-back" aria-label="Back">
-      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="ia-title">
-      <h1>Installed apps</h1>
-      <p>Settings · Apps</p>
-    </div>
-    <span class="ia-chip">4 apps</span>
-  </div>
-
-  <ul class="ia-list">
-    <li class="ia-row">
-      <div class="ia-icon ia-phone">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 006.6 6.6l2.2-2.2a1 1 0 011-.25 11.4 11.4 0 003.6.57 1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.45.57 3.57a1 1 0 01-.25 1z"/></svg>
-      </div>
-      <div class="ia-info">
-        <p class="ia-name">Phone</p>
-        <p class="ia-meta">v4.2.1<span class="ia-dot"></span>86 MB</p>
-      </div>
-      <div class="ia-actions">
-        <button class="ia-btn ia-open">Open</button>
-        <button class="ia-btn ia-un">Uninstall</button>
+  <h2>Apps</h2>
+  <ul>
+    <li>
+      <span class="icon phone" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+      </span>
+      <span class="name">Phone</span>
+      <div class="actions">
+        <button class="open" aria-label="Open Phone">Open</button>
+        <button class="uninstall" aria-label="Uninstall Phone">Uninstall</button>
       </div>
     </li>
-
-    <li class="ia-row">
-      <div class="ia-icon ia-maps">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0114 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5" fill="currentColor"/></svg>
-      </div>
-      <div class="ia-info">
-        <p class="ia-name">Maps</p>
-        <p class="ia-meta">v11.8.0<span class="ia-dot"></span>742 MB</p>
-      </div>
-      <div class="ia-actions">
-        <button class="ia-btn ia-open">Open</button>
-        <button class="ia-btn ia-un">Uninstall</button>
+    <li>
+      <span class="icon maps" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+      </span>
+      <span class="name">Maps</span>
+      <div class="actions">
+        <button class="open" aria-label="Open Maps">Open</button>
+        <button class="uninstall" aria-label="Uninstall Maps">Uninstall</button>
       </div>
     </li>
-
-    <li class="ia-row">
-      <div class="ia-icon ia-task">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>
-      </div>
-      <div class="ia-info">
-        <p class="ia-name">Task master</p>
-        <p class="ia-meta">v2.0.3<span class="ia-dot"></span>54 MB</p>
-      </div>
-      <div class="ia-actions">
-        <button class="ia-btn ia-open">Open</button>
-        <button class="ia-btn ia-un">Uninstall</button>
+    <li>
+      <span class="icon tasks" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5l1.8 1.8L9 5"/><path d="M4 13.5l1.8 1.8L9 12"/><path d="M12.5 7h7.5"/><path d="M12.5 14h7.5"/><path d="M4.5 20h15.5"/></svg>
+      </span>
+      <span class="name">Task master</span>
+      <div class="actions">
+        <button class="open" aria-label="Open Task master">Open</button>
+        <button class="uninstall" aria-label="Uninstall Task master">Uninstall</button>
       </div>
     </li>
-
-    <li class="ia-row">
-      <div class="ia-icon ia-fm">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="12" rx="2.5"/><path d="M7 8l10-4"/><circle cx="15.5" cy="14" r="2.5"/><path d="M6.5 12.5h4M6.5 15.5h4"/></svg>
-      </div>
-      <div class="ia-info">
-        <p class="ia-name">FM</p>
-        <p class="ia-meta">v3.1.4<span class="ia-dot"></span>38 MB</p>
-      </div>
-      <div class="ia-actions">
-        <button class="ia-btn ia-open">Open</button>
-        <button class="ia-btn ia-un">Uninstall</button>
+    <li>
+      <span class="icon fm" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l12-5"/><rect x="3" y="8" width="18" height="13" rx="2.5"/><circle cx="15.5" cy="14.5" r="2.8"/><path d="M6.5 12.5h4"/><path d="M6.5 16.5h4"/></svg>
+      </span>
+      <span class="name">FM</span>
+      <div class="actions">
+        <button class="open" aria-label="Open FM">Open</button>
+        <button class="uninstall" aria-label="Uninstall FM">Uninstall</button>
       </div>
     </li>
   </ul>
-
-  <div class="ia-foot">
-    <span>Storage</span>
-    <div class="ia-bar" aria-hidden="true">
-      <span style="width:3%;background:#10B981"></span>
-      <span style="width:26%;background:#2563EB"></span>
-      <span style="width:2%;background:#F59E0B"></span>
-      <span style="width:1.5%;background:#DB2777"></span>
-    </div>
-    <span>0.9 GB of 32 GB used by apps</span>
-  </div>
 </div>

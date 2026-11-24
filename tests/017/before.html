@@ -1,105 +1,70 @@
-<div class="bt-panel">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-.bt-panel{width:772px;height:307px;box-sizing:border-box;padding:18px 20px 20px;background:#F4F6F9;border-radius:20px;font-family:'Inter',system-ui,sans-serif;color:#0F172A;display:flex;flex-direction:column;gap:14px;overflow:hidden}
-.bt-panel *{box-sizing:border-box}
-.bt-head{display:flex;align-items:center;justify-content:space-between;height:32px}
-.bt-title{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:700;letter-spacing:-.01em}
-.bt-title .ic{width:32px;height:32px;border-radius:10px;background:#E0EAFF;display:grid;place-items:center}
-.bt-status{display:flex;align-items:center;gap:12px;font-size:13px;color:#64748B;font-weight:500}
-.bt-toggle{width:46px;height:26px;border-radius:13px;background:#2563EB;position:relative}
-.bt-toggle::after{content:"";position:absolute;top:3px;right:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)}
-.bt-body{flex:1;display:flex;gap:14px;min-height:0}
-.bt-now{flex:0 0 452px;background:#fff;border-radius:16px;padding:16px;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 1px 2px rgba(15,23,42,.05),0 4px 14px rgba(15,23,42,.05)}
-.bt-dev{display:flex;align-items:center;gap:10px}
-.bt-dev .ph{width:34px;height:34px;border-radius:10px;background:#EEF2FF;display:grid;place-items:center}
-.bt-dev .nm{font-size:15px;font-weight:600}
-.bt-dev .sub{font-size:12px;color:#16A34A;font-weight:500;display:flex;align-items:center;gap:5px;margin-top:2px}
-.bt-dev .sub i{width:6px;height:6px;border-radius:50%;background:#16A34A;display:inline-block}
-.bt-dev .meta{margin-left:auto;display:flex;align-items:center;gap:6px;font-size:12px;color:#64748B;font-weight:500}
-.bt-track{display:flex;align-items:center;gap:14px}
-.bt-art{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,#F97316 0%,#EC4899 55%,#8B5CF6 100%);flex:none;position:relative;overflow:hidden}
-.bt-art::after{content:"";position:absolute;inset:18px;border-radius:50%;border:2px solid rgba(255,255,255,.55)}
-.bt-info{flex:1;min-width:0}
-.bt-label{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#2563EB}
-.bt-song{font-size:17px;font-weight:700;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.bt-artist{font-size:13px;color:#64748B;margin-top:2px}
-.bt-ctrls{display:flex;align-items:center;gap:8px}
-.bt-btn{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:#F1F5F9;border:none}
-.bt-btn.play{width:48px;height:48px;background:#2563EB;box-shadow:0 4px 12px rgba(37,99,235,.35)}
-.bt-prog{display:flex;align-items:center;gap:10px;font-size:11px;color:#64748B;font-variant-numeric:tabular-nums;font-weight:500}
-.bt-bar{flex:1;height:4px;border-radius:2px;background:#E2E8F0;position:relative}
-.bt-bar span{position:absolute;left:0;top:0;bottom:0;width:42%;border-radius:2px;background:#2563EB}
-.bt-bar span::after{content:"";position:absolute;right:-5px;top:-3px;width:10px;height:10px;border-radius:50%;background:#2563EB;border:2px solid #fff;box-shadow:0 0 0 1px #2563EB}
-.bt-side{flex:1;display:flex;flex-direction:column;gap:10px;min-width:0}
-.bt-side h4{margin:0;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#64748B;padding-left:2px}
-.bt-row{background:#fff;border-radius:14px;padding:11px 12px;display:flex;align-items:center;gap:10px;box-shadow:0 1px 2px rgba(15,23,42,.05)}
-.bt-row .ph{width:30px;height:30px;border-radius:9px;background:#F1F5F9;display:grid;place-items:center;flex:none}
-.bt-row .nm{font-size:14px;font-weight:600}
-.bt-row .sub{font-size:12px;color:#94A3B8;margin-top:1px}
-.bt-row .go{margin-left:auto;font-size:12px;font-weight:600;color:#2563EB}
-.bt-add{margin-top:auto;height:52px;border-radius:14px;border:1.5px dashed #93B4F5;background:#EFF4FF;display:flex;align-items:center;justify-content:center;gap:10px;font-size:15px;font-weight:600;color:#1D4ED8;cursor:pointer}
-.bt-add .plus{width:26px;height:26px;border-radius:50%;background:#2563EB;display:grid;place-items:center}
-</style>
+<div class="openings">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap');
+    .openings{
+      --bg:#F5F6F8; --tile:#FFFFFF; --ink:#14161A; --muted:#5B6270;
+      --line:#E3E6EB; --accent:#1F6FEB; --accent-soft:#EAF1FD;
+      box-sizing:border-box; width:772px; height:200px; padding:24px;
+      background:var(--bg); font-family:'Inter',system-ui,sans-serif; color:var(--ink);
+      display:flex; flex-direction:column; gap:16px;
+    }
+    .openings *{box-sizing:border-box}
+    .openings h2{margin:0; font-size:18px; line-height:24px; font-weight:600; letter-spacing:-0.01em}
+    .openings .row{flex:1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .openings button{
+      all:unset; box-sizing:border-box; cursor:pointer;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+      background:var(--tile); border:1px solid var(--line); border-radius:16px;
+      box-shadow:0 1px 2px rgba(20,22,26,.04);
+      transition:background .15s, border-color .15s, box-shadow .15s, transform .1s;
+    }
+    .openings button:hover{border-color:#CBD1DA; box-shadow:0 2px 8px rgba(20,22,26,.06)}
+    .openings button:active{transform:scale(.98); background:var(--accent-soft); border-color:var(--accent)}
+    .openings button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
+    .openings .well{
+      width:48px; height:48px; border-radius:50%; background:var(--bg);
+      display:grid; place-items:center; color:var(--ink);
+    }
+    .openings button:active .well{background:#fff}
+    .openings svg{width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
+    .openings svg .lift{stroke:var(--accent); stroke-width:2}
+    .openings .label{font-size:15px; line-height:20px; font-weight:500}
+  </style>
 
-<div class="bt-head">
-  <div class="bt-title">
-    <div class="ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l10 10-5 5V2l5 5L7 17"/></svg></div>
-    Bluetooth
+  <h2>Openings</h2>
+  <div class="row">
+    <button type="button" aria-label="Open frunk">
+      <span class="well">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M8.5 12H2v5h2M10 17h4M20 17h2v-4l-3-1-3-3.5h-5L8.5 12"/>
+          <path class="lift" d="M8.5 12L3.5 8.5"/>
+          <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+        </svg>
+      </span>
+      <span class="label">Frunk</span>
+    </button>
+
+    <button type="button" aria-label="Open trunk">
+      <span class="well">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15.5 12H22v5h-2M14 17h-4M4 17H2v-4l3-1 3-3.5h5l2.5 3.5"/>
+          <path class="lift" d="M15.5 12l5-3.5"/>
+          <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
+        </svg>
+      </span>
+      <span class="label">Trunk</span>
+    </button>
+
+    <button type="button" aria-label="Open charge port">
+      <span class="well">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 3v4M15 3v4"/>
+          <path d="M6 7h12v4a6 6 0 0 1-12 0V7z"/>
+          <path d="M12 17v4"/>
+          <path class="lift" d="M12.6 9.5l-2.1 3h3l-2.1 3"/>
+        </svg>
+      </span>
+      <span class="label">Charge port</span>
+    </button>
   </div>
-  <div class="bt-status">Visible as "My Car" <div class="bt-toggle"></div></div>
-</div>
-
-<div class="bt-body">
-  <div class="bt-now">
-    <div class="bt-dev">
-      <div class="ph"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
-      <div>
-        <div class="nm">Alex's iPhone</div>
-        <div class="sub"><i></i>Connected · Media &amp; Calls</div>
-      </div>
-      <div class="meta">
-        <svg width="18" height="10" viewBox="0 0 22 12" fill="none"><rect x=".75" y=".75" width="18" height="10.5" rx="2.5" stroke="#64748B" stroke-width="1.5"/><rect x="3" y="3" width="11" height="6" rx="1" fill="#16A34A"/><rect x="20" y="4" width="1.6" height="4" rx=".8" fill="#64748B"/></svg>
-        78%
-      </div>
-    </div>
-
-    <div class="bt-track">
-      <div class="bt-art"></div>
-      <div class="bt-info">
-        <div class="bt-label">Now Playing</div>
-        <div class="bt-song">Midnight City Drive</div>
-        <div class="bt-artist">Neon Coast · Open Roads</div>
-      </div>
-      <div class="bt-ctrls">
-        <button class="bt-btn" aria-label="Previous"><svg width="14" height="14" viewBox="0 0 24 24" fill="#334155"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
-        <button class="bt-btn play" aria-label="Pause"><svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><rect x="6" y="5" width="4" height="14" rx="1"/><rect x="14" y="5" width="4" height="14" rx="1"/></svg></button>
-        <button class="bt-btn" aria-label="Next"><svg width="14" height="14" viewBox="0 0 24 24" fill="#334155"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
-      </div>
-    </div>
-
-    <div class="bt-prog">
-      <span>1:38</span>
-      <div class="bt-bar"><span></span></div>
-      <span>3:54</span>
-    </div>
-  </div>
-
-  <div class="bt-side">
-    <h4>Paired Devices</h4>
-    <div class="bt-row">
-      <div class="ph"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg></div>
-      <div><div class="nm">Sam's Pixel 9</div><div class="sub">Last used yesterday</div></div>
-      <div class="go">Connect</div>
-    </div>
-    <div class="bt-row">
-      <div class="ph"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#64748B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14v-2a8 8 0 0116 0v2"/><rect x="3" y="14" width="4" height="6" rx="1.5"/><rect x="17" y="14" width="4" height="6" rx="1.5"/></svg></div>
-      <div><div class="nm">Galaxy Buds</div><div class="sub">Not in range</div></div>
-    </div>
-    <div class="bt-add">
-      <div class="plus"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-      Add Device
-    </div>
-  </div>
-</div>
 </div>

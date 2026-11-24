@@ -2,10 +2,10 @@
 
 `before.html` is the first answer from a fresh Claude Opus 5.5 subagent (Claude app) with no prior context, told not to use tools (it made no tool calls), to this one line plus the output note:
 
-> Design a Bluetooth devices section for a car media screen, showing the connected phone that is now playing and an option to add a device, 772 × 307 px, light theme.
+> Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Content, exactly: a section title “Openings” and three controls, Frunk, Trunk and Charge port, each with its icon. Nothing else.
 >
 > Output: reply with one self-contained HTML snippet — a single root <div> with its own <style> inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
 
-Kept as returned. On the site the Google Fonts @import is dropped (the page already loads Inter); its classes are already prefixed, so nothing else changed.
+The ask fixes the content, so Before and After show the same things and only the design differs. Kept as returned; on the site the Google Fonts @import is dropped (the page already loads Inter). Its classes are already scoped under its root.
 
-The After is built 1:1 from the Figma file (UI/UX Library · Examples · “Dashnote · App & device management” for 015–017, `System Settings / Update dialog` for 019), light and dark variables. Its prompt has not been run through fresh sessions yet.
+The After is built 1:1 from the Figma file (UI/UX Library · the “Openings” group of `System Settings / Update dialog`), light and dark variables. Its prompt has not been run through fresh sessions yet.
