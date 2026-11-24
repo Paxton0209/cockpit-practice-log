@@ -288,9 +288,9 @@ body.dim .shell{filter:blur(4px)}
 .cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
 .cstage.scan .cs{opacity:1!important;transform:none!important;filter:none!important}
-.scanln{--c:var(--ink);position:absolute;left:0;width:2px;margin-left:-1px;z-index:3;pointer-events:none;opacity:0;border-radius:1px;background:linear-gradient(transparent,var(--c) 15%,var(--c) 85%,transparent)}
-.scanln[data-k=a]{width:1.5px;box-shadow:0 0 10px 1px color-mix(in srgb,var(--ink) 12%,transparent)}
-.scanln[data-k=b]{--c:var(--t3);width:1px;margin-left:0}
+.scanwrap{position:absolute;z-index:3;pointer-events:none;overflow:hidden;border-radius:16px;corner-shape:superellipse(1.6)}
+.scanln{position:absolute;top:0;bottom:0;left:0;width:1.5px;margin-left:-.75px;background:var(--ink);opacity:.55;box-shadow:0 0 12px 2px color-mix(in srgb,var(--ink) 14%,transparent)}
+.cstage.fade .cs{transition:opacity .22s ease-out!important;transform:none!important;filter:none!important}
 .cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;transform:scale(.97);filter:blur(6px);pointer-events:none}
 .cstage.q .cs{transition:none}
 
@@ -757,27 +757,29 @@ function sheetHTML(n){
 function morph(st,to,quiet){
   if(st.dataset.v===to)return;
   const ar=$('.art');if(ar)ar.dataset.v=to;
-  if(!quiet&&!RM.matches&&st.closest('.hero3'))return scan(st,to);
+  if(!quiet&&!RM.matches&&st.closest('.hero3')){if(to==='a')return scan(st,to);
+    if(st._scan){st._scan.forEach(a=>a.cancel());st._scan=null;st.classList.remove('scan','q');$$('.cs',st).forEach(c=>{c.style.zIndex='';['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]='')})}
+    clearTimeout(st._ft);st.classList.add('fade');st.dataset.v=to;st._ft=setTimeout(()=>st.classList.remove('fade'),260);return}
   if(st._scan){st._scan.forEach(a=>a.cancel());st._scan=null;st.classList.remove('scan');$$('.cs',st).forEach(c=>c.style.zIndex='')}
   if(quiet){st.classList.add('q');st.dataset.v=to;st.offsetWidth;st.classList.remove('q')}else st.dataset.v=to;
 }
 function scan(st,to){
   if(st._scan)st._scan.forEach(a=>a.cancel());$$('.cs',st).forEach(c=>['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]=''));
   const inc=$('.cs.'+to,st),out=$('.cs.'+(to==='a'?'b':'a'),st),fwd=to==='a';
-  let ln=$('.scanln',st);if(!ln){ln=document.createElement('i');ln.className='scanln';st.appendChild(ln)}
+  let wr=$('.scanwrap',st);if(!wr){wr=document.createElement('div');wr.className='scanwrap';wr.innerHTML='<i class="scanln"></i>';st.appendChild(wr)}const ln=$('.scanln',wr);
   const S=st.getBoundingClientRect(),W=S.width,rs=[inc,out].map(c=>{const k=$('.kp',c);return (k.firstElementChild||k).getBoundingClientRect()}),
     L=Math.max(0,Math.min(...rs.map(r=>r.left))-S.left-24),R=Math.min(W,Math.max(...rs.map(r=>r.right))-S.left+24),
-    T=Math.max(0,Math.min(...rs.map(r=>r.top))-S.top-12),B=Math.min(S.height,Math.max(...rs.map(r=>r.bottom))-S.top+12);
-  ln.dataset.k=to;ln.style.top=T+'px';ln.style.height=(B-T)+'px';
+    PL=Math.max(...rs.map(r=>r.left))-S.left,PR=Math.min(...rs.map(r=>r.right))-S.left,PT=Math.max(...rs.map(r=>r.top))-S.top,PB=Math.min(...rs.map(r=>r.bottom))-S.top;
+  ln.dataset.k=to;Object.assign(wr.style,{left:PL+'px',top:PT+'px',width:(PR-PL)+'px',height:(PB-PT)+'px'});
   $$('.cs',st).forEach(c=>c.style.zIndex='');inc.style.zIndex=2;
   st.classList.add('q','scan');st.dataset.v=to;st.offsetWidth;
-  const o=fwd?{duration:600,easing:'cubic-bezier(.65,0,.35,1)'}:{duration:420,easing:'cubic-bezier(.4,0,.6,1)'};
+  const o={duration:620,easing:'cubic-bezier(.65,0,.35,1)'};
   const x0=fwd?L:R,x1=fwd?R:L,cut=x=>[`inset(0 ${W-x}px 0 0)`,`inset(0 0 0 ${x}px)`];let a1,a3;
   if(fwd){const F=40,m=(c,on)=>{c.style.webkitMaskImage=c.style.maskImage=`linear-gradient(90deg,${on?'#000':'transparent'} ${2*W-F/2}px,${on?'transparent':'#000'} ${2*W+F/2}px)`;c.style.webkitMaskSize=c.style.maskSize=`${3*W}px 100%`;c.style.webkitMaskRepeat=c.style.maskRepeat='no-repeat'};
     m(inc,1);m(out,0);const kf=[{maskPosition:`${x0-F/2-2*W}px 0`,webkitMaskPosition:`${x0-F/2-2*W}px 0`},{maskPosition:`${x1+F/2-2*W}px 0`,webkitMaskPosition:`${x1+F/2-2*W}px 0`}];
     a1=inc.animate(kf,{...o,fill:'forwards'});a3=out.animate(kf,{...o,fill:'forwards'})}
   else{a1=inc.animate([{clipPath:cut(x0)[1]},{clipPath:cut(x1)[1]}],{...o,fill:'forwards'});a3=out.animate([{clipPath:cut(x0)[0]},{clipPath:cut(x1)[0]}],{...o,fill:'forwards'})}
-  const a2=ln.animate([{left:x0+'px',opacity:0},{opacity:1,offset:.12},{opacity:1,offset:.88},{left:x1+'px',opacity:0}],o);
+  const a2=ln.animate([{left:(x0-PL)+'px'},{left:(x1-PL)+'px'}],o);
   st._scan=[a1,a2,a3];
   a1.onfinish=()=>{st.classList.remove('scan');inc.style.zIndex='';a1.cancel();a3.cancel();[inc,out].forEach(c=>['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]=''));st.offsetWidth;st.classList.remove('q');st._scan=null};
 }
