@@ -1,47 +1,42 @@
 # Cover backgrounds
 
-Every entry cover is the After component, centered on an abstract background. The backgrounds form one series: they look like the same photographer shot them on the same day. Each one says which part of the car the component belongs to.
+Every entry cover is the After component, centered on a soft background. The backgrounds are drawn in CSS, not generated images: one shoot, five contexts. They share the same lights, grain and light direction; only four colours change, and they say which part of the car the component belongs to.
 
-## Rules for the whole series
+We tried generated images first (photographic dusk, then textures, then structural reliefs). They read as story art or illustration and competed with the component. Colour and light alone keep the component the only object in the picture, stay sharp at any size, cost no file weight, and have a matching dark version.
 
-1. **Abstract only.** No roads, cars, dashboards, people, text or logos. The component is the only object in the picture.
-2. **A quiet center.** The middle 60% × 55% has low detail and low contrast, because the component sits there. Texture and color live at the edges.
-3. **Light to mid tones.** Average lightness is about 70–88 (L\*). The light-theme panel is white at 65% with a soft shadow, so the background must be darker than white and never busy.
-4. **Same lens and light for all.** Soft focus, very shallow depth of field. Light comes from the top left. There is fine film grain, the same amount on every image.
-5. **One hue family per image.** Two or three close colors, low saturation. Never a rainbow.
-6. **Context sets the mood.** The background matches where the component lives in the car (see the table). It does not depend on whether the entry is about Layout, Type or Color.
-7. **Same output.** 1600 × 900, WebP, 300 KB or less, file name `site/covers/<context>.webp`.
+## How it is built
 
-## Context → background
+`site/index.html`, selector `.thumb.cov, .hero3.cov`:
 
-| Context | Entries | Mood | Palette | Abstract motif |
-|---|---|---|---|---|
-| Navigation | 001 Turn-by-turn | Moving forward, dusk | Apricot, haze blue, pale sage | Long horizontal light streaks, like a horizon seen through a soft-focus windshield |
-| Media | Now playing, Big controls | Warm, sound, night out | Amber, rose, deep plum at the edges | Out-of-focus round bokeh, soft halation |
-| Climate | Climate edge, Temperature headline, + and − | Air, temperature | Cool mint to warm peach, left to right | Mist and slow vapor gradients, like breath on glass |
-| Vehicle & controls | 76 px rows, Toggles, Drop the fake 9:41 | Material, touch | Warm grey, sand, graphite at the edges | Brushed metal or matte stone with grazing light |
-| Information & layout | 38 / 62 split, One primary, Charts | Calm, clarity | Off-white, pale blue-grey | Folded paper or frosted glass with large soft planes |
+- Three large radial lights over a base: `--cv1` top left, `--cv2` bottom right, `--cv3` top right, on `--cv0`.
+- Fine grain on top (`::after`), strength `--grain`: 0.6 in light, 0.12 in dark. Grain on dark reads as dirt, so it is almost off.
+- The palette comes from `data-ctx` on the cover (`nav`, `med`, `cli`, `veh`, `inf`). Entries map to a context in `CTX` (entry number → context); anything unmapped falls back to `nav`.
+- In the dark theme the After panel on a cover switches to its dark variant (dark grey at 86%, white text, lighter bottom band, deeper shadow). The Before stays as AI made it.
 
-When a new entry doesn't fit a context, reuse the closest one. Don't add a sixth context until at least 3 entries need it.
+## Rules
 
-## Prompt for Codex
+1. **Colour and light only.** No shapes, textures, objects, text or logos. The component is the only object in the picture.
+2. **A quiet center.** The lights sit at the corners; the middle stays smooth.
+3. **Light theme:** light to mid tones, clearly darker than the white panel. **Dark theme:** clean, cool near-black a step darker than the dark panel, one neutral key light top left, one context colour bottom right. Avoid warm colours in dark: they turn brown.
+4. **Same structure for all.** Only the four colours change. Don't move the lights or change the grain per context.
+5. **Context sets the colour**, not the entry's chapter (Layout, Type, Color…).
 
-Shared part (keep it the same for every image):
+## Context → palette
 
-```
-Abstract photographic background, 16:9, 1600x900. Extremely soft focus, very shallow depth of field, light from the top left, fine 35mm film grain. Low saturation, two or three close colors only. The center 60% of the frame is calm, smooth and low-contrast; texture and color stay toward the edges. Overall lightness light to mid (not white, not dark). No objects, no people, no vehicles, no roads, no text, no logos.
-```
+`cv0` base · `cv1` top left · `cv2` bottom right · `cv3` top right
 
-Then add one line for the context:
+| Context | Entries | Light | Dark |
+|---|---|---|---|
+| Navigation (`nav`) | 001 | `#e2e0da` `#efc4a3` `#98aec2` `#c3d4bb` · apricot, haze blue, pale sage | `#0f1115` `#2c2e34` `#1e3a5e` `#14171c` · night blue |
+| Media (`med`) | 002, 008 | `#e5dcd5` `#efbd9e` `#cfa3a6` `#e6cfb0` · apricot, dusty rose, sand | `#100f13` `#2d2c32` `#45264a` `#16141a` · plum |
+| Climate (`cli`) | 003, 006, 009 | `#dee2e1` `#a8c3cd` `#efc0a0` `#cfdcd6` · cool left, warm right | `#0e1114` `#173e48` `#4a2a28` `#131719` · teal top left, a corner of coral |
+| Vehicle & controls (`veh`) | 004, 007, 010 | `#dcd8d3` `#d8c5af` `#a39d97` `#e5dccf` · warm grey, sand, graphite | `#101012` `#2e2f33` `#34373c` `#161618` · steel |
+| Information & layout (`inf`) | 005, 011, 012 | `#e0e3e7` `#efdcc8` `#a7b7ca` `#d2dbe5` · pale blue-grey | `#0f1115` `#2b2e34` `#243552` `#14171c` · blue-grey |
 
-- **Navigation:** `Motif: long horizontal streaks of dusk light, like a horizon through a soft-focus windshield. Palette: apricot, haze blue, pale sage.`
-- **Media:** `Motif: large out-of-focus round bokeh with soft halation. Palette: amber and rose, deep plum only at the edges.`
-- **Climate:** `Motif: slow mist and vapor gradients, like breath on cold glass. Palette: cool mint on the left fading to warm peach on the right.`
-- **Vehicle & controls:** `Motif: brushed metal or matte stone surface under grazing light. Palette: warm grey and sand, graphite only at the edges.`
-- **Information & layout:** `Motif: large soft planes of folded paper or frosted glass. Palette: off-white and pale blue-grey.`
+When a new entry doesn't fit a context, map it to the closest one in `CTX`. Don't add a sixth context until at least 3 entries need it.
 
-## Checking an image before using it
+## Checking a cover
 
-- Put the After component on top at cover size. Can you read "300 m" without squinting?
-- Blur the image a lot. Is the center still calmer than the edges?
-- Put it next to the other covers. Do they look like one set, with the same grain, light and softness?
+- Read "300 m" at thumbnail size (about 350 px wide) without squinting, in both themes.
+- The component is the brightest thing in a light cover, and a step lighter than the background in a dark cover.
+- Put all five side by side: they should look like one set.

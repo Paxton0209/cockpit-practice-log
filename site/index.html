@@ -17,7 +17,7 @@
 :root,[data-theme=light]{
   --bg:#f7f7f7;--stage:#f2f2f2;--panel:#fff;--ink:#0a0a0a;--t2:#5c5c5c;--t3:#9a9a9a;--line:rgba(0,0,0,.075);--fill:#efefef;--fill2:rgba(29,29,31,.08);--lift:0 1px 2px rgba(0,0,0,.04),0 0 0 1px rgba(0,0,0,.06);--lift2:0 12px 32px -14px rgba(0,0,0,.16),0 0 0 1px rgba(0,0,0,.08);--accent:#0a7cff;
   --sbg:#f3f3f3;--ssf:#fff;--ssf2:#e6e6e6;--stx:#0a0a0a;--st2:#8a8a8a;--sln:#e8e8e8;--sac:#0a7cff;color-scheme:light}
-[data-theme=dark]{--cv0:#7d8187;--cv1:#a88369;--cv2:#5d7286;--cv3:#7f8c74;--grain:.4;
+[data-theme=dark]{
   --bg:#0a0a0a;--stage:#121212;--panel:#161616;--ink:#f5f5f5;--t2:#a3a3a3;--t3:#666;--line:rgba(255,255,255,.08);--fill:#222;--fill2:rgba(255,255,255,.09);--lift:0 0 0 1px rgba(255,255,255,.07);--lift2:0 0 0 1px rgba(255,255,255,.12),0 16px 40px -16px rgba(0,0,0,.7);--accent:#2b8fff;
   --sbg:#0b0b0b;--ssf:#191919;--ssf2:#2a2a2a;--stx:#f5f5f5;--st2:#8a8a8a;--sln:#262626;--sac:#2b8fff;color-scheme:dark}
 :root{--cv0:#e2e0da;--cv1:#efc4a3;--cv2:#98aec2;--cv3:#c3d4bb;--grain:.6;--bad:#E5484D;--good:#30A46C;--font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;--out:cubic-bezier(.22,1,.36,1);--ease:cubic-bezier(.2,0,0,1);--io:cubic-bezier(.65,0,.35,1)}
@@ -99,6 +99,24 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
   radial-gradient(90% 90% at 92% 100%,var(--cv2) 0%,transparent 62%),
   radial-gradient(70% 70% at 78% 12%,var(--cv3) 0%,transparent 60%),var(--cv0)}
 .thumb.cov,.hero3.cov{box-shadow:none}
+:root[data-theme=dark]{--cv0:#0f1115;--cv1:#2c2e34;--cv2:#1e3a5e;--cv3:#14171c;--grain:.12} /* must outrank the :root defaults below */
+/* cover backgrounds: one shoot, five contexts. Same three lights, grain and light direction; only the colours change.
+   cv0 base · cv1 top-left light · cv2 bottom-right · cv3 top-right. Dark: clean cool near-black, one neutral key light, one context colour. */
+[data-ctx=med]{--cv0:#e5dcd5;--cv1:#efbd9e;--cv2:#cfa3a6;--cv3:#e6cfb0}
+[data-ctx=cli]{--cv0:#dee2e1;--cv1:#a8c3cd;--cv2:#efc0a0;--cv3:#cfdcd6}
+[data-ctx=veh]{--cv0:#dcd8d3;--cv1:#d8c5af;--cv2:#a39d97;--cv3:#e5dccf}
+[data-ctx=inf]{--cv0:#e0e3e7;--cv1:#efdcc8;--cv2:#a7b7ca;--cv3:#d2dbe5}
+[data-theme=dark] [data-ctx=med]{--cv0:#100f13;--cv1:#2d2c32;--cv2:#45264a;--cv3:#16141a}
+[data-theme=dark] [data-ctx=cli]{--cv0:#0e1114;--cv1:#173e48;--cv2:#4a2a28;--cv3:#131719}
+[data-theme=dark] [data-ctx=veh]{--cv0:#101012;--cv1:#2e2f33;--cv2:#34373c;--cv3:#161618}
+[data-theme=dark] [data-ctx=inf]{--cv0:#0f1115;--cv1:#2b2e34;--cv2:#243552;--cv3:#14171c}
+/* on a dark cover the After panel is the dark variant (the Before stays as AI made it) */
+[data-theme=dark] .cov .kp:not(.is-b) .t1{background:rgba(44,44,46,.86);box-shadow:0 8px 16px rgba(0,0,0,.45);color:#fff}
+[data-theme=dark] .cov .kp:not(.is-b) .t1::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)}
+[data-theme=dark] .cov .kp:not(.is-b) .t1 .mn,[data-theme=dark] .cov .kp:not(.is-b) .t1 .mv,[data-theme=dark] .cov .kp:not(.is-b) .t1 .ni,[data-theme=dark] .cov .kp:not(.is-b) .t1 .nx b{color:#fff}
+[data-theme=dark] .cov .kp:not(.is-b) .t1 .dd i{color:rgba(255,255,255,.65)}
+[data-theme=dark] .cov .kp:not(.is-b) .t1 .bc{background:rgba(72,72,74,.55);color:rgba(255,255,255,.65)}
+[data-theme=dark] .cov .kp:not(.is-b) .t1 .ni path[stroke="#B6B6B7"]{stroke:#7c7c80}
 .hero3.cov{isolation:isolate;overflow:hidden}.hero3.cov>*{position:relative;z-index:1}.hero3.cov .cstage{z-index:1}
 .thumb.cov::after,.hero3.cov::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:calc(var(--grain)*.35);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .thumb.cov .cs{z-index:1;background:transparent}
@@ -265,10 +283,16 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .veil{position:absolute;inset:0;background:rgba(0,0,0,.06);opacity:0;touch-action:none}
 [data-theme=dark] .veil{background:rgba(0,0,0,.35)}
 [data-theme=dark] .seg4 .ind{background:rgba(255,255,255,.12);box-shadow:none}
-.sc{position:fixed;left:0;top:0;corner-shape:superellipse(1.6);background:var(--panel);border:1px solid var(--line);box-sizing:border-box;overflow:hidden;will-change:transform,width,height}
-.sc i{position:absolute;inset:-1px;border-radius:inherit;corner-shape:inherit;box-shadow:0 16px 52px rgba(0,0,0,.12);opacity:0}
-.sheet2{position:fixed;left:50%;top:48px;height:auto;max-height:calc(100dvh - 96px);width:min(720px,calc(100vw - 48px));transform:translateX(-50%);border-radius:20px;corner-shape:superellipse(1.6);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
-.sheet2:focus{outline:none}
+@property --dialog-surface-opacity{syntax:"<number>";inherits:true;initial-value:1}
+@property --dialog-copy-opacity{syntax:"<number>";inherits:true;initial-value:1}
+.sheet2{position:fixed;left:50%;top:48px;width:min(720px,calc(100vw - 48px));transform:translateX(-50%);transform-origin:top left;isolation:isolate;border-radius:20px;corner-shape:superellipse(1.6);will-change:transform,filter}
+/* one element owns the motion: the surface is drawn by the sheet itself (Dashline .sheet::before) */
+.sheet2::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;background:var(--panel);border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px var(--line),0 16px 52px rgba(0,0,0,.12);opacity:var(--dialog-surface-opacity)}
+.sbody{position:relative;max-height:calc(100dvh - 96px);overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;border-radius:inherit}
+/* title, columns and prompt fade in with the surface and clear early on close */
+.sheet2 .dtop,.sheet2 .art,.sheet2 .htools{opacity:calc(var(--dialog-surface-opacity)*var(--dialog-copy-opacity))}
+.sheet2[data-closing]{pointer-events:none}
+.sheet2:focus,.sbody:focus{outline:none}
 .sci{padding:16px 24px 24px}
 .dtop{display:flex;align-items:center;justify-content:space-between;height:36px;padding:0 0 0 4px;margin-bottom:16px}
 .dtop .mono{color:var(--t3)}
@@ -523,7 +547,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 body.lock{overflow:hidden}
 .toast{position:fixed;left:50%;bottom:28px;z-index:60;height:36px;padding:0 14px;border-radius:8px;background:var(--ink);color:var(--bg);font-size:13px;display:flex;align-items:center;opacity:0;transform:translate(-50%,8px);transition:opacity .2s,transform .45s var(--out);pointer-events:none}
 .toast.show{opacity:1;transform:translate(-50%,0)}
-@media(max-width:620px){.sheet2{left:0;right:0;bottom:0;top:auto;height:min(92dvh,760px);width:auto;transform:none;border-radius:20px 20px 0 0}.sci{padding:12px 16px 40px}.hero3{padding:52px 16px 12px;gap:12px}.hero3 .seg4{top:12px;right:12px}.art{padding:20px 16px 4px}.chg{grid-template-columns:1fr}.art h2{font-size:20px;line-height:28px}.pager{grid-template-columns:1fr}}
+@media(max-width:620px){.sheet2{left:0;right:0;bottom:0;top:auto;height:min(92dvh,760px);width:auto;transform:none;border-radius:20px 20px 0 0}.sbody{height:100%;max-height:none}.sci{padding:12px 16px 40px}.hero3{padding:52px 16px 12px;gap:12px}.hero3 .seg4{top:12px;right:12px}.art{padding:20px 16px 4px}.chg{grid-template-columns:1fr}.art h2{font-size:20px;line-height:28px}.pager{grid-template-columns:1fr}}
 @property --theme-reveal-progress{syntax:"<length>";inherits:false;initial-value:0px}
 ::view-transition-group(root),::view-transition-old(root),::view-transition-new(root){animation:none;mix-blend-mode:normal}
 ::view-transition{pointer-events:none}
@@ -653,6 +677,9 @@ const DATA=[
 ['C','Charts can wait until you park','An air-quality graph looks smart and steals a glance you don’t have.','If it doesn’t change what the driver does next, move it off the main view.',['Chart in view','Chart parked']]];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['No hierarchy'],['Phone habits'],['Too small','Too much'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['Too much']];
+/* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
+const CTX={1:'nav',2:'med',8:'med',3:'cli',6:'cli',9:'cli',4:'veh',7:'veh',10:'veh',5:'inf',11:'inf',12:'inf'};
+const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:CHAPTERS[Math.floor(i/10)],s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
 T:[`Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.`,
@@ -693,7 +720,7 @@ function viewHome(){
 function gridFor(c){
   const list=c==='All'?[ENTRIES[0],...ENTRIES.slice(1,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+3)]:ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=e.n>PUBLISHED,C=!soon&&CMP[e.s]&&CMP[e.s].cover?CMP[e.s]:null;
-    return `<a class="card ${soon?'soon':''}${C?' hc':''}" data-n="${e.n}" href="#entry-${pad(e.n)}" style="--d:${(i%3)*50}ms"><div class="thumb${C?' cov':''}">${C?cmp(e.s,'a'):''}</div>
+    return `<a class="card ${soon?'soon':''}${C?' hc':''}" data-n="${e.n}" href="#entry-${pad(e.n)}" style="--d:${(i%3)*50}ms"><div class="thumb${C?' cov':''}" data-ctx="${ctxOf(e.n)}">${C?cmp(e.s,'a'):''}</div>
     <div class="meta"><b class="num">${pad(e.n)}</b>${C?`<span class="ttl">${C.name}</span>`:`<span class="ttl">${soon?'Coming soon':e.title}</span>`}</div></a>`}).join('')}
 
 const ro=new ResizeObserver(es=>es.forEach(x=>x.target.style.setProperty('--k',x.contentRect.width/+x.target.dataset.w)));
@@ -718,31 +745,77 @@ function setupHome(){
     $$('.card',g).forEach(el=>el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:500,delay:parseFloat(el.style.getPropertyValue('--d'))||0,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}));
     if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'})});
 }
-/* ---- entry sheet: grows out of the clicked cover, Dashline spring ---- */
-const LENS_EASE='cubic-bezier(.32,.72,0,1)',RM=matchMedia('(prefers-reduced-motion: reduce)'),COMPACT=matchMedia('(max-width:620px)');
-let motion=[],lens='closed',anchor=null,curN=0;
-const stop=()=>{motion.forEach(a=>a.cancel());motion=[]};
-const anim=(el,f,o)=>{const a=el.animate(f,{fill:'both',...o});motion.push(a);return a};
-function spring(el,from,to,fmt,k=500,d=38){
-  const decay=d/2,delta=k-decay*decay,omega=Math.sqrt(Math.abs(delta)),slow=delta<0?decay-omega:decay;
-  const dur=Math.ceil(1000*Math.log(1000)/slow),n=Math.ceil(dur*120/1000);
-  return anim(el,Array.from({length:n+1},(_,i)=>{const t=dur*i/(n*1000);
-    const r=Math.abs(delta)<1e-8?1+decay*t:delta>0?Math.cos(omega*t)+decay/omega*Math.sin(omega*t):Math.cosh(omega*t)+decay/omega*Math.sinh(omega*t);
-    const p=i===n?1:1-Math.exp(-decay*t)*r;return fmt(from.map((v,j)=>v+(to[j]-v)*p))}),{duration:dur});
+/* ---- entry sheet: grows out of the clicked cover ----
+   Structure copied from Dashline (springDialog / closeInsp): the sheet rides one sampled spring
+   (dialogStyle + surface/copy opacity), the stage rides the same spring with a counter-scale
+   (lensPose), both started on the same timeline tick. */
+const lensEase='cubic-bezier(.32,.72,0,1)',lensReduced=matchMedia('(prefers-reduced-motion: reduce)'),lensCompact=matchMedia('(max-width:620px)');
+const RM=lensReduced,COMPACT=lensCompact;
+let lensMotion=[],lensState='closed',lensAnchor=null,curN=0;
+const stopLens=()=>{lensMotion.forEach(a=>a.cancel());lensMotion=[]};
+function lensAnimate(el,frames,options){
+  const a=el.animate(frames,{fill:'both',...options});lensMotion.push(a);return a;
 }
-const rbox=(r,rad)=>[r.left,r.top,r.width,r.height,rad];
-const pose=(r,t)=>[r[0]+r[2]/2-t.left-t.width/2,r[1]+r[3]/2-t.top-t.height/2,r[2]/t.width];
-const pstyle=([x,y,k])=>({transform:`translate(${x}px,${y}px) scale(${k})`,transformOrigin:'50% 50%'});
-const rest=sh=>[...sh.querySelectorAll('.dtop,.art,.pager')];
-const hstyle=([x,y,k])=>({transform:`translate(${x}px,${y}px) scale(${k})`});
-const restOf=sh=>{const h=$('.hero3',sh);return [...$$('.dtop,.art',sh),...(h?$$('.htools',h):[])]};
-const uni=(a,b)=>{const l=Math.min(a[0],b[0]),t=Math.min(a[1],b[1]),r=Math.max(a[0]+a[2],b[0]+b[2]),btm=Math.max(a[1]+a[3],b[1]+b[3]);return {left:l,top:t,right:r,bottom:btm,box:[l,t,r-l,btm-t,0]}};
-const clipf=S=>([x,y,w,h,r])=>({clipPath:`inset(${y-S.top}px ${S.right-x-w}px ${S.bottom-y-h}px ${x-S.left}px round ${r}px)`});
-const cstyle=([x,y,w,h,r])=>({transform:`translate(${x}px,${y}px)`,width:w+'px',height:h+'px',borderRadius:r+'px'});
-function thumbFor(n){const el=anchor?.isConnected&&+anchor.dataset.n===n?anchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
+// Sample the reference spring (mass 1, stiffness 500, damping 38) into native keyframes.
+function lensSpring(el,from,to,format,stiffness=500,damping=38){
+  const decay=damping/2,delta=stiffness-decay*decay;
+  const omega=Math.sqrt(Math.abs(delta));
+  const slowRate=delta<0?decay-omega:decay;
+  const duration=Math.ceil(1000*Math.log(1000)/slowRate);
+  const count=Math.ceil(duration*120/1000);
+  return lensAnimate(el,Array.from({length:count+1},(_,i)=>{
+    const t=duration*i/(count*1000);
+    const response=Math.abs(delta)<1e-8?1+decay*t:delta>0?
+      Math.cos(omega*t)+decay/omega*Math.sin(omega*t):
+      Math.cosh(omega*t)+decay/omega*Math.sinh(omega*t);
+    const p=i===count?1:1-Math.exp(-decay*t)*response;
+    return format(from.map((v,k)=>v+(to[k]-v)*p));
+  }),{duration});
+}
+function cardPose(rect,rest){
+  return [rect.left-rest.left,rect.top-rest.top,rect.width/rest.width,rect.height/rest.height];
+}
+/* the sheet is centred with left:50% + translateX(-50%); top is set in px by center() */
+const dialogStyle=([x,y,sx,sy])=>({transform:`translate(calc(-50% + ${x}px),${y}px) scale(${sx},${sy})`});
+function lensPose(r,target){
+  return [r.left+r.width/2-target.left-target.width/2,r.top+r.height/2-target.top-target.height/2,r.width/target.width];
+}
+const STAGE_R=16;
+function thumbFor(n){const el=lensAnchor?.isConnected&&+lensAnchor.dataset.n===n?lensAnchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
 function ghost(n,on){const t=thumbFor(n);if(t)t.style.visibility=on?'hidden':''}
-function srcFor(n){const el=anchor?.isConnected&&+anchor.dataset.n===n?anchor:$(`#grid .card[data-n="${n}"]`);const t=el&&$('.thumb',el);if(!t)return null;
-  const r=t.getBoundingClientRect();if(r.bottom<=0||r.top>=innerHeight)return null;return rbox(r,16)}
+/* the cover is both the card and the artwork (Dashline's cell + glyph). Closing lands on the cover at rest,
+   so hold it still: its hover lift would otherwise move the target mid-flight. */
+function sourceFor(n,rest){const t=thumbFor(n);if(!t)return null;if(rest){t.style.transition='none';t.style.transform='none'}
+  const r=t.getBoundingClientRect();if(!r.width||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth)return null;return {glyph:r,cell:r}}
+// The dialog surface and the copy ride the same spring.
+// Counter-scale only the stage to preserve its uniform cover-to-stage path.
+function springDialog(fromCard,toCard,fromArt,toArt,restCard,restArt,fromSurface=1,toSurface=1){
+  const sheet=$('#sheet2'),stage=$('.hero3',sheet);
+  const from=[...cardPose(fromCard,restCard),...lensPose(fromArt,restArt),fromSurface];
+  const to=[...cardPose(toCard,restCard),...lensPose(toArt,restArt),toSurface];
+  const cx=restArt.left+restArt.width/2-restCard.left;
+  const cy=restArt.top+restArt.height/2-restCard.top;
+  const closing=toSurface<fromSurface;
+  const initialBlur=parseFloat(getComputedStyle(sheet).filter.match(/blur\(([\d.]+)px\)/)?.[1]||'0');
+  const surface=lensSpring(sheet,from,to,v=>{
+    const alpha=Math.max(0,Math.min(1,v[7]));
+    const progress=closing?Math.max(0,Math.min(1,(fromSurface-v[7])/(fromSurface-toSurface))):0;
+    // Copy clears early, while the spring and the returning cover finish naturally.
+    const copy=closing?Math.pow(Math.max(0,1-progress/.65),2):1;
+    const blur=closing?initialBlur*(1-progress)+4*Math.sin(Math.PI*progress):0;
+    return {...dialogStyle(v),'--dialog-surface-opacity':alpha,'--dialog-copy-opacity':copy,filter:`blur(${blur}px)`};
+  });
+  /* corner radius is counter-scaled too, so the stage lands with the cover's 16px corners.
+     It also keeps this effect on the main thread with the sheet's, so the two can't split across threads. */
+  stage.style.transformOrigin='50% 50%';
+  const artwork=lensSpring(stage,from,to,([x,y,sx,sy,gx,gy,g])=>({
+    transform:`translate(${(cx+gx-x)/sx-cx}px,${(cy+gy-y)/sy-cy}px) scale(${g/sx},${g/sy})`,
+    borderRadius:`${STAGE_R/g}px`
+  }));
+  const start=document.timeline.currentTime;
+  surface.startTime=start;artwork.startTime=start;
+  return surface;
+}
 const CHEV='<svg class="chev" width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m6 4 4 4-4 4"/></svg>';
 function sheetHTML(n){
   const e=ENTRIES[n-1],S=SCENES[e.s],c=e.cc,[p0,p1]=prompts(e),pv=ENTRIES[n-2],nx=n<PUBLISHED?ENTRIES[n]:null;
@@ -751,7 +824,7 @@ function sheetHTML(n){
     <div class="dtop"><span class="dname">${CMP[e.s].name||e.title}<i class="mono">${pad(e.n)}</i></span><span class="act">
       
       </span></div>
-    <div class="ecard"><div class="hero3${CMP[e.s]&&CMP[e.s].cover?" cov":""}">
+    <div class="ecard"><div class="hero3${CMP[e.s]&&CMP[e.s].cover?" cov":""}" data-ctx="${ctxOf(e.n)}">
       <div class="cstage" id="cstage" data-v="a" style="height:${(CMP[e.s].H||CH)-40}px">
         ${cmp(e.s,'a')}${cmp(e.s,'b')}
       </div>
@@ -843,51 +916,75 @@ function wireSheet(){
     if(d.open){d.classList.add('closing');rb.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:120,easing:'ease-out',fill:'forwards'}).onfinish=()=>{d.open=false;d.classList.remove('closing');rb.getAnimations().forEach(a=>a.cancel())}}
     else{d.open=true;rb.animate([{opacity:0,transform:'translateY(-6px)'},{opacity:1,transform:'none'}],{duration:180,easing:'ease-out'})}}});
 }
-const shRO=new ResizeObserver(()=>{{const sh=$('#sheet2'),sc=$('#sc');if(!sh||!sc||lens!=='open'||COMPACT.matches)return;const as=sc.getAnimations();if(as.some(x=>x.playState==='running'))return;as.forEach(x=>x.cancel());sc.style.transition='height .3s cubic-bezier(.2,0,0,1)';Object.assign(sc.style,cstyle(rbox(sh.getBoundingClientRect(),20)))}});
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
-  ov.innerHTML='<div class="veil" id="veil"></div><div class="sc" id="sc"><i></i></div><div class="sheet2" id="sheet2" tabindex="-1" role="dialog" aria-modal="true"></div>';
-  document.body.appendChild(ov);$('#veil').onclick=()=>go('home');shRO.observe($('#sheet2'));return ov}
-function center(sh){if(COMPACT.matches){sh.style.top='';return}sh.style.top=Math.round(Math.max(48,(innerHeight-sh.offsetHeight)/2))+'px'}
-function openEntry(n){{const c=$('#sc');if(c)c.style.transition=''}
-  const ov=ensureOv(),sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),shadow=$('#sc i');
-  if(lens==='open'){curN=n;sh.innerHTML=sheetHTML(n);fit(sh);wireSheet();sh.scrollTop=0;anim(sh.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
-  if(lens==='closing'){stop();}
-  curN=n;sh.innerHTML=sheetHTML(n);fit(sh);ov.classList.add('open');document.body.classList.add('lock','dim');lens='open';center(sh);sh.scrollTop=0;sh.focus({preventScroll:true});
-  const end=rbox(sh.getBoundingClientRect(),20);Object.assign(sc.style,cstyle(end));wireSheet();
-  if(RM.matches){veil.style.opacity=1;shadow.style.opacity=1;return}
-  anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});veil.style.opacity=1;
-  const src=srcFor(n);
-  if(COMPACT.matches){spring(sh,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);spring(sc,[100],[0],([y])=>({...cstyle(end),transform:`translate(${end[0]}px,${end[1]+y*end[3]/100}px)`}),420,40)}
-  else if(src){ghost(n,1);sh.style.overflow='visible';const S=sh.getBoundingClientRect(),U=uni(src,end);Object.assign(sc.style,cstyle(U.box));const s=spring(sc,src,end,clipf(U)),a2=spring(sh,src,end,clipf(S)),sync=[s,a2];
-    const hero=$('.hero3',sh);if(hero){const hr=hero.getBoundingClientRect();hero.style.transformOrigin='50% 50%';sync.push(spring(hero,pose(src,hr),[0,0,1],hstyle))}{const t=document.timeline.currentTime;sync.forEach(a=>a.startTime=t)}
-    restOf(sh).forEach(el=>anim(el,[{opacity:0},{opacity:1}],{duration:220,delay:110,easing:'ease-out',fill:'backwards'}));
-    s.onfinish=()=>{Object.assign(sc.style,cstyle(end));sh.style.overflow='';ghost(n,0);if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
-  else{anim(sc,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(sh,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(shadow,[{opacity:0},{opacity:1}],{duration:200})}
+  ov.innerHTML='<div class="veil" id="veil"></div><div class="sheet2" id="sheet2" role="dialog" aria-modal="true" tabindex="-1"><div class="sbody" id="sbody" tabindex="-1"></div></div>';
+  document.body.appendChild(ov);$('#veil').onclick=()=>go('home');return ov}
+function center(sh){if(lensCompact.matches){sh.style.top='';return}sh.style.top=Math.round(Math.max(48,(innerHeight-sh.offsetHeight)/2))+'px'}
+function openEntry(n){
+  const ov=ensureOv(),sheet=$('#sheet2'),body=$('#sbody'),veil=$('#veil');
+  if(lensState==='open'){if(!lensCompact.matches&&!lensReduced.matches){ghost(curN,0);ghost(n,1)}curN=n;body.innerHTML=sheetHTML(n);fit(body);wireSheet();body.scrollTop=0;lensAnimate(body.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
+  if(lensState==='closing'){const a=lensAnchor;finishLens();lensAnchor=a}
+  const source=sourceFor(n,false);
+  curN=n;body.innerHTML=sheetHTML(n);fit(body);
+  lensState='open';ov.classList.add('open');document.body.classList.add('lock','dim');
+  center(sheet);body.scrollTop=0;body.focus({preventScroll:true});wireSheet();
+  const end=sheet.getBoundingClientRect(),art=$('.hero3',sheet).getBoundingClientRect();
+  veil.style.opacity=1;
+  if(lensReduced.matches)return;
+  lensAnimate(veil,[{opacity:0},{opacity:1}],{duration:220,easing:lensEase});
+  if(lensCompact.matches){
+    lensSpring(sheet,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);
+  }else if(source){
+    ghost(n,1);
+    springDialog(source.cell,end,source.glyph,art,end,art,0,1).onfinish=()=>{if(lensState==='open')stopLens()}; /* one shot: the cover became the sheet, so its slot stays empty while open */
+  }else{
+    lensAnimate(sheet,[{opacity:0},{opacity:1}],{duration:200,easing:lensEase});
+  }
 }
-function finish(){stop();$$('#grid .thumb').forEach(t=>t.style.visibility='');const ov=$('#ov');$('#veil').style.opacity='';$('#sheet2').style.overflow='';ov.classList.remove('open');document.body.classList.remove('lock');$('#sheet2').innerHTML='';lens='closed';
-  const f=anchor?.isConnected?anchor:null;curN=0;anchor=null;if(f)f.focus({preventScroll:true})}
-function closeEntry(){document.body.classList.remove('dim');{const c=$('#sc');if(c)c.style.transition=''}
-  if(lens!=='open')return;lens='closing';
-  if(RM.matches){finish();return}
-  const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||20);
-  stop();anim(veil,[{opacity:1},{opacity:0}],{duration:140,easing:'ease-out'});let end;
-  if(COMPACT.matches){end=spring(sh,[0],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);anim(sc,[{opacity:1},{opacity:0}],{duration:160})}
-  else if(src&&$('.hero3',sh)&&sh.scrollTop<2){ghost(curN,1);sh.style.overflow='visible';{const st=$('#cstage');if(st&&st.dataset.v==='b'){if(st._scan)st._scan.forEach(a=>a.cancel());fadeTo(st,'a',200)}}const hero=$('.hero3',sh),hr=hero.getBoundingClientRect(),S=sh.getBoundingClientRect();
-    restOf(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:90,easing:'ease-out',fill:'forwards'}));
-    anim($('#sc i'),[{opacity:1},{opacity:0}],{duration:160,easing:'ease-out',fill:'forwards'});
-    const U=uni(cur,src);Object.assign(sc.style,cstyle(U.box));hero.style.transformOrigin='50% 50%';const b1=spring(sh,cur,src,clipf(S)),b2=spring(hero,[0,0,1],pose(src,hr),hstyle);end=spring(sc,cur,src,clipf(U));{const t=document.timeline.currentTime;[b1,b2,end].forEach(a=>a.startTime=t)}}
-  else{const o={duration:140,easing:'ease-out',fill:'forwards'};anim(sc,[{opacity:1,transform:sc.style.transform},{opacity:0,transform:sc.style.transform+' scale(.98)'}],o);end=anim(sh,[{opacity:1,transform:'translateX(-50%)'},{opacity:0,transform:'translateX(-50%) scale(.98)'}],o)}
-  end.onfinish=finish;
+function finishLens(){
+  stopLens();
+  const sheet=$('#sheet2');sheet.removeAttribute('data-closing');{const h=$('.hero3',sheet);if(h)h.style.transformOrigin=''}
+  $$('#grid .thumb').forEach(t=>{t.style.visibility=t.style.transform='';t.offsetWidth;t.style.transition=''});
+  $('#veil').style.opacity='';$('#ov').classList.remove('open');document.body.classList.remove('lock','dim');$('#sbody').innerHTML='';
+  const focus=lensAnchor?.isConnected?lensAnchor:null;
+  lensState='closed';curN=0;lensAnchor=null;
+  if(focus)focus.focus({preventScroll:true});
+}
+function closeInsp(){
+  document.body.classList.remove('dim');
+  if(lensState!=='open')return;
+  lensState='closing';const sheet=$('#sheet2'),veil=$('#veil'),stage=$('.hero3',sheet);sheet.setAttribute('data-closing','');
+  if(lensReduced.matches){finishLens();return}
+  /* on Before, fade back to After on the way */
+  {const st=$('#cstage');if(st&&st.dataset.v==='b'){if(st._scan)st._scan.forEach(a=>a.cancel());fadeTo(st,'a',200)}}
+  const source=sourceFor(curN,true);
+  const currentSheet=sheet.getBoundingClientRect(),currentArt=stage?.getBoundingClientRect();
+  const backdrop=Number(getComputedStyle(veil).opacity),sheetOpacity=Number(getComputedStyle(sheet).opacity);
+  const surfaceOpacity=Number(getComputedStyle(sheet).getPropertyValue('--dialog-surface-opacity'));
+  stopLens();
+  lensAnimate(veil,[{opacity:backdrop},{opacity:0}],{duration:180,easing:'ease-in'});
+  let end;
+  if(lensCompact.matches){
+    const rest=sheet.getBoundingClientRect();
+    end=lensSpring(sheet,[100*(currentSheet.top-rest.top)/rest.height],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);
+  }else if(source&&stage){
+    ghost(curN,1);
+    const rest=sheet.getBoundingClientRect(),art=stage.getBoundingClientRect();
+    end=springDialog(currentSheet,source.cell,currentArt,source.glyph,rest,art,surfaceOpacity,0);
+  }else{
+    end=lensAnimate(sheet,[{opacity:sheetOpacity},{opacity:0}],{duration:150,easing:'ease-in'});
+  }
+  end.onfinish=finishLens;
 }
 function go(h){location.hash=h}
-addEventListener('keydown',e=>{if(!curN||lens!=='open')return;if(e.key==='Escape')go('home');if(e.key==='ArrowLeft'&&curN>1)go('entry-'+pad(curN-1));if(e.key==='ArrowRight'&&curN<PUBLISHED)go('entry-'+pad(curN+1))});
-addEventListener('click',e=>{const c=e.target.closest('#grid .card');if(c)anchor=c},true);
+addEventListener('keydown',e=>{if(!curN||lensState!=='open')return;if(e.key==='Escape')go('home');if(e.key==='ArrowLeft'&&curN>1)go('entry-'+pad(curN-1));if(e.key==='ArrowRight'&&curN<PUBLISHED)go('entry-'+pad(curN+1))});
+addEventListener('click',e=>{const c=e.target.closest('#grid .card');if(c)lensAnchor=c},true);
 let homeReady=false;
 function route(){
   const m=location.hash.match(/^#entry-(\d{3})$/);
   if(!homeReady){$('#app').innerHTML=viewHome();setupHome();fit($('#grid'));homeReady=true}
   if(m){const n=+m[1];if(n>=1&&n<=PUBLISHED&&n!==curN)openEntry(n)}
-  else closeEntry();
+  else closeInsp();
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 const mem={get(k){try{return localStorage.getItem('dn:'+k)}catch(_){return null}},set(k,v){try{localStorage.setItem('dn:'+k,v)}catch(_){}}};
