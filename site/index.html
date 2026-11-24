@@ -20,7 +20,7 @@
 [data-theme=dark]{
   --bg:#0a0a0a;--stage:#121212;--panel:#161616;--ink:#f5f5f5;--t2:#a3a3a3;--t3:#666;--line:rgba(255,255,255,.08);--fill:#222;--fill2:rgba(255,255,255,.09);--lift:0 0 0 1px rgba(255,255,255,.07);--lift2:0 0 0 1px rgba(255,255,255,.12),0 16px 40px -16px rgba(0,0,0,.7);--accent:#2b8fff;
   --sbg:#0b0b0b;--ssf:#191919;--ssf2:#2a2a2a;--stx:#f5f5f5;--st2:#8a8a8a;--sln:#262626;--sac:#2b8fff;color-scheme:dark}
-:root{--cv0:#e2e0da;--cv1:#efc4a3;--cv2:#98aec2;--cv3:#c3d4bb;--grain:.6;--bad:#E5484D;--good:#30A46C;--font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;--out:cubic-bezier(.22,1,.36,1);--ease:cubic-bezier(.2,0,0,1);--io:cubic-bezier(.65,0,.35,1)}
+:root{--cv0:#e0e7ea;--cv1:#b4d3e6;--cv2:#8ab6bf;--cv3:#d3e6e4;--grain:.6;--bad:#E5484D;--good:#30A46C;--font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;--out:cubic-bezier(.22,1,.36,1);--ease:cubic-bezier(.2,0,0,1);--io:cubic-bezier(.65,0,.35,1)}
 *{box-sizing:border-box}
 html{background:var(--bg)}
 body{margin:0;font:400 15px/24px var(--font);color:var(--ink);background:var(--bg);letter-spacing:normal;-webkit-font-smoothing:antialiased;transition:background-color .3s,color .3s}
@@ -99,16 +99,16 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
   radial-gradient(90% 90% at 92% 100%,var(--cv2) 0%,transparent 62%),
   radial-gradient(70% 70% at 78% 12%,var(--cv3) 0%,transparent 60%),var(--cv0)}
 .thumb.cov,.hero3.cov{box-shadow:none}
-:root[data-theme=dark]{--cv0:#0f1115;--cv1:#2c2e34;--cv2:#1e3a5e;--cv3:#14171c;--grain:.12} /* must outrank the :root defaults below */
+:root[data-theme=dark]{--cv0:#0e1215;--cv1:#263038;--cv2:#1b4250;--cv3:#121719;--grain:.12} /* must outrank the :root defaults below */
 /* cover backgrounds: one shoot, five contexts. Same three lights, grain and light direction; only the colours change.
    cv0 base · cv1 top-left light · cv2 bottom-right · cv3 top-right. Dark: clean cool near-black, one neutral key light, one context colour. */
-[data-ctx=med]{--cv0:#e9dbe0;--cv1:#f0a7a1;--cv2:#b48bbd;--cv3:#f2cdb4}
-[data-ctx=cli]{--cv0:#dbe7e7;--cv1:#86c3cf;--cv2:#f3ae8c;--cv3:#c9e2d9}
-[data-ctx=veh]{--cv0:#e4ddd0;--cv1:#e8c48f;--cv2:#8c99a8;--cv3:#ece0c6}
+[data-ctx=med]{--cv0:#ecdcdc;--cv1:#f3b3a6;--cv2:#d293a6;--cv3:#f3d6cc}
+[data-ctx=cli]{--cv0:#dde7e0;--cv1:#b3dbc6;--cv2:#8db8a8;--cv3:#dcebd8}
+[data-ctx=veh]{--cv0:#e6dfd2;--cv1:#ecca97;--cv2:#c2a27a;--cv3:#efe3cb}
 [data-ctx=inf]{--cv0:#dfe1f0;--cv1:#c2c7f5;--cv2:#8ea3dc;--cv3:#e5d5ef}
-[data-theme=dark] [data-ctx=med]{--cv0:#110f14;--cv1:#2d2c32;--cv2:#5a2a5e;--cv3:#17141b}
-[data-theme=dark] [data-ctx=cli]{--cv0:#0d1214;--cv1:#164852;--cv2:#5a2e28;--cv3:#121819}
-[data-theme=dark] [data-ctx=veh]{--cv0:#101112;--cv1:#2f3033;--cv2:#2f4256;--cv3:#16171a}
+[data-theme=dark] [data-ctx=med]{--cv0:#120f12;--cv1:#2e2b2f;--cv2:#5a2740;--cv3:#181416}
+[data-theme=dark] [data-ctx=cli]{--cv0:#0e1312;--cv1:#213a33;--cv2:#1d4a40;--cv3:#121816}
+[data-theme=dark] [data-ctx=veh]{--cv0:#101112;--cv1:#2e2f31;--cv2:#3a3c40;--cv3:#161718}
 [data-theme=dark] [data-ctx=inf]{--cv0:#0f1016;--cv1:#2a2c38;--cv2:#3a3f86;--cv3:#14151d}
 /* on a dark cover the After panel is the dark variant (the Before stays as AI made it) */
 [data-theme=dark] .cov .kp:not(.is-b) .t1{background:rgba(44,44,46,.7);box-shadow:0 8px 16px rgba(0,0,0,.36);color:#fff}
@@ -385,7 +385,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 [data-theme=dark] .cov .kp:not(.is-b) .st{--fg:#fff;--mfg:rgba(255,255,255,.6);--card:#262628;--edge:rgba(255,255,255,.08);--tile:rgba(255,255,255,.05);--ctl:rgba(255,255,255,.09);--pri:#0c6fd2;--pri-e:#0a84ff;--sh:rgba(0,0,0,.3);--hl:rgba(255,255,255,.08);--ok:#32d74b;--acc:#0a84ff;--warn:#ffb340;--sel:rgba(255,255,255,.14);--off:rgba(255,255,255,.4);--sh2:rgba(0,0,0,.3)}
 .st *{box-sizing:border-box;margin:0}.st svg{display:block;flex:none}
 .st .lh{height:55px;padding-top:12px;font-size:24px;line-height:32px;color:var(--mfg)}.st .lh.s{height:32px;padding-top:0}
-.st .card{display:flex;flex-direction:column;padding:16px 8px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 2px var(--edge),inset 0 1px 0 var(--hl),0 1px 2px var(--sh);overflow:hidden}
+.st .card{display:flex;flex-direction:column;padding:24px 8px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 2px var(--edge),inset 0 1px 0 var(--hl),0 1px 2px var(--sh);overflow:hidden}
 .st .rw{height:108px;display:flex;align-items:center;gap:20px;padding:0 32px}
 .st .ai{width:68px;height:68px;border-radius:16px;background:var(--tile);display:grid;place-items:center}
 .st .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
@@ -885,106 +885,178 @@ O:{W:1245,H:698,name:'Opening tiles',cover:1,ask:'Design controls for opening th
     </button>
   </div>
 </div>`},
-L:{W:1437,H:806,name:'Locks',cover:1,ask:'Design a locks settings section for a car settings screen, 772 × 548 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.',wrong:[['Labels at 19 px','15 px lines under them, below a 30 px bold title.'],['48 px options','Off, Left, Right and Both in 17 px type.'],['Dividers on every row','Four hairlines inside one card.']],notes:[['Labels at 28 px','Lines at 24 px and 65%. The section label steps back.'],['56 px options','In a 64 px track, 28 px text. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
+L:{W:1479,H:830,name:'Locks',cover:1,ask:'Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.',wrong:[['Labels at 18 px','15 px lines under them, below a 28 px bold title.'],['Options in 17 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines between the switches, in a second card.']],notes:[['Labels at 28 px','Lines at 24 px and 65%. The section label steps back.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
   html:()=>`<div class="st"><div class="lh s">Locks</div><div class="card"><div class="ch">Child lock<div class="seg"><i>Off</i><i>Left</i><i>Right</i><i class="on">Both</i></div></div><div class="rw"><span class="tx">Window lock<span class="m">Disable rear window switches</span></span><i class="sw off"></i></div><div class="rw"><span class="tx">Walk-away lock<span class="m">Lock when your phone key leaves</span></span><i class="sw"></i></div><div class="rw"><span class="tx">Unlock on park<span class="m">Unlock all doors in Park</span></span><i class="sw"></i></div></div></div>`,
-  before:()=>`<div class="lk-root">
+  before:()=>`<div class="locks-panel">
 <style>
-.lk-root{width:772px;height:548px;box-sizing:border-box;padding:36px 40px;background:#F5F6F8;font-family:'Inter',system-ui,sans-serif;color:#14171C;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-.lk-root *{box-sizing:border-box}
-.lk-title{margin:0 0 28px;font-size:30px;font-weight:700;letter-spacing:-0.02em;line-height:36px}
-.lk-card{background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(20,23,28,.06),0 4px 16px rgba(20,23,28,.04);flex:1;display:flex;flex-direction:column;padding:0 28px}
-.lk-child{padding:24px 0 22px;border-bottom:1px solid #ECEEF1}
-.lk-label{font-size:19px;font-weight:600;line-height:24px;margin:0 0 14px}
-.lk-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:#EEF0F3;border-radius:14px;padding:4px;height:56px}
-.lk-seg button{all:unset;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:17px;font-weight:500;color:#5A616C;cursor:pointer}
-.lk-seg button[aria-checked="true"]{background:#FFFFFF;color:#14171C;font-weight:600;box-shadow:0 1px 3px rgba(20,23,28,.12)}
-.lk-row{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #ECEEF1}
-.lk-row:last-child{border-bottom:0}
-.lk-row .lk-label{margin:0 0 4px}
-.lk-sub{font-size:15px;line-height:20px;color:#6B7280;margin:0}
-.lk-sw{all:unset;flex:none;width:60px;height:34px;border-radius:17px;background:#D5D9DF;position:relative;cursor:pointer;transition:background .2s}
-.lk-sw::after{content:"";position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
-.lk-sw[aria-checked="true"]{background:#1F6FEB}
-.lk-sw[aria-checked="true"]::after{transform:translateX(26px)}
+.locks-panel{width:772px;height:564px;box-sizing:border-box;padding:32px 36px;background:#F4F5F7;font-family:'Inter',system-ui,sans-serif;color:#14171C;display:flex;flex-direction:column;gap:20px;-webkit-font-smoothing:antialiased}
+.locks-panel *{box-sizing:border-box;font-family:inherit;margin:0}
+.locks-panel h2{font-size:28px;line-height:34px;font-weight:700;letter-spacing:-0.02em}
+.locks-panel .card{background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(20,23,28,.06),0 0 0 1px rgba(20,23,28,.05)}
+.locks-panel .child{padding:20px 24px 24px}
+.locks-panel .label{font-size:18px;line-height:24px;font-weight:600;letter-spacing:-0.01em}
+.locks-panel .seg{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;background:#ECEEF1;border-radius:14px}
+.locks-panel .seg button{height:52px;border:0;border-radius:10px;background:transparent;font-size:17px;font-weight:500;color:#5A6270;cursor:pointer;transition:background .15s,color .15s}
+.locks-panel .seg button[aria-checked="true"]{background:#FFFFFF;color:#14171C;font-weight:600;box-shadow:0 1px 3px rgba(20,23,28,.12),0 0 0 1px rgba(20,23,28,.04)}
+.locks-panel .list{flex:1;display:flex;flex-direction:column}
+.locks-panel .row{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 24px}
+.locks-panel .row + .row{border-top:1px solid #ECEEF1}
+.locks-panel .sub{margin-top:4px;font-size:15px;line-height:20px;color:#6B7280}
+.locks-panel .sw{flex:none;position:relative;width:64px;height:36px;border:0;border-radius:18px;background:#D5D9DF;cursor:pointer;transition:background .2s}
+.locks-panel .sw::after{content:"";position:absolute;top:3px;left:3px;width:30px;height:30px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+.locks-panel .sw[aria-checked="true"]{background:#1F6FEB}
+.locks-panel .sw[aria-checked="true"]::after{transform:translateX(28px)}
+.locks-panel button:focus-visible{outline:3px solid rgba(31,111,235,.45);outline-offset:2px}
 </style>
-<h2 class="lk-title">Locks</h2>
-<div class="lk-card">
-  <div class="lk-child">
-    <p class="lk-label" id="lk-child-l">Child lock</p>
-    <div class="lk-seg" role="radiogroup" aria-labelledby="lk-child-l">
-      <button role="radio" aria-checked="false">Off</button>
-      <button role="radio" aria-checked="false">Left</button>
-      <button role="radio" aria-checked="false">Right</button>
-      <button role="radio" aria-checked="true">Both</button>
+
+<h2>Locks</h2>
+
+<div class="card child">
+  <div class="label" id="cl-label">Child lock</div>
+  <div class="seg" role="radiogroup" aria-labelledby="cl-label">
+    <button role="radio" aria-checked="false">Off</button>
+    <button role="radio" aria-checked="false">Left</button>
+    <button role="radio" aria-checked="false">Right</button>
+    <button role="radio" aria-checked="true">Both</button>
+  </div>
+</div>
+
+<div class="card list">
+  <div class="row">
+    <div>
+      <div class="label" id="wl">Window lock</div>
+      <div class="sub">Disable rear window switches</div>
     </div>
+    <button class="sw" role="switch" aria-checked="false" aria-labelledby="wl"></button>
   </div>
-  <div class="lk-row">
-    <div><p class="lk-label">Window lock</p><p class="lk-sub">Disable rear window switches</p></div>
-    <button class="lk-sw" role="switch" aria-checked="false" aria-label="Window lock"></button>
+  <div class="row">
+    <div>
+      <div class="label" id="wal">Walk-away lock</div>
+      <div class="sub">Lock when your phone key leaves</div>
+    </div>
+    <button class="sw" role="switch" aria-checked="true" aria-labelledby="wal"></button>
   </div>
-  <div class="lk-row">
-    <div><p class="lk-label">Walk-away lock</p><p class="lk-sub">Lock when your phone key leaves</p></div>
-    <button class="lk-sw" role="switch" aria-checked="true" aria-label="Walk-away lock"></button>
-  </div>
-  <div class="lk-row">
-    <div><p class="lk-label">Unlock on park</p><p class="lk-sub">Unlock all doors in Park</p></div>
-    <button class="lk-sw" role="switch" aria-checked="true" aria-label="Unlock on park"></button>
+  <div class="row">
+    <div>
+      <div class="label" id="uop">Unlock on park</div>
+      <div class="sub">Unlock all doors in Park</div>
+    </div>
+    <button class="sw" role="switch" aria-checked="true" aria-labelledby="uop"></button>
   </div>
 </div>
 </div>`},
-M:{W:1392,H:781,name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 531 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.',wrong:[['Two buttons a row','A blue Open and a red Uninstall on all four rows.'],['Names set in 22 px','Smaller than the 30 px bold title above them.'],['Four solid colour tiles','Green, blue, purple and orange squares fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','The section label steps back to 24 px at 65%.'],['Colour only in the icon','Filled icons on a soft grey tile, one hue each.']],
+M:{W:1434,H:804,name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.',wrong:[['Two buttons a row','A blue Open and a red Uninstall on all four rows.'],['Names set in 22 px','Smaller than the 30 px bold title above them.'],['Gradient icon tiles','Green, blue, purple and orange gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','The section label steps back to 24 px at 65%.'],['Colour only in the icon','Filled icons on a soft grey tile, one hue each.']],
   html:()=>`<div class="st"><div class="lh">Apps</div><div class="card"><div class="rw"><span class="ai">${IC.phoneF}</span><span class="tx">Phone</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.maps}</span><span class="tx">Maps</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.layers}</span><span class="tx">Task master</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.radio}</span><span class="tx">FM</span><span class="ib">${IC.trash}</span></div></div></div>`,
-  before:()=>`<div class="apps-panel">
-<style>
-.apps-panel{
-  --bg:#F4F5F7;--card:#FFFFFF;--ink:#14161A;--muted:#5F6672;--line:#E6E8EC;
-  --primary:#1F5EFF;--primary-press:#1849C7;--danger:#C62828;--danger-bg:#FDECEC;
-  box-sizing:border-box;width:772px;height:531px;padding:28px 32px;
-  background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--ink);
-  display:flex;flex-direction:column;gap:20px;
-  -webkit-font-smoothing:antialiased;
-}
-.apps-panel *{box-sizing:border-box;}
-.apps-panel h2{margin:0;font-size:30px;line-height:36px;font-weight:700;letter-spacing:-0.01em;}
-.apps-panel ul{
-  list-style:none;margin:0;padding:0 24px;flex:1;
-  background:var(--card);border-radius:20px;
-  box-shadow:0 1px 2px rgba(20,22,26,.06),0 4px 16px rgba(20,22,26,.04);
-  display:flex;flex-direction:column;
-}
-.apps-panel li{
-  flex:1;display:flex;align-items:center;gap:20px;
-  border-bottom:1px solid var(--line);
-}
-.apps-panel li:last-child{border-bottom:0;}
-.apps-panel .icon{
-  width:56px;height:56px;border-radius:16px;flex:none;
-  display:grid;place-items:center;
-}
-.apps-panel .icon svg{width:30px;height:30px;}
-.apps-panel .phone{background:#1FA855;}
-.apps-panel .maps{background:#2F7BF5;}
-.apps-panel .tasks{background:#7A4DF0;}
-.apps-panel .fm{background:#F0632F;}
-.apps-panel .name{flex:1;font-size:22px;font-weight:600;line-height:28px;}
-.apps-panel .actions{display:flex;gap:12px;}
-.apps-panel button{
-  font:inherit;font-size:18px;font-weight:600;height:56px;min-width:132px;padding:0 24px;
-  border-radius:14px;border:0;cursor:pointer;transition:background-color .15s,transform .1s;
-}
-.apps-panel button:active{transform:scale(.97);}
-.apps-panel button:focus-visible{outline:3px solid var(--primary);outline-offset:3px;}
-.apps-panel .open{background:var(--primary);color:#fff;}
-.apps-panel .open:hover{background:var(--primary-press);}
-.apps-panel .uninstall{background:var(--danger-bg);color:var(--danger);}
-.apps-panel .uninstall:hover{background:#FADADA;}
-</style>
+  before:()=>`<div class="car-apps">
+  <style>
+
+    .car-apps {
+      --bg: #F4F5F7;
+      --surface: #FFFFFF;
+      --text: #14171C;
+      --muted: #5B636E;
+      --line: #E6E8EC;
+      --primary: #1A5CFF;
+      --primary-press: #1449CC;
+      --danger: #C62828;
+      --danger-tint: #FDECEC;
+
+      box-sizing: border-box;
+      width: 772px;
+      height: 547px;
+      padding: 28px 32px;
+      background: var(--bg);
+      font-family: 'Inter', system-ui, sans-serif;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    .car-apps *, .car-apps *::before, .car-apps *::after { box-sizing: border-box; }
+
+    .car-apps h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 38px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .car-apps ul {
+      list-style: none;
+      margin: 0;
+      padding: 0 24px;
+      background: var(--surface);
+      border-radius: 20px;
+      box-shadow: 0 1px 2px rgba(20,23,28,.04), 0 4px 16px rgba(20,23,28,.05);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .car-apps li {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .car-apps li:last-child { border-bottom: 0; }
+
+    .car-apps .icon {
+      width: 60px;
+      height: 60px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      flex: none;
+    }
+    .car-apps .icon svg { width: 32px; height: 32px; }
+    .car-apps .i-phone { background: linear-gradient(160deg, #3DDC6E, #1FA94B); }
+    .car-apps .i-maps  { background: linear-gradient(160deg, #4A8CFF, #1A5CFF); }
+    .car-apps .i-task  { background: linear-gradient(160deg, #A774FF, #6C3BE0); }
+    .car-apps .i-fm    { background: linear-gradient(160deg, #FFA640, #F06A1A); }
+
+    .car-apps .name {
+      flex: 1;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+    }
+
+    .car-apps .actions { display: flex; gap: 12px; }
+
+    .car-apps button {
+      font: inherit;
+      font-size: 18px;
+      font-weight: 600;
+      height: 56px;
+      min-width: 132px;
+      padding: 0 24px;
+      border-radius: 14px;
+      border: 0;
+      cursor: pointer;
+      transition: background-color .15s ease, transform .1s ease;
+    }
+    .car-apps button:active { transform: scale(.97); }
+    .car-apps button:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
+
+    .car-apps .open { background: var(--primary); color: #fff; }
+    .car-apps .open:hover { background: var(--primary-press); }
+
+    .car-apps .uninstall { background: var(--danger-tint); color: var(--danger); }
+    .car-apps .uninstall:hover { background: #FAD9D9; }
+  </style>
 
   <h2>Apps</h2>
+
   <ul>
     <li>
-      <span class="icon phone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25c1.1.37 2.3.57 3.6.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+      <span class="icon i-phone" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
       </span>
       <span class="name">Phone</span>
       <div class="actions">
@@ -993,7 +1065,7 @@ M:{W:1392,H:781,name:'App list',cover:1,ask:'Design an installed apps list for a
       </div>
     </li>
     <li>
-      <span class="icon maps" aria-hidden="true">
+      <span class="icon i-maps" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
       </span>
       <span class="name">Maps</span>
@@ -1003,8 +1075,8 @@ M:{W:1392,H:781,name:'App list',cover:1,ask:'Design an installed apps list for a
       </div>
     </li>
     <li>
-      <span class="icon tasks" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5l1.8 1.8L9 5"/><path d="M4 13.5l1.8 1.8L9 12"/><path d="M12.5 7h7.5"/><path d="M12.5 14h7.5"/><path d="M4.5 20h15.5"/></svg>
+      <span class="icon i-task" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 12.2l2.4 2.4 4.8-5"/></svg>
       </span>
       <span class="name">Task master</span>
       <div class="actions">
@@ -1013,8 +1085,8 @@ M:{W:1392,H:781,name:'App list',cover:1,ask:'Design an installed apps list for a
       </div>
     </li>
     <li>
-      <span class="icon fm" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 8l12-5"/><rect x="3" y="8" width="18" height="13" rx="2.5"/><circle cx="15.5" cy="14.5" r="2.8"/><path d="M6.5 12.5h4"/><path d="M6.5 16.5h4"/></svg>
+      <span class="icon i-fm" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2" fill="#fff" stroke="none"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg>
       </span>
       <span class="name">FM</span>
       <div class="actions">
@@ -1024,38 +1096,64 @@ M:{W:1392,H:781,name:'App list',cover:1,ask:'Design an installed apps list for a
     </li>
   </ul>
 </div>`},
-U:{W:1245,H:698,name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 248 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26 px semibold','Semibold titles, with 20 px lines in a lighter grey.'],['Switch at 80 × 46','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28 Medium','The lines under them at 24 px and 65%.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 16 px.']],
+U:{W:1245,H:698,name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26, lines at 19','The lines under them in a thinner, lighter grey.'],['Switch at 76 × 44','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28, lines at 24','Both Medium; the line at 65% of the text colour.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 24 px.']],
   html:()=>`<div class="st"><div class="card"><div class="rw"><span class="tx">Auto-update<span class="m">Installs new versions in the background</span></span><i class="sw"></i></div><div class="rw"><span class="tx">User agreements<span class="m">Terms of service and privacy policy</span></span><span class="cv">${IC.chevR}</span></div></div></div>`,
-  before:()=>`<div class="upd-card">
+  before:()=>`<div class="aus-card">
   <style>
-    .upd-card{width:772px;height:248px;box-sizing:border-box;padding:8px 0;background:#FFFFFF;border-radius:24px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);border:1px solid #E6E8EC;font-family:'Inter',system-ui,sans-serif;color:#0F1729;display:flex;flex-direction:column;overflow:hidden}
-    .upd-card *{box-sizing:border-box}
-    .upd-row{flex:1;display:flex;align-items:center;gap:24px;padding:0 32px;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s ease}
-    .upd-row:active{background:#F3F5F8}
-    .upd-row+.upd-row::before{content:"";position:absolute;top:0;left:32px;right:32px;height:1px;background:#E9ECF1}
-    .upd-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-    .upd-title{font-size:26px;line-height:32px;font-weight:600;letter-spacing:-.01em;color:#0F1729}
-    .upd-sub{font-size:20px;line-height:26px;font-weight:400;color:#5B6576;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .upd-switch{flex:none;width:80px;height:46px;border-radius:23px;background:#1F6FEB;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
-    .upd-switch::after{content:"";position:absolute;top:4px;left:38px;width:38px;height:38px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 4px rgba(16,24,40,.2)}
-    .upd-chev{flex:none;width:46px;height:46px;display:flex;align-items:center;justify-content:center;color:#8A93A3}
+    .aus-card{
+      box-sizing:border-box;width:772px;height:264px;
+      background:#FFFFFF;border-radius:28px;
+      box-shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+      border:1px solid #E6E8EC;
+      padding:8px 0;display:flex;flex-direction:column;
+      font-family:'Inter',system-ui,sans-serif;color:#111318;
+      -webkit-font-smoothing:antialiased;overflow:hidden;
+    }
+    .aus-card *{box-sizing:border-box}
+    .aus-row{
+      flex:1;display:flex;align-items:center;gap:24px;
+      padding:0 32px 0 36px;position:relative;
+      background:none;border:0;width:100%;text-align:left;
+      font:inherit;color:inherit;cursor:pointer;
+    }
+    .aus-row + .aus-row::before{
+      content:"";position:absolute;top:0;left:36px;right:32px;
+      height:1px;background:#ECEEF1;
+    }
+    .aus-row:active{background:#F4F6F8}
+    .aus-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+    .aus-title{font-size:26px;line-height:32px;font-weight:500;letter-spacing:-.01em}
+    .aus-sub{font-size:19px;line-height:26px;font-weight:400;color:#5F6670}
+    .aus-switch{
+      flex:none;width:76px;height:44px;border-radius:22px;
+      background:#1A6BFF;position:relative;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
+    }
+    .aus-switch::after{
+      content:"";position:absolute;top:4px;right:4px;
+      width:36px;height:36px;border-radius:50%;background:#FFFFFF;
+      box-shadow:0 1px 3px rgba(0,0,0,.2);
+    }
+    .aus-chev{flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#8A919B}
   </style>
-  <div class="upd-row" role="switch" aria-checked="true" tabindex="0">
-    <div class="upd-text">
-      <div class="upd-title">Auto-update</div>
-      <div class="upd-sub">Installs new versions in the background</div>
+
+  <div class="aus-row" role="switch" aria-checked="true" tabindex="0">
+    <div class="aus-text">
+      <span class="aus-title">Auto-update</span>
+      <span class="aus-sub">Installs new versions in the background</span>
     </div>
-    <div class="upd-switch" aria-hidden="true"></div>
+    <span class="aus-switch" aria-hidden="true"></span>
   </div>
-  <div class="upd-row" role="link" tabindex="0">
-    <div class="upd-text">
-      <div class="upd-title">User agreements</div>
-      <div class="upd-sub">Terms of service and privacy policy</div>
-    </div>
-    <div class="upd-chev" aria-hidden="true">
+
+  <button class="aus-row" type="button">
+    <span class="aus-text">
+      <span class="aus-title">User agreements</span>
+      <span class="aus-sub">Terms of service and privacy policy</span>
+    </span>
+    <span class="aus-chev" aria-hidden="true">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-    </div>
-  </div>
+    </span>
+  </button>
 </div>`},
 R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word per difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
   html:()=>`<div class="nv rs"><div class="hd"><span class="back">${IC.back}</span><b>Robo Base</b></div>${ROUTE('18 min','',1)}${ROUTE('21 min','No tolls')}${ROUTE('24 min','Fewer turns')}<div class="act"><span class="btn p">Start route</span><span class="btn s">Preferences</span></div></div>`,
@@ -1370,7 +1468,7 @@ const DATA=[
 ['M','A row opens its app','Ask for an app list and AI gives every row a blue Open and a red Uninstall button.','Tap the row to open the app. One quiet trash icon is the only button.',['Two buttons a row','One tap a row']],
 ['U','Label left, control right','AI makes the switch bigger than the words and rules a line between two rows.','Titles at 28, lines at 24 and 65%, the library switch, and space instead of a divider.',['Big switch','Library switch']],
 ['O','A one-shot action is a tile','AI draws small icons in grey circles, with a blue stroke for the moving part.','Each opening is a tile: one 72 px icon over one word. Tap the tile and it opens.',['Icons in wells','72 px icons']],
-['L','Four options lie flat','AI sets the labels at 19 px, the options at 17 px and rules every row.','Labels at 28, a 56 px segmented control, and 108 px rows without dividers.',['19 px labels','28 px labels']]];
+['L','Four options lie flat','AI sets the labels at 18 px, the options at 17 px and rules every row.','Labels at 28, options in 28 px type, and 108 px rows without dividers.',['18 px labels','28 px labels']]];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['No hierarchy'],['Phone habits'],['Too small','Too much'],['Too small'],['Phone habits','Too small'],['No hierarchy'],['Too much'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
@@ -1378,16 +1476,16 @@ const CTX={1:'nav',13:'nav',14:'nav',2:'med',8:'med',3:'cli',6:'cli',9:'cli',4:'
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:CHAPTERS[Math.floor(i/10)],s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
-M:[`Design an installed apps list for a car settings screen, 772 × 531 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.`,
-`Design an installed apps list for a car settings screen, 772 × 531 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
+M:[`Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.`,
+`Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
 On top, a section label "Apps" in 24/32 at 65%, 12 px from the top, in a 55 px band. 12 px below it, the card.
-Card: white, radius 20, 16 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Four rows inside, 108 px each, no dividers.
+Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Four rows inside, 108 px each, no dividers.
 Row: 32 px side padding, 20 px gaps. A 68 px tile, radius 16, fill #1D1D1F at 5%, holding a 48 px filled icon. Then the app name in 28/40, filling the row. On the right, a 68 px trash button with a 48 px outline trash icon (2 px stroke) at 65%, no fill.
 Apps and icon colours, one colour each: Phone (filled handset, #1F9D3A), Maps (filled arrow pointer, #007AFF), Task master (filled stacked layers, #1D1D1F), FM (filled radio, #B86E00).
 Tapping the row opens the app, so there is no Open button. No coloured squares behind the icons, no red buttons.`],
-U:[`Design an app update settings card for a car settings screen, 772 × 248 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.`,
-`Design an app update settings card for a car settings screen, 772 × 248 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
-Card: white, radius 20, 16 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Two rows inside, 108 px each, 32 px side padding, no divider.
+U:[`Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.`,
+`Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
+Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Two rows inside, 108 px each, 32 px side padding, no divider.
 Row one: "Auto-update" in 28/40, 4 px, then "Installs new versions in the background" in 24/32 at 65%. On the right, a switch 60 × 32, fully round, #007AFF, with a 24 px white knob on the right (on).
 Row two: "User agreements" in 28/40, 4 px, then "Terms of service and privacy policy" in 24/32 at 65%. On the right, a 40 px chevron at 65%.
 No icons in front of the labels, no semibold, no hairline between the rows.`],
@@ -1397,9 +1495,9 @@ On top, a section label "Openings" in 24/32 at #1D1D1F 65%. 12 px below it, thre
 Tile: white, radius 20, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Centred column, 24 px padding, 4 px gap: a 72 px outline icon (2 px stroke) over the label in 24/32. Icon and label are #1D1D1F at 65%.
 Icons: a car with its front lid up (Frunk), a car with its rear lid up (Trunk), a plug (Charge port).
 The tile is the button. No circles behind the icons and no blue in them.`],
-L:[`Design a locks settings section for a car settings screen, 772 × 548 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.`,
-`Design a locks settings section for a car settings screen, 772 × 548 px, light theme. Text is Inter Medium, #1D1D1F, secondary at 65%.
-On top, a section label "Locks" in 24/32 at 65%. 12 px below it, one card. Card: white, radius 20, 16 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%.
+L:[`Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.`,
+`Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Text is Inter Medium, #1D1D1F, secondary at 65%.
+On top, a section label "Locks" in 24/32 at 65%. 12 px below it, one card. Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%.
 First, a 148 px block with 32 px side padding, 16 px top and 12 px bottom: "Child lock" in 28/40, then 16 px, a segmented control 64 px tall, radius 16, fill #1D1D1F at 5%, 4 px padding and 4 px gaps. Four equal options, 56 px tall, radius 12, 28/40 at 65%: Off, Left, Right, Both. Both is selected: white, a 0 1 2 shadow at 8%, text at 100%.
 Then three rows, 108 px each, 32 px side padding: the name in 28/40, 4 px, a line in 24/32 at 65%; a switch on the right. Switch 60 × 32, fully round, 24 px white knob. On: #007AFF, knob right. Off: #1D1D1F at 50%, knob left.
 Rows: Window lock / Disable rear window switches (off), Walk-away lock / Lock when your phone key leaves (on), Unlock on park / Unlock all doors in Park (on). No dividers.`],

@@ -1,46 +1,59 @@
-<div class="lk-root">
+<div class="locks-panel">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-.lk-root{width:772px;height:548px;box-sizing:border-box;padding:36px 40px;background:#F5F6F8;font-family:'Inter',system-ui,sans-serif;color:#14171C;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
-.lk-root *{box-sizing:border-box}
-.lk-title{margin:0 0 28px;font-size:30px;font-weight:700;letter-spacing:-0.02em;line-height:36px}
-.lk-card{background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(20,23,28,.06),0 4px 16px rgba(20,23,28,.04);flex:1;display:flex;flex-direction:column;padding:0 28px}
-.lk-child{padding:24px 0 22px;border-bottom:1px solid #ECEEF1}
-.lk-label{font-size:19px;font-weight:600;line-height:24px;margin:0 0 14px}
-.lk-seg{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;background:#EEF0F3;border-radius:14px;padding:4px;height:56px}
-.lk-seg button{all:unset;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:17px;font-weight:500;color:#5A616C;cursor:pointer}
-.lk-seg button[aria-checked="true"]{background:#FFFFFF;color:#14171C;font-weight:600;box-shadow:0 1px 3px rgba(20,23,28,.12)}
-.lk-row{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;border-bottom:1px solid #ECEEF1}
-.lk-row:last-child{border-bottom:0}
-.lk-row .lk-label{margin:0 0 4px}
-.lk-sub{font-size:15px;line-height:20px;color:#6B7280;margin:0}
-.lk-sw{all:unset;flex:none;width:60px;height:34px;border-radius:17px;background:#D5D9DF;position:relative;cursor:pointer;transition:background .2s}
-.lk-sw::after{content:"";position:absolute;top:3px;left:3px;width:28px;height:28px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
-.lk-sw[aria-checked="true"]{background:#1F6FEB}
-.lk-sw[aria-checked="true"]::after{transform:translateX(26px)}
+.locks-panel{width:772px;height:564px;box-sizing:border-box;padding:32px 36px;background:#F4F5F7;font-family:'Inter',system-ui,sans-serif;color:#14171C;display:flex;flex-direction:column;gap:20px;-webkit-font-smoothing:antialiased}
+.locks-panel *{box-sizing:border-box;font-family:inherit;margin:0}
+.locks-panel h2{font-size:28px;line-height:34px;font-weight:700;letter-spacing:-0.02em}
+.locks-panel .card{background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(20,23,28,.06),0 0 0 1px rgba(20,23,28,.05)}
+.locks-panel .child{padding:20px 24px 24px}
+.locks-panel .label{font-size:18px;line-height:24px;font-weight:600;letter-spacing:-0.01em}
+.locks-panel .seg{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;background:#ECEEF1;border-radius:14px}
+.locks-panel .seg button{height:52px;border:0;border-radius:10px;background:transparent;font-size:17px;font-weight:500;color:#5A6270;cursor:pointer;transition:background .15s,color .15s}
+.locks-panel .seg button[aria-checked="true"]{background:#FFFFFF;color:#14171C;font-weight:600;box-shadow:0 1px 3px rgba(20,23,28,.12),0 0 0 1px rgba(20,23,28,.04)}
+.locks-panel .list{flex:1;display:flex;flex-direction:column}
+.locks-panel .row{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 24px}
+.locks-panel .row + .row{border-top:1px solid #ECEEF1}
+.locks-panel .sub{margin-top:4px;font-size:15px;line-height:20px;color:#6B7280}
+.locks-panel .sw{flex:none;position:relative;width:64px;height:36px;border:0;border-radius:18px;background:#D5D9DF;cursor:pointer;transition:background .2s}
+.locks-panel .sw::after{content:"";position:absolute;top:3px;left:3px;width:30px;height:30px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
+.locks-panel .sw[aria-checked="true"]{background:#1F6FEB}
+.locks-panel .sw[aria-checked="true"]::after{transform:translateX(28px)}
+.locks-panel button:focus-visible{outline:3px solid rgba(31,111,235,.45);outline-offset:2px}
 </style>
-<h2 class="lk-title">Locks</h2>
-<div class="lk-card">
-  <div class="lk-child">
-    <p class="lk-label" id="lk-child-l">Child lock</p>
-    <div class="lk-seg" role="radiogroup" aria-labelledby="lk-child-l">
-      <button role="radio" aria-checked="false">Off</button>
-      <button role="radio" aria-checked="false">Left</button>
-      <button role="radio" aria-checked="false">Right</button>
-      <button role="radio" aria-checked="true">Both</button>
+
+<h2>Locks</h2>
+
+<div class="card child">
+  <div class="label" id="cl-label">Child lock</div>
+  <div class="seg" role="radiogroup" aria-labelledby="cl-label">
+    <button role="radio" aria-checked="false">Off</button>
+    <button role="radio" aria-checked="false">Left</button>
+    <button role="radio" aria-checked="false">Right</button>
+    <button role="radio" aria-checked="true">Both</button>
+  </div>
+</div>
+
+<div class="card list">
+  <div class="row">
+    <div>
+      <div class="label" id="wl">Window lock</div>
+      <div class="sub">Disable rear window switches</div>
     </div>
+    <button class="sw" role="switch" aria-checked="false" aria-labelledby="wl"></button>
   </div>
-  <div class="lk-row">
-    <div><p class="lk-label">Window lock</p><p class="lk-sub">Disable rear window switches</p></div>
-    <button class="lk-sw" role="switch" aria-checked="false" aria-label="Window lock"></button>
+  <div class="row">
+    <div>
+      <div class="label" id="wal">Walk-away lock</div>
+      <div class="sub">Lock when your phone key leaves</div>
+    </div>
+    <button class="sw" role="switch" aria-checked="true" aria-labelledby="wal"></button>
   </div>
-  <div class="lk-row">
-    <div><p class="lk-label">Walk-away lock</p><p class="lk-sub">Lock when your phone key leaves</p></div>
-    <button class="lk-sw" role="switch" aria-checked="true" aria-label="Walk-away lock"></button>
-  </div>
-  <div class="lk-row">
-    <div><p class="lk-label">Unlock on park</p><p class="lk-sub">Unlock all doors in Park</p></div>
-    <button class="lk-sw" role="switch" aria-checked="true" aria-label="Unlock on park"></button>
+  <div class="row">
+    <div>
+      <div class="label" id="uop">Unlock on park</div>
+      <div class="sub">Unlock all doors in Park</div>
+    </div>
+    <button class="sw" role="switch" aria-checked="true" aria-labelledby="uop"></button>
   </div>
 </div>
 </div>

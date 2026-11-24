@@ -1,32 +1,58 @@
-<div class="upd-card">
+<div class="aus-card">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
-    .upd-card{width:772px;height:248px;box-sizing:border-box;padding:8px 0;background:#FFFFFF;border-radius:24px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);border:1px solid #E6E8EC;font-family:'Inter',system-ui,sans-serif;color:#0F1729;display:flex;flex-direction:column;overflow:hidden}
-    .upd-card *{box-sizing:border-box}
-    .upd-row{flex:1;display:flex;align-items:center;gap:24px;padding:0 32px;position:relative;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:background .15s ease}
-    .upd-row:active{background:#F3F5F8}
-    .upd-row+.upd-row::before{content:"";position:absolute;top:0;left:32px;right:32px;height:1px;background:#E9ECF1}
-    .upd-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-    .upd-title{font-size:26px;line-height:32px;font-weight:600;letter-spacing:-.01em;color:#0F1729}
-    .upd-sub{font-size:20px;line-height:26px;font-weight:400;color:#5B6576;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .upd-switch{flex:none;width:80px;height:46px;border-radius:23px;background:#1F6FEB;position:relative;box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
-    .upd-switch::after{content:"";position:absolute;top:4px;left:38px;width:38px;height:38px;border-radius:50%;background:#FFFFFF;box-shadow:0 2px 4px rgba(16,24,40,.2)}
-    .upd-chev{flex:none;width:46px;height:46px;display:flex;align-items:center;justify-content:center;color:#8A93A3}
+    .aus-card{
+      box-sizing:border-box;width:772px;height:264px;
+      background:#FFFFFF;border-radius:28px;
+      box-shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);
+      border:1px solid #E6E8EC;
+      padding:8px 0;display:flex;flex-direction:column;
+      font-family:'Inter',system-ui,sans-serif;color:#111318;
+      -webkit-font-smoothing:antialiased;overflow:hidden;
+    }
+    .aus-card *{box-sizing:border-box}
+    .aus-row{
+      flex:1;display:flex;align-items:center;gap:24px;
+      padding:0 32px 0 36px;position:relative;
+      background:none;border:0;width:100%;text-align:left;
+      font:inherit;color:inherit;cursor:pointer;
+    }
+    .aus-row + .aus-row::before{
+      content:"";position:absolute;top:0;left:36px;right:32px;
+      height:1px;background:#ECEEF1;
+    }
+    .aus-row:active{background:#F4F6F8}
+    .aus-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+    .aus-title{font-size:26px;line-height:32px;font-weight:500;letter-spacing:-.01em}
+    .aus-sub{font-size:19px;line-height:26px;font-weight:400;color:#5F6670}
+    .aus-switch{
+      flex:none;width:76px;height:44px;border-radius:22px;
+      background:#1A6BFF;position:relative;
+      box-shadow:inset 0 0 0 1px rgba(0,0,0,.04);
+    }
+    .aus-switch::after{
+      content:"";position:absolute;top:4px;right:4px;
+      width:36px;height:36px;border-radius:50%;background:#FFFFFF;
+      box-shadow:0 1px 3px rgba(0,0,0,.2);
+    }
+    .aus-chev{flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;color:#8A919B}
   </style>
-  <div class="upd-row" role="switch" aria-checked="true" tabindex="0">
-    <div class="upd-text">
-      <div class="upd-title">Auto-update</div>
-      <div class="upd-sub">Installs new versions in the background</div>
+
+  <div class="aus-row" role="switch" aria-checked="true" tabindex="0">
+    <div class="aus-text">
+      <span class="aus-title">Auto-update</span>
+      <span class="aus-sub">Installs new versions in the background</span>
     </div>
-    <div class="upd-switch" aria-hidden="true"></div>
+    <span class="aus-switch" aria-hidden="true"></span>
   </div>
-  <div class="upd-row" role="link" tabindex="0">
-    <div class="upd-text">
-      <div class="upd-title">User agreements</div>
-      <div class="upd-sub">Terms of service and privacy policy</div>
-    </div>
-    <div class="upd-chev" aria-hidden="true">
+
+  <button class="aus-row" type="button">
+    <span class="aus-text">
+      <span class="aus-title">User agreements</span>
+      <span class="aus-sub">Terms of service and privacy policy</span>
+    </span>
+    <span class="aus-chev" aria-hidden="true">
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
-    </div>
-  </div>
+    </span>
+  </button>
 </div>

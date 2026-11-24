@@ -23,16 +23,16 @@ We tried generated images first (photographic dusk, then textures, then structur
 
 ## Context → palette
 
-v0.4.0 pushed the four non-navigation palettes further apart in hue (they read as one beige before): media coral/orchid, climate teal/coral, vehicle honey/slate, information periwinkle.
+v0.4.0: each palette is now one family of neighbouring hues (the way information's periwinkle and lilac sit together), and each context owns its own part of the wheel: navigation sky–teal, climate mint–sage, vehicle honey–sand, media coral–rose, information periwinkle–lilac. Before, navigation mixed apricot, blue and sage, and the others read as one beige.
 
 `cv0` base · `cv1` top left · `cv2` bottom right · `cv3` top right
 
 | Context | Entries | Light | Dark |
 |---|---|---|---|
-| Navigation (`nav`) | 001 | `#e2e0da` `#efc4a3` `#98aec2` `#c3d4bb` · apricot, haze blue, pale sage | `#0f1115` `#2c2e34` `#1e3a5e` `#14171c` · night blue |
-| Media (`med`) | 002, 008 | `#e9dbe0` `#f0a7a1` `#b48bbd` `#f2cdb4` · coral, orchid, peach | `#110f14` `#2d2c32` `#5a2a5e` `#17141b` · plum |
-| Climate (`cli`) | 003, 006, 009 | `#dbe7e7` `#86c3cf` `#f3ae8c` `#c9e2d9` · teal left, coral right | `#0d1214` `#164852` `#5a2e28` `#121819` · teal top left, a corner of coral |
-| Vehicle & controls (`veh`) | 004, 007, 010, 017, 018 | `#e4ddd0` `#e8c48f` `#8c99a8` `#ece0c6` · honey sand, slate | `#101112` `#2f3033` `#2f4256` `#16171a` · slate |
+| Navigation (`nav`) | 001, 013, 014 | `#e0e7ea` `#b4d3e6` `#8ab6bf` `#d3e6e4` · sky, teal, pale aqua | `#0e1215` `#263038` `#1b4250` `#121719` · deep teal |
+| Media (`med`) | 002, 008 | `#ecdcdc` `#f3b3a6` `#d293a6` `#f3d6cc` · coral pink, rose, peach | `#120f12` `#2e2b2f` `#5a2740` `#181416` · wine |
+| Climate (`cli`) | 003, 006, 009 | `#dde7e0` `#b3dbc6` `#8db8a8` `#dcebd8` · mint, sage | `#0e1312` `#213a33` `#1d4a40` `#121816` · pine |
+| Vehicle & controls (`veh`) | 004, 007, 010, 017, 018 | `#e6dfd2` `#ecca97` `#c2a27a` `#efe3cb` · honey, sand, caramel | `#101112` `#2e2f31` `#3a3c40` `#161718` · steel (warm turns brown at night) |
 | Information & layout (`inf`) | 005, 011, 012, 015, 016 | `#dfe1f0` `#c2c7f5` `#8ea3dc` `#e5d5ef` · periwinkle, lilac | `#0f1016` `#2a2c38` `#3a3f86` `#14151d` · indigo |
 
 When a new entry doesn't fit a context, map it to the closest one in `CTX`. Don't add a sixth context until at least 3 entries need it.
