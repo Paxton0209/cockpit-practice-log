@@ -353,6 +353,10 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .ts .l{display:flex;align-items:center;gap:4px}.ts .rem{display:flex;align-items:center;gap:16px}
 .ts .u{display:flex;align-items:center;gap:2px}.ts .du{display:flex;align-items:center;gap:4px}
 .tstack{display:flex;flex-direction:column;gap:8px}
+/* 013's subject is the bar. On the cover the TBT panel is only context, so it sits at 30% and the cover reads differently from 001.
+   In the sheet it comes up to full with the surface (same spring), and goes back down as the sheet closes onto the cover. */
+.tstack>.tw{opacity:.3}
+#sheet2 .tstack>.tw{opacity:calc(.3 + .7*var(--dialog-surface-opacity))}
 .ts .end{width:112px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--strong)}
 /* 014 route selection */
 .rs{width:560px;height:648px;flex-direction:column;gap:16px;padding:24px;border-radius:24px}
