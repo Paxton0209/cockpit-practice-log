@@ -545,16 +545,14 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .svgbtn .cp-result{opacity:0}.svgbtn .cp-result svg{width:13px;height:13px}.svgbtn .cp-result path{stroke-dasharray:1;stroke-dashoffset:0}
 .ecard:has(.cstage[data-v=b]) .svgbtn{opacity:0;pointer-events:none}
 .htools{width:100%;display:flex;align-items:center;justify-content:center;margin-top:8px}
-.cq{margin:12px 0 0;font-size:12px;line-height:18px;color:var(--t3)}
-.fxh{margin:0 0 4px;font-size:12px;line-height:16px;font-weight:500;color:var(--t2)}
-.fxh .bv{display:flex;align-items:center;gap:6px}
-.fxh .dot{width:6px;height:6px;border-radius:50%;flex:none}.fxh .dot.bad{background:var(--bad)}.fxh .dot.good{background:var(--good)}
+.cq{margin:12px 0 0;font-size:12px;line-height:18px;color:var(--t3)}.cq p{margin:0}
 .cmpt{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:0 -12px}
-.cr{display:flex;flex-direction:column;padding:12px;border-radius:12px;corner-shape:superellipse(1.6)}
-.cr .n{margin-bottom:6px;font:500 11px/16px var(--mono,ui-monospace,SFMono-Regular,Menlo,monospace);color:var(--t3)}
-.cr b{display:block;font-size:14px;line-height:20px;font-weight:500;color:var(--ink)}
-.cr em{display:block;margin-top:4px;font-style:normal;font-size:13px;line-height:18px;color:var(--t2)}
-@media(max-width:620px){.cmpt{grid-template-columns:1fr}}
+.cr{display:flex;flex-direction:column;gap:6px;padding:10px 12px}
+.cr p{display:flex;align-items:flex-start;gap:8px;margin:0;font-size:15px;line-height:22px;font-weight:500;text-wrap:pretty}
+.cr svg{flex:none;width:14px;height:14px;margin-top:4px}
+.cr .no{color:var(--t2)}.cr .no svg{color:var(--bad)}
+.cr .ok{color:var(--ink)}.cr .ok svg{color:var(--good)}
+@media(max-width:620px){.cmpt{grid-template-columns:1fr;gap:0}.cr{padding:8px 12px}}
 .chip{flex:1;min-width:0;font-size:12px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pfoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px 16px 38px;font-size:12px;line-height:16px;color:var(--t3)}
 .phead{display:flex;align-items:center;justify-content:space-between;height:60px;padding:0 12px 0 16px;font-size:14px}.phead b{font-weight:600}
@@ -771,7 +769,7 @@ const TRIPBAR_B=`<div class="trip-bar" role="region" aria-label="Trip summary">
   </button>
 </div>`;
 const CMP={
-R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word for the difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
+R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.',wrong:[['A map inside the map','A 142 px route preview, while the real map sits right behind the panel.'],['Every route shouts','Coloured tags, traffic bars, radio buttons and arrival times on all three.'],['Time set in 26 px','The one number you compare is barely bigger than the metadata.']],notes:[['Time leads at 32 px','18, 21, 24 min. That is the comparison.'],['One word per difference','“No tolls”, “Fewer turns”. Only the top route carries a coloured tag.'],['Picked for you','The top route is preselected. Start route is one tap.']],
   html:()=>`<div class="nv rs"><div class="hd"><span class="back">${IC.back}</span><b>Robo Base</b></div>${ROUTE('18 min','',1)}${ROUTE('21 min','No tolls')}${ROUTE('24 min','Fewer turns')}<div class="act"><span class="btn p">Start route</span><span class="btn s">Preferences</span></div></div>`,
   before:()=>`<div class="rsp">
   <style>
@@ -931,7 +929,7 @@ R:{W:1640,H:920,name:'Route selection',cover:1,ask:'Design a route selection pan
     </button>
   </div>
 </div>`},
-P:{W:1640,H:920,name:'Place details',cover:1,ask:'Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.',wrong:[['Reviews before the road','Stars, review count and a charger table come before how far it is.'],['Status in four colours','Green, amber and red pills, slot bars and a battery glyph.'],['Three actions, three styles','A blue button with a shadow, plus two outlined squares.']],notes:[['The drive comes first','3.3 km, 12 min and arrival charge, in one box under the name.'],['Facts as quiet chips','Charger power and entrances are neutral chips. Only “Preferred” is blue.'],['One primary action','Directions spans the panel. Call and save sit as icons in the header.']],
+P:{W:1640,H:920,name:'Place details',cover:1,ask:'Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.',wrong:[['Reviews before the road','Stars, review count and a charger table come before how far it is.'],['Status in four colours','Green, amber and red pills, slot bars and a battery glyph.'],['Three button styles','A blue button with a shadow, plus two outlined squares.']],notes:[['The drive comes first','3.3 km, 12 min and arrival charge, in one box under the name.'],['Facts as quiet chips','Charger power and entrances are neutral chips. Only “Preferred” is blue.'],['One primary action','Directions spans the panel. Call and save sit as icons in the header.']],
   html:()=>`<div class="nv pl"><div class="hd"><span class="back">${IC.back}</span><span class="ic">${IC.phone}${IC.bookmark}</span></div><div class="inf"><div class="nm"><b>Robo Base</b><span class="m">Yecheng Rd, Jiading</span></div><div class="tags"><i class="in">Preferred</i><i>PPA</i><i>120 kW</i></div></div><div class="rp"><span class="d">${IC.turn}3.3 km, 12 min</span><span class="m">Arrival 46%</span></div><div class="sub"><div><i>Parking</i><i>North gate</i><i>East gate</i></div><div><i>South gate</i><i>Entrance B</i><i>Drop-off</i></div></div><div class="hr">${IC.clock}<div><span>Open, 12:00–24:00</span><span class="m">Mon–Fri 08:00–22:00, Sat 08:00–22:00</span></div></div><div class="act"><span class="btn p">Directions</span></div></div>`,
   before:()=>`<div class="pd-root" role="dialog" aria-labelledby="pd-title">
 <style>
@@ -1053,7 +1051,7 @@ P:{W:1640,H:920,name:'Place details',cover:1,ask:'Design a place details panel f
     </button>
   </div>
 </div>`},
-T:{W:760,H:420,name:'Turn-by-turn panel',cover:1,asks:['Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.','Design a trip summary bar for a car navigation screen, showing remaining distance, remaining time and an end-navigation action, 480 × 64 px, light theme.'],ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Blue tile outshouts distance','A 100 px blue tile is the loudest thing on the panel.'],['Distance too small to scan','44 px for the one number read at a glance.'],['Caps and filler add noise','“onto”, all-caps labels, a strip inside the card.']],notes:[['Icon steps back','Plain black icon, no tile. The distance leads.'],['Distance at 48 px','Unit on the same baseline, street lined up under it.'],['Only the facts','No extra words or caps. Two bands, a hairline and a soft shadow.']],
+T:{W:760,H:420,name:'Turn-by-turn panel',cover:1,asks:['Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.','Design a trip summary bar for a car navigation screen, showing remaining distance, remaining time and an end-navigation action, 480 × 64 px, light theme.'],ask:'Design a turn-by-turn navigation panel for a car center display, 480 × 214 px, light theme.',wrong:[['Blue tile steals the eye','A 100 px blue tile is the loudest thing on the panel.'],['Distance at only 44 px','44 px for the one number read at a glance.'],['Caps and filler add noise','“onto”, all-caps labels, a strip inside the card.']],notes:[['Icon steps back','Plain black icon, no tile. The distance leads.'],['Distance at 48 px','Unit on the same baseline, street lined up under it.'],['Only the facts','No extra words or caps. Two bands, a hairline and a soft shadow.']],
   html:(v)=>`<div class="tstack"><div class="tw"><div class="t1">
   <div class="mn"><span class="mv">${FIG_TURN}</span>
   <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
@@ -1263,10 +1261,10 @@ function sheetHTML(n){
       </div>
     </div>
     <article class="art" data-v="a">
-      <div class="fx">${(CMP[e.s].wrong||[]).length?`<div class="fxh bvs"><span class="bv" data-for="b"><i class="dot bad"></i>Before · what the first answer got wrong</span><span class="bv" data-for="a"><i class="dot good"></i>After · what changed</span></div>`:''}<div class="cmpt" id="cmpt">
-        ${(CMP[e.s].wrong||[]).slice(0,3).map(([h,d],i)=>{const[nh,nd]=(CMP[e.s].notes||[])[i]||['',''];return `<div class="cr"><span class="n">${pad(i+1).slice(1)}</span><div class="bvs"><div class="bv" data-for="b"><b>${h}</b><em>${d}</em></div><div class="bv" data-for="a"><b>${nh}</b><em>${nd}</em></div></div></div>`}).join('')}
-      </div></div>
-      <p class="cq">${CMP[e.s].asks?`Before is the first answer to two plain lines, “${CMP[e.s].asks.join('” and “')}”`:`Before is the first answer to one plain line, “${CMP[e.s].ask||p0}”`}</p>
+      <div class="cmpt" id="cmpt">
+        ${(CMP[e.s].wrong||[]).slice(0,3).map(([h],i)=>{const nh=((CMP[e.s].notes||[])[i]||[''])[0];return `<div class="cr"><p class="no"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M5.5 5.5l5 5M10.5 5.5l-5 5" stroke="#fff" stroke-width="1.6" stroke-linecap="round"/></svg>${h}</p><p class="ok"><svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="8" fill="currentColor"/><path d="M4.8 8.3l2.2 2.2 4.2-4.6" stroke="#fff" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>${nh}</p></div>`}).join('')}
+      </div>
+      <p class="cq">Before: AI’s first answer to “${(CMP[e.s].asks||[CMP[e.s].ask||p0]).join('” and “')}”</p>
       <div class="grp">
         <div class="phead"><b>Prompt</b><button class="cbtn hi" data-copy type="button" aria-label="Copy prompt"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="5.5" y="5.5" width="8" height="8" rx="2"/><path d="M10.5 3.5v-.5A1.5 1.5 0 0 0 9 1.5H4A1.5 1.5 0 0 0 2.5 3v5A1.5 1.5 0 0 0 4 9.5h.5"/></svg>Copy prompt</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button></div><div class="pclamp"><pre class="ptxt">${p1}</pre></div>
           <div class="pfoot">${CMP[e.s].tested?`<span>Tested 4× on Opus and Sonnet · 97%+ match to Figma</span>`:'<span></span>'}${CMP[e.s].svg?`<button class="svgln" data-copy="svg" type="button"><span class="cp-idle"><svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5.5 4.5 2 8l3.5 3.5M10.5 4.5 14 8l-3.5 3.5"/></svg>Copy Figma SVG</span><span class="cp-result"><svg viewBox="0 0 16 16" fill="none"><path pathLength="1" d="m3 8 3 3 7-7" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Copied</span></span></button>`:''}</div>
