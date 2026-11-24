@@ -552,9 +552,11 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .cr svg{flex:none;width:14px;height:14px;margin-top:4px}
 .cr .no{color:var(--t2)}.cr .no svg{color:var(--bad)}
 .cr .ok{color:var(--ink)}.cr .ok svg{color:var(--good)}
-/* emphasis follows the picture: on Before the problem line reads full ink and the fix steps back */
-.cr p{transition:color .32s cubic-bezier(0,0,.2,1)}
-.art[data-v=b] .cr .no{color:var(--ink)}.art[data-v=b] .cr .ok{color:var(--t2)}
+/* emphasis follows the picture: the line that matches the shown state is full ink, the other steps well back */
+.cr p,.cr svg{transition:color .32s cubic-bezier(0,0,.2,1),opacity .32s cubic-bezier(0,0,.2,1),font-weight .32s}
+.art[data-v=a] .cr .no,.art[data-v=b] .cr .ok{color:var(--t3);font-weight:400}
+.art[data-v=a] .cr .no svg,.art[data-v=b] .cr .ok svg{opacity:.35}
+.art[data-v=b] .cr .no,.art[data-v=a] .cr .ok{color:var(--ink);font-weight:500}
 @media(max-width:620px){.cmpt{grid-template-columns:1fr;gap:0}.cr{padding:8px 12px}}
 .chip{flex:1;min-width:0;font-size:12px;color:var(--t3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pfoot{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 16px 16px 38px;font-size:12px;line-height:16px;color:var(--t3)}
