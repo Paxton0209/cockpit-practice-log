@@ -102,7 +102,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .hero3.cov{isolation:isolate;overflow:hidden}.hero3.cov>*{position:relative;z-index:1}.hero3.cov .cstage{z-index:1}
 .thumb.cov::after,.hero3.cov::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:var(--grain);mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .5 0 0 0 0 .5 0 0 0 0 .5 0 0 0 1 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 .thumb.cov .cs{z-index:1;background:transparent}
-.thumb.cov .cs{position:absolute;left:50%;top:50%;width:104%;transform:translate(-50%,-50%)}
+.thumb.cov .cs{position:absolute;left:50%;top:50%;width:95.24%;transform:translate(-50%,-50%)}
 .thumb.cov .cs .px{background:transparent}
 .meta .ct{font-size:13px;color:var(--t3)}
 .card.soon{pointer-events:none}
@@ -285,7 +285,9 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .handle::before{content:"";position:absolute;top:0;bottom:0;left:-.5px;width:1px;background:var(--ink);opacity:.45}
 .handle span{position:absolute;top:50%;left:0;border-radius:50%;background:var(--panel);color:var(--ink);box-shadow:0 0 0 1px var(--line),0 4px 12px rgba(0,0,0,.12);display:grid;place-items:center}
 .ecard{overflow:visible}
-.ecard .hero3{border-radius:16px;corner-shape:superellipse(1.6)}
+.ecard .hero3{border-radius:16px;corner-shape:superellipse(1.6);aspect-ratio:16/9;padding:0;display:block}
+.ecard .hero3 .cstage{position:absolute;left:50%;top:50%;width:640px;transform:translate(-50%,-50%)}
+.ecard .hero3 .htools{position:absolute;left:0;right:0;bottom:16px;margin:0}
 .hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px}
 
 .hcap{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--t3)}
@@ -732,6 +734,8 @@ const rbox=(r,rad)=>[r.left,r.top,r.width,r.height,rad];
 const pose=(r,t)=>[r[0]+r[2]/2-t.left-t.width/2,r[1]+r[3]/2-t.top-t.height/2,r[2]/t.width];
 const pstyle=([x,y,k])=>({transform:`translate(${x}px,${y}px) scale(${k})`,transformOrigin:'50% 50%'});
 const rest=sh=>[...sh.querySelectorAll('.dtop,.art,.pager')];
+const hstyle=([x,y,k])=>({transform:`translate(${x}px,${y}px) scale(${k})`,transformOrigin:'50% 50%',borderRadius:(16/k)+'px'});
+const restOf=sh=>{const h=$('.hero3',sh);return [...$$('.dtop,.art',sh),...(h?$$('.htools',h):[])]};
 const clipf=S=>([x,y,w,h,r])=>({clipPath:`inset(${y-S.top}px ${S.right-x-w}px ${S.bottom-y-h}px ${x-S.left}px round ${r}px)`});
 const cstyle=([x,y,w,h,r])=>({transform:`translate(${x}px,${y}px)`,width:w+'px',height:h+'px',borderRadius:r+'px'});
 function thumbFor(n){const el=anchor?.isConnected&&+anchor.dataset.n===n?anchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
@@ -745,7 +749,7 @@ function sheetHTML(n){
   return `<div class="sci">
     <div class="dtop"><span class="dname">${CMP[e.s].name||e.title}<i class="mono">${pad(e.n)}</i></span><span class="act">
       
-      <button class="rb xbtn" id="dClose" aria-label="Close"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="m4 4 8 8M12 4l-8 8"/></svg></button></span></div>
+      </span></div>
     <div class="ecard"><div class="hero3${CMP[e.s]&&CMP[e.s].cover?" cov":""}">
       <div class="cstage" id="cstage" data-v="a" style="height:${(CMP[e.s].H||CH)-40}px">
         ${cmp(e.s,'a')}${cmp(e.s,'b')}
@@ -769,13 +773,18 @@ function morph(st,to,quiet){
   if(st.dataset.v===to)return;
   const ar=$('.art');if(ar)ar.dataset.v=to;
   if(!quiet&&!RM.matches&&st.closest('.hero3')){if(to==='a')return scan(st,to);
-    if(st._scan){st._scan.forEach(a=>a.cancel());st._scan=null;st.classList.remove('scan','q');$$('.cs',st).forEach(c=>{c.style.zIndex='';['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]='')})}
-    clearTimeout(st._ft);st.classList.add('fade');st.dataset.v=to;st._ft=setTimeout(()=>st.classList.remove('fade'),260);return}
+    if(st._scan){st._scan.forEach(a=>a.cancel());st._scan=null;st.classList.remove('scan','q');$$('.cs',st).forEach(c=>{c.style.zIndex='';c.style.opacity=c.style.transform=c.style.filter='';['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]='')})}
+    fadeTo(st,to,300);return}
   if(st._scan){st._scan.forEach(a=>a.cancel());st._scan=null;st.classList.remove('scan');$$('.cs',st).forEach(c=>c.style.zIndex='')}
   if(quiet){st.classList.add('q');st.dataset.v=to;st.offsetWidth;st.classList.remove('q')}else st.dataset.v=to;
 }
+function fadeTo(st,to,dur){
+  const inc=$('.cs.'+to,st),out=$('.cs.'+(to==='a'?'b':'a'),st);$$('.cs',st).forEach(c=>c.style.zIndex='');inc.style.zIndex=2;st.classList.add('q');Object.assign(out.style,{opacity:'1',transform:'none',filter:'none'});st.dataset.v=to;st.offsetWidth;
+  const fa=inc.animate([{opacity:0},{opacity:1}],{duration:dur,easing:'linear'});st._scan=[fa];
+  fa.onfinish=()=>{Object.assign(out.style,{opacity:'',transform:'',filter:''});inc.style.zIndex='';st.offsetWidth;st.classList.remove('q');st._scan=null};
+}
 function scan(st,to){
-  if(st._scan)st._scan.forEach(a=>a.cancel());$$('.cs',st).forEach(c=>['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]=''));
+  if(st._scan)st._scan.forEach(a=>a.cancel());$$('.cs',st).forEach(c=>{c.style.opacity=c.style.transform=c.style.filter=''});$$('.cs',st).forEach(c=>['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]=''));
   const inc=$('.cs.'+to,st),out=$('.cs.'+(to==='a'?'b':'a'),st),fwd=to==='a';
   let wr=$('.scanwrap',st);if(!wr){wr=document.createElement('div');wr.className='scanwrap';wr.innerHTML='<i class="scanln"></i>';st.appendChild(wr)}const ln=$('.scanln',wr);
   const S=st.getBoundingClientRect(),W=S.width,rs=[inc,out].map(c=>{const k=$('.kp',c);return (k.firstElementChild||k).getBoundingClientRect()}),
@@ -826,7 +835,6 @@ function wireSheet(){
   const st=$('#cstage'),sg=$('#seg4');
   const set=v=>{$$('button',sg).forEach(b=>b.classList.toggle('on',b.dataset.v===v));sg._place&&sg._place(true);morph(st,v)};
   seg(sg,b=>morph(st,b.dataset.v));
-  $('#dClose').onclick=()=>go('home');
   $$('[data-copy]').forEach(b=>b.onclick=ev=>{ev.preventDefault();ev.stopPropagation();copyPrompt(b,b.dataset.copy==='svg'?CMP[ENTRIES[curN-1].s].svg:$('.ptxt').textContent)});
   $$('.pclamp').forEach(c=>{const f=()=>c.classList.toggle('end',c.scrollTop+c.clientHeight>=c.scrollHeight-2);c.addEventListener('scroll',f,{passive:true});new ResizeObserver(f).observe(c)});
   $$('details.row').forEach(d=>{const sm=$('summary',d),rb=$('.rbx',d);sm.onclick=ev=>{if(ev.target.closest('button'))return;ev.preventDefault();if(RM.matches){d.open=!d.open;return}
@@ -849,8 +857,9 @@ function openEntry(n){{const c=$('#sc');if(c)c.style.transition=''}
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});veil.style.opacity=1;
   const src=srcFor(n);
   if(COMPACT.matches){spring(sh,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);spring(sc,[100],[0],([y])=>({...cstyle(end),transform:`translate(${end[0]}px,${end[1]+y*end[3]/100}px)`}),420,40)}
-  else if(src){sh.classList.add('bare');setTimeout(()=>sh.classList.remove('bare'),170);ghost(n,1);const s=spring(sc,src,end,cstyle);{const S=sh.getBoundingClientRect(),cl=spring(sh,src,end,clipf(S));cl.onfinish=()=>cl.cancel()}const ci=sh.firstElementChild,cr=ci.getBoundingClientRect(),cv={left:cr.left,top:cr.top,width:cr.width,height:Math.min(cr.height,sh.clientHeight)};spring(ci,pose(src,cv),[0,0,1],pstyle);
-    anim(ci,[{opacity:0},{opacity:1}],{duration:200,delay:30,easing:'ease-out',fill:'backwards'});
+  else if(src){ghost(n,1);const s=spring(sc,src,end,cstyle);{const S=sh.getBoundingClientRect(),cl=spring(sh,src,end,clipf(S));cl.onfinish=()=>cl.cancel()}
+    const hero=$('.hero3',sh);if(hero){const hr=hero.getBoundingClientRect();spring(hero,pose(src,hr),[0,0,1],hstyle).onfinish=()=>hero.style.borderRadius=''}
+    restOf(sh).forEach(el=>anim(el,[{opacity:0},{opacity:1}],{duration:220,delay:110,easing:'ease-out',fill:'backwards'}));
     s.onfinish=()=>{ghost(n,0);if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
   else{anim(sc,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(sh,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(shadow,[{opacity:0},{opacity:1}],{duration:200})}
 }
@@ -862,6 +871,10 @@ function closeEntry(){document.body.classList.remove('dim');{const c=$('#sc');if
   const sh=$('#sheet2'),sc=$('#sc'),veil=$('#veil'),src=srcFor(curN),cur=rbox(sc.getBoundingClientRect(),parseFloat(getComputedStyle(sc).borderTopLeftRadius)||20);
   stop();anim(veil,[{opacity:1},{opacity:0}],{duration:140,easing:'ease-out'});let end;
   if(COMPACT.matches){end=spring(sh,[0],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);anim(sc,[{opacity:1},{opacity:0}],{duration:160})}
+  else if(src&&$('.hero3',sh)){ghost(curN,1);{const st=$('#cstage');if(st&&st.dataset.v==='b'){if(st._scan)st._scan.forEach(a=>a.cancel());fadeTo(st,'a',200)}}const hero=$('.hero3',sh),hr=hero.getBoundingClientRect(),S=sh.getBoundingClientRect();
+    restOf(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:90,easing:'ease-out',fill:'forwards'}));
+    anim($('#sc i'),[{opacity:1},{opacity:0}],{duration:160,easing:'ease-out',fill:'forwards'});
+    spring(sh,cur,src,clipf(S));spring(hero,[0,0,1],pose(src,hr),hstyle);end=spring(sc,cur,src,cstyle)}
   else{const o={duration:140,easing:'ease-out',fill:'forwards'};anim(sc,[{opacity:1,transform:sc.style.transform},{opacity:0,transform:sc.style.transform+' scale(.98)'}],o);end=anim(sh,[{opacity:1,transform:'translateX(-50%)'},{opacity:0,transform:'translateX(-50%) scale(.98)'}],o)}
   end.onfinish=finish;
 }
