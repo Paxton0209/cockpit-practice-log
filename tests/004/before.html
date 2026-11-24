@@ -1,150 +1,47 @@
-<div class="car-apps">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+<div class="apps-root">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+.apps-root{width:772px;height:480px;box-sizing:border-box;padding:20px;background:#F3F4F6;font-family:'Inter',system-ui,sans-serif;color:#111827;display:flex;flex-direction:column;gap:12px}
+.apps-root *{box-sizing:border-box}
+.apps-root .row{flex:1;display:flex;align-items:center;gap:20px;padding:0 20px 0 18px;background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(17,24,39,.06),0 0 0 1px rgba(17,24,39,.05)}
+.apps-root .icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.apps-root .icon svg{width:32px;height:32px}
+.apps-root .phone{background:linear-gradient(160deg,#34D399,#059669)}
+.apps-root .maps{background:linear-gradient(160deg,#60A5FA,#2563EB)}
+.apps-root .task{background:linear-gradient(160deg,#FBBF24,#EA580C)}
+.apps-root .fm{background:linear-gradient(160deg,#A78BFA,#7C3AED)}
+.apps-root .name{flex:1;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.apps-root .actions{display:flex;gap:12px}
+.apps-root button{font-family:inherit;font-size:18px;font-weight:600;height:56px;min-width:136px;padding:0 24px;border-radius:14px;border:none;cursor:pointer;transition:background .15s,transform .1s}
+.apps-root button:active{transform:scale(.97)}
+.apps-root .open{background:#111827;color:#FFFFFF}
+.apps-root .open:hover{background:#1F2937}
+.apps-root .uninstall{background:#FEF2F2;color:#DC2626}
+.apps-root .uninstall:hover{background:#FEE2E2}
+.apps-root button:focus-visible{outline:3px solid #2563EB;outline-offset:2px}
+</style>
 
-    .car-apps {
-      --bg: #F4F5F7;
-      --surface: #FFFFFF;
-      --text: #14171C;
-      --muted: #5B636E;
-      --line: #E6E8EC;
-      --primary: #1A5CFF;
-      --primary-press: #1449CC;
-      --danger: #C62828;
-      --danger-tint: #FDECEC;
+<div class="row">
+  <div class="icon phone"><svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></div>
+  <div class="name">Phone</div>
+  <div class="actions"><button class="open" aria-label="Open Phone">Open</button><button class="uninstall" aria-label="Uninstall Phone">Uninstall</button></div>
+</div>
 
-      box-sizing: border-box;
-      width: 772px;
-      height: 547px;
-      padding: 28px 32px;
-      background: var(--bg);
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    .car-apps *, .car-apps *::before, .car-apps *::after { box-sizing: border-box; }
+<div class="row">
+  <div class="icon maps"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+  <div class="name">Maps</div>
+  <div class="actions"><button class="open" aria-label="Open Maps">Open</button><button class="uninstall" aria-label="Uninstall Maps">Uninstall</button></div>
+</div>
 
-    .car-apps h2 {
-      margin: 0;
-      font-size: 30px;
-      line-height: 38px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
+<div class="row">
+  <div class="icon task"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5l1.8 1.8L9 5"/><path d="M4 13.5l1.8 1.8L9 12"/><path d="M12.5 7h7.5"/><path d="M12.5 14h7.5"/><path d="M4.5 19.5h.01"/><path d="M12.5 19.5h7.5"/></svg></div>
+  <div class="name">Task master</div>
+  <div class="actions"><button class="open" aria-label="Open Task master">Open</button><button class="uninstall" aria-label="Uninstall Task master">Uninstall</button></div>
+</div>
 
-    .car-apps ul {
-      list-style: none;
-      margin: 0;
-      padding: 0 24px;
-      background: var(--surface);
-      border-radius: 20px;
-      box-shadow: 0 1px 2px rgba(20,23,28,.04), 0 4px 16px rgba(20,23,28,.05);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .car-apps li {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-    .car-apps li:last-child { border-bottom: 0; }
-
-    .car-apps .icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      flex: none;
-    }
-    .car-apps .icon svg { width: 32px; height: 32px; }
-    .car-apps .i-phone { background: linear-gradient(160deg, #3DDC6E, #1FA94B); }
-    .car-apps .i-maps  { background: linear-gradient(160deg, #4A8CFF, #1A5CFF); }
-    .car-apps .i-task  { background: linear-gradient(160deg, #A774FF, #6C3BE0); }
-    .car-apps .i-fm    { background: linear-gradient(160deg, #FFA640, #F06A1A); }
-
-    .car-apps .name {
-      flex: 1;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-    }
-
-    .car-apps .actions { display: flex; gap: 12px; }
-
-    .car-apps button {
-      font: inherit;
-      font-size: 18px;
-      font-weight: 600;
-      height: 56px;
-      min-width: 132px;
-      padding: 0 24px;
-      border-radius: 14px;
-      border: 0;
-      cursor: pointer;
-      transition: background-color .15s ease, transform .1s ease;
-    }
-    .car-apps button:active { transform: scale(.97); }
-    .car-apps button:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
-
-    .car-apps .open { background: var(--primary); color: #fff; }
-    .car-apps .open:hover { background: var(--primary-press); }
-
-    .car-apps .uninstall { background: var(--danger-tint); color: var(--danger); }
-    .car-apps .uninstall:hover { background: #FAD9D9; }
-  </style>
-
-  <h2>Apps</h2>
-
-  <ul>
-    <li>
-      <span class="icon i-phone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
-      </span>
-      <span class="name">Phone</span>
-      <div class="actions">
-        <button class="open" aria-label="Open Phone">Open</button>
-        <button class="uninstall" aria-label="Uninstall Phone">Uninstall</button>
-      </div>
-    </li>
-    <li>
-      <span class="icon i-maps" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-      </span>
-      <span class="name">Maps</span>
-      <div class="actions">
-        <button class="open" aria-label="Open Maps">Open</button>
-        <button class="uninstall" aria-label="Uninstall Maps">Uninstall</button>
-      </div>
-    </li>
-    <li>
-      <span class="icon i-task" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 12.2l2.4 2.4 4.8-5"/></svg>
-      </span>
-      <span class="name">Task master</span>
-      <div class="actions">
-        <button class="open" aria-label="Open Task master">Open</button>
-        <button class="uninstall" aria-label="Uninstall Task master">Uninstall</button>
-      </div>
-    </li>
-    <li>
-      <span class="icon i-fm" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2" fill="#fff" stroke="none"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg>
-      </span>
-      <span class="name">FM</span>
-      <div class="actions">
-        <button class="open" aria-label="Open FM">Open</button>
-        <button class="uninstall" aria-label="Uninstall FM">Uninstall</button>
-      </div>
-    </li>
-  </ul>
+<div class="row">
+  <div class="icon fm"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="2" fill="#fff" stroke="none"/><path d="M8.5 15.5a5 5 0 0 1 0-7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 18.4a9 9 0 0 1 0-12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></div>
+  <div class="name">FM</div>
+  <div class="actions"><button class="open" aria-label="Open FM">Open</button><button class="uninstall" aria-label="Uninstall FM">Uninstall</button></div>
+</div>
 </div>

@@ -271,6 +271,17 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .foot .pg i{display:block;height:2px;border-radius:1px;background:var(--line);overflow:hidden}.foot .pg b{display:block;height:100%;background:var(--ink);border-radius:1px}
 .foot .row{display:flex;justify-content:space-between;align-items:center;margin-right:-8px}
 .mainc{position:relative;padding:96px 48px 128px 24px;min-width:0}
+/* Colour off (default): the page is black, white and grey like a sketchbook; covers go neutral and the components' accent turns to ink (inverse in dark). Colour on brings back the context palettes and the library blue. */
+:root:not([data-color=on]) [data-ctx]{--cv0:#ebebeb;--cv1:#f7f7f7;--cv2:#d4d4d4;--cv3:#f2f2f2}
+:root[data-theme=dark]:not([data-color=on]) [data-ctx]{--cv0:#0b0b0b;--cv1:#191919;--cv2:#1f1f1f;--cv3:#101010}
+:root:not([data-color=on]) .st{--pri:#1d1d1f;--pri-e:#1d1d1f;--acc:#1d1d1f;--ok:#1d1d1f;--warn:#1d1d1f}
+:root[data-theme=dark]:not([data-color=on]) .cov .kp:not(.is-b) .st{--pri:#fff;--pri-e:#fff;--on:#1d1d1f;--acc:#fff;--ok:#fff;--warn:#fff}
+:root:not([data-color=on]) .nv{--pri:#1d1d1f;--pri-e:#1d1d1f;--info:#1d1d1f;--info-bg:rgba(29,29,31,.08);--onp:#fff}
+:root[data-theme=dark]:not([data-color=on]) .cov .kp:not(.is-b) .nv{--pri:#fff;--pri-e:#fff;--info:#fff;--info-bg:rgba(255,255,255,.12);--onp:#1d1d1f}
+.nv .act .btn.p,.nv.rs .opt .tag{color:var(--onp,#fff)}
+.tgl2{position:absolute;top:32px;right:90px;width:34px;height:34px;border-radius:50%;background:none;color:var(--t2);display:grid;place-items:center}.tgl2:hover{color:var(--ink)}
+.tgl2 .dot{width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1.5px currentColor}
+:root[data-color=on] .tgl2 .dot{box-shadow:none;background:conic-gradient(#007aff,#30a46c,#ffb340,#e5484d,#8e7cf0,#007aff)}
 .tgl{position:absolute;top:32px;right:48px;width:34px;height:34px;border-radius:50%;background:none;color:var(--t2)}.tgl:hover{color:var(--ink)}
 .mh{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:32px}
 .mh h1{font-size:28px;line-height:36px;font-weight:600}
@@ -325,7 +336,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .bare .ecard{border-color:transparent}
 .hero3 .cstage{width:100%}.hero3 .cstage .cs.a{margin:-20px 0}.hero3 .cstage .cs.b{inset:-20px 0}
 .kp{display:grid;place-items:center;background:transparent}
-.kp.top{place-items:start center}
+.kp.top{place-items:start center;-webkit-mask-image:linear-gradient(#000 calc(100% - 96px),transparent);mask-image:linear-gradient(#000 calc(100% - 96px),transparent)}
 /* the page blur behind an open entry lives on the veil (backdrop-filter, composited), so only its opacity animates: animating filter on the whole page re-rasterised every cover each frame and made open/close stutter */
 .cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
@@ -817,287 +828,171 @@ const TRIPBAR_B=`<div class="trip-bar" role="region" aria-label="Trip summary">
   </button>
 </div>`;
 const CMP={
-O:{W:1245,H:698,cv:{W:900,top:0},name:'Opening tiles',cover:1,ask:'Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Content, exactly: a section title “Openings” and three controls, Frunk, Trunk and Charge port, each with its icon. Nothing else.',wrong:[['Blue strokes in the icons','Each icon draws its moving part in blue.'],['Labels at 15 px','Under 30 px icons, in a tile 152 px tall.'],['Icons in grey circles','A 48 px well around every icon.']],notes:[['One colour for icons','Icon and label share the quiet secondary grey.'],['Labels at 24 px','Centred under the icon in a 156 px tile.'],['Icons at 72 px, no well','2 px strokes, straight on the tile.']],
-  html:()=>`<div class="st"><div class="lh s">Openings</div><div class="tg"><div class="tb">${IC.hood}Frunk</div><div class="tb">${IC.trunk}Trunk</div><div class="tb">${IC.port}Charge port</div></div></div>`,
-  before:()=>`<div class="openings">
+O:{W:1245,H:698,cv:{W:900,top:0},name:'Opening tiles',cover:1,ask:'Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 156 px, light theme. Content, exactly: three controls, Frunk, Trunk and Charge port, each with its icon. No title. Nothing else.',wrong:[['Icons in grey circles','A 60 px well around every icon.'],['Labels at 16 px','Semibold, under 34 px icons.'],['Strokes at 1.8 px','Thinner than the library’s 2 px line.']],notes:[['Icons straight on tile','No well. The tile itself is the button.'],['Labels at 24 px','Centred under the icon in a 156 px tile.'],['72 px icons, 2 px line','The library icons, at tile size.']],
+  html:()=>`<div class="st"><div class="tg"><div class="tb">${IC.hood}Frunk</div><div class="tb">${IC.trunk}Trunk</div><div class="tb">${IC.port}Charge port</div></div></div>`,
+  before:()=>`<div class="vc-access">
   <style>
-    .openings{
-      --bg:#F5F6F8; --tile:#FFFFFF; --ink:#14161A; --muted:#5B6270;
-      --line:#E3E6EB; --accent:#1F6FEB; --accent-soft:#EAF1FD;
-      box-sizing:border-box; width:772px; height:200px; padding:24px;
-      background:var(--bg); font-family:'Inter',system-ui,sans-serif; color:var(--ink);
-      display:flex; flex-direction:column; gap:16px;
+    .vc-access{
+      width:772px;height:156px;box-sizing:border-box;
+      display:grid;grid-template-columns:repeat(3,1fr);gap:12px;
+      font-family:'Inter',system-ui,sans-serif;
+      -webkit-font-smoothing:antialiased;
     }
-    .openings *{box-sizing:border-box}
-    .openings h2{margin:0; font-size:18px; line-height:24px; font-weight:600; letter-spacing:-0.01em}
-    .openings .row{flex:1; display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
-    .openings button{
-      all:unset; box-sizing:border-box; cursor:pointer;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
-      background:var(--tile); border:1px solid var(--line); border-radius:16px;
-      box-shadow:0 1px 2px rgba(20,22,26,.04);
-      transition:background .15s, border-color .15s, box-shadow .15s, transform .1s;
+    .vc-access *{box-sizing:border-box;}
+    .vc-access button{
+      all:unset;box-sizing:border-box;cursor:pointer;
+      display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+      height:156px;border-radius:20px;
+      background:#FFFFFF;border:1px solid #E4E7EC;
+      box-shadow:0 1px 2px rgba(16,24,40,.04),0 2px 8px rgba(16,24,40,.04);
+      color:#111827;
+      transition:background .15s ease,border-color .15s ease,box-shadow .15s ease,transform .1s ease;
     }
-    .openings button:hover{border-color:#CBD1DA; box-shadow:0 2px 8px rgba(20,22,26,.06)}
-    .openings button:active{transform:scale(.98); background:var(--accent-soft); border-color:var(--accent)}
-    .openings button:focus-visible{outline:2px solid var(--accent); outline-offset:2px}
-    .openings .well{
-      width:48px; height:48px; border-radius:50%; background:var(--bg);
-      display:grid; place-items:center; color:var(--ink);
+    .vc-access button:hover{border-color:#CBD2DC;box-shadow:0 2px 4px rgba(16,24,40,.06),0 6px 16px rgba(16,24,40,.06);}
+    .vc-access button:active{transform:scale(.985);background:#F7F8FA;}
+    .vc-access button:focus-visible{outline:none;border-color:#2563EB;box-shadow:0 0 0 3px rgba(37,99,235,.25);}
+    .vc-access .ic{
+      width:60px;height:60px;border-radius:50%;
+      display:grid;place-items:center;
+      background:#F1F3F6;color:#1F2937;
+      transition:background .15s ease,color .15s ease;
     }
-    .openings button:active .well{background:#fff}
-    .openings svg{width:30px; height:30px; fill:none; stroke:currentColor; stroke-width:1.6; stroke-linecap:round; stroke-linejoin:round}
-    .openings svg .lift{stroke:var(--accent); stroke-width:2}
-    .openings .label{font-size:15px; line-height:20px; font-weight:500}
+    .vc-access button:hover .ic{background:#E8ECF2;}
+    .vc-access svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+    .vc-access .lbl{font-size:16px;font-weight:600;letter-spacing:-.01em;line-height:1;}
   </style>
 
-  <h2>Openings</h2>
-  <div class="row">
-    <button type="button" aria-label="Open frunk">
-      <span class="well">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M8.5 12H2v5h2M10 17h4M20 17h2v-4l-3-1-3-3.5h-5L8.5 12"/>
-          <path class="lift" d="M8.5 12L3.5 8.5"/>
-          <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
-        </svg>
-      </span>
-      <span class="label">Frunk</span>
-    </button>
+  <button type="button" aria-label="Open frunk">
+    <span class="ic">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M6 22H3.5v-5l3-2 4-4h8.5l4 4"/>
+        <path d="M23 16.5h5a1 1 0 0 1 1 1V22h-2.5"/>
+        <path d="M11 22h10.5"/>
+        <path d="M23 15l5-5.5"/>
+        <circle cx="8.5" cy="22" r="2.5"/>
+        <circle cx="24" cy="22" r="2.5"/>
+      </svg>
+    </span>
+    <span class="lbl">Frunk</span>
+  </button>
 
-    <button type="button" aria-label="Open trunk">
-      <span class="well">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M15.5 12H22v5h-2M14 17h-4M4 17H2v-4l3-1 3-3.5h5l2.5 3.5"/>
-          <path class="lift" d="M15.5 12l5-3.5"/>
-          <circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/>
-        </svg>
-      </span>
-      <span class="label">Trunk</span>
-    </button>
+  <button type="button" aria-label="Open trunk">
+    <span class="ic">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M26 22h2.5v-4.5a1 1 0 0 0-1-1H23l-4-4.5h-8.5L7 15"/>
+        <path d="M7 16.5H4a1 1 0 0 0-1 1V22h2.5"/>
+        <path d="M10.5 22H21"/>
+        <path d="M7 15L2.5 10"/>
+        <circle cx="8" cy="22" r="2.5"/>
+        <circle cx="23.5" cy="22" r="2.5"/>
+      </svg>
+    </span>
+    <span class="lbl">Trunk</span>
+  </button>
 
-    <button type="button" aria-label="Open charge port">
-      <span class="well">
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M9 3v4M15 3v4"/>
-          <path d="M6 7h12v4a6 6 0 0 1-12 0V7z"/>
-          <path d="M12 17v4"/>
-          <path class="lift" d="M12.6 9.5l-2.1 3h3l-2.1 3"/>
-        </svg>
-      </span>
-      <span class="label">Charge port</span>
-    </button>
+  <button type="button" aria-label="Open charge port">
+    <span class="ic">
+      <svg viewBox="0 0 32 32" aria-hidden="true">
+        <rect x="7" y="9" width="14" height="17" rx="3"/>
+        <path d="M11 9V5.5M17 9V5.5"/>
+        <path d="M15 13l-3 4.5h4l-3 4.5"/>
+        <path d="M21 18h3a2 2 0 0 0 2-2v-4.5"/>
+      </svg>
+    </span>
+    <span class="lbl">Charge port</span>
+  </button>
+</div>`},
+L:{W:1363,H:765,cv:{W:900,top:1},name:'Locks',cover:1,ask:'Design a locks settings card for a car settings screen, 772 × 520 px, light theme. Content, exactly: “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). No title. Nothing else.',wrong:[['Labels at 20 px semibold','16 px lines under them.'],['Options in 18 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines under the child lock and between switches.']],notes:[['Labels at 28 px','Lines at 24 px and 65%.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
+  html:()=>`<div class="st"><div class="card"><div class="ch">Child lock<div class="seg"><i>Off</i><i>Left</i><i>Right</i><i class="on">Both</i></div></div><div class="rw"><span class="tx">Window lock<span class="m">Disable rear window switches</span></span><i class="sw off"></i></div><div class="rw"><span class="tx">Walk-away lock<span class="m">Lock when your phone key leaves</span></span><i class="sw"></i></div><div class="rw"><span class="tx">Unlock on park<span class="m">Unlock all doors in Park</span></span><i class="sw"></i></div></div></div>`,
+  before:()=>`<div class="lk-card">
+<style>
+.lk-card{box-sizing:border-box;width:772px;height:520px;padding:28px 32px;background:#FFFFFF;border-radius:24px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 8px 24px rgba(16,24,40,.06);border:1px solid #E6E8EC;font-family:'Inter',system-ui,sans-serif;color:#0F172A;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+.lk-card *{box-sizing:border-box;margin:0}
+.lk-child{padding-bottom:24px;border-bottom:1px solid #EDEFF2}
+.lk-label{font-size:20px;font-weight:600;letter-spacing:-.01em;line-height:28px}
+.lk-seg{margin-top:16px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;height:64px;background:#F1F3F6;border-radius:16px}
+.lk-seg span{display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:18px;font-weight:500;color:#5B6472}
+.lk-seg span.on{background:#FFFFFF;color:#0F172A;font-weight:600;box-shadow:0 1px 2px rgba(16,24,40,.08),0 2px 6px rgba(16,24,40,.08)}
+.lk-rows{flex:1;display:flex;flex-direction:column}
+.lk-row{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.lk-row+.lk-row{border-top:1px solid #EDEFF2}
+.lk-sub{margin-top:4px;font-size:16px;line-height:22px;color:#6B7280}
+.lk-sw{flex:none;position:relative;width:64px;height:36px;border-radius:18px;background:#D5D9E0}
+.lk-sw::after{content:"";position:absolute;top:3px;left:3px;width:30px;height:30px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(16,24,40,.2)}
+.lk-sw.on{background:#1F6FEB}
+.lk-sw.on::after{left:31px}
+</style>
+  <div class="lk-child">
+    <p class="lk-label">Child lock</p>
+    <div class="lk-seg" role="radiogroup" aria-label="Child lock">
+      <span role="radio" aria-checked="false">Off</span>
+      <span role="radio" aria-checked="false">Left</span>
+      <span role="radio" aria-checked="false">Right</span>
+      <span role="radio" aria-checked="true" class="on">Both</span>
+    </div>
+  </div>
+  <div class="lk-rows">
+    <div class="lk-row">
+      <div><p class="lk-label">Window lock</p><p class="lk-sub">Disable rear window switches</p></div>
+      <span class="lk-sw" role="switch" aria-checked="false" aria-label="Window lock"></span>
+    </div>
+    <div class="lk-row">
+      <div><p class="lk-label">Walk-away lock</p><p class="lk-sub">Lock when your phone key leaves</p></div>
+      <span class="lk-sw on" role="switch" aria-checked="true" aria-label="Walk-away lock"></span>
+    </div>
+    <div class="lk-row">
+      <div><p class="lk-label">Unlock on park</p><p class="lk-sub">Unlock all doors in Park</p></div>
+      <span class="lk-sw on" role="switch" aria-checked="true" aria-label="Unlock on park"></span>
+    </div>
   </div>
 </div>`},
-L:{W:1479,H:830,cv:{W:900,top:1},name:'Locks',cover:1,ask:'Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.',wrong:[['Labels at 18 px','15 px lines under them, below a 28 px bold title.'],['Options in 17 px type','Off, Left, Right and Both, smaller than the labels.'],['Dividers on every row','Hairlines between the switches, in a second card.']],notes:[['Labels at 28 px','Lines at 24 px and 65%. The section label steps back.'],['Options in 28 px type','56 px tall in a 64 px track. Both lifts in white.'],['Rows spaced, not ruled','108 px rows and no dividers.']],
-  html:()=>`<div class="st"><div class="lh s">Locks</div><div class="card"><div class="ch">Child lock<div class="seg"><i>Off</i><i>Left</i><i>Right</i><i class="on">Both</i></div></div><div class="rw"><span class="tx">Window lock<span class="m">Disable rear window switches</span></span><i class="sw off"></i></div><div class="rw"><span class="tx">Walk-away lock<span class="m">Lock when your phone key leaves</span></span><i class="sw"></i></div><div class="rw"><span class="tx">Unlock on park<span class="m">Unlock all doors in Park</span></span><i class="sw"></i></div></div></div>`,
-  before:()=>`<div class="locks-panel">
+M:{W:1258,H:706,cv:{W:900,top:1},name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 480 px, light theme. Content, exactly: four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. No title. Nothing else.',wrong:[['Two buttons a row','A black Open and a red Uninstall on all four rows.'],['Names set in 22 px','Semibold, beside 60 px gradient tiles.'],['Gradient icon tiles','Green, blue, orange and purple gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','One line per app in a 108 px row.'],['Colour only in the icon','Filled icons on a soft grey tile.']],
+  html:()=>`<div class="st"><div class="card"><div class="rw"><span class="ai">${IC.phoneF}</span><span class="tx">Phone</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.maps}</span><span class="tx">Maps</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.layers}</span><span class="tx">Task master</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.radio}</span><span class="tx">FM</span><span class="ib">${IC.trash}</span></div></div></div>`,
+  before:()=>`<div class="apps-root">
 <style>
-.locks-panel{width:772px;height:564px;box-sizing:border-box;padding:32px 36px;background:#F4F5F7;font-family:'Inter',system-ui,sans-serif;color:#14171C;display:flex;flex-direction:column;gap:20px;-webkit-font-smoothing:antialiased}
-.locks-panel *{box-sizing:border-box;font-family:inherit;margin:0}
-.locks-panel h2{font-size:28px;line-height:34px;font-weight:700;letter-spacing:-0.02em}
-.locks-panel .card{background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(20,23,28,.06),0 0 0 1px rgba(20,23,28,.05)}
-.locks-panel .child{padding:20px 24px 24px}
-.locks-panel .label{font-size:18px;line-height:24px;font-weight:600;letter-spacing:-0.01em}
-.locks-panel .seg{margin-top:14px;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:4px;background:#ECEEF1;border-radius:14px}
-.locks-panel .seg button{height:52px;border:0;border-radius:10px;background:transparent;font-size:17px;font-weight:500;color:#5A6270;cursor:pointer;transition:background .15s,color .15s}
-.locks-panel .seg button[aria-checked="true"]{background:#FFFFFF;color:#14171C;font-weight:600;box-shadow:0 1px 3px rgba(20,23,28,.12),0 0 0 1px rgba(20,23,28,.04)}
-.locks-panel .list{flex:1;display:flex;flex-direction:column}
-.locks-panel .row{flex:1;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 24px}
-.locks-panel .row + .row{border-top:1px solid #ECEEF1}
-.locks-panel .sub{margin-top:4px;font-size:15px;line-height:20px;color:#6B7280}
-.locks-panel .sw{flex:none;position:relative;width:64px;height:36px;border:0;border-radius:18px;background:#D5D9DF;cursor:pointer;transition:background .2s}
-.locks-panel .sw::after{content:"";position:absolute;top:3px;left:3px;width:30px;height:30px;border-radius:50%;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.2);transition:transform .2s}
-.locks-panel .sw[aria-checked="true"]{background:#1F6FEB}
-.locks-panel .sw[aria-checked="true"]::after{transform:translateX(28px)}
-.locks-panel button:focus-visible{outline:3px solid rgba(31,111,235,.45);outline-offset:2px}
+.apps-root{width:772px;height:480px;box-sizing:border-box;padding:20px;background:#F3F4F6;font-family:'Inter',system-ui,sans-serif;color:#111827;display:flex;flex-direction:column;gap:12px}
+.apps-root *{box-sizing:border-box}
+.apps-root .row{flex:1;display:flex;align-items:center;gap:20px;padding:0 20px 0 18px;background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(17,24,39,.06),0 0 0 1px rgba(17,24,39,.05)}
+.apps-root .icon{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.apps-root .icon svg{width:32px;height:32px}
+.apps-root .phone{background:linear-gradient(160deg,#34D399,#059669)}
+.apps-root .maps{background:linear-gradient(160deg,#60A5FA,#2563EB)}
+.apps-root .task{background:linear-gradient(160deg,#FBBF24,#EA580C)}
+.apps-root .fm{background:linear-gradient(160deg,#A78BFA,#7C3AED)}
+.apps-root .name{flex:1;font-size:22px;font-weight:600;letter-spacing:-.01em}
+.apps-root .actions{display:flex;gap:12px}
+.apps-root button{font-family:inherit;font-size:18px;font-weight:600;height:56px;min-width:136px;padding:0 24px;border-radius:14px;border:none;cursor:pointer;transition:background .15s,transform .1s}
+.apps-root button:active{transform:scale(.97)}
+.apps-root .open{background:#111827;color:#FFFFFF}
+.apps-root .open:hover{background:#1F2937}
+.apps-root .uninstall{background:#FEF2F2;color:#DC2626}
+.apps-root .uninstall:hover{background:#FEE2E2}
+.apps-root button:focus-visible{outline:3px solid #2563EB;outline-offset:2px}
 </style>
 
-<h2>Locks</h2>
-
-<div class="card child">
-  <div class="label" id="cl-label">Child lock</div>
-  <div class="seg" role="radiogroup" aria-labelledby="cl-label">
-    <button role="radio" aria-checked="false">Off</button>
-    <button role="radio" aria-checked="false">Left</button>
-    <button role="radio" aria-checked="false">Right</button>
-    <button role="radio" aria-checked="true">Both</button>
-  </div>
+<div class="row">
+  <div class="icon phone"><svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></div>
+  <div class="name">Phone</div>
+  <div class="actions"><button class="open" aria-label="Open Phone">Open</button><button class="uninstall" aria-label="Uninstall Phone">Uninstall</button></div>
 </div>
 
-<div class="card list">
-  <div class="row">
-    <div>
-      <div class="label" id="wl">Window lock</div>
-      <div class="sub">Disable rear window switches</div>
-    </div>
-    <button class="sw" role="switch" aria-checked="false" aria-labelledby="wl"></button>
-  </div>
-  <div class="row">
-    <div>
-      <div class="label" id="wal">Walk-away lock</div>
-      <div class="sub">Lock when your phone key leaves</div>
-    </div>
-    <button class="sw" role="switch" aria-checked="true" aria-labelledby="wal"></button>
-  </div>
-  <div class="row">
-    <div>
-      <div class="label" id="uop">Unlock on park</div>
-      <div class="sub">Unlock all doors in Park</div>
-    </div>
-    <button class="sw" role="switch" aria-checked="true" aria-labelledby="uop"></button>
-  </div>
+<div class="row">
+  <div class="icon maps"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg></div>
+  <div class="name">Maps</div>
+  <div class="actions"><button class="open" aria-label="Open Maps">Open</button><button class="uninstall" aria-label="Uninstall Maps">Uninstall</button></div>
 </div>
-</div>`},
-M:{W:1434,H:804,cv:{W:900,top:1},name:'App list',cover:1,ask:'Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.',wrong:[['Two buttons a row','A blue Open and a red Uninstall on all four rows.'],['Names set in 22 px','Smaller than the 30 px bold title above them.'],['Gradient icon tiles','Green, blue, purple and orange gradients fight the names.']],notes:[['The row opens the app','No Open button. Remove is one trash icon on the right.'],['Names at 28 px','The section label steps back to 24 px at 65%.'],['Colour only in the icon','Filled icons on a soft grey tile, one hue each.']],
-  html:()=>`<div class="st"><div class="lh">Apps</div><div class="card"><div class="rw"><span class="ai">${IC.phoneF}</span><span class="tx">Phone</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.maps}</span><span class="tx">Maps</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.layers}</span><span class="tx">Task master</span><span class="ib">${IC.trash}</span></div><div class="rw"><span class="ai">${IC.radio}</span><span class="tx">FM</span><span class="ib">${IC.trash}</span></div></div></div>`,
-  before:()=>`<div class="car-apps">
-  <style>
 
-    .car-apps {
-      --bg: #F4F5F7;
-      --surface: #FFFFFF;
-      --text: #14171C;
-      --muted: #5B636E;
-      --line: #E6E8EC;
-      --primary: #1A5CFF;
-      --primary-press: #1449CC;
-      --danger: #C62828;
-      --danger-tint: #FDECEC;
+<div class="row">
+  <div class="icon task"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5l1.8 1.8L9 5"/><path d="M4 13.5l1.8 1.8L9 12"/><path d="M12.5 7h7.5"/><path d="M12.5 14h7.5"/><path d="M4.5 19.5h.01"/><path d="M12.5 19.5h7.5"/></svg></div>
+  <div class="name">Task master</div>
+  <div class="actions"><button class="open" aria-label="Open Task master">Open</button><button class="uninstall" aria-label="Uninstall Task master">Uninstall</button></div>
+</div>
 
-      box-sizing: border-box;
-      width: 772px;
-      height: 547px;
-      padding: 28px 32px;
-      background: var(--bg);
-      font-family: 'Inter', system-ui, sans-serif;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      overflow: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
-    .car-apps *, .car-apps *::before, .car-apps *::after { box-sizing: border-box; }
-
-    .car-apps h2 {
-      margin: 0;
-      font-size: 30px;
-      line-height: 38px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .car-apps ul {
-      list-style: none;
-      margin: 0;
-      padding: 0 24px;
-      background: var(--surface);
-      border-radius: 20px;
-      box-shadow: 0 1px 2px rgba(20,23,28,.04), 0 4px 16px rgba(20,23,28,.05);
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .car-apps li {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 20px;
-      border-bottom: 1px solid var(--line);
-    }
-    .car-apps li:last-child { border-bottom: 0; }
-
-    .car-apps .icon {
-      width: 60px;
-      height: 60px;
-      border-radius: 16px;
-      display: grid;
-      place-items: center;
-      flex: none;
-    }
-    .car-apps .icon svg { width: 32px; height: 32px; }
-    .car-apps .i-phone { background: linear-gradient(160deg, #3DDC6E, #1FA94B); }
-    .car-apps .i-maps  { background: linear-gradient(160deg, #4A8CFF, #1A5CFF); }
-    .car-apps .i-task  { background: linear-gradient(160deg, #A774FF, #6C3BE0); }
-    .car-apps .i-fm    { background: linear-gradient(160deg, #FFA640, #F06A1A); }
-
-    .car-apps .name {
-      flex: 1;
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      white-space: nowrap;
-    }
-
-    .car-apps .actions { display: flex; gap: 12px; }
-
-    .car-apps button {
-      font: inherit;
-      font-size: 18px;
-      font-weight: 600;
-      height: 56px;
-      min-width: 132px;
-      padding: 0 24px;
-      border-radius: 14px;
-      border: 0;
-      cursor: pointer;
-      transition: background-color .15s ease, transform .1s ease;
-    }
-    .car-apps button:active { transform: scale(.97); }
-    .car-apps button:focus-visible { outline: 3px solid var(--primary); outline-offset: 3px; }
-
-    .car-apps .open { background: var(--primary); color: #fff; }
-    .car-apps .open:hover { background: var(--primary-press); }
-
-    .car-apps .uninstall { background: var(--danger-tint); color: var(--danger); }
-    .car-apps .uninstall:hover { background: #FAD9D9; }
-  </style>
-
-  <h2>Apps</h2>
-
-  <ul>
-    <li>
-      <span class="icon i-phone" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M6.6 10.8a15.2 15.2 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1L6.6 10.8z"/></svg>
-      </span>
-      <span class="name">Phone</span>
-      <div class="actions">
-        <button class="open" aria-label="Open Phone">Open</button>
-        <button class="uninstall" aria-label="Uninstall Phone">Uninstall</button>
-      </div>
-    </li>
-    <li>
-      <span class="icon i-maps" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
-      </span>
-      <span class="name">Maps</span>
-      <div class="actions">
-        <button class="open" aria-label="Open Maps">Open</button>
-        <button class="uninstall" aria-label="Uninstall Maps">Uninstall</button>
-      </div>
-    </li>
-    <li>
-      <span class="icon i-task" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M8.5 12.2l2.4 2.4 4.8-5"/></svg>
-      </span>
-      <span class="name">Task master</span>
-      <div class="actions">
-        <button class="open" aria-label="Open Task master">Open</button>
-        <button class="uninstall" aria-label="Uninstall Task master">Uninstall</button>
-      </div>
-    </li>
-    <li>
-      <span class="icon i-fm" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="2" fill="#fff" stroke="none"/><path d="M8.5 15.5a5 5 0 0 1 0-7M15.5 8.5a5 5 0 0 1 0 7M5.6 18.4a9 9 0 0 1 0-12.8M18.4 5.6a9 9 0 0 1 0 12.8"/></svg>
-      </span>
-      <span class="name">FM</span>
-      <div class="actions">
-        <button class="open" aria-label="Open FM">Open</button>
-        <button class="uninstall" aria-label="Uninstall FM">Uninstall</button>
-      </div>
-    </li>
-  </ul>
+<div class="row">
+  <div class="icon fm"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round"><circle cx="12" cy="12" r="2" fill="#fff" stroke="none"/><path d="M8.5 15.5a5 5 0 0 1 0-7"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M5.6 18.4a9 9 0 0 1 0-12.8"/><path d="M18.4 5.6a9 9 0 0 1 0 12.8"/></svg></div>
+  <div class="name">FM</div>
+  <div class="actions"><button class="open" aria-label="Open FM">Open</button><button class="uninstall" aria-label="Uninstall FM">Uninstall</button></div>
+</div>
 </div>`},
 U:{W:1245,H:698,cv:{W:900,top:0},name:'Update settings',cover:1,ask:'Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.',wrong:[['Titles at 26, lines at 19','The lines under them in a thinner, lighter grey.'],['Switch at 76 × 44','Bigger than the text it controls.'],['A divider between rows','A hairline splits two rows that already have space.']],notes:[['Titles at 28, lines at 24','Both Medium; the line at 65% of the text colour.'],['Switch at 60 × 32','The library size. The whole row is the hit area.'],['Spacing does the split','No divider. Each row is 108 px, the card adds 24 px.']],
   html:()=>`<div class="st"><div class="card"><div class="rw"><span class="tx">Auto-update<span class="m">Installs new versions in the background</span></span><i class="sw"></i></div><div class="rw"><span class="tx">User agreements<span class="m">Terms of service and privacy policy</span></span><span class="cv">${IC.chevR}</span></div></div></div>`,
@@ -1460,10 +1355,10 @@ const DATA=[
 ['T','One number, one shape','Ask for a navigation panel and AI writes a sentence. A driver needs a distance and an arrow.','One glance tells you how far and which way. Everything else steps back.',['Phone nav','Glance nav']],
 ['R','Compare routes by time','AI adds a mini map, traffic bars and a tag on every route. The driver is comparing three numbers.','Time leads. One word says how the others differ, and the best route is already picked.',['Route cards','Time first']],
 ['P','The drive before the details','AI opens a destination with stars, reviews and a charger table. The driver wants to know how far it is.','Distance, time and arrival charge come first. Everything else is a quiet chip.',['Review card','Drive first']],
-['M','A row opens its app','Ask for an app list and AI gives every row a blue Open and a red Uninstall button.','Tap the row to open the app. One quiet trash icon is the only button.',['Two buttons a row','One tap a row']],
+['M','A row opens its app','Ask for an app list and AI gives every row an Open and a red Uninstall button.','Tap the row to open the app. One quiet trash icon is the only button.',['Two buttons a row','One tap a row']],
 ['U','Label left, control right','AI makes the switch bigger than the words and rules a line between two rows.','Titles at 28, lines at 24 and 65%, the library switch, and space instead of a divider.',['Big switch','Library switch']],
-['O','A one-shot action is a tile','AI draws small icons in grey circles, with a blue stroke for the moving part.','Each opening is a tile: one 72 px icon over one word. Tap the tile and it opens.',['Icons in wells','72 px icons']],
-['L','Four options lie flat','AI sets the labels at 18 px, the options at 17 px and rules every row.','Labels at 28, options in 28 px type, and 108 px rows without dividers.',['18 px labels','28 px labels']]];
+['O','A one-shot action is a tile','AI puts each icon in a grey circle and sets the labels at 16 px.','Each opening is a tile: one 72 px icon over one word. Tap the tile and it opens.',['Icons in wells','72 px icons']],
+['L','Four options lie flat','AI sets the labels at 20 px, the options at 18 px and rules every row.','Labels at 28, options in 28 px type, and 108 px rows without dividers.',['20 px labels','28 px labels']]];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
@@ -1471,28 +1366,26 @@ const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
-M:[`Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.`,
-`Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
-On top, a section label "Apps" in 24/32 at 65%, 12 px from the top, in a 55 px band. 12 px below it, the card.
+M:[`Design an installed apps list for a car settings screen, 772 × 480 px, light theme. Content, exactly: four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. No title. Nothing else.`,
+`Design an installed apps list for a car settings screen, 772 × 480 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%. No title.
 Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Four rows inside, 108 px each, no dividers.
 Row: 32 px side padding, 20 px gaps. A 68 px tile, radius 16, fill #1D1D1F at 5%, holding a 48 px filled icon. Then the app name in 28/40, filling the row. On the right, a 68 px trash button with a 48 px outline trash icon (2 px stroke) at 65%, no fill.
 Apps and icon colours, one colour each: Phone (filled handset, #1F9D3A), Maps (filled arrow pointer, #007AFF), Task master (filled stacked layers, #1D1D1F), FM (filled radio, #B86E00).
-Tapping the row opens the app, so there is no Open button. No coloured squares behind the icons, no red buttons.`],
+Tapping the row opens the app, so there is no Open button. No coloured squares or gradients behind the icons, no red buttons.`],
 U:[`Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Content, exactly: a row “Auto-update” with the line “Installs new versions in the background” and a switch that is on; a row “User agreements” with the line “Terms of service and privacy policy” that opens a page. Nothing else.`,
 `Design an app update settings card for a car settings screen, 772 × 264 px, light theme. Text is Inter Medium; #1D1D1F, secondary at 65%.
 Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Two rows inside, 108 px each, 32 px side padding, no divider.
 Row one: "Auto-update" in 28/40, 4 px, then "Installs new versions in the background" in 24/32 at 65%. On the right, a switch 60 × 32, fully round, #007AFF, with a 24 px white knob on the right (on).
 Row two: "User agreements" in 28/40, 4 px, then "Terms of service and privacy policy" in 24/32 at 65%. On the right, a 40 px chevron at 65%.
 No icons in front of the labels, no semibold, no hairline between the rows.`],
-O:[`Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Content, exactly: a section title “Openings” and three controls, Frunk, Trunk and Charge port, each with its icon. Nothing else.`,
-`Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Text is Inter Medium.
-On top, a section label "Openings" in 24/32 at #1D1D1F 65%. 12 px below it, three equal tiles in a row, 156 px tall, 12 px apart.
-Tile: white, radius 20, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Centred column, 24 px padding, 4 px gap: a 72 px outline icon (2 px stroke) over the label in 24/32. Icon and label are #1D1D1F at 65%.
+O:[`Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 156 px, light theme. Content, exactly: three controls, Frunk, Trunk and Charge port, each with its icon. No title. Nothing else.`,
+`Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 156 px, light theme. Text is Inter Medium. No title.
+Three equal tiles in a row, 156 px tall, 12 px apart. Tile: white, radius 20, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%. Centred column, 24 px padding, 4 px gap: a 72 px outline icon (2 px stroke) over the label in 24/32. Icon and label are #1D1D1F at 65%.
 Icons: a car with its front lid up (Frunk), a car with its rear lid up (Trunk), a plug (Charge port).
-The tile is the button. No circles behind the icons and no blue in them.`],
-L:[`Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Content, exactly: a section title “Locks”; “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). Nothing else.`,
-`Design a locks settings section for a car settings screen, 772 × 564 px, light theme. Text is Inter Medium, #1D1D1F, secondary at 65%.
-On top, a section label "Locks" in 24/32 at 65%. 12 px below it, one card. Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%.
+The tile is the button. No circles behind the icons.`],
+L:[`Design a locks settings card for a car settings screen, 772 × 520 px, light theme. Content, exactly: “Child lock” with the options Off, Left, Right and Both (Both selected); then three switches, each with one line under it: “Window lock” with “Disable rear window switches” (off), “Walk-away lock” with “Lock when your phone key leaves” (on), “Unlock on park” with “Unlock all doors in Park” (on). No title. Nothing else.`,
+`Design a locks settings card for a car settings screen, 772 × 520 px, light theme. Text is Inter Medium, #1D1D1F, secondary at 65%. No title.
+Card: white, radius 20, 24 px top and bottom padding and 8 px at the sides, a 2 px inside border at rgba(15,23,41,0.1) and a 0 1 2 shadow at 5%.
 First, a 148 px block with 32 px side padding, 16 px top and 12 px bottom: "Child lock" in 28/40, then 16 px, a segmented control 64 px tall, radius 16, fill #1D1D1F at 5%, 4 px padding and 4 px gaps. Four equal options, 56 px tall, radius 12, 28/40 at 65%: Off, Left, Right, Both. Both is selected: white, a 0 1 2 shadow at 8%, text at 100%.
 Then three rows, 108 px each, 32 px side padding: the name in 28/40, 4 px, a line in 24/32 at 65%; a switch on the right. Switch 60 × 32, fully round, 24 px white knob. On: #007AFF, knob right. Off: #1D1D1F at 50%, knob left.
 Rows: Window lock / Disable rear window switches (off), Walk-away lock / Lock when your phone key leaves (on), Unlock on park / Unlock all doors in Park (on). No dividers.`],
@@ -1549,7 +1442,7 @@ function viewHome(){
       <div class="foot"><p class="desc">A notebook on designing car screens with AI.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
         <span class="lbl13">Peixin</span></div>
     </aside>
-    <main class="mainc"><button class="ib press tgl" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button><div class="grid" id="grid">${gridFor('All')}</div></main>
+    <main class="mainc"><button class="ib press tgl2" id="colour" aria-label="Colour" aria-pressed="false" title="Colour"><span class="dot"></span></button><button class="ib press tgl" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button><div class="grid" id="grid">${gridFor('All')}</div></main>
   </div>`}
 function gridFor(c){
   const list=c==='All'?[ENTRIES[0],...ENTRIES.slice(1,PUBLISHED).reverse(),...ENTRIES.slice(PUBLISHED,PUBLISHED+3)]:ENTRIES.filter(e=>e.cat===c);
@@ -1626,7 +1519,11 @@ function sourceFor(n,rest){const t=thumbFor(n);if(!t)return null;if(rest){t.styl
 function coverPose(stage,from,to){
   const e=ENTRIES[curN-1],v=e&&cvOf(e.s),root=$('.cs.a .kp',stage)?.firstElementChild;if(!v||!root)return null;
   const C=CMP[e.s],r=C.W/v.W,ch=root.offsetHeight,dy=v.top?r*(v.P+ch/2)-C.H/2:0;
-  return lensSpring(root,from,to,x=>{const t=1-Math.max(0,Math.min(1,x[7]));return {transform:`translateY(${dy*t}px) scale(${1+(r-1)*t})`}});
+  const a=lensSpring(root,from,to,x=>{const t=1-Math.max(0,Math.min(1,x[7]));return {transform:`translateY(${dy*t}px) scale(${1+(r-1)*t})`}});
+  /* the cover fades its cropped bottom edge; grow the same fade on the way down so the landing doesn't pop */
+  if(v.top){const kp=root.parentElement,m=x=>{const f=96*(1-Math.max(0,Math.min(1,x[7])));const g=`linear-gradient(#000 calc(100% - ${f}px),${f>1?'transparent':'#000'})`;return {maskImage:g,webkitMaskImage:g}};
+    const b=lensSpring(kp,from,to,m);a.startTime=document.timeline.currentTime;b.startTime=a.startTime}
+  return a;
 }
 function springDialog(fromCard,toCard,fromArt,toArt,restCard,restArt,fromSurface=1,toSurface=1){
   const sheet=$('#sheet2'),stage=$('.hero3',sheet);
@@ -1831,6 +1728,10 @@ function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.targ
 const mem={get(k){try{return localStorage.getItem('dn:'+k)}catch(_){return null}},set(k,v){try{localStorage.setItem('dn:'+k,v)}catch(_){}}};
 if(!location.hash){const h=mem.get('hash');if(h&&/^#entry-\d{3}$/.test(h))history.replaceState(null,'',h)}
 addEventListener('hashchange',()=>{mem.set('hash',location.hash);route()});
+(()=>{const root=document.documentElement;const apply=on=>{if(on)root.dataset.color='on';else delete root.dataset.color;const b=document.getElementById('colour');if(b)b.setAttribute('aria-pressed',on?'true':'false')};
+  apply(mem.get('colour')==='on');
+  document.addEventListener('click',ev=>{if(!ev.target.closest('#colour'))return;const on=root.dataset.color!=='on';mem.set('colour',on?'on':'off');apply(on)});
+  new MutationObserver(()=>apply(root.dataset.color==='on')).observe(document.body,{childList:true,subtree:false})})();
 (()=>{const h=new Date().getHours(),root=document.documentElement;root.dataset.theme=mem.get('theme')==='dark'?'dark':'light';let want=root.dataset.theme,busy=false;
   const set=t=>{root.dataset.theme=t;mem.set('theme',t)};
   document.addEventListener('click',async ev=>{const sw=ev.target.closest('#theme');if(!sw)return;want=want==='dark'?'light':'dark';if(busy)return;

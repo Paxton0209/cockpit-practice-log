@@ -2,7 +2,7 @@
 
 `before.html` is the first answer from a fresh Claude Opus 5.5 subagent (Claude app) with no prior context, told not to use tools (it made no tool calls), to this one line plus the output note:
 
-> Design an installed apps list for a car settings screen, 772 × 547 px, light theme. Content, exactly: a section title “Apps”, then four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. Nothing else.
+> Design an installed apps list for a car settings screen, 772 × 480 px, light theme. Content, exactly: four apps, Phone, Maps, Task master and FM, each with its icon; each app can be opened and uninstalled. No title. Nothing else.
 >
 > Output: reply with one self-contained HTML snippet — a single root <div> with its own <style> inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
 

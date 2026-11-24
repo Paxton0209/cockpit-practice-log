@@ -2,7 +2,7 @@
 
 `before.html` is the first answer from a fresh Claude Opus 5.5 subagent (Claude app) with no prior context, told not to use tools (it made no tool calls), to this one line plus the output note:
 
-> Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 200 px, light theme. Content, exactly: a section title “Openings” and three controls, Frunk, Trunk and Charge port, each with its icon. Nothing else.
+> Design controls for opening the frunk, trunk and charge port on a car settings screen, 772 × 156 px, light theme. Content, exactly: three controls, Frunk, Trunk and Charge port, each with its icon. No title. Nothing else.
 >
 > Output: reply with one self-contained HTML snippet — a single root <div> with its own <style> inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
 
