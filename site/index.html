@@ -858,8 +858,8 @@ function openEntry(n){{const c=$('#sc');if(c)c.style.transition=''}
   anim(veil,[{opacity:0},{opacity:1}],{duration:220,easing:LENS_EASE});veil.style.opacity=1;
   const src=srcFor(n);
   if(COMPACT.matches){spring(sh,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);spring(sc,[100],[0],([y])=>({...cstyle(end),transform:`translate(${end[0]}px,${end[1]+y*end[3]/100}px)`}),420,40)}
-  else if(src){ghost(n,1);sh.style.overflow='visible';const S=sh.getBoundingClientRect(),U=uni(src,end);Object.assign(sc.style,cstyle(U.box));const s=spring(sc,src,end,clipf(U));spring(sh,src,end,clipf(S));
-    const hero=$('.hero3',sh);if(hero){const hr=hero.getBoundingClientRect();hero.style.transformOrigin='50% 50%';spring(hero,pose(src,hr),[0,0,1],hstyle)}
+  else if(src){ghost(n,1);sh.style.overflow='visible';const S=sh.getBoundingClientRect(),U=uni(src,end);Object.assign(sc.style,cstyle(U.box));const s=spring(sc,src,end,clipf(U)),a2=spring(sh,src,end,clipf(S)),sync=[s,a2];
+    const hero=$('.hero3',sh);if(hero){const hr=hero.getBoundingClientRect();hero.style.transformOrigin='50% 50%';sync.push(spring(hero,pose(src,hr),[0,0,1],hstyle))}{const t=document.timeline.currentTime;sync.forEach(a=>a.startTime=t)}
     restOf(sh).forEach(el=>anim(el,[{opacity:0},{opacity:1}],{duration:220,delay:110,easing:'ease-out',fill:'backwards'}));
     s.onfinish=()=>{Object.assign(sc.style,cstyle(end));sh.style.overflow='';ghost(n,0);if(lens==='open')anim(shadow,[{opacity:0},{opacity:1}],{duration:220,easing:'ease-out'})}}
   else{anim(sc,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(sh,[{opacity:0},{opacity:1}],{duration:200,easing:LENS_EASE});anim(shadow,[{opacity:0},{opacity:1}],{duration:200})}
@@ -875,7 +875,7 @@ function closeEntry(){document.body.classList.remove('dim');{const c=$('#sc');if
   else if(src&&$('.hero3',sh)&&sh.scrollTop<2){ghost(curN,1);sh.style.overflow='visible';{const st=$('#cstage');if(st&&st.dataset.v==='b'){if(st._scan)st._scan.forEach(a=>a.cancel());fadeTo(st,'a',200)}}const hero=$('.hero3',sh),hr=hero.getBoundingClientRect(),S=sh.getBoundingClientRect();
     restOf(sh).forEach(el=>anim(el,[{opacity:1},{opacity:0}],{duration:90,easing:'ease-out',fill:'forwards'}));
     anim($('#sc i'),[{opacity:1},{opacity:0}],{duration:160,easing:'ease-out',fill:'forwards'});
-    const U=uni(cur,src);Object.assign(sc.style,cstyle(U.box));hero.style.transformOrigin='50% 50%';spring(sh,cur,src,clipf(S));spring(hero,[0,0,1],pose(src,hr),hstyle);end=spring(sc,cur,src,clipf(U))}
+    const U=uni(cur,src);Object.assign(sc.style,cstyle(U.box));hero.style.transformOrigin='50% 50%';const b1=spring(sh,cur,src,clipf(S)),b2=spring(hero,[0,0,1],pose(src,hr),hstyle);end=spring(sc,cur,src,clipf(U));{const t=document.timeline.currentTime;[b1,b2,end].forEach(a=>a.startTime=t)}}
   else{const o={duration:140,easing:'ease-out',fill:'forwards'};anim(sc,[{opacity:1,transform:sc.style.transform},{opacity:0,transform:sc.style.transform+' scale(.98)'}],o);end=anim(sh,[{opacity:1,transform:'translateX(-50%)'},{opacity:0,transform:'translateX(-50%) scale(.98)'}],o)}
   end.onfinish=finish;
 }
