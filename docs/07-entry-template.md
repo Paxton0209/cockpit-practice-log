@@ -14,9 +14,17 @@ How to make a new entry the way 001 (Turn-by-turn panel) was made. Follow it ste
 - Use the first result as-is and save it to `before/NNN-<name>-raw.html`.
 
 ## 3. Body copy
-- Before: one sentence of lede, then a grey card with the one-line prompt and 3 problems you can see in the picture.
-- After: 3 fixes, one for each problem and in the same order, then the full prompt.
+The sheet has the same layout for every entry. Only the picture changes when you toggle.
+- **Picture**: opens on Before. Clicking After plays the scan; clicking Before fades back.
+- **3 columns**: one per problem, in this order:
+  - ✕ What's wrong and why, in one short line (≤ 30 characters), e.g. "Blue tile outshouts distance".
+  - ✓ The fix as a short title, e.g. "Icon steps back".
+  - One sentence with the detail.
+- **Note line**: "Before is the first answer to one plain line, “…”", filled in from `ask`.
+- **Prompt box**: the full After prompt, with the test result and Copy Figma SVG at the bottom.
 - Plain, direct sentences. No label-colon lists, no lecturing.
+
+In `CMP`, `wrong[i][0]` is the ✕ line and `notes[i]` is the [title, sentence] pair for the ✓.
 
 ## 4. Accuracy test
 - Run the After prompt in 4 fresh sessions (2 models × 2).
