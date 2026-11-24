@@ -312,6 +312,8 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .ecard .hero3{border-radius:16px;corner-shape:superellipse(1.6);aspect-ratio:16/9;padding:0;display:block}
 .ecard .hero3 .cstage{position:absolute;left:50%;top:50%;width:640px;transform:translate(-50%,-50%)}
 .ecard .hero3 .htools{position:absolute;left:0;right:0;bottom:16px;margin:0}
+/* centre the component in the space above the Before/After toggle (16 px inset + 36 px control), so tall panels don't sink onto it */
+@media(min-width:621px){.ecard .hero3 .cstage{top:calc(50% - 26px)}}
 .hero3{position:relative;border-radius:16px 16px 0 0;corner-shape:superellipse(1.6);background:var(--stage);display:flex;flex-direction:column;align-items:center;gap:8px;padding:16px}
 
 .hcap{margin:8px 0 0;font-size:12px;line-height:16px;color:var(--t3)}
