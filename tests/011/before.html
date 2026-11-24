@@ -1,0 +1,67 @@
+<div class="tpc">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    .tpc{position:relative;width:960px;height:480px;box-sizing:border-box;overflow:hidden;
+      background:linear-gradient(180deg,#f7f8fa 0%,#eef0f3 100%);border-radius:28px;
+      font-family:'Inter',system-ui,sans-serif;color:#1b1e23;-webkit-font-smoothing:antialiased}
+    .tpc *{box-sizing:border-box}
+    .tpc .car{position:absolute;left:380px;top:40px;width:200px;height:400px;
+      filter:drop-shadow(0 18px 24px rgba(30,40,60,.10)) drop-shadow(0 2px 4px rgba(30,40,60,.08))}
+    .tpc .p{position:absolute;transform:translateY(-50%);display:flex;align-items:baseline;gap:8px;
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+    .tpc .p.l{right:620px}
+    .tpc .p.r{left:620px}
+    .tpc .p.f{top:130px}
+    .tpc .p.b{top:340px}
+    .tpc .v{font-size:60px;font-weight:600;letter-spacing:-.03em;line-height:1}
+    .tpc .u{font-size:22px;font-weight:500;color:#7a818c;letter-spacing:0}
+  </style>
+
+  <svg class="car" viewBox="0 0 200 400" aria-hidden="true">
+    <defs>
+      <linearGradient id="tpcBody" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#e9ecf0"/>
+        <stop offset=".5" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#e9ecf0"/>
+      </linearGradient>
+      <linearGradient id="tpcGlass" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#cfd6df"/>
+        <stop offset="1" stop-color="#b9c2ce"/>
+      </linearGradient>
+    </defs>
+    <!-- wheels -->
+    <rect x="8" y="60" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <rect x="166" y="60" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <rect x="8" y="270" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <rect x="166" y="270" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <!-- mirrors -->
+    <ellipse cx="17" cy="150" rx="10" ry="6" fill="#e3e7ec" stroke="#c4cad3" stroke-width="1.5"/>
+    <ellipse cx="183" cy="150" rx="10" ry="6" fill="#e3e7ec" stroke="#c4cad3" stroke-width="1.5"/>
+    <!-- body -->
+    <path d="M100 8 C140 8 172 18 176 50 L180 120 L180 330 C180 370 166 392 100 392 C34 392 20 370 20 330 L20 120 L24 50 C28 18 60 8 100 8 Z"
+      fill="url(#tpcBody)" stroke="#c4cad3" stroke-width="1.5"/>
+    <!-- headlights -->
+    <path d="M36 30 Q52 18 72 16 L70 24 Q52 28 40 38 Z" fill="#d6dbe2"/>
+    <path d="M164 30 Q148 18 128 16 L130 24 Q148 28 160 38 Z" fill="#d6dbe2"/>
+    <!-- hood lines -->
+    <path d="M66 40 Q62 90 60 124" fill="none" stroke="#d9dde3" stroke-width="1.5"/>
+    <path d="M134 40 Q138 90 140 124" fill="none" stroke="#d9dde3" stroke-width="1.5"/>
+    <!-- windshield -->
+    <path d="M44 134 Q100 112 156 134 L144 182 Q100 172 56 182 Z" fill="url(#tpcGlass)"/>
+    <!-- side windows -->
+    <path d="M38 152 L50 186 L50 296 L38 318 Z" fill="#c9d0d9"/>
+    <path d="M162 152 L150 186 L150 296 L162 318 Z" fill="#c9d0d9"/>
+    <!-- roof -->
+    <rect x="58" y="188" width="84" height="108" rx="14" fill="#f3f5f7" stroke="#d3d8df" stroke-width="1.2"/>
+    <!-- rear window -->
+    <path d="M56 304 Q100 312 144 304 L154 336 Q100 350 46 336 Z" fill="url(#tpcGlass)"/>
+    <!-- tail lights -->
+    <path d="M30 360 Q34 378 56 384 L58 378 Q40 372 36 358 Z" fill="#e2a7a7"/>
+    <path d="M170 360 Q166 378 144 384 L142 378 Q160 372 164 358 Z" fill="#e2a7a7"/>
+  </svg>
+
+  <div class="p l f"><span class="v">2.6</span><span class="u">bar</span></div>
+  <div class="p r f"><span class="v">2.6</span><span class="u">bar</span></div>
+  <div class="p l b"><span class="v">2.6</span><span class="u">bar</span></div>
+  <div class="p r b"><span class="v">2.6</span><span class="u">bar</span></div>
+</div>

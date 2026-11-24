@@ -374,14 +374,14 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .kp.is-b .tstack>.ts{display:none}
 .ts .end{width:112px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:var(--strong)}
 /* 014 route selection */
-.rs{width:560px;height:648px;flex-direction:column;gap:16px;padding:24px;border-radius:24px}
+.rs{width:560px;height:648px;flex-direction:column;gap:16px;padding:24px;border-radius:20px}
 .nv .hd{display:flex;align-items:center;gap:20px}.rs .hd{min-height:68px}.rs .hd b,.pl .nm b{font-weight:500;font-size:28px;line-height:40px}
 .rs .opt{display:flex;flex-direction:column;gap:16px;padding:20px;border-radius:20px}.rs .opt.on{background:var(--rec)}
 .rs .id{display:flex;align-items:center;justify-content:space-between;gap:24px}.rs .t{font-size:32px;line-height:44px}
 .rs .tag{width:81px;height:38px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--pri);box-shadow:inset 0 0 0 2px var(--pri-e);color:#fff;font-size:20px;line-height:28px}
 .rs .mt{display:flex;align-items:center;gap:28px;color:var(--mfg)}.rs .mt span{display:flex;gap:16px}
 /* 015 place details */
-.pl{width:560px;flex-direction:column;gap:24px;padding:24px;border-radius:24px}
+.pl{width:560px;flex-direction:column;gap:24px;padding:24px;border-radius:20px}
 .pl .hd{justify-content:space-between}.pl .ic{display:flex;gap:20px}
 .pl .inf{display:flex;flex-direction:column;gap:12px}.pl .nm{display:flex;flex-direction:column;gap:4px}
 .pl .tags{display:flex;gap:12px}.pl .tags i{font-style:normal;height:38px;min-width:80px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--muted);color:var(--mfg);font-size:20px;line-height:28px}
@@ -420,7 +420,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .st .seg i{flex:1 0 0;display:grid;place-items:center;border-radius:12px;font-style:normal;color:var(--mfg)}
 .st .seg i.on{background:var(--sel);color:var(--fg);box-shadow:0 1px 2px var(--sh2)}
 .tw{position:relative;width:480px;height:214px}
-.t1{position:relative;width:480px;height:214px;display:flex;flex-direction:column;border-radius:16px;corner-shape:superellipse(1.8);background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 8px 16px rgba(28,28,46,.18);overflow:hidden;color:#1d1d1f}
+.t1{position:relative;width:480px;height:214px;display:flex;flex-direction:column;border-radius:20px;background:rgba(255,255,255,.65);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 8px 16px rgba(28,28,46,.18);overflow:hidden;color:#1d1d1f}
 .t1::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
 .t1 .mn{flex:none;height:142px;box-sizing:border-box;display:flex;align-items:center;gap:12px;padding:0 28px;background:rgba(31,111,235,0);color:#1d1d1f}
 .t1 .mv{position:relative;flex:none;width:80px;height:80px}
@@ -654,7 +654,7 @@ body.lock{overflow:hidden}
 /* 008 dialog, 009 search keyboard, 010 result row: same box as their Befores so the Before/After swap never changes size. Class names are prefixed so older scene styles (.px .r etc.) cannot leak in. */
 .st.dg,.st.kb,.st.sr{--dg:#fff;--glass:rgba(29,29,31,.05);--kbg:#e6e7ea;--key:#fff;--fkey:#cfd1d6;--ksh:rgba(0,0,0,.14)}
 [data-theme=dark] .cov .kp:not(.is-b) .st.dg,[data-theme=dark] .cov .kp:not(.is-b) .st.kb,[data-theme=dark] .cov .kp:not(.is-b) .st.sr{--dg:#262628;--glass:rgba(255,255,255,.08);--kbg:#202022;--key:#4a4a4e;--fkey:#333336;--ksh:rgba(0,0,0,.5)}
-.st.dg{position:relative;width:672px;height:320px;gap:24px;align-items:center;padding:32px 60px;border-radius:24px;background:var(--dg);box-shadow:inset 0 0 0 2px var(--glass),0 8px 32px var(--sh2);white-space:normal;text-align:center}
+.st.dg{position:relative;width:672px;height:320px;gap:24px;align-items:center;padding:32px 60px;border-radius:20px;background:var(--dg);box-shadow:inset 0 0 0 2px var(--glass),0 8px 32px var(--sh2);white-space:normal;text-align:center}
 .st.dg .dg-x{position:absolute;left:40px;top:32px;width:68px;height:68px;display:flex;align-items:center;justify-content:center}
 .st.dg .dg-t{height:68px;display:flex;align-items:center;font-size:32px;line-height:44px}.st.dg .dg-b{width:496px;line-height:36px;color:var(--mfg)}
 .st.dg .dg-a{width:552px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
@@ -678,6 +678,22 @@ body.lock{overflow:hidden}
 .st.dg{box-shadow:inset 0 0 0 2px var(--glass),0 2px 4px var(--sh),0 24px 56px var(--amb)}
 .st.kb{box-shadow:inset 0 0 0 2px var(--glass),0 16px 40px var(--amb)}
 .nv{box-shadow:inset 0 0 0 2px var(--edge),0 2px 4px var(--sh),0 16px 40px var(--amb)}
+
+/* 011 tire pressure: car traced 1:1 from the reference and symmetrised (same geometry as the Figma component) */
+.st.tp{position:relative;width:960px;height:480px;border-radius:20px;background:var(--card);box-shadow:inset 0 0 0 2px var(--edge),inset 0 1px 0 var(--hl),0 2px 4px var(--sh),0 16px 40px var(--amb)}
+.st.tp .tp-v{position:absolute;display:flex;align-items:baseline;gap:16px;font-size:64px;line-height:72px}.st.tp .tp-v span{font-size:28px;line-height:40px;color:var(--mfg)}
+.st.tp .tp-lt{left:64px;top:56px}.st.tp .tp-rt{right:64px;top:56px}.st.tp .tp-lb{left:64px;top:352px}.st.tp .tp-rb{right:64px;top:352px}
+.st.tp .tp-d{position:absolute;top:239px;width:256px;height:2px;background:linear-gradient(90deg,transparent,currentColor);opacity:.12}.st.tp .tp-dr{left:621px;transform:scaleX(-1)}.st.tp .tp-dl{left:83px}
+.st.tp .tp-car{position:absolute;left:400px;top:76px;display:block;-webkit-mask-image:linear-gradient(#000 15%,rgba(0,0,0,.55) 85%);mask-image:linear-gradient(#000 15%,rgba(0,0,0,.55) 85%)}
+
+/* 012 dial pad, 1:1 from Figma (UI/UX Library · Panel · Dial pad); the call key keeps its green in both colour modes */
+.st.dial{--key:#fff;--ksh:rgba(0,0,0,.14);width:512px;height:582px;gap:20px}
+[data-theme=dark] .cov .kp:not(.is-b) .st.dial{--key:#4a4a4e;--ksh:rgba(0,0,0,.5)}
+.st.dial .dp-n{position:relative;height:76px;display:flex;align-items:center;justify-content:center;font-size:48px;line-height:56px}
+.st.dial .dp-n .dp-x{position:absolute;right:20px;top:14px;color:var(--mfg)}
+.st.dial .dp-k{display:grid;grid-template-columns:repeat(3,160px);gap:12px 16px}
+.st.dial .dp-k i{font-style:normal;height:86px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--key);box-shadow:0 1px 0 var(--ksh),0 8px 24px var(--amb);font-size:40px;line-height:56px}
+.st.dial .dp-c{align-self:center;width:160px;height:86px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:#1f9d3a;color:#fff}
 </style>
 </head>
 <body>
@@ -686,7 +702,7 @@ body.lock{overflow:hidden}
 <div class="toast" id="toast"></div>
 
 <script>
-const PUBLISHED=10, TOTAL=100;
+const PUBLISHED=12, TOTAL=100;
 const CDESC={All:'Before/after fixes for AI-made car screens, one rule at a time.',Layout:'Canvas, splits and where things sit on a wide screen.',Hierarchy:'What gets read first in a one-second glance.',Controls:'Targets a moving hand can actually hit.',Color:'Contrast for day, night and glare.',Type:'Sizes and weights read at arm’s length.',Icons:'Shapes that read without labels.',Motion:'Movement that informs, never distracts.',States:'Loading, empty, error and disabled, in the car.','Voice & AI':'Say it once; the screen answers with the right amount.',Screens:'Full screens, put together.'};
 /* sidebar: what's published, by where it lives in the car; the rest is announced as coming soon */
 const CHAPTERS=['Navigation','Settings'],SOON=['Media','Climate','Driving assist','Voice & AI'];
@@ -861,6 +877,110 @@ const TRIPBAR_B=`<div class="trip-bar" role="region" aria-label="Trip summary">
   </button>
 </div>`;
 const CMP={
+N:{W:1300,H:729,cv:{W:760,top:1},cw:512,name:'Dial pad',cover:1,ask:'Design a phone dial pad for a car screen, 512 × 582 px, light theme. Content, exactly: the number “186” with a delete button beside it, the keys 1–9, *, 0 and #, and a call button. Nothing else.',wrong:[['Digits at 32 px','Small for a glance at arm’s length.'],['A full-width pill','The call key stretches across, radius 36.'],['Radius 18 keys','Rounder than the library’s 12.']],notes:[['Keys 160 × 86','White keys, 16 apart, rows 12 apart.'],['Digits at 40 px','The number above at 48, centred.'],['A filled phone','The library’s filled phone on a green key.']],
+  html:()=>`<div class="st dial"><div class="dp-n">186<span class="dp-x"><svg width="48" height="48" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20.1966 16H33.1397C34.72 16 36 17.3018 36 18.9091V29.0909C36 30.6982 34.72 32 33.1397 32H20.1966C19.6389 32 19.1526 31.7964 18.7593 31.3964L12.3593 24.8873C11.8802 24.4 11.8802 23.6 12.3593 23.1127L18.7593 16.6036C19.1526 16.2036 19.6389 16 20.1966 16Z"/><path d="M23 21L29 27M29 21L23 27"/></svg></span></div><div class="dp-k"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i><i>8</i><i>9</i><i>*</i><i>0</i><i>#</i></div><span class="dp-c"><svg width="48" height="48" viewBox="0 0 48 48" fill="currentColor"><path d="M14.905 10.5H16.4985C17.3975 10.5 18.1693 11.0048 18.5296 11.8284L20.3306 15.9448C20.7406 16.8821 20.5486 17.8999 19.8252 18.6232L18.9738 19.4747C18.3381 20.1104 18.1597 21.011 18.6015 21.794C20.3099 24.8218 23.1919 27.7038 26.2197 29.4121C27.0026 29.8539 27.9033 29.6756 28.539 29.0399L29.3904 28.1885C30.1138 27.4651 31.1316 27.2731 32.0688 27.6831L36.1852 29.484C37.0089 29.8444 37.5137 30.6162 37.5137 31.5152V33.1087C37.5137 35.7174 35.3398 37.8913 32.7311 37.4565C21.8615 35.7174 12.2963 26.1522 10.5571 15.2826C10.1224 12.6739 12.2963 10.5 14.905 10.5Z"/></svg></span></div>`,
+  before:()=>`<div class="dp-root">
+<style>
+.dp-root{width:512px;height:582px;box-sizing:border-box;padding:24px;background:#F4F5F7;font-family:'Inter',system-ui,sans-serif;color:#14161A;display:flex;flex-direction:column;gap:16px;-webkit-font-smoothing:antialiased;user-select:none}
+.dp-root *{box-sizing:border-box}
+.dp-display{height:70px;display:grid;grid-template-columns:64px 1fr 64px;align-items:center}
+.dp-number{grid-column:2;text-align:center;font-size:44px;font-weight:500;letter-spacing:.04em;line-height:1;font-variant-numeric:tabular-nums}
+.dp-del{grid-column:3;justify-self:end;width:56px;height:56px;border:0;border-radius:16px;background:transparent;color:#5B606B;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .15s}
+.dp-del:hover{background:#E6E8EC}
+.dp-del:active{background:#DADDE3}
+.dp-keys{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(4,80px);gap:12px}
+.dp-key{border:0;border-radius:18px;background:#FFFFFF;box-shadow:0 1px 2px rgba(20,22,26,.06),0 0 0 1px rgba(20,22,26,.05);font-family:inherit;font-size:32px;font-weight:500;color:#14161A;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .12s,transform .12s}
+.dp-key:hover{background:#FAFBFC}
+.dp-key:active{background:#ECEEF1;transform:scale(.98)}
+.dp-key.sym{font-size:30px;color:#5B606B}
+.dp-call{margin-top:4px;height:72px;border:0;border-radius:36px;background:#1FA855;color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:0 4px 12px rgba(31,168,85,.28);transition:background .15s,transform .12s}
+.dp-call:hover{background:#1C9A4E}
+.dp-call:active{background:#188744;transform:scale(.99)}
+</style>
+<div class="dp-display">
+  <div class="dp-number" aria-live="polite">186</div>
+  <button class="dp-del" aria-label="Delete">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 5H9l-6 7 6 7h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1z"/><path d="M17 9.5l-5 5M12 9.5l5 5"/></svg>
+  </button>
+</div>
+<div class="dp-keys">
+  <button class="dp-key">1</button><button class="dp-key">2</button><button class="dp-key">3</button>
+  <button class="dp-key">4</button><button class="dp-key">5</button><button class="dp-key">6</button>
+  <button class="dp-key">7</button><button class="dp-key">8</button><button class="dp-key">9</button>
+  <button class="dp-key sym">*</button><button class="dp-key">0</button><button class="dp-key sym">#</button>
+</div>
+<button class="dp-call" aria-label="Call">
+  <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>
+</button>
+</div>`},
+W:{W:1240,H:695,cv:{W:1100,top:0},name:'Tire pressure',cover:1,ask:'Design a tire pressure card for a car screen, 960 × 480 px, light theme. Content, exactly: a top view of the car in the middle and the pressure of each of the four tires, each “2.6 bar”, placed by its wheel. No title. Nothing else.',wrong:[['A cartoon car','Headlights, red tail lights and glass gradients.'],['Values hug the car','All four crowd the middle of the card.'],['Semibold 60, radius 28','Heavier and rounder than the library.']],notes:[['Car traced 1:1','Symmetric lines; wheels are soft fills under the body.'],['Values at 64 px','Each by its wheel, the unit at 28 and 65%.'],['Quiet dividers','Two faded lines mark front from rear.']],
+  html:()=>`<div class="st tp"><div class="tp-v tp-lt">2.6<span>bar</span></div><div class="tp-v tp-rt">2.6<span>bar</span></div><div class="tp-v tp-lb">2.6<span>bar</span></div><div class="tp-v tp-rb">2.6<span>bar</span></div><i class="tp-d tp-dl"></i><i class="tp-d tp-dr"></i><svg class="tp-car" width="160" height="334" viewBox="400 76 160 334" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="411.33" y="118.35" width="28.0" height="55.0" rx="6" fill="currentColor" stroke="none" opacity=".16"/><rect x="521.02" y="118.35" width="28.0" height="55.0" rx="6" fill="currentColor" stroke="none" opacity=".16"/><rect x="411.33" y="309.03" width="28.0" height="55.0" rx="6" fill="currentColor" stroke="none" opacity=".16"/><rect x="521.03" y="309.03" width="28.0" height="55.0" rx="6" fill="currentColor" stroke="none" opacity=".16"/><path d="M 480.8 83 C 477.6 83.1 474.3 83.2 471 83.3 C 467.8 83.5 464.4 83.8 461.2 84.1 C 457.9 84.5 454.7 85 451.6 85.7 C 448.5 86.3 445.5 87.1 442.7 88.1 C 439.9 89.1 437.3 90.3 434.9 91.8 C 432.6 93.2 430.5 94.9 428.7 96.8 C 426.9 98.7 425.4 100.9 424.1 103.3 C 422.8 105.7 421.8 108.3 421 111 C 420.1 113.7 419.5 116.6 419 119.5 C 418.5 122.4 418.2 125.5 417.9 128.6 C 417.6 131.7 417.5 134.9 417.4 138 C 417.3 141.1 417.2 144.3 417.2 147.4 C 417.2 150.5 417.2 153.5 417.2 156.6 C 417.2 159.7 417.2 162.7 417.3 165.7 C 417.4 168.8 417.5 171.8 417.6 174.8 C 417.7 177.8 417.8 180.8 417.9 183.8 C 418 186.7 418.1 189.7 418.3 192.7 C 418.4 195.6 418.5 198.6 418.7 201.5 C 418.8 204.5 418.9 207.4 419 210.4 C 419.1 213.3 419.2 216.3 419.3 219.2 C 419.4 222.2 419.5 225.1 419.5 228.1 C 419.6 231 419.6 234 419.6 236.9 C 419.6 239.9 419.6 242.8 419.5 245.8 C 419.5 248.8 419.4 251.8 419.3 254.7 C 419.2 257.7 419.1 260.7 418.9 263.7 C 418.8 266.7 418.7 269.7 418.5 272.7 C 418.4 275.7 418.2 278.8 418 281.8 C 417.9 284.8 417.7 287.8 417.6 290.9 C 417.4 293.9 417.3 297 417.1 300 C 417 303.1 416.9 306.2 416.8 309.2 C 416.7 312.3 416.6 315.4 416.5 318.5 C 416.5 321.6 416.5 324.7 416.5 327.8 C 416.5 330.9 416.5 334 416.6 337.1 C 416.7 340.2 416.8 343.4 417 346.5 C 417.2 349.6 417.4 352.8 417.7 355.8 C 418 358.9 418.4 361.9 419 364.9 C 419.6 367.8 420.3 370.7 421.2 373.4 C 422.1 376.1 423.2 378.7 424.5 381 C 425.8 383.4 427.3 385.7 429.1 387.6 C 430.9 389.6 433 391.4 435.3 392.9 C 437.7 394.4 440.3 395.7 443 396.9 C 445.7 398 448.7 398.9 451.7 399.7 C 454.7 400.4 457.9 401 461.1 401.5 C 464.3 402 467.6 402.3 470.9 402.5 C 474.1 402.7 477.4 402.8 480.5 402.9 C 483.7 402.9 486.8 402.9 489.9 402.7 C 493 402.5 496 402.3 499 401.8 C 502 401.4 505 400.8 508 400 C 510.9 399.2 514 398.3 516.8 397.1 C 519.6 395.9 522.4 394.6 524.8 393 C 527.2 391.4 529.5 389.6 531.3 387.6 C 533.2 385.6 534.8 383.3 536.1 380.9 C 537.5 378.5 538.6 375.9 539.5 373.2 C 540.4 370.5 541 367.6 541.6 364.7 C 542.1 361.8 542.5 358.8 542.8 355.7 C 543.1 352.7 543.2 349.5 543.4 346.4 C 543.5 343.3 543.6 340.2 543.7 337.1 C 543.7 334 543.8 330.9 543.8 327.8 C 543.8 324.7 543.7 321.6 543.7 318.6 C 543.6 315.5 543.5 312.4 543.5 309.3 C 543.4 306.3 543.2 303.2 543.1 300.2 C 543 297.1 542.9 294.1 542.7 291 C 542.6 288 542.4 284.9 542.3 281.9 C 542.2 278.9 542 275.9 541.9 272.8 C 541.7 269.8 541.6 266.8 541.5 263.8 C 541.4 260.8 541.3 257.8 541.2 254.8 C 541.1 251.8 541 248.8 540.9 245.9 C 540.9 242.9 540.9 239.9 540.9 236.9 C 540.9 234 540.9 231 540.9 228.1 C 541 225.1 541 222.2 541.1 219.2 C 541.2 216.2 541.2 213.3 541.3 210.3 C 541.4 207.4 541.5 204.4 541.6 201.5 C 541.7 198.5 541.9 195.6 542 192.6 C 542.1 189.6 542.2 186.7 542.3 183.7 C 542.4 180.7 542.5 177.7 542.6 174.7 C 542.7 171.7 542.8 168.7 542.9 165.7 C 542.9 162.6 543 159.6 543 156.6 C 543.1 153.5 543.1 150.4 543.1 147.4 C 543.1 144.3 543.1 141.2 543 138.1 C 543 135 542.9 131.8 542.7 128.8 C 542.5 125.7 542.2 122.6 541.7 119.7 C 541.2 116.8 540.6 113.9 539.8 111.2 C 538.9 108.5 537.9 105.9 536.6 103.5 C 535.2 101.2 533.7 98.9 531.7 97 C 529.8 95 527.5 93.2 525 91.7 C 522.5 90.2 519.7 88.9 516.8 87.8 C 514 86.8 510.9 85.9 508 85.2 C 505 84.5 502 84.1 499 83.7 C 496.1 83.4 493.1 83.2 490.1 83.1 C 487 83 483.9 83 480.8 83 Z" fill="var(--card)" stroke="none"/><path d="M 480.8 83 C 477.6 83.1 474.3 83.2 471 83.3 C 467.8 83.5 464.4 83.8 461.2 84.1 C 457.9 84.5 454.7 85 451.6 85.7 C 448.5 86.3 445.5 87.1 442.7 88.1 C 439.9 89.1 437.3 90.3 434.9 91.8 C 432.6 93.2 430.5 94.9 428.7 96.8 C 426.9 98.7 425.4 100.9 424.1 103.3 C 422.8 105.7 421.8 108.3 421 111 C 420.1 113.7 419.5 116.6 419 119.5 C 418.5 122.4 418.2 125.5 417.9 128.6 C 417.6 131.7 417.5 134.9 417.4 138 C 417.3 141.1 417.2 144.3 417.2 147.4 C 417.2 150.5 417.2 153.5 417.2 156.6 C 417.2 159.7 417.2 162.7 417.3 165.7 C 417.4 168.8 417.5 171.8 417.6 174.8 C 417.7 177.8 417.8 180.8 417.9 183.8 C 418 186.7 418.1 189.7 418.3 192.7 C 418.4 195.6 418.5 198.6 418.7 201.5 C 418.8 204.5 418.9 207.4 419 210.4 C 419.1 213.3 419.2 216.3 419.3 219.2 C 419.4 222.2 419.5 225.1 419.5 228.1 C 419.6 231 419.6 234 419.6 236.9 C 419.6 239.9 419.6 242.8 419.5 245.8 C 419.5 248.8 419.4 251.8 419.3 254.7 C 419.2 257.7 419.1 260.7 418.9 263.7 C 418.8 266.7 418.7 269.7 418.5 272.7 C 418.4 275.7 418.2 278.8 418 281.8 C 417.9 284.8 417.7 287.8 417.6 290.9 C 417.4 293.9 417.3 297 417.1 300 C 417 303.1 416.9 306.2 416.8 309.2 C 416.7 312.3 416.6 315.4 416.5 318.5 C 416.5 321.6 416.5 324.7 416.5 327.8 C 416.5 330.9 416.5 334 416.6 337.1 C 416.7 340.2 416.8 343.4 417 346.5 C 417.2 349.6 417.4 352.8 417.7 355.8 C 418 358.9 418.4 361.9 419 364.9 C 419.6 367.8 420.3 370.7 421.2 373.4 C 422.1 376.1 423.2 378.7 424.5 381 C 425.8 383.4 427.3 385.7 429.1 387.6 C 430.9 389.6 433 391.4 435.3 392.9 C 437.7 394.4 440.3 395.7 443 396.9 C 445.7 398 448.7 398.9 451.7 399.7 C 454.7 400.4 457.9 401 461.1 401.5 C 464.3 402 467.6 402.3 470.9 402.5 C 474.1 402.7 477.4 402.8 480.5 402.9 C 483.7 402.9 486.8 402.9 489.9 402.7 C 493 402.5 496 402.3 499 401.8 C 502 401.4 505 400.8 508 400 C 510.9 399.2 514 398.3 516.8 397.1 C 519.6 395.9 522.4 394.6 524.8 393 C 527.2 391.4 529.5 389.6 531.3 387.6 C 533.2 385.6 534.8 383.3 536.1 380.9 C 537.5 378.5 538.6 375.9 539.5 373.2 C 540.4 370.5 541 367.6 541.6 364.7 C 542.1 361.8 542.5 358.8 542.8 355.7 C 543.1 352.7 543.2 349.5 543.4 346.4 C 543.5 343.3 543.6 340.2 543.7 337.1 C 543.7 334 543.8 330.9 543.8 327.8 C 543.8 324.7 543.7 321.6 543.7 318.6 C 543.6 315.5 543.5 312.4 543.5 309.3 C 543.4 306.3 543.2 303.2 543.1 300.2 C 543 297.1 542.9 294.1 542.7 291 C 542.6 288 542.4 284.9 542.3 281.9 C 542.2 278.9 542 275.9 541.9 272.8 C 541.7 269.8 541.6 266.8 541.5 263.8 C 541.4 260.8 541.3 257.8 541.2 254.8 C 541.1 251.8 541 248.8 540.9 245.9 C 540.9 242.9 540.9 239.9 540.9 236.9 C 540.9 234 540.9 231 540.9 228.1 C 541 225.1 541 222.2 541.1 219.2 C 541.2 216.2 541.2 213.3 541.3 210.3 C 541.4 207.4 541.5 204.4 541.6 201.5 C 541.7 198.5 541.9 195.6 542 192.6 C 542.1 189.6 542.2 186.7 542.3 183.7 C 542.4 180.7 542.5 177.7 542.6 174.7 C 542.7 171.7 542.8 168.7 542.9 165.7 C 542.9 162.6 543 159.6 543 156.6 C 543.1 153.5 543.1 150.4 543.1 147.4 C 543.1 144.3 543.1 141.2 543 138.1 C 543 135 542.9 131.8 542.7 128.8 C 542.5 125.7 542.2 122.6 541.7 119.7 C 541.2 116.8 540.6 113.9 539.8 111.2 C 538.9 108.5 537.9 105.9 536.6 103.5 C 535.2 101.2 533.7 98.9 531.7 97 C 529.8 95 527.5 93.2 525 91.7 C 522.5 90.2 519.7 88.9 516.8 87.8 C 514 86.8 510.9 85.9 508 85.2 C 505 84.5 502 84.1 499 83.7 C 496.1 83.4 493.1 83.2 490.1 83.1 C 487 83 483.9 83 480.8 83 Z" fill="currentColor" stroke="none" opacity=".035"/><path d="M 422.7 149.2 C 423.4 147.4 425 141.4 426.6 138.3 C 428.2 135.2 430.3 132.7 432.5 130.6 C 434.8 128.5 437.4 127 440.1 125.7 C 442.9 124.4 445.9 123.5 449.1 122.8 C 452.2 122.1 455.6 121.8 459 121.5 C 462.4 121.2 466 121.2 469.5 121.2 C 473.1 121.1 476.7 121.2 480.3 121.2 C 483.8 121.2 487.4 121.2 490.9 121.2 C 494.4 121.3 497.9 121.3 501.2 121.6 C 504.6 121.9 507.9 122.2 511.1 122.9 C 514.2 123.6 517.3 124.4 520.2 125.7 C 523 126.9 525.8 128.4 528.1 130.5 C 530.4 132.6 532.5 135 534 138.2 C 535.4 141.4 536.5 147.6 537 149.5" stroke-width="1.5" opacity="0.16"/><path d="M 498.5 133.2 C 495.5 133.1 492.8 133.2 489.9 133.2 C 487 133.2 484.2 133.4 481.1 133.4 C 478 133.4 474.7 133.3 471.3 133.3 C 468 133.3 464.4 133.2 461.1 133.3 C 457.7 133.5 454.3 133.6 451.2 134.1 C 448.1 134.5 445 135.1 442.5 136.1 C 439.9 137.1 437.7 138.4 435.9 140 C 434.1 141.7 432.7 143.7 431.6 145.9 C 430.5 148.2 429.8 150.7 429.3 153.4 C 428.7 156 428.5 159 428.3 161.9 C 428.2 164.8 428.2 167.9 428.3 170.9 C 428.4 173.9 428.6 177 428.8 180 C 429 183 429.3 186 429.6 189 C 429.9 192 430.3 195 430.7 198 C 431 201 431.4 204 431.8 207 C 432.3 210 432.7 213 433.1 216 C 433.5 219 434 222 434.4 225 C 434.8 228 435.2 230.9 435.6 233.9 C 435.9 236.9 436.3 239.9 436.6 242.9 C 436.9 245.9 437.2 248.9 437.4 251.9 C 437.6 254.9 437.8 257.9 437.9 260.9 C 438 263.9 438.1 266.9 438.1 269.9 C 438.2 273 438.2 276 438.1 279 C 438.1 282 438 285 438 288.1 C 437.9 291.1 437.8 294.1 437.7 297.2 C 437.6 300.2 437.5 303.3 437.3 306.3 C 437.2 309.3 437.1 312.4 437 315.4 C 437 318.5 436.9 321.5 436.8 324.6 C 436.8 327.7 436.7 330.7 436.7 333.8 C 436.7 336.8 436.7 339.9 436.8 343 C 436.9 346 437 349.1 437.2 352.2 C 437.4 355.2 437.6 358.3 438 361.3 C 438.3 364.2 438.7 367.3 439.5 369.9 C 440.3 372.5 441.2 375 442.7 376.9 C 444.2 378.9 446.1 380.4 448.4 381.6 C 450.6 382.8 453.2 383.5 456 384.2 C 458.8 384.8 461.9 385.1 465.1 385.3 C 468.3 385.6 471.7 385.6 475.1 385.7 C 478.4 385.7 481.9 385.7 485.3 385.7 C 488.7 385.7 492.1 385.7 495.3 385.4 C 498.4 385.2 501.5 384.9 504.3 384.2 C 507.1 383.6 509.8 382.8 512 381.6 C 514.2 380.4 516.1 378.8 517.6 376.9 C 519.1 374.9 520.1 372.5 520.9 369.9 C 521.7 367.3 522.1 364.2 522.5 361.3 C 522.8 358.3 523 355.2 523.2 352.2 C 523.3 349.1 523.4 346 523.5 343 C 523.5 339.9 523.6 336.8 523.5 333.8 C 523.5 330.7 523.5 327.7 523.4 324.6 C 523.4 321.5 523.3 318.5 523.2 315.4 C 523.1 312.4 523.1 309.3 523 306.3 C 522.9 303.3 522.8 300.2 522.7 297.2 C 522.6 294.1 522.5 291.1 522.5 288.1 C 522.4 285.1 522.4 282 522.3 279 C 522.3 276 522.3 273 522.4 270 C 522.4 266.9 522.5 263.9 522.6 260.9 C 522.7 257.9 522.9 254.9 523.1 251.9 C 523.3 248.9 523.5 245.9 523.8 242.9 C 524.1 239.9 524.4 236.9 524.8 233.9 C 525.1 230.9 525.5 228 525.9 225 C 526.2 222 526.6 219 527 216 C 527.4 213 527.9 210 528.3 207 C 528.7 204 529.1 201 529.4 198 C 529.8 195 530.2 192 530.5 189 C 530.9 186 531.2 183 531.5 180 C 531.7 176.9 532 173.9 532.2 170.9 C 532.3 167.9 532.5 164.8 532.5 161.9 C 532.4 159 532.2 156.1 531.7 153.4 C 531.2 150.8 530.5 148.2 529.3 146 C 528.2 143.8 526.7 141.7 524.7 140.1 C 522.6 138.4 520 137.1 517.2 136.1 C 514.3 135.1 510.9 134.5 507.8 134 C 504.7 133.5 501.5 133.3 498.5 133.2 Z" stroke-width="1.5" opacity="0.3"/><path d="M 428.7 186.5 C 428.7 188.3 428.3 193.6 428.2 197.2 C 428 200.7 427.8 204.3 427.7 207.8 C 427.6 211.4 427.5 214.9 427.4 218.5 C 427.3 222 427.2 225.6 427.2 229.2 C 427.1 232.7 427.1 236.3 427.1 239.9 C 427.1 243.4 427.1 247 427.1 250.6 C 427.1 254.1 427.1 257.7 427.2 261.3 C 427.2 264.8 427.3 268.4 427.4 272 C 427.5 275.5 427.6 279.1 427.7 282.7 C 427.8 286.2 427.9 289.8 428 293.4 C 428.1 296.9 428.3 300.5 428.4 304.1 C 428.6 307.6 428.8 311.2 428.9 314.8 C 429.1 318.3 429.3 321.9 429.5 325.4 C 429.7 329 429.8 332.5 430.1 336.1 C 430.3 339.6 430.5 343.1 430.7 346.7 C 430.9 350.2 431.2 355.5 431.3 357.3" stroke-width="1.5" opacity="0.2"/><path d="M 531.6 186.5 C 531.7 188.3 532 193.6 532.2 197.2 C 532.4 200.7 532.5 204.3 532.6 207.8 C 532.8 211.4 532.9 214.9 533 218.5 C 533.1 222 533.1 225.6 533.2 229.2 C 533.2 232.7 533.3 236.3 533.3 239.9 C 533.3 243.4 533.3 247 533.3 250.6 C 533.2 254.1 533.2 257.7 533.2 261.3 C 533.1 264.8 533 268.4 533 272 C 532.9 275.5 532.8 279.1 532.7 282.7 C 532.6 286.2 532.5 289.8 532.3 293.4 C 532.2 296.9 532.1 300.5 531.9 304.1 C 531.8 307.6 531.6 311.2 531.4 314.8 C 531.3 318.3 531.1 321.9 530.9 325.4 C 530.7 329 530.5 332.5 530.3 336.1 C 530.1 339.6 529.9 343.1 529.7 346.7 C 529.5 350.2 529.1 355.5 529 357.3" stroke-width="1.5" opacity="0.2"/><rect x="447.78" y="223.21" width="64.80" height="121.41" rx="6.5" stroke-width="1.5" opacity=".22"/><path d="M 480.8 83 C 477.6 83.1 474.3 83.2 471 83.3 C 467.8 83.5 464.4 83.8 461.2 84.1 C 457.9 84.5 454.7 85 451.6 85.7 C 448.5 86.3 445.5 87.1 442.7 88.1 C 439.9 89.1 437.3 90.3 434.9 91.8 C 432.6 93.2 430.5 94.9 428.7 96.8 C 426.9 98.7 425.4 100.9 424.1 103.3 C 422.8 105.7 421.8 108.3 421 111 C 420.1 113.7 419.5 116.6 419 119.5 C 418.5 122.4 418.2 125.5 417.9 128.6 C 417.6 131.7 417.5 134.9 417.4 138 C 417.3 141.1 417.2 144.3 417.2 147.4 C 417.2 150.5 417.2 153.5 417.2 156.6 C 417.2 159.7 417.2 162.7 417.3 165.7 C 417.4 168.8 417.5 171.8 417.6 174.8 C 417.7 177.8 417.8 180.8 417.9 183.8 C 418 186.7 418.1 189.7 418.3 192.7 C 418.4 195.6 418.5 198.6 418.7 201.5 C 418.8 204.5 418.9 207.4 419 210.4 C 419.1 213.3 419.2 216.3 419.3 219.2 C 419.4 222.2 419.5 225.1 419.5 228.1 C 419.6 231 419.6 234 419.6 236.9 C 419.6 239.9 419.6 242.8 419.5 245.8 C 419.5 248.8 419.4 251.8 419.3 254.7 C 419.2 257.7 419.1 260.7 418.9 263.7 C 418.8 266.7 418.7 269.7 418.5 272.7 C 418.4 275.7 418.2 278.8 418 281.8 C 417.9 284.8 417.7 287.8 417.6 290.9 C 417.4 293.9 417.3 297 417.1 300 C 417 303.1 416.9 306.2 416.8 309.2 C 416.7 312.3 416.6 315.4 416.5 318.5 C 416.5 321.6 416.5 324.7 416.5 327.8 C 416.5 330.9 416.5 334 416.6 337.1 C 416.7 340.2 416.8 343.4 417 346.5 C 417.2 349.6 417.4 352.8 417.7 355.8 C 418 358.9 418.4 361.9 419 364.9 C 419.6 367.8 420.3 370.7 421.2 373.4 C 422.1 376.1 423.2 378.7 424.5 381 C 425.8 383.4 427.3 385.7 429.1 387.6 C 430.9 389.6 433 391.4 435.3 392.9 C 437.7 394.4 440.3 395.7 443 396.9 C 445.7 398 448.7 398.9 451.7 399.7 C 454.7 400.4 457.9 401 461.1 401.5 C 464.3 402 467.6 402.3 470.9 402.5 C 474.1 402.7 477.4 402.8 480.5 402.9 C 483.7 402.9 486.8 402.9 489.9 402.7 C 493 402.5 496 402.3 499 401.8 C 502 401.4 505 400.8 508 400 C 510.9 399.2 514 398.3 516.8 397.1 C 519.6 395.9 522.4 394.6 524.8 393 C 527.2 391.4 529.5 389.6 531.3 387.6 C 533.2 385.6 534.8 383.3 536.1 380.9 C 537.5 378.5 538.6 375.9 539.5 373.2 C 540.4 370.5 541 367.6 541.6 364.7 C 542.1 361.8 542.5 358.8 542.8 355.7 C 543.1 352.7 543.2 349.5 543.4 346.4 C 543.5 343.3 543.6 340.2 543.7 337.1 C 543.7 334 543.8 330.9 543.8 327.8 C 543.8 324.7 543.7 321.6 543.7 318.6 C 543.6 315.5 543.5 312.4 543.5 309.3 C 543.4 306.3 543.2 303.2 543.1 300.2 C 543 297.1 542.9 294.1 542.7 291 C 542.6 288 542.4 284.9 542.3 281.9 C 542.2 278.9 542 275.9 541.9 272.8 C 541.7 269.8 541.6 266.8 541.5 263.8 C 541.4 260.8 541.3 257.8 541.2 254.8 C 541.1 251.8 541 248.8 540.9 245.9 C 540.9 242.9 540.9 239.9 540.9 236.9 C 540.9 234 540.9 231 540.9 228.1 C 541 225.1 541 222.2 541.1 219.2 C 541.2 216.2 541.2 213.3 541.3 210.3 C 541.4 207.4 541.5 204.4 541.6 201.5 C 541.7 198.5 541.9 195.6 542 192.6 C 542.1 189.6 542.2 186.7 542.3 183.7 C 542.4 180.7 542.5 177.7 542.6 174.7 C 542.7 171.7 542.8 168.7 542.9 165.7 C 542.9 162.6 543 159.6 543 156.6 C 543.1 153.5 543.1 150.4 543.1 147.4 C 543.1 144.3 543.1 141.2 543 138.1 C 543 135 542.9 131.8 542.7 128.8 C 542.5 125.7 542.2 122.6 541.7 119.7 C 541.2 116.8 540.6 113.9 539.8 111.2 C 538.9 108.5 537.9 105.9 536.6 103.5 C 535.2 101.2 533.7 98.9 531.7 97 C 529.8 95 527.5 93.2 525 91.7 C 522.5 90.2 519.7 88.9 516.8 87.8 C 514 86.8 510.9 85.9 508 85.2 C 505 84.5 502 84.1 499 83.7 C 496.1 83.4 493.1 83.2 490.1 83.1 C 487 83 483.9 83 480.8 83 Z" stroke-width="2" opacity="0.6"/><path d="M 405 193.6 C 405.1 193.1 405.3 191.5 405.7 190.7 C 406.1 189.8 406.7 189.1 407.3 188.4 C 408 187.8 408.8 187.2 409.6 186.7 C 410.4 186.2 411.3 185.7 412.2 185.3 C 413 184.8 414 184.4 414.8 183.9 C 415.6 183.5 416.4 183 417.1 182.5 C 417.8 182 418.6 181 418.9 180.8" stroke-width="2" opacity="0.6"/><path d="M 555.4 193.6 C 555.3 193.1 555 191.5 554.7 190.7 C 554.3 189.8 553.7 189.1 553 188.4 C 552.4 187.8 551.6 187.2 550.8 186.7 C 550 186.2 549 185.7 548.2 185.3 C 547.3 184.8 546.4 184.4 545.6 183.9 C 544.7 183.5 543.9 183 543.2 182.5 C 542.5 182 541.7 181 541.4 180.8" stroke-width="2" opacity="0.6"/></svg></div>`,
+  before:()=>`<div class="tpc">
+  <style>
+    .tpc{position:relative;width:960px;height:480px;box-sizing:border-box;overflow:hidden;
+      background:linear-gradient(180deg,#f7f8fa 0%,#eef0f3 100%);border-radius:28px;
+      font-family:'Inter',system-ui,sans-serif;color:#1b1e23;-webkit-font-smoothing:antialiased}
+    .tpc *{box-sizing:border-box}
+    .tpc .car{position:absolute;left:380px;top:40px;width:200px;height:400px;
+      filter:drop-shadow(0 18px 24px rgba(30,40,60,.10)) drop-shadow(0 2px 4px rgba(30,40,60,.08))}
+    .tpc .p{position:absolute;transform:translateY(-50%);display:flex;align-items:baseline;gap:8px;
+      font-variant-numeric:tabular-nums;white-space:nowrap}
+    .tpc .p.l{right:620px}
+    .tpc .p.r{left:620px}
+    .tpc .p.f{top:130px}
+    .tpc .p.b{top:340px}
+    .tpc .v{font-size:60px;font-weight:600;letter-spacing:-.03em;line-height:1}
+    .tpc .u{font-size:22px;font-weight:500;color:#7a818c;letter-spacing:0}
+  </style>
+
+  <svg class="car" viewBox="0 0 200 400" aria-hidden="true">
+    <defs>
+      <linearGradient id="tpcBody" x1="0" x2="1" y1="0" y2="0">
+        <stop offset="0" stop-color="#e9ecf0"/>
+        <stop offset=".5" stop-color="#ffffff"/>
+        <stop offset="1" stop-color="#e9ecf0"/>
+      </linearGradient>
+      <linearGradient id="tpcGlass" x1="0" x2="0" y1="0" y2="1">
+        <stop offset="0" stop-color="#cfd6df"/>
+        <stop offset="1" stop-color="#b9c2ce"/>
+      </linearGradient>
+    </defs>
+    <!-- wheels -->
+    <rect x="8" y="60" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <rect x="166" y="60" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <rect x="8" y="270" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <rect x="166" y="270" width="26" height="60" rx="9" fill="#2a2e35"/>
+    <!-- mirrors -->
+    <ellipse cx="17" cy="150" rx="10" ry="6" fill="#e3e7ec" stroke="#c4cad3" stroke-width="1.5"/>
+    <ellipse cx="183" cy="150" rx="10" ry="6" fill="#e3e7ec" stroke="#c4cad3" stroke-width="1.5"/>
+    <!-- body -->
+    <path d="M100 8 C140 8 172 18 176 50 L180 120 L180 330 C180 370 166 392 100 392 C34 392 20 370 20 330 L20 120 L24 50 C28 18 60 8 100 8 Z"
+      fill="url(#tpcBody)" stroke="#c4cad3" stroke-width="1.5"/>
+    <!-- headlights -->
+    <path d="M36 30 Q52 18 72 16 L70 24 Q52 28 40 38 Z" fill="#d6dbe2"/>
+    <path d="M164 30 Q148 18 128 16 L130 24 Q148 28 160 38 Z" fill="#d6dbe2"/>
+    <!-- hood lines -->
+    <path d="M66 40 Q62 90 60 124" fill="none" stroke="#d9dde3" stroke-width="1.5"/>
+    <path d="M134 40 Q138 90 140 124" fill="none" stroke="#d9dde3" stroke-width="1.5"/>
+    <!-- windshield -->
+    <path d="M44 134 Q100 112 156 134 L144 182 Q100 172 56 182 Z" fill="url(#tpcGlass)"/>
+    <!-- side windows -->
+    <path d="M38 152 L50 186 L50 296 L38 318 Z" fill="#c9d0d9"/>
+    <path d="M162 152 L150 186 L150 296 L162 318 Z" fill="#c9d0d9"/>
+    <!-- roof -->
+    <rect x="58" y="188" width="84" height="108" rx="14" fill="#f3f5f7" stroke="#d3d8df" stroke-width="1.2"/>
+    <!-- rear window -->
+    <path d="M56 304 Q100 312 144 304 L154 336 Q100 350 46 336 Z" fill="url(#tpcGlass)"/>
+    <!-- tail lights -->
+    <path d="M30 360 Q34 378 56 384 L58 378 Q40 372 36 358 Z" fill="#e2a7a7"/>
+    <path d="M170 360 Q166 378 144 384 L142 378 Q160 372 164 358 Z" fill="#e2a7a7"/>
+  </svg>
+
+  <div class="p l f"><span class="v">2.6</span><span class="u">bar</span></div>
+  <div class="p r f"><span class="v">2.6</span><span class="u">bar</span></div>
+  <div class="p l b"><span class="v">2.6</span><span class="u">bar</span></div>
+  <div class="p r b"><span class="v">2.6</span><span class="u">bar</span></div>
+</div>`},
 D:{W:960,H:538,cv:{W:900,top:0},name:'Confirm dialog',cover:1,ask:'Design a confirmation dialog for a car screen, 672 × 320 px, light theme. Content, exactly: a close button, the title “Dialog title”, the line “One or two lines that explain what happens next.”, and two actions, Confirm and Cancel. Nothing else.',wrong:[['Close in the corner','A left-aligned phone sheet.'],['Body at 24 px','The line under the title reads small.'],['80 px buttons','Taller and rounder than the library.']],notes:[['Centred column','Close on the left, title and line centred.'],['Line at 28/36','Two lines at 65% under a 32 px title.'],['68 px buttons','Two equal halves, 16 px apart, radius 16.']],
   html:()=>`<div class="st dg"><span class="dg-x">${IC.xClose}</span><p class="dg-t">Dialog title</p><p class="dg-b">One or two lines that explain what happens next.</p><div class="dg-a"><i class="dg-p">Confirm</i><i>Cancel</i></div></div>`,
   before:()=>`<div class="cd-root" role="dialog" aria-modal="true" aria-labelledby="cd-title" aria-describedby="cd-desc">
@@ -1704,17 +1824,30 @@ const DATA=[
 ['L','Four options lie flat','AI sets the labels at 20 px, the options at 18 px and rules every row.','Labels at 28, options in 28 px type, and 108 px rows without dividers.',['20 px labels','28 px labels']],
 ['D','A dialog is a centred pause','Ask for a confirmation and AI builds a phone sheet: left-aligned, close in the corner, 24 px body and 80 px buttons.','Close on the left, title and line centred, two equal 68 px buttons. Confirm is the only filled one.',['Phone sheet','Centred dialog']],
 ['K','Keys on whole pixels','AI gets the proportions right but lands keys on fractions of a pixel and tints the panel.','The same proportions on whole pixels: 104 × 91 keys, 12 apart, wide keys at 162, and one filled Search key.',['Fractional grid','Whole-pixel grid']],
-['S','A result row stays quiet','AI fills a blue Go button on every row and sets the address at 17 px.','Name at 28, distance and address at 24, and two quiet icons: add a stop, or go.',['Blue Go button','Quiet icons']]];
+['S','A result row stays quiet','AI fills a blue Go button on every row and sets the address at 17 px.','Name at 28, distance and address at 24, and two quiet icons: add a stop, or go.',['Blue Go button','Quiet icons']],
+['W','The car is the legend','AI draws a cartoon car with headlights and tail lights and crowds the four values against it.','A traced top view in the middle, four large values by their wheels, nothing else.',['Cartoon car','Values by wheel']],
+['N','Keys you can hit at speed','AI shrinks the digits to 32 px, rounds every key and stretches the call button into a full-width green pill.','Twelve white keys at 160 × 86, the number at 48, and one green key with the library’s filled phone.',['Full-width pill','160 × 86 keys']]];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
-const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much']];
+const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much'],['Too much','Phone habits'],['Phone habits','Too small']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const PROMPTS={
+N:[`Design a phone dial pad for a car screen, 512 × 582 px, light theme. Content, exactly: the number “186” with a delete button beside it, the keys 1–9, *, 0 and #, and a call button. Nothing else.`,
+`Design a phone dial pad for a car screen, 512 × 582 px, light theme. Text is Inter Medium, #1D1D1F.
+Top, 76 px tall: "186" centred in 48/56; a 48 px outline delete icon (3 px line) at 65%, 20 px from the right.
+20 px below, a 3 × 4 grid of keys, 160 × 86, 16 px apart horizontally and 12 px vertically: 1–9, *, 0, #. Keys are white, radius 12, a crisp 0 1 0 shadow at 14%, digits in 40/56.
+20 px below, one call key, 160 × 86, centred, radius 12, #1F9D3A, with a 48 px filled phone in white. No labels, no circles.`],
+W:[`Design a tire pressure card for a car screen, 960 × 480 px, light theme. Content, exactly: a top view of the car in the middle and the pressure of each of the four tires, each “2.6 bar”, placed by its wheel. No title. Nothing else.`,
+`Design a tire pressure card for a car screen, 960 × 480 px, light theme. Text is Inter Medium, #1D1D1F, secondary at 65%. No title.
+Card: white, radius 20, a 2 px inside border at rgba(15,23,41,0.1) and a soft shadow.
+In the middle, a line-drawn top view of the car, 160 × 334, centred: body outline 2 px at 60%, cabin and glass 1.5 px at 20–30%, wheels as soft fills at 16% tucked under an opaque body, so no line crosses the body; mirrors 2 px. The drawing fades to 55% toward the rear.
+Four values, each "2.6" in 64/72 with "bar" in 28/40 at 65%, 16 px apart on one baseline: top-left and bottom-left at x 64, top-right and bottom-right right-aligned at 64 px from the edge; tops at 56 and 352.
+Between them, at the vertical centre, two 256 × 2 lines at 12% that fade out toward the card edge, stopping 64 px short of the car.`],
 D:[`Design a confirmation dialog for a car screen, 672 × 320 px, light theme. Content, exactly: a close button, the title “Dialog title”, the line “One or two lines that explain what happens next.”, and two actions, Confirm and Cancel. Nothing else.`,
 `Design a confirmation dialog for a car screen, 672 × 320 px, light theme. Text is Inter Medium, #1D1D1F, secondary at 65%.
-Dialog: white, radius 24, padding 32 top and bottom, 60 at the sides, a 2 px inside border at #1D1D1F 5% and a soft 0 8 32 shadow. One centred column, 24 px gaps.
+Dialog: white, radius 20, padding 32 top and bottom, 60 at the sides, a 2 px inside border at #1D1D1F 5% and a soft 0 8 32 shadow. One centred column, 24 px gaps.
 Header 68 px: a 68 px close button (48 px X, 2.5 px line) pinned 40 px from the left; "Dialog title" centred in 32/44.
 Then "One or two lines that explain what happens next." centred in 28/36 at 65%, 496 px wide, two lines.
 At the bottom, two equal buttons in a 552 px row, 68 px tall, 16 px apart, radius 16, labels 28/40: Confirm filled #007AFF with white text; Cancel #000 at 7%.`],
