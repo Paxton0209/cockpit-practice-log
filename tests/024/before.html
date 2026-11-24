@@ -1,0 +1,100 @@
+<div class="child-lock">
+  <style>
+    .child-lock, .child-lock * { box-sizing: border-box; }
+    .child-lock {
+      width: 756px;
+      height: 148px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 24px 28px;
+      border: 1px solid #e1e5ea;
+      border-radius: 24px;
+      background: #fff;
+      color: #17212e;
+      font-family: Inter, system-ui, sans-serif;
+    }
+    .child-lock .lock-icon {
+      display: grid;
+      place-items: center;
+      flex: 0 0 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: #edf3ff;
+      color: #244f9e;
+    }
+    .child-lock .lock-copy { flex: 1; }
+    .child-lock h2 {
+      margin: 0 0 4px;
+      font-size: 22px;
+      font-weight: 650;
+      line-height: 28px;
+      letter-spacing: -0.45px;
+    }
+    .child-lock p {
+      margin: 0;
+      color: #536174;
+      font-size: 14px;
+      line-height: 20px;
+    }
+    .child-lock .lock-options {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 4px;
+      width: 340px;
+      min-inline-size: 0;
+      margin: 0;
+      padding: 4px;
+      border: 0;
+      border-radius: 16px;
+      background: #eef1f5;
+    }
+    .child-lock label { position: relative; cursor: pointer; }
+    .child-lock input {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+    .child-lock label span {
+      display: grid;
+      min-height: 48px;
+      place-items: center;
+      border-radius: 12px;
+      color: #364457;
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .child-lock label:hover span { background: #e2e8f0; }
+    .child-lock input:checked + span { background: #254f9e; color: #fff; }
+    .child-lock input:focus-visible + span {
+      outline: 2px solid #254f9e;
+      outline-offset: 2px;
+    }
+  </style>
+
+  <div class="lock-icon" aria-hidden="true">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+         stroke-linejoin="round">
+      <rect x="5" y="10" width="14" height="11" rx="2.5"/>
+      <path d="M8 10V7a4 4 0 0 1 8 0v3m-4 5v2"/>
+    </svg>
+  </div>
+
+  <div class="lock-copy">
+    <h2 id="child-lock-title">Child lock</h2>
+    <p id="child-lock-description">Prevents rear doors from opening from inside.</p>
+  </div>
+
+  <fieldset class="lock-options" aria-labelledby="child-lock-title"
+            aria-describedby="child-lock-description">
+    <label><input type="radio" name="child-lock" value="off" checked><span>Off</span></label>
+    <label><input type="radio" name="child-lock" value="left"><span>Left</span></label>
+    <label><input type="radio" name="child-lock" value="right"><span>Right</span></label>
+    <label><input type="radio" name="child-lock" value="both"><span>Both</span></label>
+  </fieldset>
+</div>
