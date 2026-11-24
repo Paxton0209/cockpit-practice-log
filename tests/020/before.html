@@ -1,0 +1,136 @@
+<div class="tire-pressure-card" lang="en">
+  <style>
+    .tire-pressure-card {
+      box-sizing: border-box;
+      width: 772px;
+      height: 272px;
+      padding: 23px 27px 21px;
+      overflow: hidden;
+      border: 1px solid #e0e5ec;
+      border-radius: 22px;
+      background: #fff;
+      color: #172132;
+      font: 500 14px/1.4 Inter, sans-serif;
+      box-shadow: 0 3px 12px #17213209;
+    }
+    .tire-pressure-card *, .tire-pressure-card *::before { box-sizing: border-box; }
+    .tire-pressure-card .tp-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .tire-pressure-card .tp-title { margin: 0; font-size: 24px; font-weight: 700; line-height: 30px; letter-spacing: -.65px; }
+    .tire-pressure-card .tp-target { margin: 3px 0 0; color: #556275; font-size: 13px; }
+    .tire-pressure-card .tp-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 8px;
+      background: #fff0d5;
+      color: #794602;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .tire-pressure-card .tp-content {
+      display: grid;
+      grid-template-columns: 114px 1fr;
+      align-items: stretch;
+      gap: 16px;
+      margin-top: 17px;
+    }
+    .tire-pressure-card .tp-diagram {
+      display: grid;
+      place-items: center;
+      border: 1px solid #e9edf2;
+      border-radius: 13px;
+      background: #f6f8fb;
+    }
+    .tire-pressure-card .tp-readings {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 0;
+    }
+    .tire-pressure-card .tp-reading {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      min-height: 49px;
+      padding: 8px 13px;
+      border: 1px solid #e6eaf0;
+      border-radius: 10px;
+      background: #fff;
+    }
+    .tire-pressure-card .tp-reading--low { border-color: #edcc91; background: #fff7e7; }
+    .tire-pressure-card .tp-reading dt { font-size: 13px; font-weight: 600; }
+    .tire-pressure-card .tp-reading dd {
+      margin: 0;
+      font-size: 21px;
+      font-weight: 700;
+      line-height: 1.2;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .tire-pressure-card .tp-reading dd span { color: #556275; font-size: 11px; font-weight: 600; }
+    .tire-pressure-card .tp-reading--low dd,
+    .tire-pressure-card .tp-reading--low dd span { color: #794602; }
+    .tire-pressure-card .tp-note {
+      margin: 13px 0 0;
+      padding: 11px 0 0;
+      border-top: 1px solid #e9edf2;
+      color: #556275;
+      font-size: 13px;
+    }
+    .tire-pressure-card .tp-note strong { color: #273449; font-weight: 650; }
+  </style>
+
+  <section aria-label="Tire pressure">
+    <header class="tp-header">
+      <div>
+        <h2 class="tp-title">Tire pressure</h2>
+        <p class="tp-target">Recommended cold pressure · 35 psi</p>
+      </div>
+      <span class="tp-status">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 5.5a12 12 0 0 0-1 13.5h16a12 12 0 0 0-1-13.5M12 7v5.5"/>
+          <circle cx="12" cy="16" r=".9" fill="currentColor" stroke="none"/>
+        </svg>
+        1 tire low
+      </span>
+    </header>
+
+    <div class="tp-content">
+      <div class="tp-diagram" aria-hidden="true">
+        <svg width="76" height="94" viewBox="0 0 76 94" fill="none">
+          <path d="m34 8 4-4 4 4" stroke="#6a778b" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          <rect x="23" y="15" width="30" height="71" rx="13" fill="#fff" stroke="#93a1b4" stroke-width="1.5"/>
+          <path d="M28 35l3-9h14l3 9H28Zm0 31h20l-3 9H31l-3-9Z" fill="#dce5ef" stroke="#a7b4c5" stroke-linejoin="round"/>
+          <path d="M28 41v19m20-19v19" stroke="#c7d2df" stroke-width="1.5" stroke-linecap="round"/>
+          <rect x="12" y="21" width="8" height="18" rx="3" fill="#b26707"/>
+          <rect x="56" y="21" width="8" height="18" rx="3" fill="#64758a"/>
+          <rect x="12" y="63" width="8" height="18" rx="3" fill="#64758a"/>
+          <rect x="56" y="63" width="8" height="18" rx="3" fill="#64758a"/>
+        </svg>
+      </div>
+
+      <dl class="tp-readings">
+        <div class="tp-reading tp-reading--low">
+          <dt>Front left</dt>
+          <dd>27 <span>psi</span></dd>
+        </div>
+        <div class="tp-reading">
+          <dt>Front right</dt>
+          <dd>35 <span>psi</span></dd>
+        </div>
+        <div class="tp-reading">
+          <dt>Rear left</dt>
+          <dd>35 <span>psi</span></dd>
+        </div>
+        <div class="tp-reading">
+          <dt>Rear right</dt>
+          <dd>35 <span>psi</span></dd>
+        </div>
+      </dl>
+    </div>
+
+    <p class="tp-note">Inflate the <strong>front left tire to 35 psi</strong> when cold.</p>
+  </section>
+</div>
