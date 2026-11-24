@@ -2,7 +2,7 @@
 
 `before.html` is the first answer from a fresh Claude Opus session with no prior context and no tools, to this one line plus an output-format note:
 
-> Design a route selection panel for a car navigation screen, offering three routes to the destination, 560 × 648 px, light theme.
+> Design a place details panel for a car navigation screen, for a destination with charging, 560 × 678 px, light theme.
 >
 > Output: reply with one self-contained HTML snippet — a single root <div> with its own <style> inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
 

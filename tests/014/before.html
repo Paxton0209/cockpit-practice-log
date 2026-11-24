@@ -1,159 +1,121 @@
-<div class="rsp">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-    .rsp{
-      --ink:#0F1A2A; --ink-2:#4A5668; --ink-3:#7C8796; --line:#E3E8EF;
-      --bg:#FFFFFF; --soft:#F4F6F9; --blue:#1F6FEB; --blue-soft:#EAF2FF;
-      --green:#1E9E5A; --amber:#E39A12; --red:#D9433A;
-      width:560px; height:648px; box-sizing:border-box; padding:22px 24px 24px;
-      background:var(--bg); border-radius:28px; font-family:'Inter',system-ui,sans-serif;
-      color:var(--ink); display:flex; flex-direction:column; gap:14px;
-      box-shadow:0 1px 2px rgba(15,26,42,.06),0 12px 40px rgba(15,26,42,.12);
-      -webkit-font-smoothing:antialiased; overflow:hidden;
-    }
-    .rsp *{box-sizing:border-box;margin:0}
-    .rsp-head{display:flex;align-items:center;gap:14px;height:56px;flex:none}
-    .rsp-dest-ico{width:48px;height:48px;border-radius:14px;background:var(--blue-soft);display:grid;place-items:center;flex:none}
-    .rsp-dest{flex:1;min-width:0}
-    .rsp-eyebrow{font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
-    .rsp-title{font-size:22px;font-weight:700;letter-spacing:-.01em;margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .rsp-title span{font-weight:500;color:var(--ink-2)}
-    .rsp-close{width:52px;height:52px;border-radius:50%;border:none;background:var(--soft);display:grid;place-items:center;cursor:pointer;flex:none}
-    .rsp-close:hover{background:#E9EDF2}
+<div class="pd-root" role="dialog" aria-labelledby="pd-title">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+.pd-root{--ink:#0F1720;--ink2:#4A5563;--ink3:#7A8594;--line:#E3E7EC;--bg:#FFFFFF;--soft:#F3F5F8;--accent:#0B63E5;--accent-ink:#FFFFFF;--ok:#0E8A4F;--ok-bg:#E3F5EB;--warn:#B25E00;--warn-bg:#FFF1DC;--busy:#B42318;--busy-bg:#FDE8E7;
+  box-sizing:border-box;width:560px;height:678px;padding:24px;background:var(--bg);border-radius:28px;
+  box-shadow:0 2px 6px rgba(15,23,32,.06),0 16px 40px rgba(15,23,32,.12);
+  font-family:'Inter',system-ui,sans-serif;color:var(--ink);display:flex;flex-direction:column;gap:16px;overflow:hidden;
+  -webkit-font-smoothing:antialiased;font-feature-settings:'tnum' 1,'cv11' 1}
+.pd-root *{box-sizing:border-box;margin:0}
+.pd-head{display:flex;align-items:flex-start;gap:16px}
+.pd-head-txt{flex:1;min-width:0}
+.pd-eyebrow{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:var(--ok);letter-spacing:.01em}
+.pd-eyebrow .pd-dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.pd-title{font-size:28px;line-height:34px;font-weight:700;letter-spacing:-.02em;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pd-sub{font-size:16px;line-height:22px;color:var(--ink2);margin-top:2px;display:flex;align-items:center;gap:8px}
+.pd-sub .pd-star{color:#E8A100}
+.pd-sep{width:3px;height:3px;border-radius:50%;background:var(--ink3)}
+.pd-close{flex:none;width:56px;height:56px;border-radius:50%;border:0;background:var(--soft);display:grid;place-items:center;cursor:pointer;color:var(--ink)}
+.pd-trip{display:grid;grid-template-columns:1fr 1fr 1.25fr;background:var(--soft);border-radius:18px;padding:14px 4px}
+.pd-trip > div{padding:0 16px;border-left:1px solid var(--line)}
+.pd-trip > div:first-child{border-left:0}
+.pd-k{font-size:13px;font-weight:500;color:var(--ink3);text-transform:uppercase;letter-spacing:.06em}
+.pd-v{font-size:26px;line-height:32px;font-weight:700;letter-spacing:-.02em;margin-top:2px;display:flex;align-items:center;gap:8px}
+.pd-v small{font-size:16px;font-weight:600;color:var(--ink2);letter-spacing:0}
+.pd-batt{width:34px;height:18px;border:2px solid var(--ink);border-radius:5px;position:relative;padding:2px}
+.pd-batt::after{content:'';position:absolute;right:-5px;top:4px;width:3px;height:6px;border-radius:0 2px 2px 0;background:var(--ink)}
+.pd-batt i{display:block;height:100%;width:34%;background:var(--warn);border-radius:2px}
+.pd-sec-h{display:flex;align-items:baseline;justify-content:space-between}
+.pd-sec-h h3{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.pd-sec-h span{font-size:14px;color:var(--ink3);font-weight:500}
+.pd-list{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:10px}
+.pd-row{display:flex;align-items:center;gap:14px;height:64px;padding:0 16px;border-top:1px solid var(--line)}
+.pd-row:first-child{border-top:0}
+.pd-plug{flex:none;width:40px;height:40px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:var(--ink)}
+.pd-row-main{flex:1;min-width:0}
+.pd-row-t{font-size:17px;font-weight:600;line-height:22px}
+.pd-row-s{font-size:14px;color:var(--ink2);line-height:18px}
+.pd-slots{display:flex;gap:4px;margin-right:4px}
+.pd-slots b{width:8px;height:22px;border-radius:3px;background:var(--line)}
+.pd-row.ok .pd-slots b.on{background:var(--ok)}
+.pd-row.warn .pd-slots b.on{background:var(--warn)}
+.pd-pill{flex:none;min-width:92px;text-align:center;font-size:15px;font-weight:700;padding:8px 12px;border-radius:999px}
+.ok .pd-pill{background:var(--ok-bg);color:var(--ok)}
+.warn .pd-pill{background:var(--warn-bg);color:var(--warn)}
+.busy .pd-pill{background:var(--busy-bg);color:var(--busy)}
+.pd-meta{display:flex;gap:8px;flex-wrap:nowrap}
+.pd-chip{display:flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:12px;background:var(--soft);font-size:15px;font-weight:500;color:var(--ink);white-space:nowrap}
+.pd-chip svg{color:var(--ink2)}
+.pd-actions{margin-top:auto;display:flex;gap:12px}
+.pd-go{flex:1;height:72px;border:0;border-radius:20px;background:var(--accent);color:var(--accent-ink);font:inherit;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer;box-shadow:0 6px 16px rgba(11,99,229,.28)}
+.pd-go small{font-size:15px;font-weight:500;opacity:.85}
+.pd-sq{flex:none;width:72px;height:72px;border-radius:20px;border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:inherit;font-size:12px;font-weight:600;color:var(--ink2);cursor:pointer}
+.pd-sq svg{color:var(--ink)}
+.pd-close:active,.pd-sq:active{background:var(--line)}
+.pd-go:active{background:#0952C0}
+</style>
 
-    .rsp-map{position:relative;height:142px;flex:none;border-radius:18px;overflow:hidden;background:#EAEFF4}
-    .rsp-map svg{display:block}
-    .rsp-chip{position:absolute;font-size:13px;font-weight:700;padding:5px 9px;border-radius:9px;background:#fff;color:var(--ink-2);box-shadow:0 1px 3px rgba(15,26,42,.18);line-height:1}
-    .rsp-chip.on{background:var(--blue);color:#fff}
-
-    .rsp-list{display:flex;flex-direction:column;gap:8px;flex:1;min-height:0}
-    .rsp-route{all:unset;box-sizing:border-box;flex:1;display:grid;grid-template-columns:1fr auto;align-items:center;gap:6px 14px;
-      padding:12px 18px 12px 18px;border-radius:18px;border:2px solid var(--line);background:#fff;cursor:pointer;transition:border-color .15s,background .15s}
-    .rsp-route:hover{border-color:#C9D2DE}
-    .rsp-route.on{border-color:var(--blue);background:var(--blue-soft)}
-    .rsp-top{display:flex;align-items:baseline;gap:10px;min-width:0}
-    .rsp-time{font-size:26px;font-weight:800;letter-spacing:-.02em;line-height:1}
-    .rsp-time small{font-size:16px;font-weight:600;margin-left:2px}
-    .rsp-diff{font-size:14px;font-weight:600;color:var(--ink-3)}
-    .rsp-tag{font-size:12px;font-weight:700;padding:4px 8px;border-radius:7px;line-height:1;align-self:center}
-    .rsp-tag.best{background:var(--blue);color:#fff}
-    .rsp-tag.eco{background:#E3F5EB;color:#13703F}
-    .rsp-tag.toll{background:#FFF2DC;color:#8A5A00}
-    .rsp-meta{grid-column:1;font-size:14px;color:var(--ink-2);font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .rsp-meta b{color:var(--ink);font-weight:600}
-    .rsp-traffic{grid-column:1;display:flex;height:5px;border-radius:3px;overflow:hidden;gap:2px}
-    .rsp-traffic i{display:block;height:100%}
-    .g{background:var(--green)} .a{background:var(--amber)} .r{background:var(--red)}
-    .rsp-side{grid-column:2;grid-row:1 / span 3;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-    .rsp-arr{font-size:13px;color:var(--ink-3);font-weight:500;text-align:right}
-    .rsp-arr b{display:block;font-size:18px;color:var(--ink);font-weight:700}
-    .rsp-radio{width:26px;height:26px;border-radius:50%;border:2px solid #C3CCD8;display:grid;place-items:center;background:#fff}
-    .rsp-route.on .rsp-radio{border-color:var(--blue);background:var(--blue)}
-
-    .rsp-foot{display:flex;gap:12px;height:64px;flex:none}
-    .rsp-go{flex:1;border:none;border-radius:18px;background:var(--blue);color:#fff;font:700 20px 'Inter',sans-serif;
-      display:flex;align-items:center;justify-content:center;gap:10px;cursor:pointer;box-shadow:0 6px 16px rgba(31,111,235,.32)}
-    .rsp-go:hover{background:#1A62D1}
-    .rsp-go span{font-weight:500;opacity:.85}
-    .rsp-opt{width:64px;border:none;border-radius:18px;background:var(--soft);display:grid;place-items:center;cursor:pointer}
-    .rsp-opt:hover{background:#E9EDF2}
-  </style>
-
-  <!-- Header -->
-  <div class="rsp-head">
-    <div class="rsp-dest-ico">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1v-8.5Z" fill="#1F6FEB"/></svg>
+  <header class="pd-head">
+    <div class="pd-head-txt">
+      <p class="pd-eyebrow"><span class="pd-dot"></span>Open 24 hours · 5 chargers free</p>
+      <h2 class="pd-title" id="pd-title">Ionity Lakeside Charging Hub</h2>
+      <p class="pd-sub">
+        <span><span class="pd-star">★</span> 4.6 (318)</span><span class="pd-sep"></span>
+        <span>Harbour Rd 14, Westport</span>
+      </p>
     </div>
-    <div class="rsp-dest">
-      <div class="rsp-eyebrow">Routes to</div>
-      <div class="rsp-title">Home <span>· 42 Linden Avenue</span></div>
+    <button class="pd-close" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+  </header>
+
+  <section class="pd-trip" aria-label="Trip summary">
+    <div><p class="pd-k">Arrive in</p><p class="pd-v">12 <small>min</small></p></div>
+    <div><p class="pd-k">Distance</p><p class="pd-v">8.4 <small>km</small></p></div>
+    <div><p class="pd-k">Battery on arrival</p><p class="pd-v"><span class="pd-batt"><i></i></span>34%</p></div>
+  </section>
+
+  <section aria-label="Charger availability">
+    <div class="pd-sec-h"><h3>Chargers</h3><span>Updated 1 min ago</span></div>
+    <div class="pd-list">
+      <div class="pd-row ok">
+        <span class="pd-plug"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+        <div class="pd-row-main"><p class="pd-row-t">CCS · up to 350 kW</p><p class="pd-row-s">10–80% in ~18 min</p></div>
+        <span class="pd-slots" aria-hidden="true"><b class="on"></b><b class="on"></b><b class="on"></b><b class="on"></b><b></b><b></b></span>
+        <span class="pd-pill">4 of 6 free</span>
+      </div>
+      <div class="pd-row warn">
+        <span class="pd-plug"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span>
+        <div class="pd-row-main"><p class="pd-row-t">CCS · 150 kW</p><p class="pd-row-s">10–80% in ~32 min</p></div>
+        <span class="pd-slots" aria-hidden="true"><b class="on"></b><b></b><b></b><b></b></span>
+        <span class="pd-pill">1 of 4 free</span>
+      </div>
+      <div class="pd-row busy">
+        <span class="pd-plug"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="8"/><circle cx="9" cy="10" r="1.2" fill="currentColor"/><circle cx="15" cy="10" r="1.2" fill="currentColor"/><circle cx="12" cy="15" r="1.2" fill="currentColor"/></svg></span>
+        <div class="pd-row-main"><p class="pd-row-t">Type 2 · 22 kW</p><p class="pd-row-s">Next free in ~15 min</p></div>
+        <span class="pd-slots" aria-hidden="true"><b></b><b></b></span>
+        <span class="pd-pill">In use</span>
+      </div>
     </div>
-    <button class="rsp-close" aria-label="Close">
-      <svg width="20" height="20" viewBox="0 0 20 20"><path d="M5 5l10 10M15 5 5 15" stroke="#4A5668" stroke-width="2.2" stroke-linecap="round"/></svg>
-    </button>
+  </section>
+
+  <div class="pd-meta" aria-label="Details">
+    <span class="pd-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18"/></svg>€0.59 / kWh</span>
+    <span class="pd-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 11h12v3a5 5 0 01-5 5H10a5 5 0 01-5-5v-3zM17 12h1.5a2 2 0 010 4H17M8 4v3M12 4v3"/></svg>Café</span>
+    <span class="pd-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="2"/><path d="M12 8v13M8 12h8"/></svg>Restrooms</span>
+    <span class="pd-chip"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 9a15 15 0 0120 0M5 12.5a10 10 0 0114 0M8.5 16a5 5 0 017 0"/><circle cx="12" cy="19" r="1" fill="currentColor"/></svg>Wi‑Fi</span>
   </div>
 
-  <!-- Map preview -->
-  <div class="rsp-map">
-    <svg width="512" height="142" viewBox="0 0 512 142">
-      <rect width="512" height="142" fill="#EAEFF4"/>
-      <path d="M330 0c20 30 60 40 70 70s-10 50 10 72h102V0Z" fill="#D5E6F5"/>
-      <rect x="150" y="12" width="70" height="36" rx="8" fill="#DCEBDD"/>
-      <rect x="250" y="96" width="56" height="30" rx="8" fill="#DCEBDD"/>
-      <g stroke="#fff" stroke-width="6" fill="none" stroke-linecap="round">
-        <path d="M0 70h512"/><path d="M120 0v142"/><path d="M240 0v142"/><path d="M0 30c120 0 200 20 320 10"/><path d="M0 120c160-10 300 10 512-4"/><path d="M380 0c-10 50 10 100 0 142"/>
-      </g>
-      <!-- Alternate routes -->
-      <g fill="none" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M44 104 C90 120 160 128 240 122 S380 116 420 98 455 60 464 40" stroke="#fff" stroke-width="9"/>
-        <path d="M44 104 C90 120 160 128 240 122 S380 116 420 98 455 60 464 40" stroke="#9AA6B4" stroke-width="5"/>
-        <path d="M44 104 C60 70 90 34 150 30 S300 26 350 30 440 34 464 40" stroke="#fff" stroke-width="9"/>
-        <path d="M44 104 C60 70 90 34 150 30 S300 26 350 30 440 34 464 40" stroke="#9AA6B4" stroke-width="5"/>
-        <!-- Selected route -->
-        <path d="M44 104 C100 90 150 72 240 70 S360 72 400 62 450 48 464 40" stroke="#fff" stroke-width="11"/>
-        <path d="M44 104 C100 90 150 72 240 70 S360 72 400 62 450 48 464 40" stroke="#1F6FEB" stroke-width="7"/>
-      </g>
-      <circle cx="44" cy="104" r="9" fill="#fff"/><circle cx="44" cy="104" r="6" fill="#1F6FEB"/>
-      <path d="M464 16c-8 0-14 6-14 14 0 10 14 22 14 22s14-12 14-22c0-8-6-14-14-14Z" fill="#0F1A2A"/>
-      <circle cx="464" cy="30" r="5" fill="#fff"/>
-    </svg>
-    <div class="rsp-chip on" style="left:212px;top:44px">24 min</div>
-    <div class="rsp-chip" style="left:128px;top:6px">29 min</div>
-    <div class="rsp-chip" style="left:300px;top:100px">31 min</div>
-  </div>
-
-  <!-- Route options -->
-  <div class="rsp-list" role="radiogroup" aria-label="Route options">
-    <button class="rsp-route on" role="radio" aria-checked="true">
-      <div class="rsp-top">
-        <div class="rsp-time">24<small>min</small></div>
-        <span class="rsp-tag best">Fastest</span>
-      </div>
-      <div class="rsp-meta"><b>18.4 km</b> · via A100 &amp; Ringstraße</div>
-      <div class="rsp-traffic"><i class="g" style="flex:5"></i><i class="a" style="flex:1.4"></i><i class="g" style="flex:3"></i></div>
-      <div class="rsp-side">
-        <div class="rsp-arr">Arrive<b>18:42</b></div>
-        <div class="rsp-radio"><svg width="14" height="14" viewBox="0 0 14 14"><path d="M3 7.2 5.8 10 11 4" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      </div>
+  <div class="pd-actions">
+    <button class="pd-go">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l8 19-8-4-8 4 8-19z"/></svg>
+      Start navigation <small>· 12 min</small>
     </button>
-
-    <button class="rsp-route" role="radio" aria-checked="false">
-      <div class="rsp-top">
-        <div class="rsp-time">29<small>min</small></div>
-        <span class="rsp-diff">+5 min</span>
-        <span class="rsp-tag eco">Eco · −12% fuel</span>
-      </div>
-      <div class="rsp-meta"><b>16.1 km</b> · via Parkweg &amp; city center</div>
-      <div class="rsp-traffic"><i class="g" style="flex:3"></i><i class="a" style="flex:2"></i><i class="r" style="flex:.8"></i><i class="g" style="flex:3"></i></div>
-      <div class="rsp-side">
-        <div class="rsp-arr">Arrive<b>18:47</b></div>
-        <div class="rsp-radio"></div>
-      </div>
+    <button class="pd-sq" aria-label="Add as stop">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>Add stop
     </button>
-
-    <button class="rsp-route" role="radio" aria-checked="false">
-      <div class="rsp-top">
-        <div class="rsp-time">31<small>min</small></div>
-        <span class="rsp-diff">+7 min</span>
-        <span class="rsp-tag toll">Toll road · €2.40</span>
-      </div>
-      <div class="rsp-meta"><b>23.7 km</b> · via E45 riverside motorway</div>
-      <div class="rsp-traffic"><i class="g" style="flex:7"></i><i class="a" style="flex:.8"></i><i class="g" style="flex:1.5"></i></div>
-      <div class="rsp-side">
-        <div class="rsp-arr">Arrive<b>18:49</b></div>
-        <div class="rsp-radio"></div>
-      </div>
-    </button>
-  </div>
-
-  <!-- Actions -->
-  <div class="rsp-foot">
-    <button class="rsp-opt" aria-label="Route options">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#4A5668" stroke-width="2" stroke-linecap="round"><path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/></svg>
-    </button>
-    <button class="rsp-go">
-      <svg width="22" height="22" viewBox="0 0 24 24"><path d="M12 2 20 21l-8-4-8 4 8-19Z" fill="#fff"/></svg>
-      Start <span>· 24 min</span>
+    <button class="pd-sq" aria-label="Save place">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M6 3h12v18l-6-4-6 4V3z"/></svg>Save
     </button>
   </div>
 </div>

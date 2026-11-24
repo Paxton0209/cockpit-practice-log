@@ -1,0 +1,65 @@
+<div class="trip-bar" role="region" aria-label="Trip summary">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    .trip-bar {
+      --bg: #FFFFFF;
+      --surface: #F3F5F8;
+      --ink: #0F172A;
+      --ink-2: #475569;
+      --ink-3: #94A3B8;
+      --divider: #E2E8F0;
+      --accent: #0E9F6E;
+      --danger: #DC2626;
+      --danger-press: #B91C1C;
+      box-sizing: border-box;
+      width: 480px;
+      height: 64px;
+      padding: 8px 8px 8px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: var(--bg);
+      border-radius: 16px;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, .06), 0 4px 16px rgba(15, 23, 42, .08);
+      font-family: 'Inter', system-ui, sans-serif;
+      font-feature-settings: 'tnum' 1, 'cv11' 1;
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+    .trip-bar *, .trip-bar *::before, .trip-bar *::after { box-sizing: inherit; }
+    .trip-bar .stats { flex: 1; display: flex; align-items: center; min-width: 0; }
+    .trip-bar .stat { display: flex; flex-direction: column; justify-content: center; gap: 2px; min-width: 0; }
+    .trip-bar .value { display: flex; align-items: baseline; gap: 3px; line-height: 1; white-space: nowrap; }
+    .trip-bar .num { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; }
+    .trip-bar .unit { font-size: 14px; font-weight: 600; color: var(--ink-2); }
+    .trip-bar .label { font-size: 11px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--ink-3); line-height: 1; }
+    .trip-bar .stat.time .num { color: var(--accent); }
+    .trip-bar .stat.time .unit { color: var(--accent); }
+    .trip-bar .sep { width: 1px; height: 32px; background: var(--divider); margin: 0 18px; flex: none; }
+    .trip-bar .end { flex: none; height: 48px; min-width: 104px; padding: 0 18px 0 14px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 12px; background: #FEE2E2; color: var(--danger); font: 600 16px/1 'Inter', system-ui, sans-serif; cursor: pointer; transition: background-color .15s ease, color .15s ease, transform .1s ease; }
+    .trip-bar .end svg { width: 20px; height: 20px; flex: none; }
+    .trip-bar .end:hover { background: var(--danger); color: #fff; }
+    .trip-bar .end:active { background: var(--danger-press); color: #fff; transform: scale(.97); }
+    .trip-bar .end:focus-visible { outline: 3px solid rgba(220, 38, 38, .35); outline-offset: 2px; }
+  </style>
+  <div class="stats">
+    <div class="stat time">
+      <div class="value"><span class="num">18</span><span class="unit">min</span></div>
+      <span class="label">Remaining</span>
+    </div>
+    <div class="sep" aria-hidden="true"></div>
+    <div class="stat">
+      <div class="value"><span class="num">12.4</span><span class="unit">km</span></div>
+      <span class="label">Distance</span>
+    </div>
+    <div class="sep" aria-hidden="true"></div>
+    <div class="stat">
+      <div class="value"><span class="num">14:32</span></div>
+      <span class="label">Arrival</span>
+    </div>
+  </div>
+  <button class="end" type="button" aria-label="End navigation">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    End
+  </button>
+</div>
