@@ -1,0 +1,42 @@
+<div class="nav-result" role="listitem">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    .nav-result{box-sizing:border-box;width:566px;height:116px;display:flex;align-items:center;gap:16px;padding:0 20px 0 24px;background:#FFFFFF;border-radius:20px;box-shadow:0 1px 2px rgba(16,24,40,.06),0 4px 16px rgba(16,24,40,.06);font-family:'Inter',system-ui,sans-serif;color:#0F172A;-webkit-font-smoothing:antialiased}
+    .nav-result *{box-sizing:border-box;margin:0}
+    .nav-result .nr-index{flex:none;width:36px;height:36px;border-radius:50%;background:#EEF2F7;color:#334155;font-size:18px;font-weight:600;display:flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
+    .nav-result .nr-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+    .nav-result .nr-name{font-size:26px;line-height:32px;font-weight:600;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav-result .nr-meta{font-size:17px;line-height:22px;color:#64748B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .nav-result .nr-dist{color:#0F172A;font-weight:600;font-variant-numeric:tabular-nums}
+    .nav-result .nr-sep{margin:0 6px;color:#CBD5E1}
+    .nav-result .nr-actions{flex:none;display:flex;gap:12px}
+    .nav-result button{font:inherit;border:0;cursor:pointer;height:72px;border-radius:18px;display:flex;align-items:center;justify-content:center;transition:transform .1s ease,background-color .15s ease}
+    .nav-result button:active{transform:scale(.96)}
+    .nav-result button:focus-visible{outline:3px solid #93C5FD;outline-offset:2px}
+    .nav-result .nr-stop{width:72px;background:#F1F5F9;color:#1E293B}
+    .nav-result .nr-stop:active{background:#E2E8F0}
+    .nav-result .nr-go{width:112px;gap:8px;background:#2563EB;color:#FFFFFF;font-size:20px;font-weight:600}
+    .nav-result .nr-go:active{background:#1D4ED8}
+    .nav-result svg{display:block}
+  </style>
+  <div class="nr-index" aria-label="Result 1">1</div>
+  <div class="nr-text">
+    <p class="nr-name">Robo Base</p>
+    <p class="nr-meta"><span class="nr-dist">3.3 km</span><span class="nr-sep" aria-hidden="true">•</span>Yecheng Rd, Jiading</p>
+  </div>
+  <div class="nr-actions">
+    <button class="nr-stop" type="button" aria-label="Add Robo Base as a stop">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 1.1-.27 2.2-.7 3.2"/>
+        <path d="M18 15v6M15 18h6"/>
+        <circle cx="12" cy="10" r="2.2"/>
+      </svg>
+    </button>
+    <button class="nr-go" type="button" aria-label="Go to Robo Base">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M3.4 10.6 19.6 3.3c.8-.4 1.6.4 1.2 1.2l-7.3 16.2c-.4.9-1.7.8-1.9-.2l-1.4-5.4a1 1 0 0 0-.7-.7l-5.4-1.4c-1-.2-1.1-1.5-.2-1.9Z"/>
+      </svg>
+      Go
+    </button>
+  </div>
+</div>

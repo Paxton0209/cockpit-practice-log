@@ -1,0 +1,151 @@
+<div class="nav-kb" role="group" aria-label="Search keyboard">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+    .nav-kb {
+      --bg: #E8EBF0;
+      --key: #FFFFFF;
+      --key-ink: #1B1F26;
+      --fn: #D3D8E0;
+      --fn-ink: #2A303A;
+      --accent: #1A66E0;
+      --accent-ink: #FFFFFF;
+      --gap: 10px;
+
+      box-sizing: border-box;
+      width: 1180px;
+      height: 432px;
+      padding: 18px 16px;
+      background: var(--bg);
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+      display: grid;
+      grid-template-columns: repeat(20, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      gap: 12px var(--gap);
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .nav-kb *, .nav-kb *::before, .nav-kb *::after { box-sizing: border-box; }
+
+    .nav-kb .k {
+      grid-column: span 2;
+      appearance: none;
+      border: 0;
+      margin: 0;
+      padding: 0;
+      border-radius: 12px;
+      background: var(--key);
+      color: var(--key-ink);
+      font: 500 30px/1 'Inter', system-ui, sans-serif;
+      letter-spacing: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 1px 0 rgba(16, 24, 40, 0.14), 0 1px 3px rgba(16, 24, 40, 0.06);
+      cursor: pointer;
+      transition: background-color 80ms ease, transform 80ms ease, box-shadow 80ms ease;
+    }
+    .nav-kb .k:active {
+      background: #C9CFD9;
+      transform: translateY(1px);
+      box-shadow: 0 0 0 rgba(16, 24, 40, 0);
+    }
+    .nav-kb .k:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px;
+    }
+
+    /* Row 2 starts half a key in */
+    .nav-kb .indent { grid-column: 2 / span 2; }
+
+    .nav-kb .fn {
+      background: var(--fn);
+      color: var(--fn-ink);
+      font-size: 24px;
+      font-weight: 500;
+    }
+    .nav-kb .fn:active { background: #BCC3CE; }
+
+    .nav-kb .w3 { grid-column: span 3; }
+    .nav-kb .w5 { grid-column: span 5; }
+    .nav-kb .w8 { grid-column: span 8; }
+
+    .nav-kb .punct { font-size: 34px; font-weight: 500; padding-bottom: 8px; }
+
+    .nav-kb .space {
+      font-size: 22px;
+      font-weight: 400;
+      color: #6B7380;
+    }
+
+    .nav-kb .search {
+      background: var(--accent);
+      color: var(--accent-ink);
+      font-size: 24px;
+      font-weight: 600;
+      box-shadow: 0 1px 0 rgba(10, 50, 120, 0.35), 0 2px 6px rgba(26, 102, 224, 0.25);
+    }
+    .nav-kb .search:active { background: #1554BC; }
+
+    .nav-kb svg {
+      width: 30px;
+      height: 30px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex: none;
+    }
+  </style>
+
+  <!-- Row 1 -->
+  <button class="k" type="button">Q</button>
+  <button class="k" type="button">W</button>
+  <button class="k" type="button">E</button>
+  <button class="k" type="button">R</button>
+  <button class="k" type="button">T</button>
+  <button class="k" type="button">Y</button>
+  <button class="k" type="button">U</button>
+  <button class="k" type="button">I</button>
+  <button class="k" type="button">O</button>
+  <button class="k" type="button">P</button>
+
+  <!-- Row 2 -->
+  <button class="k indent" type="button">A</button>
+  <button class="k" type="button">S</button>
+  <button class="k" type="button">D</button>
+  <button class="k" type="button">F</button>
+  <button class="k" type="button">G</button>
+  <button class="k" type="button">H</button>
+  <button class="k" type="button">J</button>
+  <button class="k" type="button">K</button>
+  <button class="k" type="button">L</button>
+
+  <!-- Row 3 -->
+  <button class="k fn w3" type="button" aria-label="Shift" style="grid-column: 1 / span 3;">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 3.5 12.5H8v7.5h8v-7.5h4.5Z"/></svg>
+  </button>
+  <button class="k" type="button">Z</button>
+  <button class="k" type="button">X</button>
+  <button class="k" type="button">C</button>
+  <button class="k" type="button">V</button>
+  <button class="k" type="button">B</button>
+  <button class="k" type="button">N</button>
+  <button class="k" type="button">M</button>
+  <button class="k fn w3" type="button" aria-label="Delete">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 5H9l-6.5 7L9 19h12a1 1 0 0 0 1-1V6a1 1 0 0 0-1-1Z"/><path d="m12.5 9.5 5 5m0-5-5 5"/></svg>
+  </button>
+
+  <!-- Row 4 -->
+  <button class="k fn w3" type="button" aria-label="Numbers and symbols">123</button>
+  <button class="k fn punct" type="button" aria-label="Comma">,</button>
+  <button class="k w8 space" type="button" aria-label="Space">Space</button>
+  <button class="k fn punct" type="button" aria-label="Full stop">.</button>
+  <button class="k w5 search" type="button">
+    <svg viewBox="0 0 24 24" aria-hidden="true" style="stroke-width:2.4"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></svg>
+    Search
+  </button>
+</div>

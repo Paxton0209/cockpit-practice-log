@@ -1,0 +1,107 @@
+<div class="trip-delete-dialog" role="alertdialog" aria-modal="true" aria-labelledby="tdd-title" aria-describedby="tdd-desc">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    .trip-delete-dialog {
+      --surface: #FFFFFF;
+      --text-strong: #111418;
+      --text-body: #3D4450;
+      --neutral: #EDEFF2;
+      --neutral-pressed: #DDE1E6;
+      --danger: #C62828;
+      --danger-pressed: #A61F1F;
+      --focus: #1A5FD6;
+
+      box-sizing: border-box;
+      width: 672px;
+      height: 324px;
+      padding: 36px 36px 32px;
+      display: flex;
+      flex-direction: column;
+      background: var(--surface);
+      border-radius: 28px;
+      box-shadow:
+        0 1px 2px rgba(17, 20, 24, 0.06),
+        0 16px 48px rgba(17, 20, 24, 0.18);
+      font-family: 'Inter', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      color: var(--text-strong);
+    }
+
+    .trip-delete-dialog *,
+    .trip-delete-dialog *::before,
+    .trip-delete-dialog *::after { box-sizing: border-box; }
+
+    .trip-delete-dialog h2 {
+      margin: 0;
+      font-size: 32px;
+      line-height: 40px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-strong);
+    }
+
+    .trip-delete-dialog p {
+      margin: 12px 0 0;
+      max-width: 580px;
+      font-size: 22px;
+      line-height: 31px;
+      font-weight: 400;
+      letter-spacing: -0.005em;
+      color: var(--text-body);
+    }
+
+    .trip-delete-dialog .actions {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .trip-delete-dialog button {
+      height: 76px;
+      border: 0;
+      border-radius: 18px;
+      font-family: inherit;
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      cursor: pointer;
+      transition: background-color 120ms ease, transform 120ms ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .trip-delete-dialog button:active { transform: scale(0.98); }
+
+    .trip-delete-dialog button:focus-visible {
+      outline: 4px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    .trip-delete-dialog .cancel {
+      background: var(--neutral);
+      color: var(--text-strong);
+    }
+    .trip-delete-dialog .cancel:active { background: var(--neutral-pressed); }
+
+    .trip-delete-dialog .delete {
+      background: var(--danger);
+      color: #FFFFFF;
+    }
+    .trip-delete-dialog .delete:active { background: var(--danger-pressed); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .trip-delete-dialog button { transition: none; }
+      .trip-delete-dialog button:active { transform: none; }
+    }
+  </style>
+
+  <h2 id="tdd-title">Delete this trip?</h2>
+  <p id="tdd-desc">The trip and its charging stops will be removed. This can’t be undone.</p>
+
+  <div class="actions">
+    <button type="button" class="cancel" autofocus>Cancel</button>
+    <button type="button" class="delete">Delete</button>
+  </div>
+</div>
