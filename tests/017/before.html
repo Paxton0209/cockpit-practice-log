@@ -1,0 +1,80 @@
+<div class="takeover-alert" role="alert" aria-atomic="true" lang="en">
+  <style>
+    .takeover-alert {
+      box-sizing: border-box;
+      position: relative;
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      align-items: center;
+      gap: 24px;
+      width: 560px;
+      height: 240px;
+      padding: 30px;
+      overflow: hidden;
+      border: 1px solid #e9c5c0;
+      border-radius: 16px;
+      background: #fff9f7;
+      color: #251816;
+      font-family: Inter, system-ui, sans-serif;
+    }
+
+    .takeover-alert::before {
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 6px;
+      background: #b42318;
+      content: "";
+    }
+
+    .takeover-alert .takeover-icon {
+      display: grid;
+      place-items: center;
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: #fbe2de;
+      color: #9c2018;
+    }
+
+    .takeover-alert .takeover-context {
+      margin: 0 0 8px;
+      color: #90251d;
+      font-size: 15px;
+      font-weight: 750;
+      line-height: 20px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .takeover-alert .takeover-title {
+      margin: 0;
+      font-size: 40px;
+      font-weight: 800;
+      line-height: 44px;
+      letter-spacing: -0.035em;
+    }
+
+    .takeover-alert .takeover-instruction {
+      margin: 12px 0 0;
+      color: #594440;
+      font-size: 21px;
+      font-weight: 550;
+      line-height: 28px;
+    }
+  </style>
+
+  <span class="takeover-icon" aria-hidden="true">
+    <svg width="56" height="56" viewBox="0 0 56 56" fill="none" stroke="currentColor"
+      stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" focusable="false">
+      <circle cx="28" cy="28" r="22" />
+      <circle cx="28" cy="28" r="5" />
+      <path d="M7 22h42M24 31l-8 15m16-15 8 15" />
+    </svg>
+  </span>
+
+  <div>
+    <p class="takeover-context">Assisted driving</p>
+    <h2 class="takeover-title">Take control now</h2>
+    <p class="takeover-instruction">Grip the wheel and steer.</p>
+  </div>
+</div>
