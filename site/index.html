@@ -288,7 +288,9 @@ body.dim .shell{filter:blur(4px)}
 .cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
 .cstage.scan .cs{opacity:1!important;transform:none!important;filter:none!important}
-.scanln{position:absolute;top:0;bottom:0;left:0;width:2px;margin-left:-1px;z-index:3;pointer-events:none;opacity:0;border-radius:1px;background:linear-gradient(transparent,var(--ink) 18%,var(--ink) 82%,transparent);box-shadow:0 0 16px 3px color-mix(in srgb,var(--ink) 18%,transparent)}
+.scanln{--c:var(--good);position:absolute;left:0;width:2px;margin-left:-1px;z-index:3;pointer-events:none;opacity:0;border-radius:1px;background:linear-gradient(transparent,var(--c) 15%,var(--c) 85%,transparent);box-shadow:0 0 14px 2px color-mix(in srgb,var(--c) 35%,transparent)}
+.scanln[data-k=a]::before{content:"";position:absolute;top:0;bottom:0;right:2px;width:80px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--c) 16%,transparent));-webkit-mask:linear-gradient(transparent,#000 15%,#000 85%,transparent);mask:linear-gradient(transparent,#000 15%,#000 85%,transparent)}
+.scanln[data-k=b]{--c:var(--bad);box-shadow:none;opacity:0}
 .cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;transform:scale(.97);filter:blur(6px);pointer-events:none}
 .cstage.q .cs{transition:none}
 
@@ -763,14 +765,19 @@ function scan(st,to){
   if(st._scan)st._scan.forEach(a=>a.cancel());
   const inc=$('.cs.'+to,st),out=$('.cs.'+(to==='a'?'b':'a'),st),fwd=to==='a';
   let ln=$('.scanln',st);if(!ln){ln=document.createElement('i');ln.className='scanln';st.appendChild(ln)}
+  const S=st.getBoundingClientRect(),W=S.width,rs=[inc,out].map(c=>{const k=$('.kp',c);return (k.firstElementChild||k).getBoundingClientRect()}),
+    L=Math.max(0,Math.min(...rs.map(r=>r.left))-S.left-24),R=Math.min(W,Math.max(...rs.map(r=>r.right))-S.left+24),
+    T=Math.max(0,Math.min(...rs.map(r=>r.top))-S.top-12),B=Math.min(S.height,Math.max(...rs.map(r=>r.bottom))-S.top+12);
+  ln.dataset.k=to;ln.style.top=T+'px';ln.style.height=(B-T)+'px';
   $$('.cs',st).forEach(c=>c.style.zIndex='');inc.style.zIndex=2;
   st.classList.add('q','scan');st.dataset.v=to;st.offsetWidth;
-  const o={duration:620,easing:'cubic-bezier(.65,0,.35,1)'};
-  const a1=inc.animate([{clipPath:fwd?'inset(0 100% 0 0)':'inset(0 0 0 100%)'},{clipPath:'inset(0 0 0 0)'}],o);
-  const a2=ln.animate([{left:fwd?'0%':'100%',opacity:0},{opacity:1,offset:.1},{opacity:1,offset:.9},{left:fwd?'100%':'0%',opacity:0}],o);
-  const a3=out.animate([{clipPath:'inset(0 0 0 0)'},{clipPath:fwd?'inset(0 0 0 100%)':'inset(0 100% 0 0)'}],o);
+  const o=fwd?{duration:640,easing:'cubic-bezier(.65,0,.35,1)'}:{duration:460,easing:'cubic-bezier(.4,0,.6,1)'};
+  const x0=fwd?L:R,x1=fwd?R:L,cut=x=>[`inset(0 ${W-x}px 0 0)`,`inset(0 0 0 ${x}px)`];
+  const a1=inc.animate([{clipPath:fwd?cut(x0)[0]:cut(x0)[1]},{clipPath:fwd?cut(x1)[0]:cut(x1)[1]}],{...o,fill:'forwards'});
+  const a3=out.animate([{clipPath:fwd?cut(x0)[1]:cut(x0)[0]},{clipPath:fwd?cut(x1)[1]:cut(x1)[0]}],{...o,fill:'forwards'});
+  const a2=ln.animate([{left:x0+'px',opacity:0},{opacity:1,offset:.12},{opacity:1,offset:.88},{left:x1+'px',opacity:0}],o);
   st._scan=[a1,a2,a3];
-  a1.onfinish=()=>{st.classList.remove('scan');inc.style.zIndex='';st.offsetWidth;st.classList.remove('q');st._scan=null};
+  a1.onfinish=()=>{st.classList.remove('scan');inc.style.zIndex='';a1.cancel();a3.cancel();st.offsetWidth;st.classList.remove('q');st._scan=null};
 }
 
 const COPY_TIMING={out:100,in:120,labelDelay:40,tickDelay:80,tick:180,hold:1000,returnOut:100,returnIn:180};
