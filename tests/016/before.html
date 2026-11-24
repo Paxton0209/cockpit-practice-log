@@ -1,163 +1,66 @@
-<div class="vehicle-access" lang="en">
+<div class="aus-card">
   <style>
-    .vehicle-access {
-      box-sizing: border-box;
-      width: 772px;
-      height: 200px;
-      padding: 19px 20px 20px;
-      border: 1px solid #dce2e8;
-      border-radius: 20px;
-      background: #f5f7fa;
-      color: #19232e;
-      font-family: Inter, sans-serif;
-    }
-
-    .vehicle-access *,
-    .vehicle-access *::before,
-    .vehicle-access *::after {
-      box-sizing: border-box;
-    }
-
-    .vehicle-access h2 {
-      margin: 0 0 13px;
-      font-size: 20px;
-      font-weight: 650;
-      line-height: 24px;
-      letter-spacing: -.45px;
-    }
-
-    .vehicle-access .access-controls {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .vehicle-access .access-button {
-      display: grid;
-      grid-template-columns: 44px 1fr 33px;
-      align-items: center;
-      gap: 12px;
-      height: 122px;
-      padding: 16px;
-      border: 1px solid #dde3e9;
-      border-radius: 14px;
-      background: #fff;
-      box-shadow: 0 2px 3px #19232e08;
-      color: inherit;
-      font: inherit;
-      text-align: left;
-      cursor: pointer;
-      transition: background-color 140ms, border-color 140ms;
-    }
-
-    .vehicle-access .access-button:hover {
-      border-color: #a4c1fb;
-      background: #f9fbff;
-    }
-
-    .vehicle-access .access-button:active {
-      background: #e8efff;
-    }
-
-    .vehicle-access .access-button:focus-visible {
-      outline: 3px solid #215aca;
-      outline-offset: 2px;
-    }
-
-    .vehicle-access .access-icon {
-      display: grid;
-      width: 44px;
-      height: 44px;
-      place-items: center;
-      border-radius: 11px;
-      background: #eaf1fe;
-      color: #214e9e;
-    }
-
-    .vehicle-access .access-icon svg {
-      width: 28px;
-      height: 28px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.5;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .vehicle-access .access-label,
-    .vehicle-access .access-action {
-      display: block;
-      white-space: nowrap;
-    }
-
-    .vehicle-access .access-label {
-      font-size: 15px;
-      font-weight: 650;
-      line-height: 20px;
-    }
-
-    .vehicle-access .access-action {
-      margin-top: 3px;
-      color: #4e5e70;
-      font-size: 13px;
-      line-height: 18px;
-    }
-
-    .vehicle-access .access-arrow {
-      display: grid;
-      width: 33px;
-      height: 33px;
-      place-items: center;
-      border: 1px solid #e1e7ee;
-      border-radius: 50%;
-      color: #334960;
-      font-size: 17px;
-      line-height: 1;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .vehicle-access .access-button {
-        transition: none;
-      }
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+    .aus-card{width:772px;height:216px;box-sizing:border-box;padding:12px 28px;background:#FFFFFF;border:1px solid #E4E7EC;border-radius:24px;box-shadow:0 1px 2px rgba(16,24,40,.04),0 8px 24px rgba(16,24,40,.06);font-family:'Inter',system-ui,sans-serif;color:#101828;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+    .aus-card *{box-sizing:border-box}
+    .aus-row{display:flex;align-items:center;gap:20px;flex:1}
+    .aus-row.top{flex:0 0 112px}
+    .aus-icon{flex:0 0 52px;height:52px;border-radius:16px;display:grid;place-items:center}
+    .aus-icon.blue{background:#EAF2FF;color:#1F6FEB}
+    .aus-icon.gray{background:#F2F4F7;color:#475467}
+    .aus-text{flex:1;min-width:0}
+    .aus-title{font-size:20px;font-weight:600;line-height:28px;letter-spacing:-.01em;margin:0}
+    .aus-sub{font-size:15px;line-height:22px;color:#667085;margin:2px 0 0}
+    .aus-status{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;color:#067647;margin-top:6px}
+    .aus-status i{width:8px;height:8px;border-radius:50%;background:#17B26A;display:inline-block}
+    .aus-divider{height:1px;background:#EAECF0;margin-left:72px}
+    /* switch */
+    .aus-switch{position:relative;flex:0 0 72px;height:40px;cursor:pointer}
+    .aus-switch input{position:absolute;opacity:0;width:100%;height:100%;margin:0;cursor:pointer;z-index:1}
+    .aus-track{position:absolute;inset:0;border-radius:999px;background:#D0D5DD;transition:background .2s ease}
+    .aus-thumb{position:absolute;top:4px;left:4px;width:32px;height:32px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(16,24,40,.2),0 1px 2px rgba(16,24,40,.08);transition:transform .22s cubic-bezier(.3,.7,.4,1)}
+    .aus-switch input:checked ~ .aus-track{background:#1F6FEB}
+    .aus-switch input:checked ~ .aus-thumb{transform:translateX(32px)}
+    .aus-switch input:focus-visible ~ .aus-track{outline:3px solid #B2CCFF;outline-offset:2px}
+    /* link row */
+    .aus-link{text-decoration:none;color:inherit;border-radius:16px;margin:4px -12px 0;padding:0 12px;transition:background .15s ease}
+    .aus-link:hover{background:#F9FAFB}
+    .aus-link:active{background:#F2F4F7}
+    .aus-link .aus-title{font-size:18px;font-weight:500}
+    .aus-link .aus-sub{font-size:14px;margin-top:0}
+    .aus-chev{color:#98A2B3;display:flex;align-items:center;gap:6px;font-size:15px;font-weight:500}
+    .aus-chev span{color:#1F6FEB}
   </style>
 
-  <h2>Vehicle access</h2>
-
-  <div class="access-controls" role="group" aria-label="Vehicle access controls">
-    <button class="access-button" type="button" aria-label="Open frunk" data-action="open-frunk">
-      <span class="access-icon" aria-hidden="true">
-        <svg viewBox="0 0 28 28">
-          <path d="m9 16-1.7-5.1L3 8m6 8 2.6-4.5a2 2 0 0 1 1.7-1h5.5a2 2 0 0 1 1.7 1l2.7 4.5 1.8 1.5V21H3v-2.5l2-1.5L9 16Zm0 0h14.2"/>
-          <circle cx="8" cy="21" r="2.25" fill="#eaf1fe"/>
-          <circle cx="21" cy="21" r="2.25" fill="#eaf1fe"/>
-        </svg>
-      </span>
-      <span><span class="access-label">Frunk</span><span class="access-action">Open</span></span>
-      <span class="access-arrow" aria-hidden="true">↗</span>
-    </button>
-
-    <button class="access-button" type="button" aria-label="Open trunk" data-action="open-trunk">
-      <span class="access-icon" aria-hidden="true">
-        <svg viewBox="0 0 28 28">
-          <path d="m19 16 1.7-5.1L25 8m-6 8-2.6-4.5a2 2 0 0 0-1.7-1H9.2a2 2 0 0 0-1.7 1L4.8 16 3 17.5V21h22v-2.5L23 17l-4-1Zm0 0H4.8"/>
-          <circle cx="7" cy="21" r="2.25" fill="#eaf1fe"/>
-          <circle cx="20" cy="21" r="2.25" fill="#eaf1fe"/>
-        </svg>
-      </span>
-      <span><span class="access-label">Trunk</span><span class="access-action">Open</span></span>
-      <span class="access-arrow" aria-hidden="true">↗</span>
-    </button>
-
-    <button class="access-button" type="button" aria-label="Open charge port" data-action="open-charge-port">
-      <span class="access-icon" aria-hidden="true">
-        <svg viewBox="0 0 28 28">
-          <rect x="4.5" y="6.5" width="19" height="15" rx="4"/>
-          <path d="m15.5 9.5-4.3 5h5.6l-4.3 4.2"/>
-        </svg>
-      </span>
-      <span><span class="access-label">Charge port</span><span class="access-action">Open</span></span>
-      <span class="access-arrow" aria-hidden="true">↗</span>
-    </button>
+  <div class="aus-row top">
+    <div class="aus-icon blue">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.64-6.36"/><path d="M21 4v5h-5"/><path d="M12 8v5l3 2"/></svg>
+    </div>
+    <div class="aus-text">
+      <p class="aus-title">Automatic app updates</p>
+      <p class="aus-sub">Download over Wi‑Fi and install only while the vehicle is parked.</p>
+      <span class="aus-status"><i></i>Up to date · Version 4.2.1</span>
+    </div>
+    <label class="aus-switch" aria-label="Automatic app updates">
+      <input type="checkbox" role="switch" checked>
+      <span class="aus-track"></span>
+      <span class="aus-thumb"></span>
+    </label>
   </div>
+
+  <div class="aus-divider"></div>
+
+  <a class="aus-row aus-link" href="#">
+    <div class="aus-icon gray">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5"/><path d="M9 13h6M9 17h4"/></svg>
+    </div>
+    <div class="aus-text">
+      <p class="aus-title">User agreements</p>
+      <p class="aus-sub">Terms of service, privacy notice and software licenses</p>
+    </div>
+    <div class="aus-chev">
+      <span>View</span>
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+    </div>
+  </a>
 </div>

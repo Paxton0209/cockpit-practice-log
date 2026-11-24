@@ -1,9 +1,11 @@
 # 015 · Before
 
-`before.html` is the first answer from a fresh Codex CLI session using `gpt-6.2-sol`. The ask and output note below were the only user input. The session made no tool calls.
+`before.html` is the first answer from a fresh Claude Opus 5.5 subagent (Claude app) with no prior context, told not to use tools (it made no tool calls), to this one line plus the output note:
 
-> Design a search suggestions list for a car navigation screen, under a search bar, 560 × 316 px, light theme.
+> Design an installed apps list for a car settings screen with Phone, Maps, Task master and FM, each with open and uninstall actions, 772 × 499 px, light theme.
 >
-> Output: reply with one self-contained HTML snippet — a single root `<div>` with its own `<style>` inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
+> Output: reply with one self-contained HTML snippet — a single root <div> with its own <style> inside — in one code block, and nothing else. Do not use any tools. Use the Inter font.
 
-The HTML inside the original code block is kept as returned.
+Kept as returned. On the site the Google Fonts @import is dropped (the page already loads Inter); its classes are already prefixed, so nothing else changed.
+
+The After is built 1:1 from the Figma file (UI/UX Library · Examples · “Dashnote · App & device management” for 015–017, `System Settings / Update dialog` for 019), light and dark variables. Its prompt has not been run through fresh sessions yet.
