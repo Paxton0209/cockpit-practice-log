@@ -289,7 +289,7 @@ body.dim .shell{filter:blur(4px)}
 .cstage .cs.b{position:absolute;inset:0}
 .cstage.scan .cs{opacity:1!important;transform:none!important;filter:none!important}
 .scanwrap{position:absolute;z-index:3;pointer-events:none;overflow:hidden;border-radius:16px;corner-shape:superellipse(1.6)}
-.scanln{position:absolute;top:0;bottom:0;left:0;width:1.5px;margin-left:-.75px;background:var(--ink);opacity:.55;box-shadow:0 0 12px 2px color-mix(in srgb,var(--ink) 14%,transparent)}
+.scanln{position:absolute;top:0;bottom:0;left:0;width:1.5px;margin-left:-.75px;background:var(--ink);opacity:0;box-shadow:0 0 12px 2px color-mix(in srgb,var(--ink) 14%,transparent)}
 .cstage.fade .cs{transition:opacity .22s ease-out!important;transform:none!important;filter:none!important}
 .cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;transform:scale(.97);filter:blur(6px);pointer-events:none}
 .cstage.q .cs{transition:none}
@@ -779,7 +779,7 @@ function scan(st,to){
     m(inc,1);m(out,0);const kf=[{maskPosition:`${x0-F/2-2*W}px 0`,webkitMaskPosition:`${x0-F/2-2*W}px 0`},{maskPosition:`${x1+F/2-2*W}px 0`,webkitMaskPosition:`${x1+F/2-2*W}px 0`}];
     a1=inc.animate(kf,{...o,fill:'forwards'});a3=out.animate(kf,{...o,fill:'forwards'})}
   else{a1=inc.animate([{clipPath:cut(x0)[1]},{clipPath:cut(x1)[1]}],{...o,fill:'forwards'});a3=out.animate([{clipPath:cut(x0)[0]},{clipPath:cut(x1)[0]}],{...o,fill:'forwards'})}
-  const a2=ln.animate([{left:(x0-PL)+'px'},{left:(x1-PL)+'px'}],o);
+  const a2=ln.animate([{left:(x0-PL)+'px',opacity:.55},{left:(x1-PL)+'px',opacity:.55}],o);
   st._scan=[a1,a2,a3];
   a1.onfinish=()=>{st.classList.remove('scan');inc.style.zIndex='';a1.cancel();a3.cancel();[inc,out].forEach(c=>['webkitMaskImage','maskImage','webkitMaskSize','maskSize','webkitMaskRepeat','maskRepeat'].forEach(k=>c.style[k]=''));st.offsetWidth;st.classList.remove('q');st._scan=null};
 }
