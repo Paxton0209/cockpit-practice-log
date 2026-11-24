@@ -10,7 +10,7 @@ Each Before is the first answer from a clean, tool-less session to an ask that f
 
 **Changes**
 - Cards use 24 px top and bottom padding (the library `list-card` too), so the outer edge matches the row rhythm.
-- Cover palettes: one family of neighbouring hues per context, each in its own part of the wheel (navigation sky–teal, climate mint–sage, vehicle honey–sand, media coral–rose, information periwinkle–lilac). See `docs/08-cover-backgrounds.md`.
+- Cover palettes: one family of neighbouring hues per context, each in its own part of the wheel (navigation sky–teal, climate mint–sage, vehicle light grey, media coral–rose, information periwinkle–lilac). See `docs/08-cover-backgrounds.md`.
 - 001 shows only the turn-by-turn panel; the trip summary bar and its prompt lines are gone.
 - Devices is parked (Before kept in `tests/_parked/devices/`) while the selected style is decided. The earlier 015–024 plan is archived in `tests/_archive-plan-015-024/`.
 
