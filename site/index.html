@@ -287,6 +287,8 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 body.dim .shell{filter:blur(4px)}
 .cstage .cs{transition:opacity .42s cubic-bezier(.2,0,0,1),transform .5s cubic-bezier(.2,0,0,1),filter .42s cubic-bezier(.2,0,0,1);will-change:opacity,transform}
 .cstage .cs.b{position:absolute;inset:0}
+.cstage.scan .cs{opacity:1!important;transform:none!important;filter:none!important}
+.scanln{position:absolute;top:0;bottom:0;left:0;width:2px;margin-left:-1px;z-index:3;pointer-events:none;opacity:0;border-radius:1px;background:linear-gradient(transparent,var(--ink) 18%,var(--ink) 82%,transparent);box-shadow:0 0 16px 3px color-mix(in srgb,var(--ink) 18%,transparent)}
 .cstage[data-v=a] .cs.b,.cstage[data-v=b] .cs.a{opacity:0;transform:scale(.97);filter:blur(6px);pointer-events:none}
 .cstage.q .cs{transition:none}
 
@@ -752,8 +754,23 @@ function sheetHTML(n){
   </div>`}
 function morph(st,to,quiet){
   if(st.dataset.v===to)return;
-  if(quiet){st.classList.add('q');st.dataset.v=to;st.offsetWidth;st.classList.remove('q')}else st.dataset.v=to;
   const ar=$('.art');if(ar)ar.dataset.v=to;
+  if(!quiet&&!RM.matches&&st.closest('.hero3'))return scan(st,to);
+  if(st._scan){st._scan.forEach(a=>a.cancel());st._scan=null;st.classList.remove('scan');$$('.cs',st).forEach(c=>c.style.zIndex='')}
+  if(quiet){st.classList.add('q');st.dataset.v=to;st.offsetWidth;st.classList.remove('q')}else st.dataset.v=to;
+}
+function scan(st,to){
+  if(st._scan)st._scan.forEach(a=>a.cancel());
+  const inc=$('.cs.'+to,st),out=$('.cs.'+(to==='a'?'b':'a'),st),fwd=to==='a';
+  let ln=$('.scanln',st);if(!ln){ln=document.createElement('i');ln.className='scanln';st.appendChild(ln)}
+  $$('.cs',st).forEach(c=>c.style.zIndex='');inc.style.zIndex=2;
+  st.classList.add('q','scan');st.dataset.v=to;st.offsetWidth;
+  const o={duration:620,easing:'cubic-bezier(.65,0,.35,1)'};
+  const a1=inc.animate([{clipPath:fwd?'inset(0 100% 0 0)':'inset(0 0 0 100%)'},{clipPath:'inset(0 0 0 0)'}],o);
+  const a2=ln.animate([{left:fwd?'0%':'100%',opacity:0},{opacity:1,offset:.1},{opacity:1,offset:.9},{left:fwd?'100%':'0%',opacity:0}],o);
+  const a3=out.animate([{clipPath:'inset(0 0 0 0)'},{clipPath:fwd?'inset(0 0 0 100%)':'inset(0 100% 0 0)'}],o);
+  st._scan=[a1,a2,a3];
+  a1.onfinish=()=>{st.classList.remove('scan');inc.style.zIndex='';st.offsetWidth;st.classList.remove('q');st._scan=null};
 }
 
 const COPY_TIMING={out:100,in:120,labelDelay:40,tickDelay:80,tick:180,hold:1000,returnOut:100,returnIn:180};
