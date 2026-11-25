@@ -42,13 +42,14 @@
   z-index: -1;
   left: -11px;
   right: -7px;
-  top: 41px;
-  height: 56px;
+  top: 47px;
+  height: 52px;
   filter: blur(20px);
   pointer-events: none;
-  opacity: var(--vo-glow-o, .45);
+  opacity: var(--vo-glow-o, .30);
   transition: opacity .6s ease;
 }
+:root[data-theme=dark] .vo-glow { top: 41px; height: 56px; opacity: var(--vo-glow-o-dark, .45); }
 .vo-glow i {
   position: absolute;
   bottom: 0;
@@ -64,7 +65,7 @@
 .vo-glow i:nth-child(3) { left: 34%;  background-position: 50% 0; }
 .vo-glow i:nth-child(4) { left: 50%;  background-position: 75% 0; }
 .vo-glow i:nth-child(5) { left: 72%;  background-position: 100% 0; }
-.vo-pill[data-kind=user] { --vo-glow-o: .4; --vo-glow: linear-gradient(90deg, rgb(161 181 189 / 0), rgb(170 178 181 / .9) 25%, rgb(139 142 144) 60%, rgb(111 111 113 / .9) 85%, rgb(211 211 214 / 0)); }
+.vo-pill[data-kind=user] { --vo-glow-o: .26; --vo-glow-o-dark: .4; --vo-glow: linear-gradient(90deg, rgb(161 181 189 / 0), rgb(170 178 181 / .9) 25%, rgb(139 142 144) 60%, rgb(111 111 113 / .9) 85%, rgb(211 211 214 / 0)); }
 .vo-pill[data-kind=reply] { --vo-glow: linear-gradient(90deg, rgb(100 210 255 / 0), rgb(100 210 255 / .9) 25%, rgb(10 132 255) 60%, rgb(94 92 230 / .9) 85%, rgb(94 92 230 / 0)); }
 .vo-pill[data-kind=ask] { --vo-glow: linear-gradient(90deg, rgb(123 100 255 / 0), rgb(100 157 255 / .9) 25%, rgb(129 71 238) 60%, rgb(94 92 230 / .9) 85%, rgb(94 92 230 / 0)); }
 .vo-pill[data-kind=thinking] .vo-glow { display: none; }
