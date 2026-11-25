@@ -2181,11 +2181,12 @@ const DATA=[
 ['EU','Energy use'],
 ['VU','User speech'],
 ['VT','Thinking'],
-['VA','Assistant speech']];
+['VA','Assistant speech'],
+['VP','Proactive']];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much'],['Too much','Phone habits'],['Phone habits','Too small']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice',20:'voice'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const ARCHIVED_ENTRIES=new Set([4]);
@@ -2433,7 +2434,7 @@ function copyButton(kind){
     </span>Copy
   </button>`;
 }
-const TESTED={T:97,R:92,P:98,U:99,O:93,L:99,D:93,K:99,S:95,W:92,N:96,J:92,PM:99,DM:98,EU:92,VU:99,VT:95,VA:99};
+const TESTED={T:97,R:92,P:98,U:99,O:93,L:99,D:93,K:99,S:95,W:92,N:96,J:92,PM:99,DM:98,EU:92,VU:99,VT:95,VA:99,VP:99};
 function sheetHTML(n){
   const e=ENTRIES[n-1],C=CMP[e.s],afterOnly=C.afterOnly;
   const [p0,p1]=C.prompt?[C.ask||'',C.prompt]:prompts(e);

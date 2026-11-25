@@ -1,6 +1,7 @@
 /* 017–019 Voice: user speech, thinking, assistant speech.
    Pixel values from Figma UI/UX Library › Examples › voice / user-speech, voice / thinking, voice / assistant-speech. */
 .vo-stage { box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: 72px; }
+.vo-stage > .vo-pill { flex: none; }
 .vo-pill {
   --vo-fill: #fff;
   --vo-edge: rgb(29 29 31 / 5%);
@@ -33,7 +34,8 @@
   --vo-shadow: 0 4px 16px rgb(0 0 0 / 32%);
 }
 
-/* ambient glow: an ellipse 41 px down, 18 px wider than the pill, blurred and clipped by it */
+/* ambient glow: an ellipse 41 px down, 18 px wider than the pill, blurred and clipped by it.
+   Built from five overlapping slices of the same gradient so it can rise and fall like a voice level. */
 .vo-glow {
   will-change: transform;
   position: absolute;
@@ -42,48 +44,82 @@
   right: -7px;
   top: 41px;
   height: 56px;
-  border-radius: 50%;
   filter: blur(20px);
   pointer-events: none;
-  background: var(--vo-glow);
-  background-size: 200% 100%;
   opacity: var(--vo-glow-o, .45);
   transition: opacity .6s ease;
 }
-.vo-pill[data-kind=user] { --vo-glow-o: .4; --vo-glow: linear-gradient(90deg, rgb(161 181 189 / 0), rgb(170 178 181 / .9) 12.5%, rgb(139 142 144) 30%, rgb(111 111 113 / .9) 42.5%, rgb(211 211 214 / 0) 50%, rgb(170 178 181 / .9) 62.5%, rgb(139 142 144) 80%, rgb(111 111 113 / .9) 92.5%, rgb(161 181 189 / 0)); }
-.vo-pill[data-kind=reply] { --vo-glow: linear-gradient(90deg, rgb(100 210 255 / 0), rgb(100 210 255 / .9) 12.5%, rgb(10 132 255) 30%, rgb(94 92 230 / .9) 42.5%, rgb(94 92 230 / 0) 50%, rgb(100 210 255 / .9) 62.5%, rgb(10 132 255) 80%, rgb(94 92 230 / .9) 92.5%, rgb(100 210 255 / 0)); }
-.vo-pill[data-kind=ask] { --vo-glow: linear-gradient(90deg, rgb(123 100 255 / 0), rgb(100 157 255 / .9) 12.5%, rgb(129 71 238) 30%, rgb(94 92 230 / .9) 42.5%, rgb(94 92 230 / 0) 50%, rgb(100 157 255 / .9) 62.5%, rgb(129 71 238) 80%, rgb(94 92 230 / .9) 92.5%, rgb(123 100 255 / 0)); }
+.vo-glow i {
+  position: absolute;
+  bottom: 0;
+  width: 32%;
+  height: 100%;
+  border-radius: 50%;
+  background: var(--vo-glow);
+  background-size: 312% 100%;
+  transform-origin: 50% 100%;
+}
+.vo-glow i:nth-child(1) { left: -4%;  background-position: 0% 0; }
+.vo-glow i:nth-child(2) { left: 18%;  background-position: 25% 0; }
+.vo-glow i:nth-child(3) { left: 34%;  background-position: 50% 0; }
+.vo-glow i:nth-child(4) { left: 50%;  background-position: 75% 0; }
+.vo-glow i:nth-child(5) { left: 72%;  background-position: 100% 0; }
+.vo-pill[data-kind=user] { --vo-glow-o: .4; --vo-glow: linear-gradient(90deg, rgb(161 181 189 / 0), rgb(170 178 181 / .9) 25%, rgb(139 142 144) 60%, rgb(111 111 113 / .9) 85%, rgb(211 211 214 / 0)); }
+.vo-pill[data-kind=reply] { --vo-glow: linear-gradient(90deg, rgb(100 210 255 / 0), rgb(100 210 255 / .9) 25%, rgb(10 132 255) 60%, rgb(94 92 230 / .9) 85%, rgb(94 92 230 / 0)); }
+.vo-pill[data-kind=ask] { --vo-glow: linear-gradient(90deg, rgb(123 100 255 / 0), rgb(100 157 255 / .9) 25%, rgb(129 71 238) 60%, rgb(94 92 230 / .9) 85%, rgb(94 92 230 / 0)); }
 .vo-pill[data-kind=thinking] .vo-glow { display: none; }
-/* live: the glow drifts along the pill and breathes */
-.vo-pill[data-live] .vo-glow { animation: vo-drift 5s linear infinite, vo-breathe 2.6s ease-in-out infinite alternate; }
-@keyframes vo-drift { to { background-position: -200% 0; } }
-@keyframes vo-breathe { from { transform: scaleY(.8); } to { transform: scaleY(1.2); } }
+/* live: each slice rises and falls on its own beat, like a waveform under the words */
+.vo-pill[data-live] .vo-glow i { animation: vo-level 1.4s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-glow i:nth-child(1) { animation-duration: 1.10s; animation-delay: -.3s; }
+.vo-pill[data-live] .vo-glow i:nth-child(2) { animation-duration: .82s;  animation-delay: -.6s; }
+.vo-pill[data-live] .vo-glow i:nth-child(3) { animation-duration: 1.30s; animation-delay: -.1s; }
+.vo-pill[data-live] .vo-glow i:nth-child(4) { animation-duration: .94s;  animation-delay: -.8s; }
+.vo-pill[data-live] .vo-glow i:nth-child(5) { animation-duration: 1.18s; animation-delay: -.45s; }
+@keyframes vo-level { 0% { transform: scaleY(.55); } 35% { transform: scaleY(1.25); } 60% { transform: scaleY(.8); } 100% { transform: scaleY(1.45); } }
+/* waiting for an answer (proactive): a slow, even breath instead of speech */
+.vo-pill[data-live][data-kind=ask].is-waiting .vo-glow i { animation: vo-wait 2.8s ease-in-out infinite alternate; }
+@keyframes vo-wait { from { transform: scaleY(.7); } to { transform: scaleY(1.05); } }
 
-/* orb halo (Figma: orb-halo, 96 px, concentric with the orb, 40%, layer blur 20) */
-.vo-halo { will-change: transform; position: absolute; z-index: -2; left: -12px; top: -12px; width: 96px; height: 96px; border-radius: 50%; opacity: .4; filter: blur(10px); pointer-events: none; }
+/* orb halo (Figma: orb-halo, 96 px, concentric with the orb, 16% light / 24% dark, layer blur 36): a faint wash, not a ring */
+.vo-halo { will-change: transform; position: absolute; z-index: -2; left: -12px; top: -12px; width: 96px; height: 96px; border-radius: 50%; opacity: .16; filter: blur(18px); pointer-events: none; }
+:root[data-theme=dark] .vo-halo { opacity: .24; }
 .vo-halo img { width: 100%; height: 100%; display: block; border-radius: 50%; }
-.vo-pill[data-live] .vo-halo img { animation: vo-swirl 7s linear infinite; }
+.vo-pill[data-live] .vo-halo img { animation: vo-swirl 8s linear infinite; }
 
 /* ---------- orb ---------- */
-.vo-orb { position: relative; flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; }
-.vo-orb img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: 50%; }
-.vo-orb img + img { opacity: 0; mix-blend-mode: screen; }
-.vo-pill[data-live] .vo-orb.is-fluid img:first-child { animation: vo-swirl 7s linear infinite; }
-.vo-pill[data-live] .vo-orb.is-fluid img + img { animation: vo-swirl 4.6s linear infinite reverse, vo-pulse 2.3s ease-in-out infinite alternate; }
-.vo-pill[data-kind=thinking][data-live] .vo-orb.is-fluid img:first-child { animation-duration: 2.8s; }
-@keyframes vo-swirl { from { transform: rotate(0) scale(1.12); } 50% { transform: rotate(180deg) scale(1.2); } to { transform: rotate(360deg) scale(1.12); } }
-@keyframes vo-pulse { from { opacity: .2; } to { opacity: .65; } }
+/* clip-path keeps a true circle even while the inner layers move (border-radius + transformed children leaves corners) */
+.vo-orb { position: relative; flex: none; width: 48px; height: 48px; border-radius: 50%; clip-path: circle(24px at 50% 50%); }
+.vo-orb img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+/* the moving layers sit inside the sphere, faded out before its rim, so the original edge stays crisp */
+.vo-orb .vo-flow { position: absolute; inset: 0; -webkit-mask-image: radial-gradient(circle, #000 52%, transparent 70%); mask-image: radial-gradient(circle, #000 52%, transparent 70%); pointer-events: none; }
+.vo-orb .vo-flow img { opacity: 0; mix-blend-mode: screen; }
+.vo-pill[data-live] .vo-orb.is-fluid .vo-flow img { animation: vo-swirl 6s linear infinite, vo-pulse 2.6s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-fluid .vo-flow img + img { animation: vo-swirl 9s linear infinite reverse, vo-pulse 3.4s ease-in-out infinite alternate-reverse; }
+@keyframes vo-swirl { from { transform: rotate(0) scale(1.15); } 50% { transform: rotate(180deg) scale(1.3); } to { transform: rotate(360deg) scale(1.15); } }
+@keyframes vo-pulse { from { opacity: .15; } to { opacity: .6; } }
+
+/* thinking: the grain drifts irregularly inside the sphere instead of spinning */
+.vo-orb.is-thinking .vo-flow img { mix-blend-mode: normal; opacity: .55; }
+.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(1) { animation: vo-grain-a 3.7s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(2) { animation: vo-grain-b 2.9s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(3) { animation: vo-grain-c 4.3s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking > img { animation: vo-grain-base 2.3s ease-in-out infinite alternate; }
+@keyframes vo-grain-a { 0% { transform: translate(-3px, 2px) scale(1.35); opacity: .2; } 30% { transform: translate(4px, -3px) scale(1.5); opacity: .6; } 65% { transform: translate(-2px, -4px) scale(1.4); opacity: .3; } 100% { transform: translate(3px, 4px) scale(1.55); opacity: .55; } }
+@keyframes vo-grain-b { 0% { transform: translate(3px, -2px) scale(1.7) rotate(40deg); opacity: .5; } 40% { transform: translate(-4px, 3px) scale(1.6) rotate(52deg); opacity: .15; } 100% { transform: translate(2px, 5px) scale(1.8) rotate(35deg); opacity: .5; } }
+@keyframes vo-grain-c { 0% { transform: translate(0, 4px) scale(1.2) rotate(-25deg); opacity: .15; } 50% { transform: translate(-5px, -2px) scale(1.3) rotate(-18deg); opacity: .45; } 100% { transform: translate(4px, -3px) scale(1.25) rotate(-30deg); opacity: .25; } }
+@keyframes vo-grain-base { from { opacity: 1; } to { opacity: .7; } }
 /* Figma: thinking art at exposure −1 in light, +0.54 in dark */
 .vo-orb.is-thinking img { filter: brightness(.5); }
 :root[data-theme=dark] .vo-orb.is-thinking img { filter: brightness(1.45); }
 
 /* ---------- words ---------- */
-.vo-text { position: relative; display: block; flex: none; height: 32px; overflow: hidden; white-space: nowrap; transition: width .6s cubic-bezier(.25, .8, .35, 1); }
-.vo-line { position: relative; display: inline-block; white-space: nowrap; transition: transform .6s cubic-bezier(.25, .8, .35, 1), opacity .3s ease; will-change: transform; }
+.vo-text { position: relative; display: block; flex: none; height: 32px; overflow: hidden; white-space: nowrap; }
+.vo-line { position: relative; display: inline-block; white-space: nowrap; will-change: transform, filter; }
 .vo-pill[data-kind=user] .vo-line { opacity: .7; }
-.vo-line b { font-weight: inherit; display: inline-block; animation: vo-word .55s cubic-bezier(.2, .8, .3, 1) both; }
+.vo-line b { font-weight: inherit; display: inline-block; animation: vo-word .9s cubic-bezier(.25, .6, .2, 1) both; }
 /* each word arrives with a short motion blur instead of popping in */
-@keyframes vo-word { from { opacity: 0; filter: blur(8px); transform: translateX(10px); } 60% { filter: blur(1px); } to { opacity: 1; filter: blur(0); transform: none; } }
+/* words condense in place: no horizontal hop, just opacity and a blur that settles */
+@keyframes vo-word { from { opacity: 0; filter: blur(12px); } 40% { opacity: .7; } to { opacity: 1; filter: blur(0); } }
 /* scrolling: the 448 px window fades 10% at both edges, as in the Figma mask */
 .vo-text.is-scroll { -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
 .vo-pill[data-kind=thinking] .vo-line {
@@ -93,9 +129,19 @@
   background-clip: text;
 }
 :root[data-theme=dark] .vo-pill[data-kind=thinking] .vo-line { background-image: linear-gradient(90deg, #c2edff, rgb(100 210 255 / .9) 25%, #50a7ff 60%, rgb(107 105 255 / .9) 78%, #c35ce6); }
-.vo-pill[data-kind=thinking][data-live] .vo-line { background-image: linear-gradient(90deg, #2e9bea, #007aff 30%, #af52de 50%, #007aff 70%, #2e9bea); background-size: 200% 100%; animation: vo-shimmer 2.4s linear infinite; }
-:root[data-theme=dark] .vo-pill[data-kind=thinking][data-live] .vo-line { background-image: linear-gradient(90deg, #c2edff, #50a7ff 30%, #c35ce6 50%, #50a7ff 70%, #c2edff); }
-@keyframes vo-shimmer { to { background-position: -200% 0; } }
+.vo-pill[data-kind=thinking][data-live] .vo-line {
+  background-image:
+    linear-gradient(100deg, transparent 38%, rgb(0 60 255 / .35) 48%, transparent 58%),
+    linear-gradient(90deg, #2e9bea, #00b7ff 18%, #007aff 34%, #6e5bff 52%, #af52de 68%, #ff5fa2 84%, #2e9bea);
+  background-size: 250% 100%, 300% 100%;
+  animation: vo-shimmer 2.6s cubic-bezier(.45, 0, .25, 1) infinite;
+}
+:root[data-theme=dark] .vo-pill[data-kind=thinking][data-live] .vo-line {
+  background-image:
+    linear-gradient(100deg, transparent 35%, rgb(255 255 255 / .95) 48%, transparent 60%),
+    linear-gradient(90deg, #c2edff, #64d2ff 18%, #50a7ff 34%, #8f86ff 52%, #c35ce6 68%, #ff7ab8 84%, #c2edff);
+}
+@keyframes vo-shimmer { from { background-position: 130% 0, 0 0; } to { background-position: -130% 0, -150% 0; } }
 
 /* while the sheet closes, freeze the loops and drop the costly backdrop so the morph stays smooth */
 .sheet2[data-closing] .vo-pill, .sheet2[data-closing] .vo-pill * { animation-play-state: paused !important; }

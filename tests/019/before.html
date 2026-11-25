@@ -5,146 +5,128 @@
 <title>Assistant speech bar</title>
 <style>
   html, body { margin: 0; padding: 0; background: transparent; }
-  body { font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  * { box-sizing: border-box; }
   .bar {
-    position: absolute; left: 0; top: 0;
-    width: 548px; height: 72px; box-sizing: border-box;
-    border-radius: 20px;
-    background: linear-gradient(180deg, #FFFFFF 0%, #F6F8FB 100%);
-    border: 1px solid #E3E8EF;
-    box-shadow: inset 0 1px 0 #FFFFFF;
-    display: flex; align-items: center;
+    position: relative;
+    width: 548px; height: 72px;
+    display: flex; align-items: center; gap: 14px;
     padding: 0 22px 0 14px;
+    border-radius: 22px;
+    background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+    border: 1px solid #e3e8ef;
+    box-shadow: inset 0 1px 0 #ffffff, inset 0 -1px 0 rgba(15,23,42,0.03);
+    font-family: Inter, system-ui, sans-serif;
     overflow: hidden;
   }
-  /* Orb */
-  .orb { position: relative; width: 44px; height: 44px; flex: 0 0 44px; margin-right: 14px; }
-  .orb .core {
-    position: absolute; inset: 8px; border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #8FD3FF 0%, #3B82F6 55%, #4F46E5 100%);
-    box-shadow: 0 2px 8px rgba(59,130,246,.35);
-    transition: transform .4s ease;
+  .bar::after { /* soft speaking glow along the bottom edge */
+    content: ""; position: absolute; left: 14px; right: 14px; bottom: 0; height: 2px;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent, #3b82f6 30%, #06b6d4 70%, transparent);
+    opacity: 0; transform: scaleX(0.3);
+    transition: opacity .4s ease, transform .6s ease;
   }
-  .orb .ring {
-    position: absolute; inset: 4px; border-radius: 50%;
-    border: 2px solid rgba(59,130,246,.28);
-    opacity: 0;
+  .bar.speaking::after { opacity: .55; transform: scaleX(1); animation: sweep 2.4s ease-in-out infinite; }
+  @keyframes sweep { 0%,100% { transform: translateX(-6%) scaleX(.9); } 50% { transform: translateX(6%) scaleX(.9); } }
+
+  .orb {
+    position: relative; flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center; gap: 3px;
+    background: radial-gradient(circle at 32% 28%, #7dd3fc 0%, #3b82f6 55%, #2563eb 100%);
+    box-shadow: 0 0 0 0 rgba(59,130,246,0.0);
   }
-  .orb .bars {
-    position: absolute; inset: 8px; display: flex; align-items: center; justify-content: center; gap: 2.5px;
+  .orb::before {
+    content: ""; position: absolute; inset: -5px; border-radius: 50%;
+    border: 2px solid rgba(59,130,246,0.25); opacity: 0;
   }
-  .orb .bars i {
-    display: block; width: 3px; height: 6px; border-radius: 2px; background: rgba(255,255,255,.95);
+  .bar.speaking .orb::before { animation: ring 1.8s ease-out infinite; }
+  @keyframes ring { 0% { transform: scale(.9); opacity: .9; } 100% { transform: scale(1.18); opacity: 0; } }
+  .orb i {
+    display: block; width: 3px; height: 6px; border-radius: 2px; background: #fff;
     transition: height .12s ease;
   }
-  .bar.listening .orb .ring { animation: ring 1.6s ease-out infinite; }
-  .bar.listening .orb .ring.r2 { animation-delay: .8s; }
-  @keyframes ring { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(1.18); opacity: 0; } }
 
-  /* Text stage */
-  .stage { position: relative; flex: 1; height: 72px; }
-  .line {
-    position: absolute; left: 0; right: 0; top: 50%;
-    transform: translateY(-50%);
-    margin: 0; font-size: 16px; line-height: 21px; font-weight: 500;
-    color: #0F172A; letter-spacing: -0.005em;
-    transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .4s ease;
+  .text {
+    flex: 1; min-width: 0;
+    font-size: 15.5px; line-height: 21px; font-weight: 500; letter-spacing: -0.005em;
+    color: #0f172a;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
   }
-  .line .w { display: inline-block; opacity: 0; transform: translateY(4px); filter: blur(2px);
-    transition: opacity .28s ease, transform .28s ease, filter .28s ease, color .4s ease; }
-  .line .w.on { opacity: 1; transform: none; filter: none; }
-  .line .w.hl { color: #2563EB; font-weight: 600; }
-  .line.out { transform: translateY(calc(-50% - 22px)); opacity: 0; }
-  .q { font-size: 19px; line-height: 24px; font-weight: 600; letter-spacing: -0.01em; }
-  .q .w.on { color: #0F172A; }
-  .q .cursor {
-    display: inline-block; width: 2px; height: 18px; margin-left: 4px; vertical-align: -3px;
-    background: #3B82F6; border-radius: 1px; opacity: 0;
+  .w {
+    display: inline-block; opacity: 0; transform: translateY(5px); filter: blur(3px);
+    color: #94a3b8;
+    transition: opacity .28s ease, transform .32s cubic-bezier(.2,.8,.2,1), filter .28s ease, color .5s ease;
   }
-  .bar.listening .q .cursor { animation: blink 1s steps(1) infinite; }
-  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+  .w.on { opacity: 1; transform: none; filter: none; color: #0f172a; }
+  .w.key.on { color: #2563eb; font-weight: 600; }
+  .text.out .w { opacity: 0; transition: opacity .5s ease; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .w { transition: none; opacity: 1; transform: none; filter: none; color: #0f172a; }
+    .w.key { color: #2563eb; font-weight: 600; }
+    .bar.speaking::after, .bar.speaking .orb::before { animation: none; }
+  }
 </style>
 </head>
 <body>
-<div class="bar" id="bar" role="status" aria-live="polite">
-  <div class="orb" aria-hidden="true">
-    <div class="ring"></div><div class="ring r2"></div>
-    <div class="core"></div>
-    <div class="bars"><i></i><i></i><i></i><i></i></div>
+  <div class="bar" id="bar" role="status" aria-live="polite">
+    <div class="orb" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+    <div class="text" id="text" aria-label="Opening all the windows and setting the cabin to 22°, with the rear windows halfway"></div>
   </div>
-  <div class="stage">
-    <p class="line" id="say"></p>
-    <p class="line q" id="ask"></p>
-  </div>
-</div>
 <script>
 (function () {
-  var bar = document.getElementById('bar');
-  var say = document.getElementById('say');
-  var ask = document.getElementById('ask');
-  var bars = bar.querySelectorAll('.bars i');
-  var core = bar.querySelector('.core');
+  var words = [
+    ["Opening"], ["all", 1], ["the", 1], ["windows", 1], ["and"], ["setting"], ["the"], ["cabin"],
+    ["to"], ["22°,", 1], ["with"], ["the"], ["rear", 1], ["windows", 1], ["halfway", 1]
+  ];
+  var bar = document.getElementById("bar");
+  var text = document.getElementById("text");
+  var bars = bar.querySelectorAll(".orb i");
+  var spans = words.map(function (w, i) {
+    var s = document.createElement("span");
+    s.className = "w" + (w[1] ? " key" : "");
+    s.textContent = w[0];
+    s.setAttribute("aria-hidden", "true");
+    text.appendChild(s);
+    if (i < words.length - 1) text.appendChild(document.createTextNode(" "));
+    return s;
+  });
 
-  var statement = 'Opening all the windows and setting the cabin to 22°, with the rear windows halfway';
-  var highlight = { 'windows': 1, '22°,': 1, 'halfway': 1, 'rear': 1 };
-  var question = 'Turn on the seat heater too?';
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (reduced) { spans.forEach(function (s) { s.classList.add("on"); }); return; }
 
-  function build(el, text, hl) {
-    el.innerHTML = '';
-    var spans = [];
-    text.split(' ').forEach(function (word, i, arr) {
-      var s = document.createElement('span');
-      s.className = 'w' + (hl && hl[word] ? ' hl' : '');
-      s.textContent = word;
-      el.appendChild(s);
-      if (i < arr.length - 1) el.appendChild(document.createTextNode(' '));
-      spans.push(s);
-    });
-    return spans;
-  }
-
-  var speaking = false, wave = 0;
-  function animateBars() {
-    wave += 0.22;
+  var speaking = false, t0 = 0;
+  function wave(now) {
     for (var i = 0; i < bars.length; i++) {
-      var h = speaking
-        ? 6 + Math.abs(Math.sin(wave + i * 1.3) * Math.cos(wave * 0.6 + i)) * 14
-        : 4;
-      bars[i].style.height = h.toFixed(1) + 'px';
+      var h = 6;
+      if (speaking) {
+        var t = now / 1000;
+        h = 7 + Math.abs(Math.sin(t * (6.2 + i * 1.7) + i * 1.3)) * 11
+              + Math.abs(Math.sin(t * 13.1 + i * 2.1)) * 4;
+        if (i === 0 || i === 3) h *= 0.7;
+      } else {
+        h = 5 + Math.sin(now / 600 + i * 0.8) * 1.2;
+      }
+      bars[i].style.height = h.toFixed(1) + "px";
     }
-    core.style.transform = speaking ? 'scale(' + (1 + Math.sin(wave * 0.8) * 0.04).toFixed(3) + ')' : 'scale(1)';
-    requestAnimationFrame(animateBars);
+    requestAnimationFrame(wave);
   }
-  requestAnimationFrame(animateBars);
+  requestAnimationFrame(wave);
 
-  var timers = [];
-  function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
-
-  function reveal(spans, start, step) {
-    spans.forEach(function (s, i) { at(start + i * step, function () { s.classList.add('on'); }); });
-    return start + spans.length * step;
+  function cycle() {
+    text.classList.remove("out");
+    spans.forEach(function (s) { s.classList.remove("on"); });
+    speaking = true; bar.classList.add("speaking");
+    var delay = 350;
+    spans.forEach(function (s, i) {
+      var len = words[i][0].length;
+      setTimeout(function () { s.classList.add("on"); }, delay);
+      delay += 150 + len * 28 + (/[,]$/.test(words[i][0]) ? 220 : 0);
+    });
+    setTimeout(function () { speaking = false; bar.classList.remove("speaking"); }, delay + 250);
+    setTimeout(function () { text.classList.add("out"); }, delay + 3200);
+    setTimeout(cycle, delay + 4000);
   }
-
-  function run() {
-    timers.forEach(clearTimeout); timers = [];
-    bar.classList.remove('listening');
-    say.classList.remove('out');
-    var a = build(say, statement, highlight);
-    var b = build(ask, question, null);
-    var cur = document.createElement('span'); cur.className = 'cursor'; ask.appendChild(cur);
-    ask.style.opacity = '1';
-
-    at(200, function () { speaking = true; });
-    var t = reveal(a, 300, 190);
-    at(t + 150, function () { speaking = false; });
-    t += 1300;
-    at(t, function () { say.classList.add('out'); speaking = true; });
-    var t2 = reveal(b, t + 250, 210);
-    at(t2 + 100, function () { speaking = false; bar.classList.add('listening'); });
-    at(t2 + 4800, function () { ask.style.opacity = '0'; bar.classList.remove('listening'); });
-    at(t2 + 5400, run);
-  }
-  run();
+  cycle();
 })();
 </script>
 </body>
