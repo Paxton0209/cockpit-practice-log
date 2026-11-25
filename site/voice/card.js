@@ -158,23 +158,30 @@ async function voPlay(pill) {
           await voSleep(420);
         }
         if (handover) {
-          /* the old status lifts away as a whole while the new one is written in left to right behind it;
-             the pill reshapes underneath. (Gradient text is painted by the line, so words can't fade one by one.) */
+          /* the old status lifts softly away while the new one sweeps in with a wider light mask;
+             the grain orb gives a subtle breath in sync with the thought shift so orb + text feel unified. */
           const ghost = line.cloneNode(true);
           ghost.classList.add('vo-ghost');
           box.appendChild(ghost);
-          ghost.animate([{ opacity: 1, filter: 'blur(0)', transform: ghost.style.transform || 'none' }, { opacity: 0, filter: 'blur(8px)', transform: `${ghost.style.transform || ''} translateY(-8px)` }],
-            { duration: 460, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards' }).finished.then(() => ghost.remove(), () => ghost.remove());
+          ghost.animate(
+            [{ opacity: 1, filter: 'blur(0)', transform: ghost.style.transform || 'none' },
+             { opacity: 0, filter: 'blur(5px)', transform: `${ghost.style.transform || ''} translateY(-5px)` }],
+            { duration: 380, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards' }
+          ).finished.then(() => ghost.remove(), () => ghost.remove());
+          pill.querySelector('.vo-orb')?.animate(
+            [{ transform: 'scale(1)' }, { transform: 'scale(1.045)' }, { transform: 'scale(1)' }],
+            { duration: 680, easing: 'cubic-bezier(.25, .6, .2, 1)' }
+          );
           line.getAnimations().forEach(a => a.cancel());
           line.textContent = text;
           voTint(line, runs.indexOf(r));
           line.classList.add('vo-write');
           E.wT = Math.min(Math.ceil(line.scrollWidth) + 2, VO_MAX);
           line.animate([
-            { opacity: 0, filter: 'blur(6px)', transform: `translate(${E.x}px, 8px)`, maskPosition: '100% 0', webkitMaskPosition: '100% 0' },
+            { opacity: 0, filter: 'blur(5px)', transform: `translate(${E.x}px, 5px)`, maskPosition: '100% 0', webkitMaskPosition: '100% 0' },
             { opacity: 1, filter: 'blur(0)', transform: `translate(${E.x}px, 0)`, maskPosition: '0% 0', webkitMaskPosition: '0% 0' }],
-            { duration: 820, delay: 160, easing: 'cubic-bezier(.2, .7, .2, 1)', fill: 'both' })
-          await voSleep(160 + 820 + hold);
+            { duration: 740, delay: 80, easing: 'cubic-bezier(.22, .68, .2, 1)', fill: 'both' });
+          await voSleep(80 + 740 + hold);
           continue;
         }
         if (kind === 'thinking') voTint(line, runs.indexOf(r));
@@ -265,7 +272,7 @@ Motion: words appear one by one, each rising 6 px as it fades in; the pill grows
 ${VO_BASE}
 The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (412 px with Inter). Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
 Motion: a gradient flows through the words in a loop, and each status has its own palette (clear blue; indigo to violet; violet to pink; teal to blue); the line cycles “Understanding your request”, “Finding related features”, “Browsing your history”, each fading out and in with a short blur while the pill eases to the new width; inside the orb the grain drifts and flickers irregularly (no spinning).`,
-    wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.'], ['A ringed blue bead', 'The orb looks like a button.']],
+    wrong: [['“THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.'], ['A ringed blue bead', 'The orb looks like a button.']],
     notes: [['One line in a gradient', 'The sweep shows work in progress.'], ['The library’s grain orb', 'It turns faster while thinking.'], ['No glow', 'The pill stays quiet until there is an answer.']],
   },
   VA: {
@@ -278,7 +285,7 @@ Orb: a deep blue glass sphere with a bright cyan wave across it, and behind it, 
 ${VO_GLOW('0.45', 'rgb(100,210,255) at 0% → rgb(100,210,255) at 90% (25%) → rgb(10,132,255) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
 Motion: the reply streams in word by word, each word fading in from a short motion blur, and the line slides on inside a 448 px window that fades 10% at both edges; the orb’s fluid turns and the glow under the words rises and falls like a voice level.`,
     wrong: [['Text at 15.5 px, two lines', 'The reply wraps inside a 72 px bar.'], ['Keywords in blue', '“all the windows” and “22°” read like links.'], ['An equaliser icon', 'Bars stand in for the assistant.']],
-    notes: [['24/32, one line', 'Words condense from a blur; the line slides in a window that fades at both edges.'], ['The library orb', 'Its fluid turns while the assistant speaks.'], ['A glow that moves like a voice', 'Five slices of the blue glow rise and fall under the words.']],
+    notes: [['24/32, one line', 'Words condense from a blur; the line slides in a window that fades at both edges.'], ['The library orb', 'Its fluid turns while the assistant speaks.'], ['Glow moves like a voice', 'Five slices of the blue glow rise and fall under the words.']],
   },
   VP: {
     W: 700, before: () => voiceBefore('VP', 548), name: 'Proactive', cover: 1, fullStage: true, testReference: 'Figma',
@@ -289,7 +296,7 @@ ${VO_BASE}
 Orb: a violet glass sphere with a deep indigo swirl, and behind it, under the glow, a 96 px copy of the orb, concentric with it, at 16% opacity and blurred 18 px, clipped by the pill. Words: “Would you like to open the windows?”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px.
 ${VO_GLOW('0.45', 'rgb(123,100,255) at 0% → rgb(100,157,255) at 90% (25%) → rgb(129,71,238) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
 Motion: because the assistant starts the conversation, the pill first folds down to the orb and its first word, “Would”, and the orb gives a soft ping; then the question is spoken word by word like any reply, each word condensing from a short blur as the pill grows with it. While it waits for an answer the violet glow breathes slowly instead of moving like speech.`,
-    wrong: [['A “SUGGESTION” label at 11 px', 'An all-caps label says what the moment already shows.'], ['A mic pill on the right', 'An extra control competes with the question.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.']],
+    wrong: [['“SUGGESTION” label at 11 px', 'An all-caps label says what the moment already shows.'], ['A mic pill on the right', 'An extra control competes with the question.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.']],
     notes: [['It grows out of the orb', 'The pill folds to the orb, pings, then unfolds with the question.'], ['The violet orb and glow', 'Proactive has its own colour, apart from replies.'], ['A slow breath while waiting', 'The glow stops moving like speech once the question is asked.']],
   },
 };
