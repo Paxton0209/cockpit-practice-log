@@ -272,13 +272,16 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nav small.z{visibility:hidden}
 .foot{margin-top:auto;display:flex;flex-direction:column;gap:10px;padding:0 12px}
 .foot .mx{display:grid;grid-template-columns:repeat(20,1fr);gap:3px}
-.foot .mx a,.foot .mx i{display:block;aspect-ratio:1;border-radius:1.5px;background:color-mix(in srgb,var(--ink) 6.5%,transparent);transition:transform .16s var(--out),opacity .16s,background-color .16s}
+.foot .mx a,.foot .mx i{display:block;aspect-ratio:1;border-radius:1.5px;background:color-mix(in srgb,var(--ink) 6.5%,transparent);transition:transform .16s var(--out),opacity .18s ease,background-color .16s}
 .foot .mx a{background:var(--ink);opacity:.52}
-.foot .mx a:hover{opacity:.92;transform:scale(1.3);z-index:2;position:relative}
+.foot .mx a:hover{opacity:.88;transform:scale(1.22);z-index:2;position:relative}
+.foot .mx a:active{transform:scale(.92)}
 .foot .mx i.next{background:color-mix(in srgb,var(--ink) 16%,transparent)}
-.foot .by{display:flex;align-items:center;justify-content:space-between;font-size:12px;line-height:16px;color:var(--t3);font-variant-numeric:tabular-nums}
+.foot .by{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;line-height:16px;color:var(--t3);font-variant-numeric:tabular-nums}
+.foot .by .mxlbl{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .14s ease}
+.foot .by .mxlbl .mxn{font:400 11px/16px var(--mono);color:var(--t3);margin-right:5px}
 .foot .by strong{font-weight:500;color:var(--t2)}
-.foot .by a{color:var(--t3);transition:color .15s}.foot .by a:hover{color:var(--ink)}
+.foot .by a{flex:none;color:var(--t3);transition:color .15s}.foot .by a:hover{color:var(--ink)}
 .mainc{position:relative;padding:96px 48px 128px 24px;min-width:0}
 /* Colour off (default): the page is black, white and grey like a sketchbook; covers go neutral and the components' accent turns to ink (inverse in dark). Colour on brings back the context palettes and the library blue. */
 :root:not([data-color=on]) [data-ctx]{--cv0:#ebebeb;--cv1:#f7f7f7;--cv2:#d4d4d4;--cv3:#f2f2f2}
@@ -2315,7 +2318,7 @@ function viewHome(){
     <aside class="side">
       <a class="brand" href="#home">Dashnote</a>
       <nav class="nav" id="nav"><span class="navind" id="navind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'Index':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}${SOON.map(c=>`<button class="soon" disabled><span>${c}</span><small>Soon</small></button>`).join('')}</nav>
-      <div class="foot"><div class="mx" aria-label="${PUBLISHED} of ${TOTAL} components published">${Array.from({length:TOTAL},(_,i)=>{const pe=PUBLISHED_ENTRIES[i];if(pe){const nm=(CMP[pe.s]&&CMP[pe.s].name)||pe.title;return `<a href="#entry-${pad(pe.n)}" data-n="${pe.n}" title="${pad(pe.n)} ${nm}" aria-label="${pad(pe.n)} ${nm}"></a>`}return `<i${i===PUBLISHED?' class="next" title="Next up"':''}></i>`}).join('')}</div><div class="by"><span><strong>${PUBLISHED}</strong> / ${TOTAL}</span><a href="https://github.com/Paxton0209/dashnote" target="_blank" rel="noopener">GitHub</a></div></div>
+      <div class="foot"><div class="mx" id="mx" aria-label="${PUBLISHED} of ${TOTAL} components published">${Array.from({length:TOTAL},(_,i)=>{const pe=PUBLISHED_ENTRIES[i];if(pe){const nm=(CMP[pe.s]&&CMP[pe.s].name)||pe.title;return `<a href="#entry-${pad(pe.n)}" data-n="${pe.n}" data-nm="${nm}" aria-label="${pad(pe.n)} ${nm}"></a>`}return `<i${i===PUBLISHED?' class="next"':''}></i>`}).join('')}</div><div class="by"><span class="mxlbl" id="mxlbl"><strong>${PUBLISHED}</strong> / ${TOTAL}</span><a href="https://github.com/Paxton0209/dashnote" target="_blank" rel="noopener">GitHub</a></div></div>
     </aside>
     <main class="mainc"><button class="ib press tgl" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button><div class="grid" id="grid">${gridFor('All')}</div></main>
   </div>`}
@@ -2346,6 +2349,11 @@ function moveNav(){const navind=$('#navind'),on=$('#nav button.on');if(!navind)r
 addEventListener('resize',moveNav);
 function setupHome(){
   requestAnimationFrame(moveNav);
+  const mx=$('#mx'),mxlbl=$('#mxlbl'),defLbl=mxlbl?mxlbl.innerHTML:'';
+  if(mx&&mxlbl){
+    mx.addEventListener('pointerover',e=>{const a=e.target.closest('a[data-n]');if(!a)return;mxlbl.innerHTML=`<span class="mxn">${pad(+a.dataset.n)}</span><strong>${a.dataset.nm}</strong>`});
+    mx.addEventListener('pointerleave',()=>{mxlbl.innerHTML=defLbl});
+  }
   $$('#nav button').forEach(b=>b.onclick=()=>{if(b.classList.contains('on'))return;$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));moveNav();const c=b.dataset.c,g=$('#grid');
     g.innerHTML=gridFor(c);fit(g);
     /* reveal row by row: cards on one line rise together */
@@ -2391,7 +2399,7 @@ const STAGE_R=16;
 function dotFor(n){return lensAnchor?.isConnected&&lensAnchor.matches('.foot .mx a')&&+lensAnchor.dataset.n===n?lensAnchor:null}
 function thumbFor(n){const el=lensAnchor?.isConnected&&lensAnchor.matches('#grid .card')&&+lensAnchor.dataset.n===n?lensAnchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
 function ghost(n,on){const t=thumbFor(n);if(t)t.style.visibility=on?'hidden':''}
-/* morph a clicked bottom-left matrix square seamlessly into the centered sheet (and back into its slot) */
+/* physically sampled spring morph between a clicked bottom-left matrix square and the centered sheet */
 function springFromDot(dot,endRect,opening){
   const sheet=$('#sheet2'),body=$('#sbody'),dotRect=dot.getBoundingClientRect();
   const dx=(dotRect.left+dotRect.width/2)-(endRect.left+endRect.width/2);
@@ -2401,34 +2409,36 @@ function springFromDot(dot,endRect,opening){
   const start=document.timeline.currentTime;
   if(opening){
     dot.style.opacity='.16';
-    const ease='cubic-bezier(.2,.88,.22,1)',dur=360;
-    const aSheet=lensAnimate(sheet,[
-      {offset:0,transform:`translate(calc(-50% + ${dx}px),${dy}px) scale(${sx},${sy})`,borderRadius:'56px','--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:.85},
-      {offset:.16,opacity:1},
-      {offset:1,transform:'translate(-50%,0px) scale(1,1)',borderRadius:'14px','--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:1}
-    ],{duration:dur,easing:ease});
-    const aBody=lensAnimate(body,[
-      {offset:0,opacity:0,filter:'blur(10px)'},
-      {offset:.14,opacity:0,filter:'blur(10px)'},
-      {offset:.62,opacity:1,filter:'blur(0px)'},
-      {offset:1,opacity:1,filter:'blur(0px)'}
-    ],{duration:dur,easing:'cubic-bezier(.22,1,.36,1)'});
+    const aSheet=lensSpring(sheet,[0],[1],([p])=>{
+      const t=Math.max(0,Math.min(1,p));
+      const curSx=sx+(1-sx)*t,curSy=sy+(1-sy)*t;
+      const x=dx*(1-t),y=dy*(1-t)-Math.sin(t*Math.PI)*14;
+      const op=Math.min(1,.82+t*1.2);
+      return {transform:`translate(calc(-50% + ${x.toFixed(2)}px),${y.toFixed(2)}px) scale(${curSx.toFixed(4)},${curSy.toFixed(4)})`,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:op};
+    },440,35);
+    const aBody=lensSpring(body,[0],[1],([p])=>{
+      const t=Math.max(0,Math.min(1,p));
+      const u=Math.max(0,Math.min(1,(t-.04)/.42));
+      const ease=1-Math.pow(1-u,2);
+      return {opacity:ease,transform:`translateY(${((1-ease)*5).toFixed(2)}px)`,filter:ease<.99?`blur(${((1-ease)*2).toFixed(2)}px)`:'none'};
+    },440,35);
     aSheet.startTime=start;aBody.startTime=start;
     return aSheet;
   }
-  const ease='cubic-bezier(.32,.06,.2,1)',dur=260;
-  const aSheet=lensAnimate(sheet,[
-    {offset:0,transform:'translate(-50%,0px) scale(1,1)',borderRadius:'14px','--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:1},
-    {offset:.62,opacity:.88},
-    {offset:1,transform:`translate(calc(-50% + ${dx}px),${dy}px) scale(${sx},${sy})`,borderRadius:'56px','--dialog-surface-opacity':1,'--dialog-copy-opacity':0,opacity:0}
-  ],{duration:dur,easing:ease});
-  const aBody=lensAnimate(body,[
-    {offset:0,opacity:1,filter:'blur(0px)'},
-    {offset:.28,opacity:0,filter:'blur(6px)'},
-    {offset:1,opacity:0,filter:'blur(6px)'}
-  ],{duration:dur,easing:'ease-in'});
-  dot.style.opacity='';
+  const aSheet=lensSpring(sheet,[0],[1],([p])=>{
+    const t=Math.max(0,Math.min(1,p));
+    const curSx=1-(1-sx)*t,curSy=1-(1-sy)*t;
+    const x=dx*t,y=dy*t-Math.sin(t*Math.PI)*10;
+    const op=t<.52?1:Math.pow(Math.max(0,1-(t-.52)/.48),1.35);
+    return {transform:`translate(calc(-50% + ${x.toFixed(2)}px),${y.toFixed(2)}px) scale(${curSx.toFixed(4)},${curSy.toFixed(4)})`,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:op};
+  },520,40);
+  const aBody=lensSpring(body,[0],[1],([p])=>{
+    const t=Math.max(0,Math.min(1,p));
+    const u=Math.max(0,Math.min(1,1-(t-.18)/.72));
+    return {opacity:u*u,filter:u<.99?`blur(${((1-u)*1.8).toFixed(2)}px)`:'none'};
+  },520,40);
   aSheet.startTime=start;aBody.startTime=start;
+  setTimeout(()=>{if(dot.isConnected&&lensState!=='open')dot.style.opacity=''},135);
   return aSheet;
 }
 /* the cover is both the card and the artwork (Dashline's cell + glyph). Closing lands on the cover at rest,
@@ -2619,17 +2629,14 @@ function openEntry(n){
   lensAnimate(veil,[{opacity:0},{opacity:1}],{duration:220,easing:lensEase});
   const done=()=>{if(gen===lensGen&&lensState==='open'){stopLens();sheet.style.transformOrigin=''}};
   if(lensCompact.matches){
-    lensAnimate(body,[{filter:'blur(6px)'},{filter:'blur(0px)'}],{duration:260,easing:'cubic-bezier(.22,1,.36,1)'});
     lensSpring(sheet,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40).onfinish=done;
   }else if(dot){
     springFromDot(dot,end,true).onfinish=done;
   }else if(source){
     ghost(n,1);
-    lensAnimate(body,[{filter:'blur(6px)'},{filter:'blur(0px)'}],{duration:260,easing:'cubic-bezier(.22,1,.36,1)'});
     springDialog(source.cell,end,source.glyph,art,end,art,0,1).onfinish=done; /* one shot: the cover became the sheet, so its slot stays empty while open */
   }else{
     sheet.style.transformOrigin='50% 50%';
-    lensAnimate(body,[{filter:'blur(8px)'},{filter:'blur(0px)'}],{duration:280,easing:'cubic-bezier(.22,1,.36,1)'});
     lensSpring(sheet,[0],[1],([p])=>{const t=Math.max(0,p);return {transform:`translateX(-50%) scale(${.94+.06*t})`,opacity:Math.min(1,t*2.4),'--dialog-surface-opacity':1,'--dialog-copy-opacity':1}},480,38).onfinish=done;
   }
 }
