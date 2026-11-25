@@ -18,7 +18,7 @@
   --bg:#f7f7f7;--stage:#f2f2f2;--panel:#fff;--ink:#0a0a0a;--t2:#5c5c5c;--t3:#78787c;--line:rgba(0,0,0,.075);--fill:#efefef;--fill2:rgba(29,29,31,.08);--lift:0 1px 2px rgba(0,0,0,.04),0 0 0 1px rgba(0,0,0,.06);--lift2:0 12px 32px -14px rgba(0,0,0,.16),0 0 0 1px rgba(0,0,0,.08);--accent:#0a7cff;--preview-shadow:0 1px 2px rgb(18 24 38 / .05),0 5px 14px -3px rgb(18 24 38 / .08),0 14px 28px -10px rgb(18 24 38 / .08);
   --sbg:#f3f3f3;--ssf:#fff;--ssf2:#e6e6e6;--stx:#0a0a0a;--st2:#8a8a8a;--sln:#e8e8e8;--sac:#0a7cff;color-scheme:light}
 [data-theme=dark]{
-  --bg:#0a0a0a;--stage:#121212;--panel:#161616;--ink:#f5f5f5;--t2:#a3a3a3;--t3:#8a8a8e;--line:rgba(255,255,255,.08);--fill:#222;--fill2:rgba(255,255,255,.09);--lift:0 0 0 1px rgba(255,255,255,.07);--lift2:0 12px 32px -14px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);--accent:#2b8fff;--preview-shadow:0 2px 4px rgb(0 0 0 / .22),0 8px 20px rgb(0 0 0 / .30);
+  --bg:#0a0a0a;--stage:#121212;--panel:#161616;--ink:#f5f5f5;--t2:#a3a3a3;--t3:#8a8a8e;--line:rgba(255,255,255,.08);--fill:#222;--fill2:rgba(255,255,255,.09);--lift:0 0 0 1px rgba(255,255,255,.07);--lift2:0 12px 32px -14px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);--accent:#2b8fff;--preview-shadow:0 1px 2px rgb(0 0 0 / .10),0 6px 16px -4px rgb(0 0 0 / .14);
   --sbg:#0b0b0b;--ssf:#191919;--ssf2:#2a2a2a;--stx:#f5f5f5;--st2:#8a8a8a;--sln:#262626;--sac:#2b8fff;color-scheme:dark}
 :root{--cv0:#eaedef;--cv1:#dde5e9;--cv2:#cbd5da;--cv3:#f1f4f5;--cv-mid:rgba(255,255,255,.32);--grain:.42;--bad:#E5484D;--good:#30A46C;--font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;--out:cubic-bezier(.22,1,.36,1);--ease:cubic-bezier(.2,0,0,1);--io:cubic-bezier(.65,0,.35,1)}
 *{box-sizing:border-box}
@@ -124,7 +124,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 [data-theme=dark] .cov .kp:not(.is-b) .t1 .ni path[stroke="#B6B6B7"],[data-theme=dark] .cov .kp:not(.is-b) .t1 .mv path[stroke-opacity]{stroke:#606062;stroke-opacity:1}
 .hero3.cov{isolation:isolate;overflow:hidden}.hero3.cov>*{position:relative;z-index:1}.hero3.cov .cstage{z-index:1}
 .thumb.cov::after,.hero3.cov::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.10;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.1' intercept='-0.52'/%3E%3CfeFuncG type='linear' slope='2.1' intercept='-0.52'/%3E%3CfeFuncB type='linear' slope='2.1' intercept='-0.52'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px 160px}
-:root[data-theme=dark] :is(.thumb.cov,.hero3.cov)::after{mix-blend-mode:soft-light;opacity:.09}
+:root[data-theme=dark] :is(.thumb.cov,.hero3.cov)::after{mix-blend-mode:soft-light;opacity:.025}
 .thumb.cov .cs{z-index:1;background:transparent}
 .thumb.cov .cs{position:absolute;left:50%;top:50%;width:95.24%;transform:translate(-50%,-50%)}
 .thumb.cov .cs .px{background:transparent}
