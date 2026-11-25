@@ -47,12 +47,12 @@ function driveModes(cover) {
 /* Energy use, HeroUI v3 card anatomy: header (title + range tabs), KPI (value, unit, delta chip), then a calm full-width chart.
    One series, three faint gridlines, a dashed average and a single end point; colour follows the Colour switch. */
 const EU_LINE = 'M0.0 41.6C1.8 40.1 7.4 33.9 11.1 32.1C14.8 30.4 18.4 30.2 22.1 31.2C25.8 32.3 29.5 35.8 33.2 38.5C36.9 41.3 40.6 45.4 44.3 47.7C48.0 50.1 51.6 51.8 55.3 52.4C59.0 52.9 62.7 51.8 66.4 51.0C70.1 50.3 73.8 48.5 77.5 48.0C81.2 47.4 84.8 47.4 88.5 47.9C92.2 48.4 95.9 50.2 99.6 51.1C103.3 52.1 107.0 53.5 110.7 53.6C114.4 53.7 118.0 52.8 121.7 51.7C125.4 50.6 129.1 47.9 132.8 46.8C136.5 45.7 140.2 44.3 143.9 45.0C147.6 45.8 151.2 48.1 154.9 51.4C158.6 54.7 162.3 60.4 166.0 65.0C169.7 69.7 173.4 75.6 177.1 79.3C180.8 83.1 184.4 86.1 188.1 87.7C191.8 89.3 195.5 88.9 199.2 88.7C202.9 88.5 206.6 87.0 210.3 86.5C214.0 86.0 217.6 85.7 221.3 85.6C225.0 85.5 228.7 86.3 232.4 86.0C236.1 85.6 239.8 85.4 243.5 83.6C247.2 81.8 250.8 78.7 254.5 75.2C258.2 71.7 261.9 66.4 265.6 62.6C269.3 58.8 273.0 54.5 276.7 52.5C280.4 50.4 284.0 49.7 287.7 50.2C291.4 50.7 295.1 53.4 298.8 55.3C302.5 57.2 306.2 60.2 309.9 61.5C313.6 62.7 317.2 63.3 320.9 62.7C324.6 62.1 328.3 59.8 332.0 58.0C335.7 56.2 339.4 53.4 343.1 51.9C346.8 50.3 350.4 49.2 354.1 48.7C357.8 48.1 361.5 48.7 365.2 48.3C368.9 48.0 372.6 48.0 376.3 46.6C380.0 45.3 383.6 42.8 387.3 40.3C391.0 37.7 394.7 33.7 398.4 31.4C402.1 29.1 405.8 26.5 409.5 26.4C413.2 26.3 416.8 27.9 420.5 30.7C424.2 33.4 427.9 38.7 431.6 43.1C435.3 47.5 439.0 53.3 442.7 57.2C446.4 61.1 450.0 64.5 453.7 66.7C457.4 68.9 461.1 69.4 464.8 70.4C468.5 71.3 472.2 71.3 475.9 72.3C479.6 73.3 483.2 74.8 486.9 76.4C490.6 77.9 494.3 80.5 498.0 81.8C501.7 83.0 505.4 84.3 509.1 83.9C512.8 83.5 516.4 81.6 520.1 79.4C523.8 77.1 527.5 73.0 531.2 70.4C534.9 67.7 538.6 64.6 542.3 63.5C546.0 62.5 549.6 62.9 553.3 64.2C557.0 65.5 560.7 69.0 564.4 71.5C568.1 74.0 571.8 77.5 575.5 79.1C579.2 80.7 582.8 81.3 586.5 80.9C590.2 80.5 593.9 78.3 597.6 76.7C601.3 75.2 605.0 72.8 608.7 71.5C612.4 70.3 616.0 69.6 619.7 69.1C623.4 68.7 627.1 68.9 630.8 68.7C634.5 68.5 638.2 68.1 641.9 67.9C645.6 67.8 649.2 67.0 652.9 67.9C656.6 68.7 662.2 72.1 664.0 73.0';
-function energyUse() {
+function energyUse(_, cover) {
   const PW = 664, PH = 146, avgY = 60.6, endY = 73.0;
   const gy = v => (PH - v / 40 * PH).toFixed(1);
   const grid = [40, 20, 0].map(v => `<line x1="0" x2="${PW}" y1="${gy(v)}" y2="${gy(v)}"/>`).join('');
   const ylab = [40, 20, 0].map(v => `<span class="eu-y" style="top:${(PH - v / 40 * PH - 16).toFixed(1)}px">${v}</span>`).join('');
-  return `<div class="vehicle-preview vehicle-surface eu">
+  return `<div class="vehicle-preview vehicle-surface eu${cover ? '' : ' eu-live'}">
     <div class="eu-head">
       <h2 class="eu-title">Energy use</h2>
       <div class="vehicle-segment eu-tabs" aria-label="Displayed range: last 10 km"><span class="is-selected">Last 10 km</span><span>Last 100 km</span></div>
@@ -66,9 +66,9 @@ function energyUse() {
       <svg class="eu-plot" width="${PW}" height="${PH}" viewBox="0 0 ${PW} ${PH}" overflow="visible" aria-hidden="true">
         <defs><linearGradient id="eu-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".14"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient></defs>
         <g class="eu-grid">${grid}</g>
-        <path d="${EU_LINE}L${PW} ${PH}L0 ${PH}Z" fill="url(#eu-fill)"/>
+        <path class="eu-area" d="${EU_LINE}L${PW} ${PH}L0 ${PH}Z" fill="url(#eu-fill)"/>
         <line class="eu-avg" x1="0" x2="${PW}" y1="${avgY}" y2="${avgY}"/>
-        <path class="eu-line" d="${EU_LINE}"/>
+        <path class="eu-line" d="${EU_LINE}" pathLength="1"/>
         <circle cx="${PW}" cy="${endY}" r="14" class="eu-halo"/><circle cx="${PW}" cy="${endY}" r="7" class="eu-dot"/>
       </svg>
       <span class="eu-avg-tag" style="top:${(avgY - 40).toFixed(1)}px">Average 23.4</span>

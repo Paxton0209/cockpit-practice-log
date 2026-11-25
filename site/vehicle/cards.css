@@ -206,3 +206,13 @@
 .vehicle-switch:is([aria-checked=true],[data-active=true]) .vehicle-off { display: none; }
 
 .ecard .hero3.vehicle-stage .cstage { --lift: 0px; transform: translate(-50%, -50%); }
+
+/* detail only: the last 10 km are drawn once, left to right, then the reading at Now settles with one soft pulse */
+.sheet2 .cs.a .eu-live .eu-line { stroke-dasharray: 1; stroke-dashoffset: 1; animation: eu-draw 1.4s cubic-bezier(.45, 0, .2, 1) .35s forwards; }
+.sheet2 .cs.a .eu-live .eu-area { opacity: 0; animation: eu-fade .8s ease 1.2s forwards; }
+.sheet2 .cs.a .eu-live .eu-dot { opacity: 0; animation: eu-fade .3s ease 1.7s forwards; }
+.sheet2 .cs.a .eu-live .eu-halo { opacity: 0; transform-box: fill-box; transform-origin: center; animation: eu-ping 1.1s cubic-bezier(.2, .7, .2, 1) 1.75s forwards; }
+@keyframes eu-draw { to { stroke-dashoffset: 0; } }
+@keyframes eu-fade { to { opacity: 1; } }
+@keyframes eu-ping { 0% { opacity: .35; transform: scale(.5); } 100% { opacity: .14; transform: scale(1); } }
+@media (prefers-reduced-motion: reduce) { .eu-live * { animation: none !important; opacity: inherit; stroke-dashoffset: 0 !important; } }

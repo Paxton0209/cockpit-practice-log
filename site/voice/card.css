@@ -121,6 +121,9 @@
 /* thinking hand-over: the outgoing line is a ghost on top; incoming words rise 6 px out of a blur */
 .vo-ghost { position: absolute; left: 0; top: 0; pointer-events: none; }
 .vo-line b.vo-still { animation: none; }
+/* the first word of a new line arrives with the fold, quick and soft */
+.vo-line b.vo-first { animation: vo-first .4s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes vo-first { from { opacity: .45; filter: blur(5px); } to { opacity: 1; filter: blur(0); } }
 /* written in: a soft-edged mask sweeps left to right across the incoming status */
 .vo-line.vo-write { -webkit-mask-image: linear-gradient(90deg, #000 40%, transparent 60%); mask-image: linear-gradient(90deg, #000 40%, transparent 60%); -webkit-mask-size: 250% 100%; mask-size: 250% 100%; -webkit-mask-position: 0 0; mask-position: 0 0; }
 /* scrolling: the 448 px window fades 10% at both edges, as in the Figma mask */

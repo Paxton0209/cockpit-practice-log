@@ -139,7 +139,13 @@ async function voPlay(pill) {
       if (!alive()) return;
       /* thinking → thinking: words hand over in place (see below); everything else fades the old line first */
       const handover = r[0][0] === 'thinking' && pill.dataset.kind === 'thinking' && line.textContent.trim();
-      if (!handover) { await fade(0, 360).finished.catch(() => {}); line.classList.remove('vo-write'); }
+      /* a streamed line that follows another: the old words lift away as a ghost while the pill folds to the new first word (never empty) */
+      const crossfold = !handover && r[0][2] && !r[0][5] && line.textContent.trim();
+      if (crossfold) {
+        const ghost = line.cloneNode(true); ghost.classList.add('vo-ghost'); box.appendChild(ghost);
+        ghost.animate([{ opacity: 1, filter: 'blur(0)' }, { opacity: 0, filter: 'blur(10px)' }], { duration: 360, easing: 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' }).finished.then(() => ghost.remove(), () => ghost.remove());
+        line.classList.remove('vo-write');
+      } else if (!handover) { await fade(0, 360).finished.catch(() => {}); line.classList.remove('vo-write'); }
       if (!alive()) return;
       voSetKind(pill, r[0][0]);
       box.classList.remove('is-scroll');
@@ -191,9 +197,11 @@ async function voPlay(pill) {
       }
       /* streamed: lay out every word with its own reveal delay; targets follow the words as they are spoken */
       const words = [], times = [], gaps = [];
-      let t = enter ? 60 : 200;
+      /* the first word is already on screen (folded to it), so speech starts right away */
+      let t = 0;
       r.forEach(([, text, gap, hold], si) => { text.split(' ').forEach(w => { words.push(w); times.push(t); gaps.push(gap); t += gap; }); t += (si < r.length - 1 ? hold : 0); });
-      line.innerHTML = words.map((w, i) => enter && i === 0 ? `<b class="vo-still">${w}</b>` : `<b style="animation-delay:${times[i]}ms">${w}</b>`).join(' ');
+      line.innerHTML = words.map((w, i) => i === 0 ? `<b class="vo-${enter ? 'still' : 'first'}">${w}</b>` : `<b style="animation-delay:${times[i]}ms">${w}</b>`).join(' ');
+      line.style.transform = 'translateX(0px)'; E.x = 0; E.vx = 0;
       line.getAnimations().forEach(a => a.cancel()); line.style.opacity = 1; line.style.filter = '';
       const rights = [...line.children].map(b => b.offsetLeft + b.offsetWidth + 2);
       E.speak(words.map((w, i) => ({ w, at: times[i], dur: gaps[i] })), /\?$/.test(words[words.length - 1]));
