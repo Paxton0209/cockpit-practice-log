@@ -14,7 +14,7 @@
   box-sizing: border-box;
   height: 72px;
   padding: 0 28px 0 12px;
-  border-radius: 28px;
+  border-radius: 36px;
   overflow: hidden;
   isolation: isolate;
   background: var(--vo-fill);
@@ -68,23 +68,19 @@
 .vo-pill[data-kind=reply] { --vo-glow: linear-gradient(90deg, rgb(100 210 255 / 0), rgb(100 210 255 / .9) 25%, rgb(10 132 255) 60%, rgb(94 92 230 / .9) 85%, rgb(94 92 230 / 0)); }
 .vo-pill[data-kind=ask] { --vo-glow: linear-gradient(90deg, rgb(123 100 255 / 0), rgb(100 157 255 / .9) 25%, rgb(129 71 238) 60%, rgb(94 92 230 / .9) 85%, rgb(94 92 230 / 0)); }
 .vo-pill[data-kind=thinking] .vo-glow { display: none; }
-/* live: each slice rises and falls on its own beat, like a waveform under the words */
-.vo-pill[data-live] .vo-glow i { animation: vo-level 1.4s ease-in-out infinite alternate; }
-.vo-pill[data-live] .vo-glow i:nth-child(1) { animation-duration: 1.10s; animation-delay: -.3s; }
-.vo-pill[data-live] .vo-glow i:nth-child(2) { animation-duration: .82s;  animation-delay: -.6s; }
-.vo-pill[data-live] .vo-glow i:nth-child(3) { animation-duration: 1.30s; animation-delay: -.1s; }
-.vo-pill[data-live] .vo-glow i:nth-child(4) { animation-duration: .94s;  animation-delay: -.8s; }
-.vo-pill[data-live] .vo-glow i:nth-child(5) { animation-duration: 1.18s; animation-delay: -.45s; }
-@keyframes vo-level { 0% { transform: scaleY(.55); } 35% { transform: scaleY(1.25); } 60% { transform: scaleY(.8); } 100% { transform: scaleY(1.45); } }
-/* waiting for an answer (proactive): a slow, even breath instead of speech */
-.vo-pill[data-live][data-kind=ask].is-waiting .vo-glow i { animation: vo-wait 2.8s ease-in-out infinite alternate; }
-@keyframes vo-wait { from { transform: scaleY(.7); } to { transform: scaleY(1.05); } }
+/* live: the speech engine (card.js) writes --g1…--g5 from the voice level and pitch of the words being spoken */
+.vo-pill[data-live] .vo-glow i:nth-child(1) { transform: scaleY(var(--g1, 1)); }
+.vo-pill[data-live] .vo-glow i:nth-child(2) { transform: scaleY(var(--g2, 1)); }
+.vo-pill[data-live] .vo-glow i:nth-child(3) { transform: scaleY(var(--g3, 1)); }
+.vo-pill[data-live] .vo-glow i:nth-child(4) { transform: scaleY(var(--g4, 1)); }
+.vo-pill[data-live] .vo-glow i:nth-child(5) { transform: scaleY(var(--g5, 1)); }
 
 /* orb halo (Figma: orb-halo, 96 px, concentric with the orb, 16% light / 24% dark, layer blur 36): a faint wash, not a ring */
 .vo-halo { will-change: transform; position: absolute; z-index: -2; left: -12px; top: -12px; width: 96px; height: 96px; border-radius: 50%; opacity: .16; filter: blur(18px); pointer-events: none; }
 :root[data-theme=dark] .vo-halo { opacity: .24; }
 .vo-halo img { width: 100%; height: 100%; display: block; border-radius: 50%; }
-.vo-pill[data-live] .vo-halo img { animation: vo-swirl 8s linear infinite; }
+.vo-pill[data-live] .vo-halo { opacity: calc(.16 + var(--lv, 0) * .12); }
+.vo-pill[data-live] .vo-halo img { transform: rotate(calc(var(--rot, 0) * 1deg)); }
 
 /* ---------- orb ---------- */
 /* clip-path keeps a true circle even while the inner layers move (border-radius + transformed children leaves corners) */
@@ -93,17 +89,18 @@
 /* the moving layers sit inside the sphere, faded out before its rim, so the original edge stays crisp */
 .vo-orb .vo-flow { position: absolute; inset: 0; -webkit-mask-image: radial-gradient(circle, #000 52%, transparent 70%); mask-image: radial-gradient(circle, #000 52%, transparent 70%); pointer-events: none; }
 .vo-orb .vo-flow img { opacity: 0; mix-blend-mode: screen; }
-.vo-pill[data-live] .vo-orb.is-fluid .vo-flow img { animation: vo-swirl 6s linear infinite, vo-pulse 2.6s ease-in-out infinite alternate; }
-.vo-pill[data-live] .vo-orb.is-fluid .vo-flow img + img { animation: vo-swirl 9s linear infinite reverse, vo-pulse 3.4s ease-in-out infinite alternate-reverse; }
+.vo-pill[data-live] .vo-orb.is-fluid { transform: scale(calc(1 + var(--lv, 0) * .05)); }
+.vo-pill[data-live] .vo-orb.is-fluid .vo-flow img { opacity: calc(.15 + var(--lv, 0) * .55); transform: rotate(calc(var(--rot, 0) * 1deg)) scale(calc(1.15 + var(--lv, 0) * .15)); }
+.vo-pill[data-live] .vo-orb.is-fluid .vo-flow img + img { opacity: calc(.1 + var(--lv, 0) * .45); transform: rotate(calc(var(--rot, 0) * -1.4deg)) scale(calc(1.2 + var(--lv, 0) * .12)); }
 @keyframes vo-swirl { from { transform: rotate(0) scale(1.15); } 50% { transform: rotate(180deg) scale(1.3); } to { transform: rotate(360deg) scale(1.15); } }
 @keyframes vo-pulse { from { opacity: .15; } to { opacity: .6; } }
 
 /* thinking: the grain drifts irregularly inside the sphere instead of spinning */
 .vo-orb.is-thinking .vo-flow img { mix-blend-mode: normal; opacity: .55; }
-.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(1) { animation: vo-grain-a 3.7s ease-in-out infinite alternate; }
-.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(2) { animation: vo-grain-b 2.9s ease-in-out infinite alternate; }
-.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(3) { animation: vo-grain-c 4.3s ease-in-out infinite alternate; }
-.vo-pill[data-live] .vo-orb.is-thinking > img { animation: vo-grain-base 2.3s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(1) { animation: vo-grain-a 7.4s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(2) { animation: vo-grain-b 6.2s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking .vo-flow img:nth-child(3) { animation: vo-grain-c 8.6s ease-in-out infinite alternate; }
+.vo-pill[data-live] .vo-orb.is-thinking > img { animation: vo-grain-base 4.6s ease-in-out infinite alternate; }
 @keyframes vo-grain-a { 0% { transform: translate(-3px, 2px) scale(1.35); opacity: .2; } 30% { transform: translate(4px, -3px) scale(1.5); opacity: .6; } 65% { transform: translate(-2px, -4px) scale(1.4); opacity: .3; } 100% { transform: translate(3px, 4px) scale(1.55); opacity: .55; } }
 @keyframes vo-grain-b { 0% { transform: translate(3px, -2px) scale(1.7) rotate(40deg); opacity: .5; } 40% { transform: translate(-4px, 3px) scale(1.6) rotate(52deg); opacity: .15; } 100% { transform: translate(2px, 5px) scale(1.8) rotate(35deg); opacity: .5; } }
 @keyframes vo-grain-c { 0% { transform: translate(0, 4px) scale(1.2) rotate(-25deg); opacity: .15; } 50% { transform: translate(-5px, -2px) scale(1.3) rotate(-18deg); opacity: .45; } 100% { transform: translate(4px, -3px) scale(1.25) rotate(-30deg); opacity: .25; } }

@@ -46,70 +46,114 @@ function voSetKind(pill, kind) {
   const h = pill.querySelector('.vo-halo'), nh = voHalo(kind);
   if (h) h.outerHTML = nh; else if (nh) pill.insertAdjacentHTML('afterbegin', nh);
 }
+/* ---------- speech engine ----------
+   Visuals follow a simulated voice, not a timer: every word becomes syllable pulses (vowel groups),
+   stressed words (numbers, capitals, long words) push harder, pitch drifts down through a statement
+   and lifts on a question. The level drives the glow slices, the orb's flow and halo; a spring drives width. */
+const voSyllables = w => Math.max(1, (w.toLowerCase().match(/[aeiouy]+/g) || []).length);
+const voStress = w => /\d/.test(w) ? 1 : /^[A-Z]/.test(w) ? .85 : w.length > 6 ? .7 : w.length < 4 ? .3 : .5;
+function voEngine(pill) {
+  const box = pill.querySelector('.vo-text'), line = pill.querySelector('.vo-line');
+  const E = { pulses: [], wT: box.offsetWidth, w: box.offsetWidth, vw: 0, xT: 0, x: 0, vx: 0, lv: 0, pitch: .5, rot: 0, waiting: false, t0: performance.now() };
+  /* words: [{w, at(ms from now), dur}]; question lifts pitch at the end */
+  E.speak = (words, question) => {
+    const now = performance.now();
+    words.forEach(({ w, at, dur }, i) => {
+      const n = voSyllables(w), st = voStress(w), last = i === words.length - 1;
+      const decl = 1 - i / Math.max(words.length, 1) * .5;          /* declination through the sentence */
+      for (let k = 0; k < n; k++) {
+        const pitch = Math.min(1, Math.max(0, .35 * decl + st * .3 + (question && last ? .35 * (k + 1) / n : 0)));
+        E.pulses.push({ t: now + at + k * dur / n, a: .25 + .75 * st * (k === 0 ? 1 : .6), p: pitch, len: dur / n });
+      }
+      if (/[,.]$/.test(w)) E.pulses.push({ t: now + at + dur, a: 0, p: .3, len: 260 });   /* a breath after punctuation */
+    });
+  };
+  let last = performance.now(), raf;
+  const tick = now => {
+    if (!pill.isConnected) return;
+    const dt = Math.min(50, now - last) / 1000; last = now;
+    if (!pill.closest('[data-closing]')) {
+      /* raw level and pitch from active syllables: fast attack, decaying tail */
+      let raw = 0, pit = E.pitch;
+      for (const p of E.pulses) {
+        const u = now - p.t; if (u < 0 || u > p.len + 220) continue;
+        const env = u < 40 ? u / 40 : Math.exp(-(u - 40) / 120);
+        if (p.a * env > raw) { raw = p.a * env; pit = p.p; }
+      }
+      E.pulses = E.pulses.filter(p => now - p.t < p.len + 400);
+      if (E.waiting) raw = Math.max(raw, .1 + .08 * Math.sin((now - E.t0) / 900));
+      const tau = raw > E.lv ? .06 : .22;                       /* attack 60 ms, release 220 ms */
+      E.lv += (raw - E.lv) * (1 - Math.exp(-dt / tau));
+      E.pitch += (pit - E.pitch) * (1 - Math.exp(-dt / .18));
+      E.rot += dt * (6 + 70 * E.lv);                             /* the fluid turns with the voice, nearly still in silence */
+      /* glow: energy centred where the pitch sits (low pitch left, high pitch right) */
+      const c = .2 + .6 * E.pitch;
+      for (let j = 0; j < 5; j++) {
+        const d = j / 4 - c, g = .82 + E.lv * .85 * Math.exp(-(d * d) / .09);
+        pill.style.setProperty('--g' + (j + 1), g.toFixed(3));
+      }
+      pill.style.setProperty('--lv', E.lv.toFixed(3));
+      pill.style.setProperty('--rot', E.rot.toFixed(1));
+      /* width and scroll: a soft, critically damped spring (no overshoot) toward the words spoken so far */
+      const k = 210, cdamp = 2 * Math.sqrt(k);
+      E.vw += (k * (E.wT - E.w) - cdamp * E.vw) * dt; E.w += E.vw * dt;
+      E.vx += (k * (E.xT - E.x) - cdamp * E.vx) * dt; E.x += E.vx * dt;
+      box.style.width = E.w.toFixed(2) + 'px';
+      line.style.transform = `translateX(${E.x.toFixed(2)}px)`;
+    }
+    raf = requestAnimationFrame(tick);
+  };
+  raf = requestAnimationFrame(tick);
+  return E;
+}
+
 async function voPlay(pill) {
   pill.dataset.run = '1';
   const box = pill.querySelector('.vo-text'), line = pill.querySelector('.vo-line');
   const runs = voRuns(VO_SCRIPTS[pill.dataset.script]);
   const alive = () => pill.isConnected && !pill.closest('[data-closing]');
-  let curW = box.offsetWidth;
-  const anims = [];
-  /* finished animations are committed to inline style and dropped, so nothing depends on fill-forwards (which the browser may discard) */
-  const run = (el, kf, opt) => { const a = el.animate(kf, { fill: 'forwards', ...opt }); a.onfinish = () => { try { a.commitStyles(); } catch (e) {} a.cancel(); }; anims.push(a); return a; };
-  const swapOut = async () => { await run(line, [{ opacity: 1, filter: 'blur(0)' }, { opacity: 0, filter: 'blur(10px)' }], { duration: 360, easing: 'cubic-bezier(.4, 0, 1, 1)' }).finished.catch(() => {}); };
+  const E = voEngine(pill);
+  const fade = (to, ms) => line.animate([{ opacity: to ? 0 : 1, filter: `blur(${to ? 10 : 0}px)` }, { opacity: to, filter: `blur(${to ? 0 : 10}px)` }], { duration: ms, easing: to ? 'cubic-bezier(.2, .6, .2, 1)' : 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' });
   while (alive()) {
     for (const r of runs) {
       if (!alive()) return;
-      await swapOut();
+      await fade(0, 360).finished.catch(() => {});
       if (!alive()) return;
-      anims.splice(0).forEach(a => a.cancel());
-      line.style.opacity = ''; line.style.filter = ''; line.style.transform = 'none';
       voSetKind(pill, r[0][0]);
       box.classList.remove('is-scroll');
+      E.xT = 0;
       if (!r[0][2]) {
-        /* whole line: cross-fade with blur, pill width eases to fit */
         const [kind, text, , hold, , enter] = r[0];
-        if (enter) {
-          /* fold to the orb, a soft ping, then unfold with the words */
-          run(box, [{ width: curW + 'px' }, { width: '0px' }], { duration: 420, easing: VO_EASE });
-          curW = 0;
-          await voSleep(700);
-          if (!alive()) return;
-          pill.querySelector('.vo-orb').animate([{ transform: 'scale(1)' }, { transform: 'scale(1.12)' }, { transform: 'scale(1)' }], { duration: 700, easing: 'cubic-bezier(.3, 0, .2, 1)' });
-          await voSleep(380);
+        if (enter) {                                   /* proactive: fold to the orb, a soft ping, then unfold */
+          E.wT = 0; await voSleep(900); if (!alive()) return;
+          pill.querySelector('.vo-orb').animate([{ scale: 1 }, { scale: 1.1 }, { scale: 1 }], { duration: 800, easing: 'cubic-bezier(.3, 0, .2, 1)' });
+          await voSleep(420);
         }
-        line.textContent = text;
-        const w = Math.ceil(line.getBoundingClientRect().width / ((line.getBoundingClientRect().width / line.offsetWidth) || 1)) + 2, right = false;
-        const toW = Math.min(w, VO_MAX);
-        run(box, [{ width: curW + 'px' }, { width: toW + 'px' }], { duration: 520, easing: VO_EASE });
-        run(line, [{ opacity: 0, filter: 'blur(8px)', transform: `translateX(${right ? VO_MAX - w + 10 : 10}px)` }, { opacity: 1, filter: 'blur(0)', transform: `translateX(${right ? VO_MAX - w : 0}px)` }], { duration: 520, easing: VO_EASE });
-        curW = toW;
-        if (enter) { await voSleep(520); pill.classList.add('is-waiting'); await voSleep(hold); pill.classList.remove('is-waiting'); }
-        else await voSleep(520 + hold);
+        line.textContent = text; line.style.transform = `translateX(${E.x}px)`;
+        E.wT = Math.min(Math.ceil(line.scrollWidth) + 2, VO_MAX);
+        fade(1, 640);
+        if (kind !== 'thinking') E.speak(text.split(' ').map((w, i) => ({ w, at: 120 + i * 190, dur: 190 })), /\?$/.test(text));
+        if (enter) { await voSleep(640 + text.split(' ').length * 190); E.waiting = true; await voSleep(hold); E.waiting = false; }
+        else await voSleep(640 + hold);
         continue;
       }
-      /* streamed words: every word is laid out up front with its own delay; one continuous animation scrolls the line */
-      const words = [], times = [];
-      let t = 260;   /* the pill eases to the first word while the previous line fades */
-      r.forEach(([, text, gap, hold], si) => { text.split(' ').forEach((w, i) => { words.push(w); times.push(t); t += gap; }); t += (si < r.length - 1 ? hold : 0); });
-      const T = t, lastHold = r[r.length - 1][3];
+      /* streamed: lay out every word with its own reveal delay; targets follow the words as they are spoken */
+      const words = [], times = [], gaps = [];
+      let t = 200;
+      r.forEach(([, text, gap, hold], si) => { text.split(' ').forEach(w => { words.push(w); times.push(t); gaps.push(gap); t += gap; }); t += (si < r.length - 1 ? hold : 0); });
       line.innerHTML = words.map((w, i) => `<b style="animation-delay:${times[i]}ms">${w}</b>`).join(' ');
-      const bs = [...line.children], rights = bs.map(b => b.offsetLeft + b.offsetWidth + 2);
-      const kfW = [], kfX = [];
-      rights.forEach((rx, i) => {
-        const off = times[i] / (T + 400);
-        kfW.push({ offset: off, width: Math.min(rx, VO_MAX) + 'px', easing: VO_EASE });
-        kfX.push({ offset: off, transform: `translateX(${rx > VO_MAX ? VO_MAX - 8 - rx : 0}px)`, easing: VO_EASE });
-      });
-      kfW.unshift({ offset: 0, width: curW + 'px', easing: VO_EASE }); kfX.unshift({ offset: 0, transform: 'none', easing: VO_EASE });
-      /* hold the last position to the end (a missing offset-1 frame would ease back to the underlying style) */
-      kfW.push({ ...kfW[kfW.length - 1], offset: 1 }); kfX.push({ ...kfX[kfX.length - 1], offset: 1 });
-      run(line, [{ opacity: 1 }, { opacity: 1 }], { duration: 1 });
-      run(box, kfW, { duration: T + 400 });
-      run(line, kfX, { duration: T + 400 });
-      const firstOver = rights.findIndex(rx => rx > VO_MAX);
-      if (firstOver >= 0) setTimeout(() => alive() && box.classList.add('is-scroll'), times[firstOver]);
-      curW = Math.min(rights[rights.length - 1], VO_MAX);
-      await voSleep(T + 400 + lastHold);
+      line.getAnimations().forEach(a => a.cancel()); line.style.opacity = 1; line.style.filter = '';
+      const rights = [...line.children].map(b => b.offsetLeft + b.offsetWidth + 2);
+      E.speak(words.map((w, i) => ({ w, at: times[i], dur: gaps[i] })), false);
+      const start = performance.now();
+      for (let i = 0; i < words.length; i++) {
+        const wait = times[i] - 120 - (performance.now() - start); if (wait > 0) await voSleep(wait);   /* lead the reveal a little so the pill opens before the word lands */
+        if (!alive()) return;
+        E.wT = Math.min(rights[i], VO_MAX);
+        E.xT = rights[i] > VO_MAX ? VO_MAX - 8 - rights[i] : 0;
+        if (rights[i] > VO_MAX) box.classList.add('is-scroll');
+      }
+      await voSleep(gaps[gaps.length - 1] + r[r.length - 1][3]);
     }
   }
 }
@@ -121,7 +165,7 @@ function voReset(pill) {
   line.style.transition = 'opacity .12s ease'; line.style.opacity = 0;
   setTimeout(() => {
     voSetKind(pill, first);
-    box.getAnimations().concat(line.getAnimations()).forEach(a => a.cancel()); line.style.filter = '';
+    box.getAnimations().concat(line.getAnimations()).forEach(a => a.cancel()); line.style.filter = ''; ['--lv','--rot','--g1','--g2','--g3','--g4','--g5'].forEach(v => pill.style.removeProperty(v));
     box.style.width = ''; box.classList.remove('is-scroll');
     line.style.transform = 'none'; line.textContent = pill.dataset.text; line.style.opacity = 1;
   }, 120);
@@ -135,7 +179,7 @@ setInterval(() => {
   });
 }, 300);
 
-const VO_BASE = `Pill: 72 px tall, corner radius 28, padding 12 px left and 28 px right, items centred with 12 px gaps, clipped. Light theme: fill #FFFFFF, a 1 px inside stroke of #1D1D1F at 5%, drop shadow 0 4 16 in rgb(28,28,46) at 12%, background blur 40.
+const VO_BASE = `Pill: 72 px tall, fully round (radius 36), padding 12 px left and 28 px right, items centred with 12 px gaps, clipped. Light theme: fill #FFFFFF, a 1 px inside stroke of #1D1D1F at 5%, drop shadow 0 4 16 in rgb(28,28,46) at 12%, background blur 40.
 Orb: 48 × 48 at x 12, y 12. Words: Inter Medium 24/32, letter-spacing 0, one line, #1D1D1F.`;
 const VO_GLOW = (o, stops) => `Ambient glow inside the pill, under everything: an ellipse at x −11, y 41, 18 px wider than the pill and 56 px tall, layer blur 40 (CSS blur 20 px), opacity ${o}, clipped by the pill, filled with a horizontal gradient ${stops}.`;
 
@@ -153,14 +197,14 @@ Motion: words appear one by one, each rising 6 px as it fades in; the pill grows
     notes: [['24/32 at 70%', 'The driver’s words sit back from the assistant’s.'], ['The driver’s photo', 'The library’s 48 px avatar.'], ['A grey glow that drifts', 'The pill breathes while the mic is open.']],
   },
   VT: {
-    W: 700, before: () => voiceBefore('VT', 386), name: 'Thinking', cover: 1, fullStage: true, testReference: 'Figma',
-    html: (_, cover) => voStage(386, voPill('thinking', 'Analyzing target restaurant', 286, cover, 'thinking'), cover),
-    ask: 'Design the thinking state for a car voice assistant, 386 × 72 px, light theme. It shows the assistant working on “Analyzing target restaurant”. Animate it. Nothing else.',
-    prompt: `Design the thinking state of a car voice assistant on a 386 × 72 px canvas.
+    W: 700, before: () => voiceBefore('VT', 412), name: 'Thinking', cover: 1, fullStage: true, testReference: 'Figma',
+    html: (_, cover) => voStage(412, voPill('thinking', 'Analyzing target restaurant', 286, cover, 'thinking'), cover),
+    ask: 'Design the thinking state for a car voice assistant, 412 × 72 px, light theme. It shows the assistant working on “Analyzing target restaurant”. Animate it. Nothing else.',
+    prompt: `Design the thinking state of a car voice assistant on a 412 × 72 px canvas, pill centred.
 ${VO_BASE}
-The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px. Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
+The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (412 px with Inter). Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
 Motion: a richer gradient (cyan, blue, violet, pink) flows through the words in a loop; the line cycles “Understanding your request”, “Finding related features”, “Browsing your history”, each fading out and in with a short blur while the pill eases to the new width; inside the orb the grain drifts and flickers irregularly (no spinning).`,
-    wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 17 px', 'Too small at arm’s length.'], ['A ringed blue bead', 'The orb looks like a button.']],
+    wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 18 px', 'Too small at arm’s length.'], ['A ringed blue bead', 'The orb looks like a button.']],
     notes: [['One line in a gradient', 'The sweep shows work in progress.'], ['The library’s grain orb', 'It turns faster while thinking.'], ['No glow', 'The pill stays quiet until there is an answer.']],
   },
   VA: {
