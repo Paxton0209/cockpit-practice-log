@@ -2315,7 +2315,7 @@ function viewHome(){
     <aside class="side">
       <a class="brand" href="#home">Dashnote</a>
       <nav class="nav" id="nav"><span class="navind" id="navind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'Index':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}${SOON.map(c=>`<button class="soon" disabled><span>${c}</span><small>Soon</small></button>`).join('')}</nav>
-      <div class="foot"><div class="mx" aria-label="${PUBLISHED} of ${TOTAL} components published">${Array.from({length:TOTAL},(_,i)=>{const pe=PUBLISHED_ENTRIES[i];if(pe){const nm=(CMP[pe.s]&&CMP[pe.s].name)||pe.title;return `<a href="#entry-${pad(pe.n)}" title="${pad(pe.n)} ${nm}" aria-label="${pad(pe.n)} ${nm}"></a>`}return `<i${i===PUBLISHED?' class="next" title="Next up"':''}></i>`}).join('')}</div><div class="by"><span><strong>${PUBLISHED}</strong> / ${TOTAL}</span><a href="https://github.com/Paxton0209/dashnote" target="_blank" rel="noopener">GitHub</a></div></div>
+      <div class="foot"><div class="mx" aria-label="${PUBLISHED} of ${TOTAL} components published">${Array.from({length:TOTAL},(_,i)=>{const pe=PUBLISHED_ENTRIES[i];if(pe){const nm=(CMP[pe.s]&&CMP[pe.s].name)||pe.title;return `<a href="#entry-${pad(pe.n)}" data-n="${pe.n}" title="${pad(pe.n)} ${nm}" aria-label="${pad(pe.n)} ${nm}"></a>`}return `<i${i===PUBLISHED?' class="next" title="Next up"':''}></i>`}).join('')}</div><div class="by"><span><strong>${PUBLISHED}</strong> / ${TOTAL}</span><a href="https://github.com/Paxton0209/dashnote" target="_blank" rel="noopener">GitHub</a></div></div>
     </aside>
     <main class="mainc"><button class="ib press tgl" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button><div class="grid" id="grid">${gridFor('All')}</div></main>
   </div>`}
@@ -2358,7 +2358,7 @@ function setupHome(){
    (lensPose), both started on the same timeline tick. */
 const lensEase='cubic-bezier(.32,.72,0,1)',lensReduced=matchMedia('(prefers-reduced-motion: reduce)'),lensCompact=matchMedia('(max-width:620px)');
 const RM=lensReduced,COMPACT=lensCompact;
-let lensMotion=[],lensState='closed',lensAnchor=null,curN=0;
+let lensMotion=[],lensState='closed',lensAnchor=null,curN=0,lensGen=0;
 const stopLens=()=>{lensMotion.forEach(a=>a.cancel());lensMotion=[]};
 function lensAnimate(el,frames,options){
   const a=el.animate(frames,{fill:'both',...options});lensMotion.push(a);return a;
@@ -2388,8 +2388,26 @@ function lensPose(r,target){
   return [r.left+r.width/2-target.left-target.width/2,r.top+r.height/2-target.top-target.height/2,r.width/target.width];
 }
 const STAGE_R=16;
-function thumbFor(n){const el=lensAnchor?.isConnected&&+lensAnchor.dataset.n===n?lensAnchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
+function dotFor(n){return lensAnchor?.isConnected&&lensAnchor.matches('.foot .mx a')&&+lensAnchor.dataset.n===n?lensAnchor:null}
+function thumbFor(n){const el=lensAnchor?.isConnected&&lensAnchor.matches('#grid .card')&&+lensAnchor.dataset.n===n?lensAnchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
 function ghost(n,on){const t=thumbFor(n);if(t)t.style.visibility=on?'hidden':''}
+/* spring the sheet directly out of (or back into) a clicked bottom-left matrix dot */
+function springFromDot(dotRect,endRect,opening){
+  const sheet=$('#sheet2');
+  const dx=(dotRect.left+dotRect.width/2)-(endRect.left+endRect.width/2);
+  const dy=(dotRect.top+dotRect.height/2)-(endRect.top+endRect.height/2);
+  sheet.style.transformOrigin='50% 50%';
+  if(opening){
+    return lensSpring(sheet,[0],[1],([p])=>{
+      const t=Math.max(0,p),s=Math.max(.04,.04+.96*t),op=Math.min(1,t*2.8);
+      return {transform:`translate(calc(-50% + ${dx*(1-t)}px),${dy*(1-t)}px) scale(${s})`,opacity:op,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1};
+    },460,36);
+  }
+  return lensSpring(sheet,[0],[1],([p])=>{
+    const t=Math.max(0,Math.min(1,p)),s=Math.max(.04,1-.96*t),op=Math.max(0,1-t*1.35);
+    return {transform:`translate(calc(-50% + ${dx*t}px),${dy*t}px) scale(${s})`,opacity:op,'--dialog-surface-opacity':1,'--dialog-copy-opacity':Math.max(0,1-t*2.2)};
+  },520,42);
+}
 /* the cover is both the card and the artwork (Dashline's cell + glyph). Closing lands on the cover at rest,
    so hold it still: its hover lift would otherwise move the target mid-flight. */
 function sourceFor(n,rest){const t=thumbFor(n);if(!t)return null;if(rest){t.style.transition='none';t.style.transform='none'}
@@ -2560,13 +2578,15 @@ function wireSheet(){
 }
 function ensureOv(){let ov=$('#ov');if(ov)return ov;ov=document.createElement('div');ov.className='ov';ov.id='ov';
   ov.innerHTML='<div class="veil" id="veil"></div><div class="sheet2" id="sheet2" role="dialog" aria-modal="true" tabindex="-1"><div class="sbody" id="sbody" tabindex="-1"></div></div>';
-  document.body.appendChild(ov);$('#veil').onclick=()=>go('home');return ov}
+  document.body.appendChild(ov);$('#veil').onclick=()=>{if(location.hash&&location.hash!=='#home')go('home');else closeInsp()};return ov}
 function center(sh){if(lensCompact.matches){sh.style.top='';return}sh.style.top=Math.round(Math.max(28,(innerHeight-sh.offsetHeight)/2))+'px'}
 function openEntry(n){
   const ov=ensureOv(),sheet=$('#sheet2'),body=$('#sbody'),veil=$('#veil');
-  if(lensState==='open'){if(!lensCompact.matches&&!lensReduced.matches){ghost(curN,0);ghost(n,1)}curN=n;body.innerHTML=sheetHTML(n);fit(body);wireSheet();body.scrollTop=0;lensAnimate(body.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
+  if(lensState==='open'){if(!lensCompact.matches&&!lensReduced.matches){ghost(curN,0);if(!dotFor(n))ghost(n,1)}curN=n;body.innerHTML=sheetHTML(n);fit(body);wireSheet();body.scrollTop=0;lensAnimate(body.firstElementChild,[{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});return}
   if(lensState==='closing'){const a=lensAnchor;finishLens();lensAnchor=a}
-  const source=sourceFor(n,false);
+  const gen=++lensGen;
+  stopLens();sheet.removeAttribute('data-closing');sheet.style.transformOrigin='';sheet.style.opacity='';
+  const dot=dotFor(n),source=dot?null:sourceFor(n,false);
   curN=n;body.innerHTML=sheetHTML(n);fit(body);
   lensState='open';ov.classList.add('open');document.body.classList.add('lock','dim');
   center(sheet);body.scrollTop=0;body.focus({preventScroll:true});wireSheet();
@@ -2574,18 +2594,22 @@ function openEntry(n){
   veil.style.opacity=1;
   if(lensReduced.matches)return;
   lensAnimate(veil,[{opacity:0},{opacity:1}],{duration:220,easing:lensEase});
+  const done=()=>{if(gen===lensGen&&lensState==='open'){stopLens();sheet.style.transformOrigin=''}};
   if(lensCompact.matches){
-    lensSpring(sheet,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40);
+    lensSpring(sheet,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40).onfinish=done;
+  }else if(dot){
+    springFromDot(dot.getBoundingClientRect(),end,true).onfinish=done;
   }else if(source){
     ghost(n,1);
-    springDialog(source.cell,end,source.glyph,art,end,art,0,1).onfinish=()=>{if(lensState==='open')stopLens()}; /* one shot: the cover became the sheet, so its slot stays empty while open */
+    springDialog(source.cell,end,source.glyph,art,end,art,0,1).onfinish=done; /* one shot: the cover became the sheet, so its slot stays empty while open */
   }else{
-    lensAnimate(sheet,[{opacity:0},{opacity:1}],{duration:200,easing:lensEase});
+    sheet.style.transformOrigin='50% 50%';
+    lensSpring(sheet,[0],[1],([p])=>{const t=Math.max(0,p);return {transform:`translateX(-50%) scale(${.94+.06*t})`,opacity:Math.min(1,t*2.4),'--dialog-surface-opacity':1,'--dialog-copy-opacity':1}},480,38).onfinish=done;
   }
 }
 function finishLens(){
   stopLens();
-  const sheet=$('#sheet2');sheet.removeAttribute('data-closing');{const h=$('.hero3',sheet);if(h)h.style.transformOrigin=''}
+  const sheet=$('#sheet2');sheet.removeAttribute('data-closing');sheet.style.transformOrigin='';sheet.style.opacity='';{const h=$('.hero3',sheet);if(h)h.style.transformOrigin=''}
   $$('#grid .thumb').forEach(t=>{t.style.visibility=t.style.transform='';t.offsetWidth;t.style.transition=''});
   $('#veil').style.opacity='';$('#ov').classList.remove('open');document.body.classList.remove('lock','dim');$('#sbody').innerHTML='';
   const focus=lensAnchor?.isConnected?lensAnchor:null;
@@ -2595,11 +2619,12 @@ function finishLens(){
 function closeInsp(){
   document.body.classList.remove('dim');
   if(lensState!=='open')return;
+  const gen=++lensGen;
   lensState='closing';const sheet=$('#sheet2'),veil=$('#veil'),stage=$('.hero3',sheet);sheet.setAttribute('data-closing','');
   if(lensReduced.matches){finishLens();return}
   /* on Before, fade back to After on the way */
   {const st=$('#cstage');if(st&&st.dataset.v==='b'){if(st._scan)st._scan.forEach(a=>a.cancel());fadeTo(st,'a',200)}}
-  const source=sourceFor(curN,true);
+  const dot=dotFor(curN),source=dot?null:sourceFor(curN,true);
   const currentSheet=sheet.getBoundingClientRect(),currentArt=stage?.getBoundingClientRect();
   const backdrop=Number(getComputedStyle(veil).opacity),sheetOpacity=Number(getComputedStyle(sheet).opacity);
   const surfaceOpacity=Number(getComputedStyle(sheet).getPropertyValue('--dialog-surface-opacity'));
@@ -2609,25 +2634,29 @@ function closeInsp(){
   if(lensCompact.matches){
     const rest=sheet.getBoundingClientRect();
     end=lensSpring(sheet,[100*(currentSheet.top-rest.top)/rest.height],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);
+  }else if(dot){
+    const rest=sheet.getBoundingClientRect();
+    end=springFromDot(dot.getBoundingClientRect(),rest,false);
   }else if(source&&stage){
     ghost(curN,1);
     const rest=sheet.getBoundingClientRect(),art=stage.getBoundingClientRect();
     end=springDialog(currentSheet,source.cell,currentArt,source.glyph,rest,art,surfaceOpacity,0);
   }else{
-    end=lensAnimate(sheet,[{opacity:sheetOpacity},{opacity:0}],{duration:150,easing:'ease-in'});
+    sheet.style.transformOrigin='50% 50%';
+    end=lensAnimate(sheet,[{opacity:sheetOpacity,transform:'translateX(-50%) scale(1)'},{opacity:0,transform:'translateX(-50%) scale(.95)'}],{duration:150,easing:'ease-in'});
   }
-  end.onfinish=finishLens;
+  end.onfinish=()=>{if(gen===lensGen)finishLens()};
 }
 function go(h){location.hash=h}
 addEventListener('keydown',e=>{
   if(!curN||lensState!=='open')return;
-  if(e.key==='Escape'){go('home');return}
+  if(e.key==='Escape'){if(location.hash&&location.hash!=='#home')go('home');else closeInsp();return}
   if(e.key!=='ArrowLeft'&&e.key!=='ArrowRight')return;
   const index=PUBLISHED_ENTRIES.findIndex(entry=>entry.n===curN);
   const next=PUBLISHED_ENTRIES[index+(e.key==='ArrowLeft'?-1:1)];
   if(next)go('entry-'+pad(next.n));
 });
-addEventListener('click',e=>{const c=e.target.closest('#grid .card');if(c)lensAnchor=c},true);
+addEventListener('click',e=>{const c=e.target.closest('#grid .card,.foot .mx a');if(c)lensAnchor=c},true);
 let homeReady=false;
 function route(){
   const m=location.hash.match(/^#entry-(\d{3})$/);
@@ -2640,7 +2669,7 @@ function route(){
     closeInsp();
     return;
   }
-  if(n!==curN&&PUBLISHED_ENTRIES.some(e=>e.n===n))openEntry(n);
+  if((n!==curN||lensState!=='open')&&PUBLISHED_ENTRIES.some(e=>e.n===n))openEntry(n);
 }
 function setupLoops(){const io=new IntersectionObserver(es=>es.forEach(x=>x.target.classList.toggle('play',x.isIntersecting)),{threshold:.35});$$('.card:not(.soon)').forEach(c=>io.observe(c))}
 const mem={get(k){try{return localStorage.getItem('dn:'+k)}catch(_){return null}},set(k,v){try{localStorage.setItem('dn:'+k,v)}catch(_){}}};
