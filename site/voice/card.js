@@ -74,7 +74,7 @@ const voSyllables = w => Math.max(1, (w.toLowerCase().match(/[aeiouy]+/g) || [])
 const voStress = w => /\d/.test(w) ? 1 : /^[A-Z]/.test(w) ? .85 : w.length > 6 ? .7 : w.length < 4 ? .3 : .5;
 function voEngine(pill) {
   const box = pill.querySelector('.vo-text'), line = pill.querySelector('.vo-line');
-  const E = { think: 0, pulses: [], wT: box.offsetWidth, w: box.offsetWidth, vw: 0, xT: 0, x: 0, vx: 0, lv: 0, pitch: .5, rot: 0, waiting: false, t0: performance.now() };
+  const E = { think: 0, pulses: [], wT: line.offsetWidth, w: line.offsetWidth, vw: 0, xT: 0, x: 0, vx: 0, lv: 0, pitch: .5, rot: 0, waiting: false, t0: performance.now() };
   /* words: [{w, at(ms from now), dur}]; question lifts pitch at the end */
   E.speak = (words, question) => {
     const now = performance.now();

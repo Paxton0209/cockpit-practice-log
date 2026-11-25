@@ -111,15 +111,16 @@
 :root[data-theme=dark] .vo-orb.is-thinking img { filter: brightness(1.45); }
 
 /* ---------- words ---------- */
-.vo-text { position: relative; display: block; flex: none; height: 32px; overflow: hidden; white-space: nowrap; }
+/* extra bleed padding (cancelled by negative margin) lets the incoming word blur fade softly without a hard vertical clip */
+.vo-text { position: relative; display: block; flex: none; height: 32px; box-sizing: content-box; padding: 14px 18px 14px 10px; margin: -14px -18px -14px -10px; overflow: hidden; white-space: nowrap; }
 .vo-line { position: relative; display: inline-block; white-space: nowrap; will-change: transform, filter; }
 .vo-pill[data-kind=user] .vo-line { opacity: .7; }
 .vo-line b { font-weight: inherit; display: inline-block; animation: vo-word .9s cubic-bezier(.25, .6, .2, 1) both; }
 /* each word arrives with a short motion blur instead of popping in */
 /* words condense in place: no horizontal hop, just opacity and a blur that settles */
-@keyframes vo-word { from { opacity: 0; filter: blur(12px); } 40% { opacity: .7; } to { opacity: 1; filter: blur(0); } }
+@keyframes vo-word { from { opacity: 0; filter: blur(10px); } 40% { opacity: .7; } to { opacity: 1; filter: blur(0); } }
 /* thinking hand-over: the outgoing line is a ghost on top; incoming words rise 6 px out of a blur */
-.vo-ghost { position: absolute; left: 0; top: 0; pointer-events: none; }
+.vo-ghost { position: absolute; left: 10px; top: 14px; pointer-events: none; }
 .vo-line b.vo-still { animation: none; }
 /* the first word of a new line arrives with the fold, quick and soft */
 .vo-line b.vo-first { animation: vo-first .4s cubic-bezier(.2, .7, .2, 1) both; }
