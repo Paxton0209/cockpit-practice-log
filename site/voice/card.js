@@ -4,9 +4,10 @@
 const VO_ORB = { user: 'voice/orb-user.png', thinking: 'voice/orb-thinking.png', reply: 'voice/orb-reply.png', ask: 'voice/orb-ask.png' };
 const voOrb = kind => {
   const src = VO_ORB[kind], img = `<img src="${src}" alt="" width="48" height="48">`;
-  /* base art stays still; reply/ask turn two screen-blended copies, thinking drifts three grain layers */
+  /* base art stays still; reply/ask turn two screen-blended copies + front luminous core filament; thinking drifts three grain layers */
   const flow = kind === 'user' ? '' : `<span class="vo-flow">${img.repeat(kind === 'thinking' ? 3 : 2)}</span>`;
-  return `<span class="vo-orb${kind === 'reply' || kind === 'ask' ? ' is-fluid' : ''} is-${kind}" aria-hidden="true">${img}${flow}</span>`;
+  const core = (kind === 'reply' || kind === 'ask') ? '<span class="vo-core"></span>' : '';
+  return `<span class="vo-orb${kind === 'reply' || kind === 'ask' ? ' is-fluid' : ''} is-${kind}" aria-hidden="true">${img}${flow}${core}</span>`;
 };
 const voHalo = kind => (kind === 'reply' || kind === 'ask') ? `<span class="vo-halo" aria-hidden="true"><img src="${VO_ORB[kind]}" alt=""></span>` : '';
 const voPill = (kind, text, textW, cover, script) =>
@@ -105,7 +106,7 @@ function voEngine(pill) {
       const tau = raw > E.lv ? .06 : .22;                       /* attack 60 ms, release 220 ms */
       E.lv += (raw - E.lv) * (1 - Math.exp(-dt / tau));
       E.pitch += (pit - E.pitch) * (1 - Math.exp(-dt / .18));
-      E.rot += dt * (6 + 70 * E.lv);                             /* the fluid turns with the voice, nearly still in silence */
+      E.rot += dt * (8 + 102 * E.lv);                             /* the fluid turns with the voice, nearly still in silence */
       /* glow: energy centred where the pitch sits (low pitch left, high pitch right) */
       const c = .2 + .6 * E.pitch;
       for (let j = 0; j < 5; j++) {
@@ -134,9 +135,19 @@ async function voPlay(pill) {
   const alive = () => pill.isConnected && !pill.closest('[data-closing]');
   const E = voEngine(pill);
   const fade = (to, ms) => line.animate([{ opacity: to ? 0 : 1, filter: `blur(${to ? 10 : 0}px)` }, { opacity: to, filter: `blur(${to ? 0 : 10}px)` }], { duration: ms, easing: to ? 'cubic-bezier(.2, .6, .2, 1)' : 'cubic-bezier(.4, 0, 1, 1)', fill: 'forwards' });
+  let firstThink = true;
   while (alive()) {
     for (const r of runs) {
       if (!alive()) return;
+      /* On initial open of Thinking, the first phrase is already visible on screen — hold it calmly instead of flashing/re-entering it. */
+      if (firstThink && r[0][0] === 'thinking' && !r[0][2] && line.textContent.trim() === r[0][1]) {
+        firstThink = false;
+        voTint(line, runs.indexOf(r));
+        E.wT = Math.min(Math.ceil(line.scrollWidth) + 2, VO_MAX);
+        await voSleep(r[0][3]);
+        continue;
+      }
+      firstThink = false;
       /* thinking → thinking: words hand over in place (see below); everything else fades the old line first */
       const handover = r[0][0] === 'thinking' && pill.dataset.kind === 'thinking' && line.textContent.trim();
       /* a streamed line that follows another: the old words lift away as a ghost while the pill folds to the new first word (never empty) */
@@ -281,7 +292,7 @@ Motion: a gradient flows through the words in a loop, and each status has its ow
     ask: 'Design the assistant-speech bar for a car voice assistant, 548 × 72 px, light theme. The assistant says “Opening all the windows and setting the cabin to 22°, with the rear windows halfway”. Animate it. Nothing else.',
     prompt: `Design the assistant-speech state of a car voice assistant on a 548 × 72 px canvas, pill centred.
 ${VO_BASE}
-Orb: a deep blue glass sphere with a bright cyan wave across it, and behind it, under the glow, a 96 px copy of the orb, concentric with it, at 16% opacity and blurred 18 px (Figma layer blur 36), clipped by the pill. Words: “Opening all the windows”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px, centred on the canvas.
+Orb: a 48 × 48 px deep-sapphire optical glass sphere with three internal depth layers (dark core, counter-drifting cyan fluid ribbons, and a bright horizontal energy filament that pulses with speech), topped with a crisp specular Fresnel rim and grounded by a soft tinted contact shadow beneath it; behind it sits a clean cyan-blue radial wash (no dark blur mud). Words: “Opening all the windows”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px, centred on the canvas.
 ${VO_GLOW('0.45', 'rgb(100,210,255) at 0% → rgb(100,210,255) at 90% (25%) → rgb(10,132,255) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
 Motion: the reply streams in word by word, each word fading in from a short motion blur, and the line slides on inside a 448 px window that fades 10% at both edges; the orb’s fluid turns and the glow under the words rises and falls like a voice level.`,
     wrong: [['Text at 15.5 px, two lines', 'The reply wraps inside a 72 px bar.'], ['Keywords in blue', '“all the windows” and “22°” read like links.'], ['An equaliser icon', 'Bars stand in for the assistant.']],
@@ -293,7 +304,7 @@ Motion: the reply streams in word by word, each word fading in from a short moti
     ask: 'Design a proactive suggestion from a car voice assistant, 548 × 72 px, light theme: unprompted, the assistant asks “Would you like to open the windows?” and waits for an answer. Animate it. Nothing else.',
     prompt: `Design the proactive state of a car voice assistant on a 548 × 72 px canvas, pill centred.
 ${VO_BASE}
-Orb: a violet glass sphere with a deep indigo swirl, and behind it, under the glow, a 96 px copy of the orb, concentric with it, at 16% opacity and blurred 18 px, clipped by the pill. Words: “Would you like to open the windows?”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px.
+Orb: a 48 × 48 px deep-indigo optical glass sphere with three internal depth layers (dark core, soft violet-lavender aurora swirl, and a calm breathing luminous center), topped with a crisp specular Fresnel rim and grounded by a soft violet-tinted contact shadow beneath it; behind it sits a clean violet radial wash. Words: “Would you like to open the windows?”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px.
 ${VO_GLOW('0.45', 'rgb(123,100,255) at 0% → rgb(100,157,255) at 90% (25%) → rgb(129,71,238) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
 Motion: because the assistant starts the conversation, the pill first folds down to the orb and its first word, “Would”, and the orb gives a soft ping; then the question is spoken word by word like any reply, each word condensing from a short blur as the pill grows with it. While it waits for an answer the violet glow breathes slowly instead of moving like speech.`,
     wrong: [['“SUGGESTION” label at 11 px', 'An all-caps label says what the moment already shows.'], ['A mic pill on the right', 'An extra control competes with the question.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.']],
