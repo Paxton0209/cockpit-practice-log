@@ -95,9 +95,9 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 .card:hover .thumb .after{animation:none;clip-path:inset(0 0 0 0);transition:clip-path .7s var(--out)}
 .card:hover .thumb .cur{animation:none;opacity:0}
 .card:hover .thumb .lb.b{animation:none;opacity:0}.card:hover .thumb .lb.a{animation:none;opacity:1}
-.meta{display:flex;align-items:baseline;gap:10px;min-height:24px;padding:0 2px}
-.meta b{font:400 12px/24px var(--mono);color:var(--t3)}
-.meta .ttl{font-size:15px;font-weight:500;line-height:24px}
+.meta{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:22px;padding:0 2px}
+.meta b{flex:none;font:400 12.5px/22px var(--font);font-variant-numeric:tabular-nums;color:var(--t3)}
+.meta .ttl{min-width:0;font-size:14.5px;font-weight:500;line-height:22px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .thumb.cov,.hero3.cov{background:
   radial-gradient(66% 58% at 50% 48%,var(--cv-mid,rgba(255,255,255,.34)) 0%,transparent 74%),
   radial-gradient(115% 84% at 8% 4%,var(--cv1) 0%,transparent 62%),
@@ -279,7 +279,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .foot .mx i.next{background:color-mix(in srgb,var(--ink) 16%,transparent)}
 .foot .by{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;line-height:16px;color:var(--t3);font-variant-numeric:tabular-nums}
 .foot .by .mxlbl{min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:opacity .14s ease}
-.foot .by .mxlbl .mxn{font:400 11px/16px var(--mono);color:var(--t3);margin-right:5px}
+.foot .by .mxlbl .mxn{font:400 12px/16px var(--font);font-variant-numeric:tabular-nums;color:var(--t3);margin-right:6px}
 .foot .by strong{font-weight:500;color:var(--t2)}
 .foot .by a{flex:none;color:var(--t3);transition:color .15s}.foot .by a:hover{color:var(--ink)}
 .mainc{position:relative;padding:96px 48px 128px 24px;min-width:0}
@@ -559,7 +559,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .dp p{margin:4px 0 0;font-size:15px;line-height:22px;color:var(--ink)}
 .bv[data-for=b] .chg{margin-bottom:20px}
 .dname{display:flex;align-items:center;gap:8px;font-size:15px;line-height:22px;font-weight:600;color:var(--ink)}
-.dname i{font-style:normal;font:400 13px/20px var(--mono);color:var(--t3);font-variant-numeric:tabular-nums}
+.dname i{font-style:normal;font:400 13px/22px var(--font);color:var(--t3);font-variant-numeric:tabular-nums}
 .lede+.kv{margin-top:16px}
 .kv{margin:0;padding:12px 20px;border-radius:12px;corner-shape:superellipse(1.6);background:var(--stage)}
 @media(max-width:620px){.kr{grid-template-columns:1fr!important;gap:2px!important}}
@@ -2309,7 +2309,7 @@ const CURSOR='<span class="cur"><svg width="14" height="14" viewBox="0 0 14 14">
 function thumb(e){return `<div class="thumb"><div class="scr"><div class="before">${scr(e.s,'before')}</div><div class="after">${scr(e.s,'after')}</div></div>${CURSOR}</div>`}
 function card(e,i){const soon=!e.s;
   return `<a class="card ${soon?'soon':''}" data-n="${e.n}" href="#entry-${pad(e.n)}" data-tags="${(TAGS[e.n-1]||[]).join('|')}" data-r style="--d:${Math.floor(i/3)*90}ms;--ld:${((i*0.9)%6.4).toFixed(2)}s">${soon?'<div class="thumb"></div>':thumb(e)}
-    <div class="meta"><b class="num">${pad(e.n)}</b><span class="ttl">${soon?'':e.title}</span></div></a>`}
+    <div class="meta"><span class="ttl">${soon?'':e.title}</span><b class="num">${pad(e.n)}</b></div></a>`}
 const HERO=ENTRIES[0];
 function viewHome(){
   const count=c=>c==='All'?PUBLISHED:PUBLISHED_ENTRIES.filter(e=>e.cat===c).length;
@@ -2329,7 +2329,7 @@ function gridFor(c){
   const list=c==='All'?[...mixed,...ENTRIES.slice(DATA.length,DATA.length+3)]:PUBLISHED_ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=!e.s,C=!soon&&CMP[e.s]&&CMP[e.s].cover?CMP[e.s]:null;
     return `<a class="card ${soon?'soon':''}${C?' hc':''}" data-n="${e.n}" href="#entry-${pad(e.n)}" style="--d:${Math.floor(i/3)*90}ms"><div class="thumb${C?' cov':''}" data-ctx="${ctxOf(e.n)}">${C?cmpCover(e.s):''}</div>
-    <div class="meta"><b class="num">${pad(e.n)}</b>${C?`<span class="ttl">${C.name}</span>`:`<span class="ttl">${soon?'Coming soon':e.title}</span>`}</div></a>`}).join('')}
+    <div class="meta">${C?`<span class="ttl">${C.name}</span>`:`<span class="ttl">${soon?'Coming soon':e.title}</span>`}<b class="num">${pad(e.n)}</b></div></a>`}).join('')}
 
 const ro=new ResizeObserver(es=>es.forEach(x=>x.target.style.setProperty('--k',x.contentRect.width/+x.target.dataset.w)));
 /* set the scale synchronously so a freshly inserted cover never shows a first frame at the default scale */

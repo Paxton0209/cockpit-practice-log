@@ -59,7 +59,7 @@ function energyUse(_, cover) {
     </div>
     <div class="eu-kpi">
       <span class="eu-value">20.0</span><span class="eu-unit">kWh/100 km</span>
-      <span class="eu-delta"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>15% vs average</span>
+      <span class="eu-delta"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>15% vs 23.4 avg</span>
     </div>
     <div class="eu-chart" role="img" aria-label="Energy use over the last 10 km. Average 23.4, now 20.0 kilowatt-hours per 100 kilometres.">
       ${ylab}
@@ -71,7 +71,6 @@ function energyUse(_, cover) {
         <path class="eu-line" d="${EU_LINE}" pathLength="1"/>
         <circle cx="${PW}" cy="${endY}" r="14" class="eu-halo"/><circle cx="${PW}" cy="${endY}" r="7" class="eu-dot"/>
       </svg>
-      <span class="eu-avg-tag" style="top:${(avgY - 40).toFixed(1)}px">Average 23.4</span>
       <span class="eu-x" style="left:44px">10 km</span><span class="eu-x eu-x-mid">5 km</span><span class="eu-x eu-x-end">Now</span>
     </div>
   </div>`;
@@ -109,10 +108,10 @@ A 2 × 2 grid of 378 × 152 px tiles, 16 px apart. Each tile is white, radius 20
 Top row of each tile: a 56 px outline icon (2.75 px line, round ends, #1D1D1F at 65%) on the left; on the right, “OFF” in Inter Semibold 24/32, #1D1D1F, letter-spacing 2%.
 Below, 16 px down: the name in 28/40 (Snow, Wet, Sand, Range saver) and, 4 px after it, a 48 px outline info icon (2 px line) at the same 65%.
 Icons: a snowflake, a water drop with a curve beside it, a cactus, a leaf with a plus.`},
-  EU: {W:1144,H:642,wrong:[['A 64 px bold reading','The number shouts over the chart it summarises.'],['A green badge','“3.4 below” in a tinted pill, a colour nothing else uses.'],['Bars without a scale','Ten bars and an “Avg” line with no values.']],notes:[['Reading at 48/56','Paired with its unit on one baseline.'],['“15% vs average” in grey','Right-aligned on the same baseline, no badge.'],['A line with a scale','40 · 20 · 0, a labelled 23.4 average and a dot at Now.']],name:'Energy use',html:energyUse,prompt:`Design a 772 × 430 px energy use card in Inter Medium, 32 px padding, radius 20.
+  EU: {W:1144,H:642,wrong:[['A 64 px bold reading','The number shouts over the chart it summarises.'],['A green badge','“3.4 below” in a tinted pill, a colour nothing else uses.'],['Bars without a scale','Ten bars and an “Avg” line with no values.']],notes:[['Reading at 48/56','Paired with its unit on one baseline.'],['“15% vs 23.4 avg” in grey','Right-aligned on the same baseline, no badge.'],['A line with a scale','40 · 20 · 0, a dashed average line and a dot at Now.']],name:'Energy use',html:energyUse,prompt:`Design a 772 × 430 px energy use card in Inter Medium, 32 px padding, radius 20.
 Header, 64 px: “Energy use” in 28/40 at left; a two-option range control at right (Last 10 km selected), 344 × 64 px, 4 px inner padding, radius 16, labels in 24/32, track #1D1D1F at 11%, the selected option white (radius 12) with a soft shadow.
-20 px below, the reading: “20.0” in 48/56 and “kWh/100 km” in 24/32 at 65% on one baseline, and, right-aligned on the same baseline, a down arrow and “15% vs average” in 24/32 at 65%.
-32 px below, the chart: a 664 × 146 px plot flush right (44 px in from the left), with 40, 20 and 0 in 24/32 at 65% right-aligned in the 32 px to its left, each centred on its gridline (40 on the plot’s top edge, 0 on its bottom), three 1 px gridlines, one smooth 3 px #1D1D1F line that wanders between 16 and 33 through roughly 28.6, 26.0, 27.2, 15.7, 22.8, 24.1, 31.4, 20.7, 20.7, 19.0 and 20.0 at each km from 10 km to Now, with small wiggles between, with an area fill from 14% to nothing; a dashed 2 px average line at 23.4 with “Average 23.4” in 24/32 at 65% right-aligned just above it; one point at Now: a 7 px white dot with a 3 px ring and a 14 px halo at 14%. 12 px under the plot, “10 km” (left edge of the plot), “5 km” (centred) and “Now” (right edge) in 24/32 at 65%.`},
+20 px below, the reading: “20.0” in 48/56 and “kWh/100 km” in 24/32 at 65% on one baseline, and, right-aligned on the same baseline, a down arrow and “15% vs 23.4 avg” in 24/32 at 65%.
+32 px below, the chart: a 664 × 146 px plot flush right (44 px in from the left), with 40, 20 and 0 in 24/32 at 65% right-aligned in the 32 px to its left, each centred on its gridline (40 on the plot’s top edge, 0 on its bottom), three 1 px gridlines, one smooth 3 px #1D1D1F line that wanders between 16 and 33 through roughly 28.6, 26.0, 27.2, 15.7, 22.8, 24.1, 31.4, 20.7, 20.7, 19.0 and 20.0 at each km from 10 km to Now, with small wiggles between, with an area fill from 14% to nothing; a dashed 2 px average line at 23.4 with no inline label inside the plot; one point at Now: a 7 px white dot with a 3 px ring and a 14 px halo at 14%. 12 px under the plot, “10 km” (left edge of the plot), “5 km” (centred) and “Now” (right edge) in 24/32 at 65%.`},
   SC: {W:912,H:480,name:'Smart comfort',html:(_, cover)=>smartComfort(cover),prompt:`Design a 772 × 428 px smart comfort panel with 32 px card padding. Put Climate, Seats, Lighting and Audio on one row, with a short accent underline under Climate.
 Leave 32 px between the tabs and the Smart comfort heading. Start the settings group immediately after the heading and use 16 px of vertical padding in each row. Show Auto rear climate (on) and Auto mirror heating (off). Use “Adjusts rear climate based on seat occupancy.” and “Turns on based on wiper activity.” as secondary text. Align each 60 × 32 px switch to the same right edge.`}
 };
