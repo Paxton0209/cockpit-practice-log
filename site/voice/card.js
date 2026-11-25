@@ -185,13 +185,13 @@ async function voPlay(pill) {
         const first = r[0][1].split(' ')[0];
         line.getAnimations().forEach(a => a.cancel()); line.style.opacity = 1; line.style.filter = '';
         line.innerHTML = `<b class="vo-still">${first}</b>`;
-        E.wT = Math.ceil(line.scrollWidth) + 2; await voSleep(900); if (!alive()) return;
-        pill.querySelector('.vo-orb').animate([{ scale: 1 }, { scale: 1.1 }, { scale: 1 }], { duration: 800, easing: 'cubic-bezier(.3, 0, .2, 1)' });
-        await voSleep(420);
+        E.wT = Math.ceil(line.scrollWidth) + 2; await voSleep(520); if (!alive()) return;
+        pill.querySelector('.vo-orb').animate([{ scale: 1 }, { scale: 1.1 }, { scale: 1 }], { duration: 640, easing: 'cubic-bezier(.3, 0, .2, 1)' });
+        await voSleep(160);
       }
       /* streamed: lay out every word with its own reveal delay; targets follow the words as they are spoken */
       const words = [], times = [], gaps = [];
-      let t = 200;
+      let t = enter ? 60 : 200;
       r.forEach(([, text, gap, hold], si) => { text.split(' ').forEach(w => { words.push(w); times.push(t); gaps.push(gap); t += gap; }); t += (si < r.length - 1 ? hold : 0); });
       line.innerHTML = words.map((w, i) => enter && i === 0 ? `<b class="vo-still">${w}</b>` : `<b style="animation-delay:${times[i]}ms">${w}</b>`).join(' ');
       line.getAnimations().forEach(a => a.cancel()); line.style.opacity = 1; line.style.filter = '';
