@@ -2309,7 +2309,7 @@ function viewHome(){
   </div>`}
 function gridFor(c){
   /* Index order is curated for rhythm, not number: no two voice pills, lists or tile grids side by side or stacked. Anything not listed follows, newest first. */
-  const MIX=[19,16,12, 1,15,18, 13,17,11, 14,9,2, 20,3,6, 10,7,8, 5];
+  const MIX=[1,19,12, 16,15,18, 13,17,11, 14,9,2, 20,3,6, 10,7,8, 5];
   const mixed=[...MIX.map(n=>PUBLISHED_ENTRIES.find(e=>e.n===n)).filter(Boolean),...PUBLISHED_ENTRIES.filter(e=>!MIX.includes(e.n)).reverse()];
   const list=c==='All'?[...mixed,...ENTRIES.slice(DATA.length,DATA.length+3)]:PUBLISHED_ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=!e.s,C=!soon&&CMP[e.s]&&CMP[e.s].cover?CMP[e.s]:null;
