@@ -1,22 +1,29 @@
-# Dashnote (formerly Cockpit Practice Log)
+# Dashnote
 
-> A practice log on designing in-car interfaces with AI — what AI gets wrong, how to fix it, and the prompt that does it.
+> A notebook on designing car screens with AI — what AI gets wrong, how to fix it, and the prompt that does it.
 
-This repo is the working notebook for the project: product decisions, research, content plan and prototypes. It grows as the idea gets clearer.
+**Live site:** https://paxton0209.github.io/cockpit-practice-log/
 
-## Contents
+Dashnote collects real in-car HMI components (Navigation, Settings, Voice & AI, and more) with interactive **Before / After** comparisons, concise design notes, and copy-ready prompts tested against automotive UI guidelines.
 
-| File | What it holds |
+## Local Preview
+
+```bash
+python3 -m http.server 8000 --directory site
+```
+
+Then open `http://localhost:8000` in your browser.
+
+## Repository Structure
+
+| Path | Description |
 |---|---|
-| [docs/01-product-definition.md](docs/01-product-definition.md) | What we are building, for whom, goals, what we will not do |
-| [docs/02-decisions-log.md](docs/02-decisions-log.md) | Dated decisions and the reasoning behind them |
-| [docs/03-research-and-references.md](docs/03-research-and-references.md) | Reference sites, competitors, platform landscape |
-| [docs/04-content-plan.md](docs/04-content-plan.md) | Entry template, cadence, first entries, post formats |
-| [docs/05-open-questions.md](docs/05-open-questions.md) | Things still to decide or check |
-| `site/` | Website wireframe v0.1: home (3D stage placeholder, 100-entry progress, list) and entry page |
-| `prototypes/cockpit-mcp/` | MCP server v0.1: 79 rules, tokens, components, layout checker (zero dependencies) |
-| `prototypes/library-site-v3/` | Earlier library website prototype (superseded, kept for reference) |
+| `site/` | Interactive Dashnote web app (deployed automatically to GitHub Pages) |
+| `docs/` | Product definition, decisions log, card guidelines, and session handoffs |
+| `prototypes/cockpit-mcp/` | Zero-dependency MCP server with automotive HMI rules, tokens, and layout checker |
+| `before/` | Reference "Before" AI first-draft prototypes |
+| `tests/` | Prompt evaluation and component checks |
 
-## Sources
+## License
 
-Rules and tokens come from the Figma files *Guideline* and *UI/UX Library*.
+[MIT](LICENSE)
