@@ -272,11 +272,19 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nav button.on{background:none;color:var(--ink);font-weight:500}
 .nav small{font-size:12px;font-weight:400;color:var(--t3);font-variant-numeric:tabular-nums}
 .nav small.z{visibility:hidden}
-.foot{margin-top:auto;display:flex;flex-direction:column;gap:16px;padding:0 12px}
-.desc{margin:0;font-size:13px;line-height:20px;color:var(--t3);text-wrap:balance}
+.foot{margin-top:auto;display:flex;flex-direction:column;gap:14px;padding:16px 12px 0;border-top:1px solid var(--line)}
+.desc{margin:0;font-size:12.5px;line-height:18px;color:var(--t2);text-wrap:balance}
 .foot .pg{display:flex;flex-direction:column;gap:8px}
-.foot .pg i{display:block;height:2px;border-radius:1px;background:var(--line);overflow:hidden}.foot .pg b{display:block;height:100%;background:var(--ink);border-radius:1px}
-.foot .row{display:flex;justify-content:space-between;align-items:center;margin-right:-8px}
+.foot .pg-hd{display:flex;align-items:baseline;justify-content:space-between;font-size:12px;line-height:16px;color:var(--t3)}
+.foot .pg-hd strong{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.foot .pg-hd span{font-variant-numeric:tabular-nums}
+.foot .mx{display:grid;grid-template-columns:repeat(20,1fr);gap:3px}
+.foot .mx a,.foot .mx i{display:block;aspect-ratio:1;border-radius:2px;background:color-mix(in srgb,var(--ink) 8%,transparent);transition:transform .16s var(--out),background-color .16s}
+.foot .mx a{background:var(--ink);opacity:.82}
+.foot .mx a:hover{opacity:1;transform:scale(1.35);z-index:2;position:relative}
+.foot .mx i.next{background:color-mix(in srgb,var(--ink) 26%,transparent)}
+.foot .by{display:flex;align-items:center;justify-content:space-between;font-size:12px;line-height:16px;color:var(--t3)}
+.foot .by a{color:var(--t3);transition:color .15s}.foot .by a:hover{color:var(--ink)}
 .mainc{position:relative;padding:96px 48px 128px 24px;min-width:0}
 /* Colour off (default): the page is black, white and grey like a sketchbook; covers go neutral and the components' accent turns to ink (inverse in dark). Colour on brings back the context palettes and the library blue. */
 :root:not([data-color=on]) [data-ctx]{--cv0:#ebebeb;--cv1:#f7f7f7;--cv2:#d4d4d4;--cv3:#f2f2f2}
@@ -2313,8 +2321,8 @@ function viewHome(){
     <aside class="side">
       <a class="brand" href="#home">Dashnote</a>
       <nav class="nav" id="nav"><span class="navind" id="navind"></span>${['All',...CHAPTERS].map((c,k)=>`<button class="${k?'':'on'}" data-c="${c}"><span>${c==='All'?'Index':c}</span><small class="${count(c)?'':'z'}">${count(c)}</small></button>`).join('')}${SOON.map(c=>`<button class="soon" disabled><span>${c}</span><small>Soon</small></button>`).join('')}</nav>
-      <div class="foot"><p class="desc">A notebook on designing car screens with AI.</p><div class="pg"><span class="lbl13 num">${pad(PUBLISHED)} / ${TOTAL}</span><i><b style="width:${PUBLISHED}%"></b></i></div>
-        <span class="lbl13">Peixin</span></div>
+      <div class="foot"><p class="desc">A notebook on designing car screens with AI.</p><div class="pg"><div class="pg-hd"><span>Progress</span><span><strong>${pad(PUBLISHED)}</strong> / ${TOTAL}</span></div><div class="mx" aria-label="${PUBLISHED} of ${TOTAL} components published">${Array.from({length:TOTAL},(_,i)=>{const pe=PUBLISHED_ENTRIES[i];if(pe){const nm=(CMP[pe.s]&&CMP[pe.s].name)||pe.title;return `<a href="#entry-${pad(pe.n)}" title="${pad(pe.n)} ${nm}" aria-label="${pad(pe.n)} ${nm}"></a>`}return `<i${i===PUBLISHED?' class="next" title="Next up"':''}></i>`}).join('')}</div></div>
+        <div class="by"><span>Peixin</span><a href="https://github.com/Paxton0209/dashnote" target="_blank" rel="noopener">GitHub ↗</a></div></div>
     </aside>
     <main class="mainc"><button class="ib press tgl" id="theme" aria-label="Day / Night"><svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M8 1.5a6.5 6.5 0 0 1 0 13Z" fill="currentColor"/></svg></button><div class="grid" id="grid">${gridFor('All')}</div></main>
   </div>`}
