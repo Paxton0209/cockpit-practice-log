@@ -1,128 +1,96 @@
-/* 017 Voice card — one capsule; the orb's fluid and the words carry the state */
-@property --vc-a { syntax: '<color>'; inherits: true; initial-value: #2fd3ff; }
-@property --vc-b { syntax: '<color>'; inherits: true; initial-value: #1a5cff; }
-@property --vc-c { syntax: '<color>'; inherits: true; initial-value: #7a3cff; }
-
-.vc-stage {
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 840px;
-  height: 72px;
-  font-family: var(--font, Inter, sans-serif);
-}
-.vc-pill {
-  --vc-surface: #1d1d1f;
-  --vc-ink: #fff;
+/* 017–019 Voice: user speech, thinking, assistant speech.
+   Pixel values from Figma UI/UX Library › Examples › voice / user-speech, voice / thinking, voice / assistant-speech. */
+.vo-stage { box-sizing: border-box; display: flex; align-items: center; justify-content: center; height: 72px; }
+.vo-pill {
+  --vo-fill: #fff;
+  --vo-edge: rgb(29 29 31 / 5%);
+  --vo-ink: #1d1d1f;
+  --vo-shadow: 0 4px 16px rgb(28 28 46 / 12%);
   position: relative;
   display: flex;
   align-items: center;
   gap: 12px;
   box-sizing: border-box;
   height: 72px;
-  padding: 0 24px 0 8px;
-  border-radius: 36px;
+  padding: 0 28px 0 12px;
+  border-radius: 28px;
   overflow: hidden;
   isolation: isolate;
-  background: var(--vc-surface);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 6%), 0 2px 4px rgb(0 0 0 / 6%), 0 12px 32px rgb(0 0 0 / 14%);
-  color: var(--vc-ink);
-  transition: --vc-a .9s ease, --vc-b .9s ease, --vc-c .9s ease;
+  background: var(--vo-fill);
+  box-shadow: inset 0 0 0 1px var(--vo-edge), var(--vo-shadow);
+  -webkit-backdrop-filter: blur(40px);
+  backdrop-filter: blur(40px);
+  color: var(--vo-ink);
+  font-family: "SF Pro Text", "SF Pro", -apple-system, BlinkMacSystemFont, Inter, sans-serif;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
 }
-/* the orb's colour washes faintly across the pill, as in the library component */
-.vc-pill::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background: radial-gradient(90% 160% at 0% 50%, color-mix(in srgb, var(--vc-b) 22%, transparent), transparent 55%);
-  opacity: .9;
+:root[data-theme=dark] .vo-pill {
+  --vo-fill: #2c2c2e;
+  --vo-edge: rgb(255 255 255 / 5%);
+  --vo-ink: #fff;
+  --vo-shadow: 0 4px 16px rgb(0 0 0 / 32%);
 }
-:root[data-theme=dark] .vc-pill { --vc-surface: #2c2c2e; }
 
-/* ---------- orb ---------- */
-.vc-orb {
-  position: relative;
-  flex: none;
-  width: 56px;
+/* ambient glow: an ellipse 41 px down, 18 px wider than the pill, blurred and clipped by it */
+.vo-glow {
+  position: absolute;
+  z-index: -1;
+  left: -11px;
+  right: -7px;
+  top: 41px;
   height: 56px;
   border-radius: 50%;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 60%, #0b1030, #03040c 75%);
-  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 10%);
+  filter: blur(20px);
+  pointer-events: none;
+  background: var(--vo-glow);
+  background-size: 200% 100%;
+  opacity: var(--vo-glow-o, .45);
+  transition: opacity .6s ease;
 }
-.vc-fluid { position: absolute; inset: -30%; filter: blur(4px); }
-.vc-fluid i {
-  position: absolute;
-  border-radius: 50%;
-  mix-blend-mode: screen;
-  animation: vc-drift 6s ease-in-out infinite alternate;
-}
-.vc-fluid i:nth-child(1) { left: 10%; top: 30%; width: 70%; height: 38%; background: radial-gradient(closest-side, var(--vc-a), transparent); }
-.vc-fluid i:nth-child(2) { left: 30%; top: 12%; width: 62%; height: 62%; background: radial-gradient(closest-side, var(--vc-b), transparent); animation-duration: 7.5s; animation-delay: -2s; }
-.vc-fluid i:nth-child(3) { left: 20%; top: 46%; width: 64%; height: 46%; background: radial-gradient(closest-side, var(--vc-c), transparent); animation-duration: 9s; animation-delay: -4s; }
-.vc-orb::after { /* glass highlight */
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: radial-gradient(60% 45% at 32% 22%, rgb(255 255 255 / 42%), transparent 70%),
-              radial-gradient(80% 60% at 50% 110%, rgb(255 255 255 / 12%), transparent 70%);
-}
-@keyframes vc-drift {
-  0%   { transform: translate(-8%, 4%) rotate(0deg) scale(1); }
-  50%  { transform: translate(10%, -8%) rotate(140deg) scale(1.15); }
-  100% { transform: translate(-4%, 10%) rotate(300deg) scale(.92); }
-}
+.vo-pill[data-kind=user] { --vo-glow-o: .4; --vo-glow: linear-gradient(90deg, rgb(161 181 189 / 0), rgb(170 178 181 / .9) 12.5%, rgb(139 142 144) 30%, rgb(111 111 113 / .9) 42.5%, rgb(211 211 214 / 0) 50%, rgb(170 178 181 / .9) 62.5%, rgb(139 142 144) 80%, rgb(111 111 113 / .9) 92.5%, rgb(161 181 189 / 0)); }
+.vo-pill[data-kind=reply] { --vo-glow: linear-gradient(90deg, rgb(100 210 255 / 0), rgb(100 210 255 / .9) 12.5%, rgb(10 132 255) 30%, rgb(94 92 230 / .9) 42.5%, rgb(94 92 230 / 0) 50%, rgb(100 210 255 / .9) 62.5%, rgb(10 132 255) 80%, rgb(94 92 230 / .9) 92.5%, rgb(100 210 255 / 0)); }
+.vo-pill[data-kind=ask] { --vo-glow: linear-gradient(90deg, rgb(123 100 255 / 0), rgb(100 157 255 / .9) 12.5%, rgb(129 71 238) 30%, rgb(94 92 230 / .9) 42.5%, rgb(94 92 230 / 0) 50%, rgb(100 157 255 / .9) 62.5%, rgb(129 71 238) 80%, rgb(94 92 230 / .9) 92.5%, rgb(123 100 255 / 0)); }
+.vo-pill[data-kind=thinking] .vo-glow { display: none; }
+/* live: the glow drifts along the pill and breathes */
+.vo-pill[data-live] .vo-glow { animation: vo-drift 5s linear infinite, vo-breathe 2.6s ease-in-out infinite alternate; }
+@keyframes vo-drift { to { background-position: -200% 0; } }
+@keyframes vo-breathe { from { transform: scaleY(.8); } to { transform: scaleY(1.2); } }
 
-/* states: listening (cyan, quick), thinking (violet swirl), speaking (blue-violet, calm) */
-.vc-pill[data-state=listening] { --vc-a: #3fe0ff; --vc-b: #1a6bff; --vc-c: #2b3cff; }
-.vc-pill[data-state=listening] .vc-fluid i { animation-duration: 2.4s; }
-.vc-pill[data-state=listening] .vc-fluid i:nth-child(2) { animation-duration: 3.1s; }
-.vc-pill[data-state=listening] .vc-fluid i:nth-child(3) { animation-duration: 3.7s; }
-.vc-pill[data-state=thinking] { --vc-a: #b46bff; --vc-b: #4c5dff; --vc-c: #ff6bd6; }
-.vc-pill[data-state=thinking] .vc-fluid { animation: vc-spin 2.2s linear infinite; }
-.vc-pill[data-state=speaking] { --vc-a: #5ab8ff; --vc-b: #3f4dff; --vc-c: #9b4dff; }
-@keyframes vc-spin { to { transform: rotate(360deg); } }
+/* ---------- orb ---------- */
+.vo-orb { position: relative; flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; }
+.vo-orb img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; border-radius: 50%; }
+.vo-orb img + img { opacity: 0; mix-blend-mode: screen; }
+.vo-pill[data-live] .vo-orb.is-fluid img:first-child { animation: vo-swirl 7s linear infinite; }
+.vo-pill[data-live] .vo-orb.is-fluid img + img { animation: vo-swirl 4.6s linear infinite reverse, vo-pulse 2.3s ease-in-out infinite alternate; }
+.vo-pill[data-kind=thinking][data-live] .vo-orb.is-fluid img:first-child { animation-duration: 2.8s; }
+@keyframes vo-swirl { from { transform: rotate(0) scale(1.12); } 50% { transform: rotate(180deg) scale(1.2); } to { transform: rotate(360deg) scale(1.12); } }
+@keyframes vo-pulse { from { opacity: .2; } to { opacity: .65; } }
+/* Figma: thinking art at exposure −1 in light, +0.54 in dark */
+.vo-orb.is-thinking img { filter: brightness(.5); }
+:root[data-theme=dark] .vo-orb.is-thinking img { filter: brightness(1.45); }
 
 /* ---------- words ---------- */
-.vc-view {
-  position: relative;
-  overflow: hidden;
-  max-width: 740px;
-  height: 44px;
-  transition: width .42s cubic-bezier(.22, 1.2, .36, 1);
-}
-.vc-view.is-over { -webkit-mask-image: linear-gradient(90deg, transparent, #000 48px); mask-image: linear-gradient(90deg, transparent, #000 48px); }
-.vc-line {
-  position: absolute;
-  left: 0;
-  top: 0;
-  white-space: nowrap;
-  font-size: 32px;
-  line-height: 44px;
-  font-weight: 500;
-  transition: transform .36s cubic-bezier(.22, 1, .36, 1), opacity .24s ease;
-}
-.vc-line b { font-weight: inherit; display: inline-block; animation: vc-word .32s cubic-bezier(.22, 1, .36, 1) both; }
-@keyframes vc-word { from { opacity: 0; transform: translateY(6px); } }
-.vc-pill[data-state=thinking] .vc-line {
+.vo-text { position: relative; display: block; flex: none; height: 32px; overflow: hidden; white-space: nowrap; transition: width .5s cubic-bezier(.22, 1.15, .36, 1); }
+.vo-line { position: relative; display: inline-block; white-space: nowrap; transition: transform .45s cubic-bezier(.22, 1, .36, 1), opacity .25s ease; }
+.vo-pill[data-kind=user] .vo-line { opacity: .7; }
+.vo-line b { font-weight: inherit; display: inline-block; animation: vo-word .35s cubic-bezier(.22, 1, .36, 1) both; }
+@keyframes vo-word { from { opacity: 0; transform: translateY(6px); } }
+/* scrolling: the 448 px window fades 10% at both edges, as in the Figma mask */
+.vo-text.is-scroll { -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); }
+.vo-pill[data-kind=thinking] .vo-line {
   color: transparent;
-  background: linear-gradient(90deg, #8fd8ff, #7c8bff 40%, #e08cff 60%, #8fd8ff) 0 0 / 200% 100%;
+  background: linear-gradient(90deg, #2e9bea, rgb(31 143 232 / .9) 25%, #007aff 60%, rgb(88 86 214 / .9) 78%, #af52de) 0 0 / 100% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: vc-shimmer 1.6s linear infinite;
 }
-@keyframes vc-shimmer { to { background-position: -200% 0; } }
+:root[data-theme=dark] .vo-pill[data-kind=thinking] .vo-line { background-image: linear-gradient(90deg, #c2edff, rgb(100 210 255 / .9) 25%, #50a7ff 60%, rgb(107 105 255 / .9) 78%, #c35ce6); }
+.vo-pill[data-kind=thinking][data-live] .vo-line { background-image: linear-gradient(90deg, #2e9bea, #007aff 30%, #af52de 50%, #007aff 70%, #2e9bea); background-size: 200% 100%; animation: vo-shimmer 2.4s linear infinite; }
+:root[data-theme=dark] .vo-pill[data-kind=thinking][data-live] .vo-line { background-image: linear-gradient(90deg, #c2edff, #50a7ff 30%, #c35ce6 50%, #50a7ff 70%, #c2edff); }
+@keyframes vo-shimmer { to { background-position: -200% 0; } }
 
-/* monochrome mode keeps the motion, drops the hue */
-/* the orb keeps its colour in monochrome mode: it is the assistant's identity, like the call green */
-:root:not([data-color=on]) .vc-pill[data-state=thinking] .vc-line {
-  background-image: linear-gradient(90deg, #fff, #8a8a8e 40%, #fff 60%, #8a8a8e);
-}
 @media (prefers-reduced-motion: reduce) {
-  .vc-fluid, .vc-fluid i, .vc-line, .vc-line b { animation: none !important; transition: none !important; }
+  .vo-pill *, .vo-pill { animation: none !important; transition: none !important; }
 }
-
-.vc-before { display: block; width: 840px; height: 72px; border: 0; pointer-events: none; background: transparent; color-scheme: light; }
+.vo-before { display: block; border: 0; pointer-events: none; background: transparent; color-scheme: light; height: 72px; }

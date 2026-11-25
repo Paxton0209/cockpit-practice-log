@@ -1207,7 +1207,7 @@ const ITINERARY_BEFORE=`<div class="nav-itinerary" role="region" aria-labelledby
 </div>`;
 const CMP={
 ...VEHICLE_CARDS,
-VC:VOICE_CARD,
+...VOICE_CARDS,
 J:{W:1080,H:560,cv:{W:984,top:0},fullStage:true,name:'Multi-stop itinerary',cover:1,
   wrong:[['Header divider','A rule separates the destination count from the route.'],['Blue markers throughout','The origin and both destinations use blue markers.'],['Blue-tinted edit button','The footer action introduces another blue surface.']],
   notes:[['Space under the title','The header and timeline are separated by spacing.'],['Markers by stop type','Green origin, numbered waypoint, hollow segment and red arrival.'],['Secondary edit button','The existing secondary button keeps the focus on the itinerary.']],
@@ -2179,11 +2179,13 @@ const DATA=[
 ['PM','Parking method'],
 ['DM','Drive modes'],
 ['EU','Energy use'],
-['VC','Voice card']];
+['VU','User speech'],
+['VT','Thinking'],
+['VA','Assistant speech']];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much'],['Too much','Phone habits'],['Phone habits','Too small']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const ARCHIVED_ENTRIES=new Set([4]);
@@ -2431,7 +2433,7 @@ function copyButton(kind){
     </span>Copy
   </button>`;
 }
-const TESTED={T:97,R:92,P:98,U:99,O:93,L:99,D:93,K:99,S:95,W:92,N:96,J:92,PM:99,DM:98,EU:92,VC:98};
+const TESTED={T:97,R:92,P:98,U:99,O:93,L:99,D:93,K:99,S:95,W:92,N:96,J:92,PM:99,DM:98,EU:92,VU:99,VT:95,VA:99};
 function sheetHTML(n){
   const e=ENTRIES[n-1],C=CMP[e.s],afterOnly=C.afterOnly;
   const [p0,p1]=C.prompt?[C.ask||'',C.prompt]:prompts(e);

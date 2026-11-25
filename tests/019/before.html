@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Assistant speech bar</title>
+<style>
+  html, body { margin: 0; padding: 0; background: transparent; }
+  body { font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  .bar {
+    position: absolute; left: 0; top: 0;
+    width: 548px; height: 72px; box-sizing: border-box;
+    border-radius: 20px;
+    background: linear-gradient(180deg, #FFFFFF 0%, #F6F8FB 100%);
+    border: 1px solid #E3E8EF;
+    box-shadow: inset 0 1px 0 #FFFFFF;
+    display: flex; align-items: center;
+    padding: 0 22px 0 14px;
+    overflow: hidden;
+  }
+  /* Orb */
+  .orb { position: relative; width: 44px; height: 44px; flex: 0 0 44px; margin-right: 14px; }
+  .orb .core {
+    position: absolute; inset: 8px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #8FD3FF 0%, #3B82F6 55%, #4F46E5 100%);
+    box-shadow: 0 2px 8px rgba(59,130,246,.35);
+    transition: transform .4s ease;
+  }
+  .orb .ring {
+    position: absolute; inset: 4px; border-radius: 50%;
+    border: 2px solid rgba(59,130,246,.28);
+    opacity: 0;
+  }
+  .orb .bars {
+    position: absolute; inset: 8px; display: flex; align-items: center; justify-content: center; gap: 2.5px;
+  }
+  .orb .bars i {
+    display: block; width: 3px; height: 6px; border-radius: 2px; background: rgba(255,255,255,.95);
+    transition: height .12s ease;
+  }
+  .bar.listening .orb .ring { animation: ring 1.6s ease-out infinite; }
+  .bar.listening .orb .ring.r2 { animation-delay: .8s; }
+  @keyframes ring { 0% { transform: scale(.85); opacity: .9; } 100% { transform: scale(1.18); opacity: 0; } }
+
+  /* Text stage */
+  .stage { position: relative; flex: 1; height: 72px; }
+  .line {
+    position: absolute; left: 0; right: 0; top: 50%;
+    transform: translateY(-50%);
+    margin: 0; font-size: 16px; line-height: 21px; font-weight: 500;
+    color: #0F172A; letter-spacing: -0.005em;
+    transition: transform .5s cubic-bezier(.2,.7,.2,1), opacity .4s ease;
+  }
+  .line .w { display: inline-block; opacity: 0; transform: translateY(4px); filter: blur(2px);
+    transition: opacity .28s ease, transform .28s ease, filter .28s ease, color .4s ease; }
+  .line .w.on { opacity: 1; transform: none; filter: none; }
+  .line .w.hl { color: #2563EB; font-weight: 600; }
+  .line.out { transform: translateY(calc(-50% - 22px)); opacity: 0; }
+  .q { font-size: 19px; line-height: 24px; font-weight: 600; letter-spacing: -0.01em; }
+  .q .w.on { color: #0F172A; }
+  .q .cursor {
+    display: inline-block; width: 2px; height: 18px; margin-left: 4px; vertical-align: -3px;
+    background: #3B82F6; border-radius: 1px; opacity: 0;
+  }
+  .bar.listening .q .cursor { animation: blink 1s steps(1) infinite; }
+  @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+<div class="bar" id="bar" role="status" aria-live="polite">
+  <div class="orb" aria-hidden="true">
+    <div class="ring"></div><div class="ring r2"></div>
+    <div class="core"></div>
+    <div class="bars"><i></i><i></i><i></i><i></i></div>
+  </div>
+  <div class="stage">
+    <p class="line" id="say"></p>
+    <p class="line q" id="ask"></p>
+  </div>
+</div>
+<script>
+(function () {
+  var bar = document.getElementById('bar');
+  var say = document.getElementById('say');
+  var ask = document.getElementById('ask');
+  var bars = bar.querySelectorAll('.bars i');
+  var core = bar.querySelector('.core');
+
+  var statement = 'Opening all the windows and setting the cabin to 22°, with the rear windows halfway';
+  var highlight = { 'windows': 1, '22°,': 1, 'halfway': 1, 'rear': 1 };
+  var question = 'Turn on the seat heater too?';
+
+  function build(el, text, hl) {
+    el.innerHTML = '';
+    var spans = [];
+    text.split(' ').forEach(function (word, i, arr) {
+      var s = document.createElement('span');
+      s.className = 'w' + (hl && hl[word] ? ' hl' : '');
+      s.textContent = word;
+      el.appendChild(s);
+      if (i < arr.length - 1) el.appendChild(document.createTextNode(' '));
+      spans.push(s);
+    });
+    return spans;
+  }
+
+  var speaking = false, wave = 0;
+  function animateBars() {
+    wave += 0.22;
+    for (var i = 0; i < bars.length; i++) {
+      var h = speaking
+        ? 6 + Math.abs(Math.sin(wave + i * 1.3) * Math.cos(wave * 0.6 + i)) * 14
+        : 4;
+      bars[i].style.height = h.toFixed(1) + 'px';
+    }
+    core.style.transform = speaking ? 'scale(' + (1 + Math.sin(wave * 0.8) * 0.04).toFixed(3) + ')' : 'scale(1)';
+    requestAnimationFrame(animateBars);
+  }
+  requestAnimationFrame(animateBars);
+
+  var timers = [];
+  function at(ms, fn) { timers.push(setTimeout(fn, ms)); }
+
+  function reveal(spans, start, step) {
+    spans.forEach(function (s, i) { at(start + i * step, function () { s.classList.add('on'); }); });
+    return start + spans.length * step;
+  }
+
+  function run() {
+    timers.forEach(clearTimeout); timers = [];
+    bar.classList.remove('listening');
+    say.classList.remove('out');
+    var a = build(say, statement, highlight);
+    var b = build(ask, question, null);
+    var cur = document.createElement('span'); cur.className = 'cursor'; ask.appendChild(cur);
+    ask.style.opacity = '1';
+
+    at(200, function () { speaking = true; });
+    var t = reveal(a, 300, 190);
+    at(t + 150, function () { speaking = false; });
+    t += 1300;
+    at(t, function () { say.classList.add('out'); speaking = true; });
+    var t2 = reveal(b, t + 250, 210);
+    at(t2 + 100, function () { speaking = false; bar.classList.add('listening'); });
+    at(t2 + 4800, function () { ask.style.opacity = '0'; bar.classList.remove('listening'); });
+    at(t2 + 5400, run);
+  }
+  run();
+})();
+</script>
+</body>
+</html>
