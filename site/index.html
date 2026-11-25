@@ -2391,22 +2391,50 @@ const STAGE_R=16;
 function dotFor(n){return lensAnchor?.isConnected&&lensAnchor.matches('.foot .mx a')&&+lensAnchor.dataset.n===n?lensAnchor:null}
 function thumbFor(n){const el=lensAnchor?.isConnected&&lensAnchor.matches('#grid .card')&&+lensAnchor.dataset.n===n?lensAnchor:$(`#grid .card[data-n="${n}"]`);return el&&$('.thumb',el)}
 function ghost(n,on){const t=thumbFor(n);if(t)t.style.visibility=on?'hidden':''}
-/* spring the sheet directly out of (or back into) a clicked bottom-left matrix dot */
-function springFromDot(dotRect,endRect,opening){
-  const sheet=$('#sheet2');
+/* morph a clicked bottom-left matrix square seamlessly into the centered sheet (and back into its slot) */
+function springFromDot(dot,endRect,opening){
+  const sheet=$('#sheet2'),body=$('#sbody'),dotRect=dot.getBoundingClientRect();
   const dx=(dotRect.left+dotRect.width/2)-(endRect.left+endRect.width/2);
   const dy=(dotRect.top+dotRect.height/2)-(endRect.top+endRect.height/2);
+  const sx=Math.max(.008,dotRect.width/endRect.width),sy=Math.max(.008,dotRect.height/endRect.height);
+  const dark=document.documentElement.dataset.theme==='dark';
+  const dotFill=dark?'rgba(245,245,245,.86)':'rgba(18,18,20,.82)';
+  const clearFill=dark?'rgba(245,245,245,0)':'rgba(18,18,20,0)';
   sheet.style.transformOrigin='50% 50%';
+  const start=document.timeline.currentTime;
   if(opening){
-    return lensSpring(sheet,[0],[1],([p])=>{
-      const t=Math.max(0,p),s=Math.max(.04,.04+.96*t),op=Math.min(1,t*2.8);
-      return {transform:`translate(calc(-50% + ${dx*(1-t)}px),${dy*(1-t)}px) scale(${s})`,opacity:op,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1};
-    },460,36);
+    dot.style.visibility='hidden';
+    const ease='cubic-bezier(.26,.08,.18,1)',dur=460;
+    const aSheet=lensAnimate(sheet,[
+      {offset:0,transform:`translate(calc(-50% + ${dx}px),${dy}px) scale(${sx},${sy})`,borderRadius:'110px',backgroundColor:dotFill,'--dialog-surface-opacity':0,'--dialog-copy-opacity':0,opacity:1},
+      {offset:.22,transform:`translate(calc(-50% + ${dx*.66}px),${dy*.66}px) scale(${sx+(1-sx)*.18},${sy+(1-sy)*.18})`,borderRadius:'48px',backgroundColor:dotFill,'--dialog-surface-opacity':.35,'--dialog-copy-opacity':0,opacity:1},
+      {offset:.52,backgroundColor:clearFill,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1},
+      {offset:1,transform:'translate(-50%,0px) scale(1,1)',borderRadius:'14px',backgroundColor:clearFill,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:1}
+    ],{duration:dur,easing:ease});
+    const aBody=lensAnimate(body,[
+      {offset:0,opacity:0},
+      {offset:.26,opacity:0},
+      {offset:.68,opacity:1},
+      {offset:1,opacity:1}
+    ],{duration:dur,easing:'ease-out'});
+    aSheet.startTime=start;aBody.startTime=start;
+    return aSheet;
   }
-  return lensSpring(sheet,[0],[1],([p])=>{
-    const t=Math.max(0,Math.min(1,p)),s=Math.max(.04,1-.96*t),op=Math.max(0,1-t*1.35);
-    return {transform:`translate(calc(-50% + ${dx*t}px),${dy*t}px) scale(${s})`,opacity:op,'--dialog-surface-opacity':1,'--dialog-copy-opacity':Math.max(0,1-t*2.2)};
-  },520,42);
+  dot.style.visibility='hidden';
+  const ease='cubic-bezier(.34,.04,.22,1)',dur=360;
+  const aSheet=lensAnimate(sheet,[
+    {offset:0,transform:'translate(-50%,0px) scale(1,1)',borderRadius:'14px',backgroundColor:clearFill,'--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:1},
+    {offset:.42,backgroundColor:dotFill,'--dialog-surface-opacity':.35,'--dialog-copy-opacity':0,opacity:1},
+    {offset:.82,transform:`translate(calc(-50% + ${dx*.88}px),${dy*.88}px) scale(${sx+(1-sx)*.06},${sy+(1-sy)*.06})`,borderRadius:'90px',backgroundColor:dotFill,'--dialog-surface-opacity':0,'--dialog-copy-opacity':0,opacity:1},
+    {offset:1,transform:`translate(calc(-50% + ${dx}px),${dy}px) scale(${sx},${sy})`,borderRadius:'110px',backgroundColor:dotFill,'--dialog-surface-opacity':0,'--dialog-copy-opacity':0,opacity:.85}
+  ],{duration:dur,easing:ease});
+  const aBody=lensAnimate(body,[
+    {offset:0,opacity:1},
+    {offset:.36,opacity:0},
+    {offset:1,opacity:0}
+  ],{duration:dur,easing:'ease-in'});
+  aSheet.startTime=start;aBody.startTime=start;
+  return aSheet;
 }
 /* the cover is both the card and the artwork (Dashline's cell + glyph). Closing lands on the cover at rest,
    so hold it still: its hover lift would otherwise move the target mid-flight. */
@@ -2598,7 +2626,7 @@ function openEntry(n){
   if(lensCompact.matches){
     lensSpring(sheet,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40).onfinish=done;
   }else if(dot){
-    springFromDot(dot.getBoundingClientRect(),end,true).onfinish=done;
+    springFromDot(dot,end,true).onfinish=done;
   }else if(source){
     ghost(n,1);
     springDialog(source.cell,end,source.glyph,art,end,art,0,1).onfinish=done; /* one shot: the cover became the sheet, so its slot stays empty while open */
@@ -2609,8 +2637,9 @@ function openEntry(n){
 }
 function finishLens(){
   stopLens();
-  const sheet=$('#sheet2');sheet.removeAttribute('data-closing');sheet.style.transformOrigin='';sheet.style.opacity='';{const h=$('.hero3',sheet);if(h)h.style.transformOrigin=''}
+  const sheet=$('#sheet2');sheet.removeAttribute('data-closing');sheet.style.transformOrigin='';sheet.style.opacity='';sheet.style.backgroundColor='';sheet.style.borderRadius='';{const h=$('.hero3',sheet);if(h)h.style.transformOrigin=''}
   $$('#grid .thumb').forEach(t=>{t.style.visibility=t.style.transform='';t.offsetWidth;t.style.transition=''});
+  $$('.foot .mx a').forEach(a=>{a.style.visibility=''});
   $('#veil').style.opacity='';$('#ov').classList.remove('open');document.body.classList.remove('lock','dim');$('#sbody').innerHTML='';
   const focus=lensAnchor?.isConnected?lensAnchor:null;
   lensState='closed';curN=0;lensAnchor=null;
@@ -2636,7 +2665,7 @@ function closeInsp(){
     end=lensSpring(sheet,[100*(currentSheet.top-rest.top)/rest.height],[100],([y])=>({transform:`translateY(${y}%)`}),420,42);
   }else if(dot){
     const rest=sheet.getBoundingClientRect();
-    end=springFromDot(dot.getBoundingClientRect(),rest,false);
+    end=springFromDot(dot,rest,false);
   }else if(source&&stage){
     ghost(curN,1);
     const rest=sheet.getBoundingClientRect(),art=stage.getBoundingClientRect();
