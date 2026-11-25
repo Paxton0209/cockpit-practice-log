@@ -6,9 +6,10 @@ const voOrb = kind => {
   const fluid = kind !== 'user', src = VO_ORB[kind];
   return `<span class="vo-orb${fluid ? ' is-fluid' : ''} is-${kind}" aria-hidden="true"><img src="${src}" alt="" width="48" height="48">${fluid ? `<img src="${src}" alt="" width="48" height="48">` : ''}</span>`;
 };
+const voHalo = kind => (kind === 'reply' || kind === 'ask') ? `<span class="vo-halo" aria-hidden="true"><img src="${VO_ORB[kind]}" alt=""></span>` : '';
 const voPill = (kind, text, textW, cover, script) =>
-  `<div class="vo-pill" data-kind="${kind}"${cover ? '' : ` data-live data-script="${script}"`} role="status">
-    <span class="vo-glow"></span>${voOrb(kind)}
+  `<div class="vo-pill" data-kind="${kind}"${cover ? '' : ` data-live data-script="${script}" data-text="${text}"`} role="status">
+    ${voHalo(kind)}<span class="vo-glow"></span>${voOrb(kind)}
     <span class="vo-text"><span class="vo-line">${text}</span></span>
   </div>`;
 const voStage = (w, pill, cover) => cover ? pill : `<div class="vo-stage" style="width:${w}px">${pill}</div>`;
@@ -39,7 +40,7 @@ async function voPlay(pill) {
     box.classList.toggle('is-scroll', over);
     line.style.transform = alignRight && !over ? `translateX(${VO_MAX - w}px)` : `translateX(${over ? VO_MAX - 8 - w : 0}px)`;
   };
-  const alive = () => pill.isConnected;
+  const alive = () => pill.isConnected && !pill.closest('[data-closing]');
   while (alive()) {
     for (const [kind, text, gap, hold, append] of script) {
       if (!alive()) return;
@@ -48,7 +49,9 @@ async function voPlay(pill) {
         await voSleep(260);
         if (pill.dataset.kind !== kind) {
           pill.dataset.kind = kind;
-          orb.outerHTML = voOrb(kind);
+          pill.querySelector('.vo-orb').outerHTML = voOrb(kind);
+          const h = pill.querySelector('.vo-halo'), nh = voHalo(kind);
+          if (h) h.outerHTML = nh; else if (nh) pill.insertAdjacentHTML('afterbegin', nh);
         }
         line.textContent = '';
         line.style.transform = 'none';
@@ -69,6 +72,20 @@ async function voPlay(pill) {
     }
   }
 }
+/* on close, put the pill back to its cover frame (quick fade) so the morph lands on what the cover shows */
+function voReset(pill) {
+  if (pill.dataset.reset) return; pill.dataset.reset = '1';
+  const line = pill.querySelector('.vo-line'), box = pill.querySelector('.vo-text');
+  const first = VO_SCRIPTS[pill.dataset.script][0][0];
+  line.style.transition = 'opacity .12s ease'; line.style.opacity = 0;
+  setTimeout(() => {
+    if (pill.dataset.kind !== first) { pill.dataset.kind = first; pill.querySelector('.vo-orb').outerHTML = voOrb(first); const h = pill.querySelector('.vo-halo'), nh = voHalo(first); if (h) h.outerHTML = nh; else if (nh) pill.insertAdjacentHTML('afterbegin', nh); }
+    box.style.transition = 'none'; box.style.width = ''; box.classList.remove('is-scroll');
+    line.style.transform = 'none'; line.textContent = pill.dataset.text; line.style.opacity = 1;
+  }, 120);
+}
+new MutationObserver(ms => { for (const m of ms) if (m.target.hasAttribute && m.target.hasAttribute('data-closing')) m.target.querySelectorAll('.vo-pill[data-live]').forEach(voReset); })
+  .observe(document.documentElement, { subtree: true, attributes: true, attributeFilter: ['data-closing'] });
 setInterval(() => {
   document.querySelectorAll('.vo-pill[data-live]:not([data-run])').forEach(p => {
     if (p.closest('[inert]') || !p.offsetParent) return;
@@ -77,7 +94,7 @@ setInterval(() => {
 }, 300);
 
 const VO_BASE = `Pill: 72 px tall, corner radius 28, padding 12 px left and 28 px right, items centred with 12 px gaps, clipped. Light theme: fill #FFFFFF, a 1 px inside stroke of #1D1D1F at 5%, drop shadow 0 4 16 in rgb(28,28,46) at 12%, background blur 40.
-Orb: 48 × 48 at x 12, y 12. Words: SF Pro Medium 24/32 (Inter Medium if SF Pro is unavailable), letter-spacing 0, one line, #1D1D1F.`;
+Orb: 48 × 48 at x 12, y 12. Words: Inter Medium 24/32, letter-spacing 0, one line, #1D1D1F.`;
 const VO_GLOW = (o, stops) => `Ambient glow inside the pill, under everything: an ellipse at x −11, y 41, 18 px wider than the pill and 56 px tall, layer blur 40 (CSS blur 20 px), opacity ${o}, clipped by the pill, filled with a horizontal gradient ${stops}.`;
 
 const VOICE_CARDS = {
@@ -87,7 +104,7 @@ const VOICE_CARDS = {
     ask: 'Design the user-speech bar for a car voice assistant, 548 × 72 px, light theme. It shows the driver’s words as they are recognised: “Open all the windows and lower the rear windows halfway. Then set the cabin to 22° and turn on the seat heater.” with the driver’s avatar. Animate it. Nothing else.',
     prompt: `Design the user-speech state of a car voice assistant on a 548 × 72 px canvas, pill centred.
 ${VO_BASE}
-Orb: the driver’s round photo avatar. Words at 70% opacity: “Open all the windows”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (358 px wide with SF Pro, whose words measure 258 px), centred on the canvas.
+Orb: the driver’s round photo avatar. Words at 70% opacity: “Open all the windows”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px, centred on the canvas.
 ${VO_GLOW('0.4', 'of neutral greys: rgb(161,181,189) at 0% → rgb(170,178,181) at 90% (25%) → rgb(139,142,144) (60%) → rgb(111,111,113) at 90% (85%) → rgb(211,211,214) at 0%')}
 Motion: words appear one by one, each rising 6 px as it fades in; the pill grows with them up to a 448 px text window, then the line scrolls left so the newest word stays in view, and the window fades 10% at both edges. The glow drifts along the pill and breathes.`,
     wrong: [['Text at 15 px', 'Too small to read from the driver’s seat.'], ['A cartoon avatar', 'A generic figure stands in for the driver.'], ['A blinking cursor', 'Recognised speech reads like a text field.']],
@@ -99,7 +116,7 @@ Motion: words appear one by one, each rising 6 px as it fades in; the pill grows
     ask: 'Design the thinking state for a car voice assistant, 386 × 72 px, light theme. It shows the assistant working on “Analyzing target restaurant”. Animate it. Nothing else.',
     prompt: `Design the thinking state of a car voice assistant on a 386 × 72 px canvas.
 ${VO_BASE}
-The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (386 px with SF Pro). Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, 286 px, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
+The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px. Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, 286 px, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
 Motion: the gradient sweeps through the words in a loop and the orb’s grain turns.`,
     wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 17 px', 'Too small at arm’s length.'], ['A ringed blue bead', 'The orb looks like a button.']],
     notes: [['One line in a gradient', 'The sweep shows work in progress.'], ['The library’s grain orb', 'It turns faster while thinking.'], ['No glow', 'The pill stays quiet until there is an answer.']],
@@ -110,7 +127,7 @@ Motion: the gradient sweeps through the words in a loop and the orb’s grain tu
     ask: 'Design the assistant-speech bar for a car voice assistant, 548 × 72 px, light theme. The assistant says “Opening all the windows and setting the cabin to 22°, with the rear windows halfway”, then asks “Turn on the seat heater too?” Animate it. Nothing else.',
     prompt: `Design the assistant-speech state of a car voice assistant on a 548 × 72 px canvas, pill centred.
 ${VO_BASE}
-Orb: a deep blue glass sphere with a bright cyan wave across it. Words: “Opening all the windows”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (358 px wide with SF Pro, whose words measure 258 px), centred on the canvas.
+Orb: a deep blue glass sphere with a bright cyan wave across it, and behind it, under the glow, a 96 px copy of the orb, concentric with it, at 40% opacity and blurred 10 px (Figma layer blur 20), clipped by the pill. Words: “Opening all the windows”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px, centred on the canvas.
 ${VO_GLOW('0.45', 'rgb(100,210,255) at 0% → rgb(100,210,255) at 90% (25%) → rgb(10,132,255) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
 Motion: the reply streams in word by word and scrolls inside a 448 px window that fades 10% at both edges; the orb’s fluid turns and the glow drifts and breathes. Then the question “Turn on the seat heater too?” appears right-aligned in a 548 px pill, the orb shifts violet and the glow turns violet (rgb(123,100,255) → rgb(100,157,255) → rgb(129,71,238) → rgb(94,92,230)).`,
     wrong: [['Text at 19 px', 'Too small at arm’s length.'], ['A blue keyword', '“windows” in blue reads like a link.'], ['An equaliser icon', 'Bars stand in for the assistant.']],
