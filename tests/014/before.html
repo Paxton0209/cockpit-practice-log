@@ -1,0 +1,150 @@
+<div class="pk-card" role="dialog" aria-labelledby="pk-title" aria-describedby="pk-desc">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    .pk-card {
+      --pk-bg: #ffffff;
+      --pk-ink: #0f1419;
+      --pk-ink-2: #545b66;
+      --pk-ink-3: #7a828e;
+      --pk-track: #eef0f3;
+      --pk-line: #dfe2e7;
+      --pk-accent: #0a63e8;
+      --pk-accent-press: #0852c2;
+
+      box-sizing: border-box;
+      width: 640px;
+      height: 384px;
+      padding: 32px 36px 32px;
+      display: flex;
+      flex-direction: column;
+      background: var(--pk-bg);
+      border-radius: 28px;
+      box-shadow: 0 1px 2px rgba(15, 20, 25, .06), 0 12px 32px rgba(15, 20, 25, .10);
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--pk-ink);
+      -webkit-font-smoothing: antialiased;
+      font-feature-settings: 'cv11', 'ss01';
+    }
+    .pk-card *, .pk-card *::before, .pk-card *::after { box-sizing: border-box; }
+
+    .pk-title {
+      margin: 0;
+      font-size: 30px;
+      line-height: 36px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .pk-desc {
+      margin: 8px 0 0;
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 400;
+      color: var(--pk-ink-2);
+    }
+
+    .pk-offset {
+      margin: 30px 0 0;
+      padding: 0;
+      border: 0;
+      min-width: 0;
+    }
+    .pk-offset legend {
+      padding: 0;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--pk-ink-3);
+    }
+    .pk-seg {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      padding: 4px;
+      height: 64px;
+      background: var(--pk-track);
+      border-radius: 16px;
+    }
+    .pk-seg input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .pk-seg label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--pk-ink-2);
+      cursor: pointer;
+      user-select: none;
+      transition: background-color .18s ease, color .18s ease, box-shadow .18s ease;
+    }
+    .pk-seg input:checked + label {
+      background: #ffffff;
+      color: var(--pk-ink);
+      font-weight: 600;
+      box-shadow: 0 1px 2px rgba(15, 20, 25, .08), 0 2px 8px rgba(15, 20, 25, .08);
+    }
+    .pk-seg input:focus-visible + label {
+      outline: 3px solid var(--pk-accent);
+      outline-offset: 2px;
+    }
+
+    .pk-actions {
+      margin-top: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .pk-btn {
+      height: 68px;
+      border-radius: 16px;
+      border: 0;
+      font-family: inherit;
+      font-size: 19px;
+      font-weight: 600;
+      letter-spacing: -0.005em;
+      cursor: pointer;
+      transition: background-color .15s ease, transform .1s ease;
+    }
+    .pk-btn:active { transform: scale(.985); }
+    .pk-btn:focus-visible { outline: 3px solid var(--pk-accent); outline-offset: 3px; }
+    .pk-btn--primary {
+      background: var(--pk-accent);
+      color: #ffffff;
+    }
+    .pk-btn--primary:active { background: var(--pk-accent-press); }
+    .pk-btn--secondary {
+      background: #ffffff;
+      color: var(--pk-ink);
+      box-shadow: inset 0 0 0 1.5px var(--pk-line);
+    }
+    .pk-btn--secondary:active { background: var(--pk-track); }
+  </style>
+
+  <h2 class="pk-title" id="pk-title">How to park</h2>
+  <p class="pk-desc" id="pk-desc">Hold the brake to continue.</p>
+
+  <fieldset class="pk-offset">
+    <legend>Parking offset</legend>
+    <div class="pk-seg">
+      <input type="radio" name="pk-offset" id="pk-left" value="left">
+      <label for="pk-left">Left</label>
+      <input type="radio" name="pk-offset" id="pk-center" value="center" checked>
+      <label for="pk-center">Center</label>
+      <input type="radio" name="pk-offset" id="pk-right" value="right">
+      <label for="pk-right">Right</label>
+    </div>
+  </fieldset>
+
+  <div class="pk-actions">
+    <button type="button" class="pk-btn pk-btn--primary">Park now</button>
+    <button type="button" class="pk-btn pk-btn--secondary">Exit &amp; park</button>
+  </div>
+</div>

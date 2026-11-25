@@ -1,0 +1,148 @@
+<div class="nav-itinerary" role="region" aria-labelledby="nav-itinerary-title">
+  <style>
+    .nav-itinerary {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      width: 560px;
+      height: 444px;
+      padding: 27px 31px 26px;
+      border: 1px solid #dce3eb;
+      border-radius: 28px;
+      background: #f9fbfe;
+      color: #172438;
+      font-family: Inter, system-ui, sans-serif;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .nav-itinerary .itinerary-heading {
+      margin: 0;
+      padding-bottom: 19px;
+      border-bottom: 1px solid #dce3eb;
+      font-size: 30px;
+      font-weight: 680;
+      line-height: 38px;
+      letter-spacing: -0.85px;
+    }
+
+    .nav-itinerary .itinerary-route {
+      position: relative;
+      display: grid;
+      grid-template-rows: 56px 65px 43px 65px;
+      margin-top: 12px;
+    }
+
+    .nav-itinerary .itinerary-route::before {
+      position: absolute;
+      inset-block: 28px 32px;
+      left: 13px;
+      width: 2px;
+      background: #c7d7ed;
+      content: "";
+    }
+
+    .nav-itinerary .itinerary-row {
+      position: relative;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      align-items: center;
+      column-gap: 17px;
+      min-width: 0;
+    }
+
+    .nav-itinerary .itinerary-position {
+      box-sizing: border-box;
+      justify-self: center;
+      width: 14px;
+      height: 14px;
+      border: 2px solid #f9fbfe;
+      border-radius: 50%;
+      background: #2867ce;
+      box-shadow: 0 0 0 3px #dce8fb;
+    }
+
+    .nav-itinerary .itinerary-stop-number {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 50%;
+      background: #dce8fb;
+      color: #1d4f9e;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .nav-itinerary .itinerary-current {
+      color: #43546a;
+      font-size: 19px;
+      font-weight: 520;
+    }
+
+    .nav-itinerary .itinerary-destination {
+      font-size: 23px;
+      font-weight: 650;
+      line-height: 1.25;
+      letter-spacing: -0.35px;
+    }
+
+    .nav-itinerary .itinerary-time {
+      color: #344760;
+      font-size: 22px;
+      font-weight: 620;
+    }
+
+    .nav-itinerary .itinerary-leg {
+      grid-column: 2 / -1;
+      color: #53647a;
+      font-size: 17px;
+      font-weight: 520;
+    }
+
+    .nav-itinerary .itinerary-edit {
+      box-sizing: border-box;
+      width: 100%;
+      height: 54px;
+      margin-top: auto;
+      border: 1px solid #d2e1f8;
+      border-radius: 15px;
+      background: #e8f0fd;
+      color: #174681;
+      cursor: pointer;
+      font: 650 19px/1 Inter, system-ui, sans-serif;
+    }
+
+    .nav-itinerary .itinerary-edit:hover {
+      background: #dbe9fc;
+    }
+
+    .nav-itinerary .itinerary-edit:focus-visible {
+      outline: 3px solid #2867ce;
+      outline-offset: 3px;
+    }
+  </style>
+
+  <h2 class="itinerary-heading" id="nav-itinerary-title">2 destinations</h2>
+
+  <div class="itinerary-route">
+    <div class="itinerary-row">
+      <span class="itinerary-position" aria-hidden="true"></span>
+      <span class="itinerary-current">Current location</span>
+    </div>
+    <div class="itinerary-row">
+      <span class="itinerary-stop-number">1</span>
+      <span class="itinerary-destination">To Amusement Park</span>
+      <time class="itinerary-time" datetime="10:17">10:17</time>
+    </div>
+    <div class="itinerary-row">
+      <span class="itinerary-leg">8.2 km · 17 min</span>
+    </div>
+    <div class="itinerary-row">
+      <span class="itinerary-stop-number">2</span>
+      <span class="itinerary-destination">Riverside Park</span>
+      <time class="itinerary-time" datetime="10:34">10:34</time>
+    </div>
+  </div>
+
+  <button class="itinerary-edit" type="button">Edit stops</button>
+</div>

@@ -1,0 +1,64 @@
+<div class="eu-card" role="region" aria-labelledby="eu-title">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    .eu-card{width:772px;height:430px;box-sizing:border-box;padding:28px 28px 24px;background:#FFFFFF;border-radius:24px;box-shadow:0 1px 2px rgba(15,23,42,.06),0 8px 24px rgba(15,23,42,.08);font-family:'Inter',system-ui,sans-serif;color:#0F172A;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+    .eu-card *{box-sizing:border-box;margin:0}
+    .eu-head{display:flex;align-items:center;justify-content:space-between;height:52px}
+    .eu-title{font-size:26px;font-weight:600;letter-spacing:-.01em}
+    .eu-seg{display:flex;padding:4px;background:#F1F5F9;border-radius:14px;gap:4px}
+    .eu-seg button{font:inherit;font-size:17px;font-weight:500;color:#475569;background:transparent;border:0;border-radius:10px;height:44px;padding:0 20px;cursor:pointer}
+    .eu-seg button[aria-pressed="true"]{background:#FFFFFF;color:#0F172A;font-weight:600;box-shadow:0 1px 3px rgba(15,23,42,.14)}
+    .eu-reading{margin-top:18px;display:flex;align-items:baseline;gap:10px}
+    .eu-value{font-size:64px;font-weight:700;line-height:1;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+    .eu-unit{font-size:22px;font-weight:500;color:#64748B}
+    .eu-compare{margin-top:12px;display:inline-flex;align-items:center;gap:8px;align-self:flex-start;height:34px;padding:0 14px 0 10px;border-radius:17px;background:#E6F5EE;color:#0B6B43;font-size:17px;font-weight:500}
+    .eu-compare svg{flex:none}
+    .eu-compare b{font-weight:600}
+    .eu-chart{margin-top:auto}
+    .eu-chart svg{display:block}
+    .eu-axis{display:flex;justify-content:space-between;margin-top:8px;font-size:15px;font-weight:500;color:#64748B;font-variant-numeric:tabular-nums}
+  </style>
+
+  <div class="eu-head">
+    <h2 class="eu-title" id="eu-title">Energy use</h2>
+    <div class="eu-seg" role="group" aria-label="Range">
+      <button type="button" aria-pressed="true">Last 10 km</button>
+      <button type="button" aria-pressed="false">Last 100 km</button>
+    </div>
+  </div>
+
+  <div class="eu-reading">
+    <span class="eu-value">20.0</span>
+    <span class="eu-unit">kWh/100 km</span>
+  </div>
+
+  <p class="eu-compare">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M9 3v11M4 9.5 9 14.5l5-5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span><b>3.4 below</b> your 23.4 average</span>
+  </p>
+
+  <div class="eu-chart">
+    <svg width="716" height="160" viewBox="0 0 716 160" role="img" aria-label="Energy use per kilometre over the last 10 km, average 20.0 kWh/100 km, compared with 23.4 average">
+      <g fill="#CBD5E1">
+        <rect x="13.8" y="67" width="44" height="93" rx="6"/>
+        <rect x="85.4" y="50.5" width="44" height="109.5" rx="6"/>
+        <rect x="157" y="34" width="44" height="126" rx="6"/>
+        <rect x="228.6" y="63" width="44" height="97" rx="6"/>
+        <rect x="300.2" y="76" width="44" height="84" rx="6"/>
+        <rect x="371.8" y="47.5" width="44" height="112.5" rx="6"/>
+        <rect x="443.4" y="55" width="44" height="105" rx="6"/>
+        <rect x="515" y="69" width="44" height="91" rx="6"/>
+        <rect x="586.6" y="61.5" width="44" height="98.5" rx="6"/>
+      </g>
+      <rect x="658.2" y="56.5" width="44" height="103.5" rx="6" fill="#0F766E"/>
+      <line x1="0" y1="159" x2="716" y2="159" stroke="#E2E8F0" stroke-width="2"/>
+      <line x1="0" y1="41" x2="716" y2="41" stroke="#475569" stroke-width="2" stroke-dasharray="6 6"/>
+      <text x="716" y="31" text-anchor="end" font-family="Inter, sans-serif" font-size="15" font-weight="600" fill="#475569">Avg</text>
+    </svg>
+    <div class="eu-axis" aria-hidden="true">
+      <span>10 km ago</span>
+      <span>5 km</span>
+      <span>Now</span>
+    </div>
+  </div>
+</div>

@@ -33,6 +33,7 @@ Befores live in `tests/NNN/before.html` with their exact ask in `README.md`.
 - **Monochrome by default**, Colour switch restores palettes and blue. Semantic colours stay: call green `#1F9D3A`.
 - Icons come from the library only (filled phone = `general/phone_filled`). Line weight scales with size (2 px at 48, 3 px at 72).
 - Swap transition: opacity + transform only, never filter.
+- **Figma trailing alignment:** use a fixed gap, a Fill left content slot, and a Fixed or Hug trailing control or value. Verify the trailing edge on the main and actual instances, including after selecting a nested layer, in both themes and with longer text. Fix the main and check existing instance overrides.
 
 ## Figma changes this session
 

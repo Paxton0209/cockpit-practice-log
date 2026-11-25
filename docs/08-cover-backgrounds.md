@@ -2,7 +2,7 @@
 
 Every entry cover shows the After component on a soft CSS background. The site opens in monochrome with a shared neutral palette across all contexts. The **Colour** control in the top right restores the context palettes and the library's blue accent.
 
-The **Day / Night** control switches the light or dark palette independently. Dashnote remembers both settings locally. The dial pad's green call key (`#1F9D3A`) keeps its action colour in both Colour settings.
+The **Day / Night** control switches the light or dark palette independently. Dashnote remembers both settings locally. The dial pad's translucent green call key stays green in both Colour settings. The keyboard's Search key uses a translucent neutral fill.
 
 ## How it is built
 
@@ -11,7 +11,7 @@ The **Day / Night** control switches the light or dark palette independently. Da
 - Three large radial lights over a base: `--cv1` top left, `--cv2` bottom right, `--cv3` top right, on `--cv0`.
 - Fine grain on top (`::after`), strength `--grain`: 0.6 in light, 0.12 in dark. Grain on dark reads as dirt, so it is almost off.
 - With Colour off, the neutral tokens override the context palette. With Colour on (`data-color="on"`), `data-ctx` selects the palette. `CTX` maps each entry to a context and defaults to `nav`.
-- In the dark theme the After panel on a cover switches to its dark variant (dark grey at 86%, white text, lighter bottom band, deeper shadow). The Before stays as AI made it.
+- The After panel follows the light or dark palette. Covers and details share the component shadow in `--preview-shadow`, with the same offsets and blur and theme-specific opacities. Before previews retain their original styling.
 
 ## Default monochrome palette
 
@@ -53,4 +53,4 @@ When a new entry doesn't fit a context, map it to the closest one in `CTX`. Don'
 
 ## Framing on the home grid
 
-A component whose body text would drop below about 11 px on a 350 px home card gets a tighter cover canvas (`cv.W` in `CMP`). Entries 008–012 use cover widths of 900, 1260, 700, 1100 and 760 px respectively. Tall components such as the dial pad are top-anchored with `cv.top` and fade at the bottom edge. The sheet shows the full component and `coverPose` scales between the two framings.
+A component whose body text would drop below about 11 px on a 350 px home card gets a tighter cover canvas (`cv.W` in `CMP`). Entries 008–012 use cover widths of 900, 1260, 700, 920 and 760 px respectively. Tall components such as the dial pad are top-anchored with `cv.top` and fade at the bottom edge. The sheet shows the full component and `coverPose` scales between the two framings.

@@ -1,0 +1,79 @@
+<div class="dm-root">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+.dm-root{
+  --bg:#EEF1F5;--tile:#FFFFFF;--line:#DDE2E9;--ink:#141A22;--muted:#5D6775;
+  --icon-bg:#F1F4F8;--off-bg:#E7EBF0;--focus:#1F6FEB;
+  width:772px;height:320px;box-sizing:border-box;padding:16px;
+  background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--ink);
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+  -webkit-font-smoothing:antialiased;
+}
+.dm-root *{box-sizing:border-box}
+.dm-tile{position:relative;height:100%;border-radius:20px;background:var(--tile);
+  border:1px solid var(--line);box-shadow:0 1px 2px rgba(20,26,34,.04),0 4px 12px rgba(20,26,34,.04)}
+.dm-toggle{all:unset;box-sizing:border-box;cursor:pointer;width:100%;height:100%;
+  border-radius:20px;padding:20px 18px 20px;display:flex;flex-direction:column;justify-content:space-between}
+.dm-toggle:active{background:#F7F9FB}
+.dm-toggle:focus-visible,.dm-info:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.dm-icon{width:72px;height:72px;border-radius:18px;background:var(--icon-bg);
+  display:grid;place-items:center;color:#3A4452}
+.dm-icon svg{width:40px;height:40px}
+.dm-text{display:flex;flex-direction:column;gap:12px}
+.dm-name{font-size:22px;font-weight:600;line-height:1.15;letter-spacing:-.01em}
+.dm-state{align-self:flex-start;font-size:15px;font-weight:600;letter-spacing:.08em;
+  color:var(--muted);background:var(--off-bg);border-radius:999px;padding:7px 14px;line-height:1}
+.dm-info{all:unset;box-sizing:border-box;cursor:pointer;position:absolute;top:12px;right:12px;
+  width:48px;height:48px;border-radius:50%;display:grid;place-items:center;color:var(--muted)}
+.dm-info:active{background:var(--icon-bg)}
+.dm-info svg{width:26px;height:26px}
+</style>
+
+<div class="dm-tile">
+  <button class="dm-toggle" role="switch" aria-checked="false" aria-label="Snow mode, off">
+    <span class="dm-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M3.3 7l17.4 10M3.3 17L20.7 7"/><path d="M9.5 3.5L12 6l2.5-2.5M9.5 20.5L12 18l2.5 2.5M3.6 10.3L7 9.4 6.1 6M17.9 18l-.9-3.4 3.4-.9M3.6 13.7L7 14.6 6.1 18M17.9 6l-.9 3.4 3.4.9"/></svg>
+    </span>
+    <span class="dm-text"><span class="dm-name">Snow</span><span class="dm-state">OFF</span></span>
+  </button>
+  <button class="dm-info" aria-label="About Snow mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".6" fill="currentColor"/></svg>
+  </button>
+</div>
+
+<div class="dm-tile">
+  <button class="dm-toggle" role="switch" aria-checked="false" aria-label="Wet mode, off">
+    <span class="dm-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5S4.5 8 4.5 10.5a3.5 3.5 0 0 0 7 0C11.5 8 8 3.5 8 3.5z"/><path d="M16.5 9.5s-3.5 4.5-3.5 7a3.5 3.5 0 0 0 7 0c0-2.5-3.5-7-3.5-7z"/></svg>
+    </span>
+    <span class="dm-text"><span class="dm-name">Wet</span><span class="dm-state">OFF</span></span>
+  </button>
+  <button class="dm-info" aria-label="About Wet mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".6" fill="currentColor"/></svg>
+  </button>
+</div>
+
+<div class="dm-tile">
+  <button class="dm-toggle" role="switch" aria-checked="false" aria-label="Sand mode, off">
+    <span class="dm-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="6" r="2.5"/><path d="M2 17c3-4.5 6.5-6 10-4.5"/><path d="M2 20.5c4-3.5 8.5-5 13-3.5 2.4.8 4.6 1.6 7 1.5"/></svg>
+    </span>
+    <span class="dm-text"><span class="dm-name">Sand</span><span class="dm-state">OFF</span></span>
+  </button>
+  <button class="dm-info" aria-label="About Sand mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".6" fill="currentColor"/></svg>
+  </button>
+</div>
+
+<div class="dm-tile">
+  <button class="dm-toggle" role="switch" aria-checked="false" aria-label="Range saver mode, off">
+    <span class="dm-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="7" width="17" height="10" rx="2.5"/><path d="M22 10.5v3"/><path d="M8 14.5c0-3 2.2-4.8 6-5-.2 3.8-2 6-5 6"/><path d="M8 14.5l2.5-2.5"/></svg>
+    </span>
+    <span class="dm-text"><span class="dm-name">Range saver</span><span class="dm-state">OFF</span></span>
+  </button>
+  <button class="dm-info" aria-label="About Range saver mode">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 11v6"/><circle cx="12" cy="7.6" r=".6" fill="currentColor"/></svg>
+  </button>
+</div>
+</div>
