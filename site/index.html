@@ -405,6 +405,20 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .rs .mt{display:flex;align-items:center;gap:24px;color:var(--mfg)}.rs .mt span{display:flex;gap:16px}
 /* 015 place details */
 .pl{width:560px;flex-direction:column;gap:24px;padding:24px;border-radius:20px}
+/* 021 navigation search */
+.nv.ns{width:560px;height:204px;flex-direction:column;border-radius:20px;overflow:hidden}
+.nv.ns .ns-top{flex:none;height:84px;display:flex;align-items:center;gap:12px;padding:0 20px}
+.nv.ns .ns-in{flex:1;min-width:0;display:flex;align-items:center;gap:12px;color:var(--mfg);font-size:28px;line-height:40px}
+.nv.ns .ns-acts{flex:none;display:flex;align-items:center;gap:16px;color:var(--mfg)}
+.nv.ns .ns-div{flex:none;height:2px;background:var(--div)}
+.nv.ns .ns-bot{flex:1;min-height:0;display:flex;align-items:center;gap:24px;padding:20px;overflow:hidden}
+.nv.ns .ns-it{flex:none;display:flex;align-items:center;gap:12px}
+.nv.ns .ns-ic{flex:none;width:48px;height:48px;display:grid;place-items:center;color:var(--mfg)}
+.nv.ns .ns-ic.ch{color:var(--info)}
+.nv.ns .ns-tx{display:flex;flex-direction:column;gap:4px}
+.nv.ns .ns-tx b{font-weight:500;font-size:28px;line-height:40px;color:var(--fg)}
+.nv.ns .ns-tx span{font-size:24px;line-height:32px;color:var(--mfg)}
+.nv.ns .ns-sep{flex:none;width:2px;height:48px;background:var(--div)}
 .pl .hd{justify-content:space-between}.pl .ic{display:flex;gap:20px}
 .pl .inf{display:flex;flex-direction:column;gap:12px}.pl .nm{display:flex;flex-direction:column;gap:4px}
 .pl .tags{display:flex;gap:12px}.pl .tags i{font-style:normal;height:38px;min-width:80px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--muted);color:var(--mfg);font-size:20px;line-height:28px}
@@ -2160,6 +2174,54 @@ T:{W:642,H:360,name:'Turn-by-turn panel',cover:1,ask:'Design a turn-by-turn navi
   <div class="tx"><div class="dd"><b>300</b><i>m</i></div><span class="st"><span class="pre">onto&nbsp;</span>Main Street</span></div></div>
   <div class="bc"><span class="nx"><span class="ni"><i class="na">${FIG_NEXT}</i><i class="nb">${FIG_NEXT_B}</i></span><span class="nxt"><span class="tn">Then<span class="stw">&nbsp;straight</span></span><b>150 m</b></span></span><span class="eta"><span class="w1">Arrive</span><b>10:48</b><span class="w2">Arrival</span></span></div></div>
 </div></div>`},
+NS:{W:688,H:386,name:'Navigation search',cover:1,ask:'Design a navigation search card for a car screen, 560 × 204 px, light theme. Content, exactly: a search bar with “Navigate” and Home and Work shortcuts, and two quick destinations below — “Galen Place” (“Galen Pl, Fremont”) as a recent stop and “Palo Alto” (“Palo Alto, CA”) as a charging station. Nothing else.',wrong:[['Filled pins & red badge','Heavy teardrop pins and a loud red charger circle break icon unity.'],['16 px text, cramped rows','Tiny phone-scale input box and 13 px addresses.'],['Boxed pills on shortcuts','Nested borders around search, Home and Work add clutter.']],notes:[['48 px library line icons','One 2 px stroke family; charging uses the single library blue.'],['28/40 and 24/32 type','Destination names and addresses read in one glance.'],['One flat glass panel','Two bands separated by a 2 px hairline, no nested boxes.']],
+  html:()=>`<div class="nv ns">
+    <div class="ns-top">
+      <div class="ns-in"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M36.5121 36.5123L27.8586 27.8587M27.8586 27.8587C26.0714 29.6459 23.6025 30.7514 20.8756 30.7514C15.4218 30.7514 11 26.3296 11 20.8757C11 15.4219 15.4218 11.0001 20.8756 11.0001C26.3294 11.0001 30.7512 15.4219 30.7512 20.8757C30.7512 23.6027 29.6458 26.0716 27.8586 27.8587Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Navigate</span></div>
+      <div class="ns-acts">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M12.505 22.537C12.505 21.8055 12.8185 21.1785 13.341 20.7605L22.6415 13.132C23.373 12.505 24.627 12.505 25.3585 13.132L34.659 20.7605C35.1815 21.1785 35.495 21.8055 35.495 22.537V33.405C35.495 34.5545 34.5545 35.495 33.405 35.495H14.595C13.4455 35.495 12.505 34.5545 12.505 33.405V22.537Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M17.45 35.8H13.1C12.49 35.8 11.905 35.5577 11.4736 35.1264C11.0423 34.695 10.8 34.11 10.8 33.5V17.35C10.7924 16.9377 10.901 16.5315 11.1131 16.1779C11.3253 15.8243 11.6326 15.5374 12 15.35L21.1 10.5C21.4436 10.3187 21.8284 10.2295 22.2168 10.241C22.6051 10.2525 22.9839 10.3644 23.3162 10.5658C23.6485 10.7672 23.9229 11.0512 24.1129 11.3901C24.3028 11.7291 24.4017 12.1115 24.4 12.5V17.8299M17.45 35.8H24.4M17.45 35.8V28.2M24.4 35.8H34.2C34.81 35.8 35.395 35.5577 35.8263 35.1264C36.2577 34.695 36.5 34.11 36.5 33.5V22.4C36.5002 21.9884 36.3945 21.5836 36.1931 21.2246C35.9917 20.8656 35.7014 20.5644 35.35 20.35L28 15.85C27.6437 15.6262 27.2338 15.5021 26.8131 15.4908C26.3925 15.4795 25.9765 15.5814 25.6087 15.7857C25.2409 15.9901 24.9346 16.2894 24.722 16.6526C24.5128 17.0099 24.4018 17.4161 24.4 17.8299M24.4 35.8V17.85" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+    </div>
+    <div class="ns-div"></div>
+    <div class="ns-bot">
+      <div class="ns-it">
+        <span class="ns-ic"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M12.9412 20.6262C14.3412 15.4262 19.3999 12 24.4999 12C31.0999 12 36.4999 17.4 36.4999 24C36.4999 30.6 31.0999 36 24.4999 36C19.8999 36 15.9999 33.4 13.9999 29.6M12.9412 20.6262C12.975 20.8414 13.1605 21 13.3783 21H19M12.9412 20.6262L11.9249 14.1704" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M24.5 18V23C24.5 23.6295 24.7964 24.2223 25.3 24.6L28.5 27" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <div class="ns-tx"><b>Galen Place</b><span>Galen Pl, Fremont</span></div>
+      </div>
+      <div class="ns-sep"></div>
+      <div class="ns-it">
+        <span class="ns-ic ch"><svg width="48" height="48" viewBox="0 0 48 48" fill="none"><path d="M17.1897 11.3523H30.8103C31.8424 11.3523 32.8323 11.7623 33.562 12.4921C34.2919 13.2219 34.7019 14.2117 34.7019 15.2439V32.7561C34.7019 33.7882 34.2919 34.7781 33.562 35.5078C32.8323 36.2377 31.8424 36.6477 30.8103 36.6477H17.1897C16.1575 36.6477 15.1677 36.2377 14.4379 35.5078C13.7081 34.7781 13.2981 33.7882 13.2981 32.7561V15.2439C13.2981 14.2117 13.7081 13.2219 14.4379 12.4921C15.1677 11.7623 16.1575 11.3523 17.1897 11.3523Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M25.0183 18.4084C25.1358 17.8212 24.3632 17.4958 24.0251 17.99L19.7905 24.179C19.5707 24.5002 19.8007 24.9363 20.1899 24.9363H23.6561C23.8851 24.9363 24.057 25.1459 24.012 25.3705L23.1794 29.5336C23.062 30.1208 23.8345 30.4463 24.1726 29.9521L28.4073 23.763C28.627 23.4418 28.397 23.0057 28.0078 23.0057H24.5417C24.3126 23.0057 24.1408 22.7961 24.1857 22.5715L25.0183 18.4084Z" fill="currentColor"/></svg></span>
+        <div class="ns-tx"><b>Palo Alto</b><span>Palo Alto, CA</span></div>
+      </div>
+    </div>
+  </div>`,
+  before:()=>`<div class="ns-b" role="region" aria-label="Navigation search">
+  <style>
+    .ns-b{box-sizing:border-box;width:560px;height:204px;padding:18px 20px;border-radius:20px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 4px 16px rgba(15,23,42,.08);display:flex;flex-direction:column;gap:14px;font-family:var(--font);color:#0f172a;text-align:left}
+    .ns-b *{box-sizing:border-box;margin:0}
+    .ns-b-top{display:flex;align-items:center;gap:10px}
+    .ns-b-in{flex:1;height:44px;padding:0 14px;border-radius:12px;background:#f1f5f9;border:1px solid #e2e8f0;display:flex;align-items:center;gap:10px;color:#64748b;font-size:16px;font-weight:500}
+    .ns-b-btn{height:44px;padding:0 14px;border-radius:12px;background:#f8fafc;border:1px solid #e2e8f0;display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:#334155}
+    .ns-b-lbl{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#94a3b8}
+    .ns-b-list{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1}
+    .ns-b-card{padding:12px 14px;border-radius:14px;background:#f8fafc;border:1px solid #e2e8f0;display:flex;align-items:center;gap:12px}
+    .ns-b-pin{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;color:#fff;background:#64748b;box-shadow:0 2px 6px rgba(15,23,42,.15)}
+    .ns-b-pin.ev{background:#ef4444}
+    .ns-b-t{font-size:16px;font-weight:600;line-height:20px;color:#0f172a}
+    .ns-b-s{font-size:13px;line-height:17px;color:#64748b;margin-top:2px}
+  </style>
+  <div class="ns-b-top">
+    <div class="ns-b-in"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span>Navigate</span></div>
+    <div class="ns-b-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3l9 8h-3v9h-5v-6h-2v6H6v-9H3l9-8z"/></svg>Home</div>
+    <div class="ns-b-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 3h6a2 2 0 0 1 2 2v2h4a1 1 0 0 1 1 1v11a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a1 1 0 0 1 1-1h4V5a2 2 0 0 1 2-2zm0 4h6V5H9v2z"/></svg>Work</div>
+  </div>
+  <div class="ns-b-lbl">Quick destinations</div>
+  <div class="ns-b-list">
+    <div class="ns-b-card"><span class="ns-b-pin"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span><div><p class="ns-b-t">Galen Place</p><p class="ns-b-s">Galen Pl, Fremont</p></div></div>
+    <div class="ns-b-card"><span class="ns-b-pin ev"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><div><p class="ns-b-t">Palo Alto</p><p class="ns-b-s">Palo Alto, CA</p></div></div>
+  </div>
+</div>`},
 C:{W:640,H:360,name:'Climate control',notes:[['112 px value','The temperature reads at arm’s length; everything else steps back.'],['72 px targets','Minus and plus become full-width buttons on the bottom edge.'],['Quiet label','The label drops to a 22 px caption at 65%.'],['Radius 24','The card joins the same corner family as the other panels.']],html:()=>`<div class="c1" data-ga="radius 24" data-gb="radius 16"><small data-ga="22px" data-gb="13px">Temperature</small><div class="v" data-ga="112px" data-gb="40px">21.5°</div><div class="bt"><i>${I('minus',36)}</i><i>${I('plus',36)}</i></div></div>`},
 A:{W:640,H:220,name:'Settings row',notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},
 B:{W:640,H:340,name:'Now playing',notes:[['232 px art','You know what is playing at a glance.'],['40 px title','The one line that matters leads.'],['104 × 88 play','The main action is a real button.'],['32 px rhythm','Prev, play and next sit on one even spacing.']],html:()=>`<div class="b1" data-ga="radius 28" data-gb="radius 12"><i class="ka" data-ga="232" data-gb="48"></i><span class="tt" data-ga="40px" data-gb="15px">Night Drive<small>Mira Okafor</small></span><span class="c"><span class="pv">${I('prev',40)}</span><span class="pl">${I('play',40)}</span><span class="nx2">${I('next',40)}</span></span></div>`}};
@@ -2198,17 +2260,25 @@ const DATA=[
 ['VU','User speech'],
 ['VT','Thinking'],
 ['VA','Assistant speech'],
-['VP','Proactive']];
+['VP','Proactive'],
+['NS','Navigation search']];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much'],['Too much','Phone habits'],['Phone habits','Too small']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice',20:'voice'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice',20:'voice',21:'nav'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const ARCHIVED_ENTRIES=new Set([4]);
 const PUBLISHED_ENTRIES=ENTRIES.filter(e=>e.s&&!ARCHIVED_ENTRIES.has(e.n));
 const PUBLISHED=PUBLISHED_ENTRIES.length;
 const PROMPTS={
+NS:[`Design a navigation search card for a car screen, 560 × 204 px, light theme. Content, exactly: a search bar with “Navigate” and Home and Work shortcuts, and two quick destinations below — “Galen Place” (“Galen Pl, Fremont”) as a recent stop and “Palo Alto” (“Palo Alto, CA”) as a charging station. Nothing else.`,
+`Design a 560 × 204 px navigation search card for a car screen in Inter Medium, light theme.
+Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a map), radius 20, a 2 px inside border (#1D1D1F at 5%), and a soft elevation shadow. Split into two bands by a full-width 2 px horizontal hairline (#0F1729 at 10%).
+Top band, 84 px tall, 20 px side padding: on the left, a bare 48 px 2 px-stroke search icon and “Navigate” in 28/40 (#1D1D1F at 65%) with a 12 px gap; on the right, bare 48 px 2 px-stroke Home and Work (building) icons at 65%, 16 px apart. No nested input box, no pill borders around shortcuts.
+Bottom band, 118 px tall, 20 px padding, 24 px gap: two quick destinations side by side separated by a centred 2 × 48 px vertical hairline (#0F1729 at 10%).
+First item: a 48 px 2 px-stroke history clock icon at 65%, 12 px gap, then “Galen Place” in 28/40 (#1D1D1F) over “Galen Pl, Fremont” in 24/32 (#1D1D1F at 65%) with a 4 px gap.
+Second item: a 48 px 2 px-stroke rounded-rect charging-station icon with a lightning bolt in #007AFF, 12 px gap, then “Palo Alto” in 28/40 (#1D1D1F) over “Palo Alto, CA” in 24/32 (#1D1D1F at 65%) with a 4 px gap. No teardrop map pins, no red badges, no section heading.`],
 J:[ITINERARY_ASK,
 `${ITINERARY_ASK}
 Show the standalone 560 × 444 px panel. Use a light panel surface (white at 65% with 12 px backdrop blur, or #1C1C1E in dark), a 20 px outer radius, a 2 px inside border (#1D1D1F at 5%), and 24 px from the outside edge to the content.
@@ -2324,7 +2394,7 @@ function viewHome(){
   </div>`}
 function gridFor(c){
   /* Index order is curated for rhythm, not number: no two voice pills, lists or tile grids side by side or stacked. Anything not listed follows, newest first. */
-  const MIX=[1,19,12, 16,15,18, 13,17,11, 14,9,2, 20,3,6, 10,7,8, 5];
+  const MIX=[1,19,12, 16,15,18, 21,17,11, 13,14,9, 2,20,3, 6,10,7, 8,5];
   const mixed=[...MIX.map(n=>PUBLISHED_ENTRIES.find(e=>e.n===n)).filter(Boolean),...PUBLISHED_ENTRIES.filter(e=>!MIX.includes(e.n)).reverse()];
   const list=c==='All'?[...mixed,...ENTRIES.slice(DATA.length,DATA.length+3)]:PUBLISHED_ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=!e.s,C=!soon&&CMP[e.s]&&CMP[e.s].cover?CMP[e.s]:null;
@@ -2500,8 +2570,8 @@ function copyButton(kind){
     </span>Copy
   </button>`;
 }
-const TESTED={T:97,R:96,P:98,U:99,O:97,L:99,D:98,K:99,S:95,W:95,N:96,J:96,PM:99,DM:98,EU:97,VU:99,VT:97,VA:99,VP:99};
-const TESTED_BY={R:'Gemini 4 Neon',O:'Gemini 4 Neon',D:'Gemini 4 Neon',W:'Gemini 4 Neon',J:'Gemini 4 Neon',EU:'Gemini 4 Neon'};
+const TESTED={T:97,R:96,P:98,U:99,O:97,L:99,D:98,K:99,S:95,W:95,N:96,J:96,PM:99,DM:98,EU:97,VU:99,VT:97,VA:99,VP:99,NS:98};
+const TESTED_BY={R:'Gemini 4 Neon',O:'Gemini 4 Neon',D:'Gemini 4 Neon',W:'Gemini 4 Neon',J:'Gemini 4 Neon',EU:'Gemini 4 Neon',NS:'Gemini 4 Neon'};
 function sheetHTML(n){
   const e=ENTRIES[n-1],C=CMP[e.s],afterOnly=C.afterOnly;
   const [p0,p1]=C.prompt?[C.ask||'',C.prompt]:prompts(e);
