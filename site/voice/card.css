@@ -6,7 +6,7 @@
   --vo-fill: #fff;
   --vo-edge: rgb(29 29 31 / 9%);
   --vo-ink: #1d1d1f;
-  --vo-shadow: 0 10px 28px -3px rgb(20 24 44 / 26%), 0 3px 10px rgb(20 24 44 / 15%);
+  --vo-shadow: 0 1px 2px rgb(18 24 38 / 5%), 0 6px 16px -4px rgb(18 24 38 / 10%), 0 14px 26px -10px rgb(18 24 38 / 8%);
   position: relative;
   display: flex;
   align-items: center;
@@ -90,8 +90,8 @@
 .vo-orb { position: relative; flex: none; width: 48px; height: 48px; border-radius: 50%; overflow: hidden; isolation: isolate; }
 .vo-orb > img { clip-path: circle(24px at 50% 50%); }
 /* subtle tinted contact shadow beneath the blue/violet orbs to ground them physically on the light pill */
-.vo-pill[data-kind=reply] .vo-orb { box-shadow: 0 5px 11px -2px rgba(10, 44, 118, .32), 0 2px 4px rgba(10, 30, 82, .18); }
-.vo-pill[data-kind=ask] .vo-orb { box-shadow: 0 5px 11px -2px rgba(56, 24, 122, .32), 0 2px 4px rgba(42, 18, 92, .18); }
+.vo-pill[data-kind=reply] .vo-orb { box-shadow: 0 3px 7px -2px rgba(10, 44, 118, .20), 0 1px 2px rgba(10, 30, 82, .10); }
+.vo-pill[data-kind=ask] .vo-orb { box-shadow: 0 3px 7px -2px rgba(56, 24, 122, .20), 0 1px 2px rgba(42, 18, 92, .10); }
 :root[data-theme=dark] .vo-pill[data-kind=reply] .vo-orb, :root[data-theme=dark] .vo-pill[data-kind=ask] .vo-orb { box-shadow: 0 4px 10px -1px rgba(0, 0, 0, .48); }
 /* 3D optical glass shell: Fresnel specular crescent at top + internal chromatic bounce at bottom rim */
 .vo-orb.is-fluid::after {
