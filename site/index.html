@@ -407,12 +407,12 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .pl{width:560px;flex-direction:column;gap:24px;padding:24px;border-radius:20px}
 /* 021 navigation search */
 .nv.ns{width:560px;height:204px;flex-direction:column;border-radius:20px;overflow:hidden}
-.nv.ns .ns-top{flex:none;height:84px;display:flex;align-items:center;gap:12px;padding:0 20px 0 18px}
-.nv.ns .ns-in{flex:1;min-width:0;display:flex;align-items:center;gap:12px;color:var(--mfg);font-size:28px;line-height:40px}
+.nv.ns .ns-top{flex:none;height:84px;display:flex;align-items:center;gap:12px;padding:0 20px 0 16px}
+.nv.ns .ns-in{flex:1;min-width:0;display:flex;align-items:center;gap:16px;color:var(--mfg);font-size:28px;line-height:40px}
 .nv.ns .ns-acts{flex:none;display:flex;align-items:center;gap:16px;color:var(--mfg)}
 .nv.ns .ns-div{flex:none;height:2px;background:var(--div)}
-.nv.ns .ns-bot{flex:1;min-height:0;display:flex;align-items:center;gap:20px;padding:20px 20px 20px 18px;overflow:hidden}
-.nv.ns .ns-it{flex:none;display:flex;align-items:center;gap:12px}
+.nv.ns .ns-bot{flex:1;min-height:0;display:flex;align-items:center;gap:16px;padding:20px 16px;overflow:hidden}
+.nv.ns .ns-it{flex:none;display:flex;align-items:center;gap:16px}
 .nv.ns .ns-ic{flex:none;width:56px;height:56px;display:grid;place-items:center;color:var(--mfg)}
 .nv.ns .ns-tx{display:flex;flex-direction:column;gap:2px}
 .nv.ns .ns-tx b{font-weight:500;font-size:28px;line-height:32px;color:var(--fg)}
@@ -2274,10 +2274,10 @@ const PROMPTS={
 NS:[`Design a navigation search card for a car screen, 560 × 204 px, light theme. Content, exactly: a search bar with “Navigate” and Home and Work shortcuts, and two quick destinations below — “Galen Place” (“Galen Pl, Fremont”) as a recent stop and “Palo Alto” (“Palo Alto, CA”) as a charging station. Nothing else.`,
 `Design a 560 × 204 px navigation search card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a map), radius 20, a 2 px inside border (#1D1D1F at 5%), and a soft elevation shadow. Split into two bands by a full-width 2 px horizontal hairline (#0F1729 at 10%).
-Top band, 84 px tall, 18 px left and 20 px right padding: on the left, a bare 56 px search icon with a 3 px stroke (#1D1D1F at 65%, matching the optical weight of Inter Medium) and “Navigate” in 28/40 (#1D1D1F at 65%) with a 12 px gap; on the right, filled (solid) 48 px Home (house with door cutout) and Work (briefcase) icons at 65%, 16 px apart. No nested input box, no pill borders around shortcuts.
-Bottom band, 118 px tall, 20 px padding (18 px left), 20 px gap: two quick destinations side by side separated by a centred 2 × 48 px vertical hairline (#0F1729 at 10%). Keep all icons neutral secondary (#1D1D1F at 65%, no accent blue or red).
-First item: a 56 px 3 px-stroke history clock icon at 65%, 12 px gap, then a tight two-line stack (2 px gap) with “Galen Place” in 28/32 (#1D1D1F) over “Galen Pl, Fremont” in 24/28 (#1D1D1F at 65%).
-Second item: a 56 px 3 px-stroke rounded-rect charging-station icon with a lightning bolt at 65%, 12 px gap, then a tight two-line stack (2 px gap) with “Palo Alto” in 28/32 (#1D1D1F) over “Palo Alto, CA” in 24/28 (#1D1D1F at 65%). No teardrop map pins, no coloured badges, no section heading.`],
+Top band, 84 px tall, 16 px left and 20 px right padding: on the left, a bare 56 px search icon with a 3 px stroke (#1D1D1F at 65%, matching the optical weight of Inter Medium) and “Navigate” in 28/40 (#1D1D1F at 65%) with a 16 px gap; on the right, filled (solid) 48 px Home (house with door cutout) and Work (briefcase) icons at 65%, 16 px apart. No nested input box, no pill borders around shortcuts.
+Bottom band, 118 px tall, 20 px vertical and 16 px horizontal padding, 16 px gap: two quick destinations side by side separated by a centred 2 × 48 px vertical hairline (#0F1729 at 10%). Keep all icons neutral secondary (#1D1D1F at 65%, no accent blue or red).
+First item: a 56 px 3 px-stroke history clock icon at 65%, 16 px gap, then a tight two-line stack (2 px gap) with “Galen Place” in 28/32 (#1D1D1F) over “Galen Pl, Fremont” in 24/28 (#1D1D1F at 65%).
+Second item: a 56 px 3 px-stroke rounded-rect charging-station icon with a lightning bolt at 65%, 16 px gap, then a tight two-line stack (2 px gap) with “Palo Alto” in 28/32 (#1D1D1F) over “Palo Alto, CA” in 24/28 (#1D1D1F at 65%). No teardrop map pins, no coloured badges, no section heading.`],
 J:[ITINERARY_ASK,
 `${ITINERARY_ASK}
 Show the standalone 560 × 444 px panel. Use a light panel surface (white at 65% with 12 px backdrop blur, or #1C1C1E in dark), a 20 px outer radius, a 2 px inside border (#1D1D1F at 5%), and 24 px from the outside edge to the content.
