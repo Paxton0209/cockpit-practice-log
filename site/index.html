@@ -2348,11 +2348,41 @@ function moveNav(){const navind=$('#navind'),on=$('#nav button.on');if(!navind)r
 addEventListener('resize',moveNav);
 function setupHome(){
   requestAnimationFrame(moveNav);
-  $$('#nav button').forEach(b=>b.onclick=()=>{$$('#nav button').forEach(x=>x.classList.toggle('on',x===b));moveNav();const c=b.dataset.c,g=$('#grid');
-    g.innerHTML=gridFor(c);fit(g);
-    /* reveal row by row: cards on one line rise together */
-    {const cs=[...g.children].filter(el=>el.classList.contains('card')),tops=[...new Set(cs.map(el=>el.offsetTop))].sort((a,b)=>a-b);cs.forEach(el=>el.animate([{opacity:0,transform:'translateY(10px)'},{opacity:1,transform:'none'}],{duration:520,delay:tops.indexOf(el.offsetTop)*90,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'}))}
-    if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'})});
+  let tabSeq=0;
+  $$('#nav button').forEach(b=>b.onclick=async()=>{
+    if(b.classList.contains('on'))return;
+    const seq=++tabSeq;
+    $$('#nav button').forEach(x=>x.classList.toggle('on',x===b));moveNav();
+    const c=b.dataset.c,g=$('#grid');
+    if(innerWidth<860)b.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});else scrollTo({top:0,behavior:'smooth'});
+    /* capture old card positions for FLIP shared-element glide (e.g. Index ↔ Voice & AI) */
+    const oldRects=new Map();
+    [...g.children].forEach(el=>{if(el.dataset.n)oldRects.set(el.dataset.n,el.getBoundingClientRect())});
+    const nextHTML=gridFor(c);
+    const hasShared=[...nextHTML.matchAll(/data-n="(\d+)"/g)].some(m=>oldRects.has(m[1]));
+    if(!hasShared&&!RM.matches){
+      /* disjoint categories: quick 110ms soft dissolve instead of a jarring 0ms white flash */
+      await g.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(-4px)'}],{duration:110,easing:'cubic-bezier(.4,0,1,1)',fill:'forwards'}).finished.catch(()=>{});
+      if(seq!==tabSeq)return;
+    }
+    g.getAnimations().forEach(a=>a.cancel());
+    g.innerHTML=nextHTML;fit(g);
+    if(RM.matches)return;
+    const cs=[...g.children].filter(el=>el.classList.contains('card'));
+    const tops=[...new Set(cs.map(el=>el.offsetTop))].sort((a,b)=>a-b);
+    cs.forEach(el=>{
+      const prev=el.dataset.n&&oldRects.get(el.dataset.n);
+      if(prev){
+        const cur=el.getBoundingClientRect();
+        const dx=prev.left-cur.left,dy=prev.top-cur.top;
+        if(Math.hypot(dx,dy)>2&&Math.abs(dy)<1400){
+          el.animate([{transform:`translate(${dx}px,${dy}px)`},{transform:'none'}],{duration:420,easing:'cubic-bezier(.22,1,.36,1)'});
+          return;
+        }
+      }
+      el.animate([{opacity:0,transform:'translateY(8px)'},{opacity:1,transform:'none'}],{duration:380,delay:tops.indexOf(el.offsetTop)*55,easing:'cubic-bezier(.22,1,.36,1)',fill:'backwards'});
+    });
+  });
 }
 /* ---- entry sheet: grows out of the clicked cover ----
    Structure copied from Dashline (springDialog / closeInsp): the sheet rides one sampled spring
