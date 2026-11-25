@@ -35,6 +35,26 @@ const VO_SCRIPTS = {
   /* proactive: the assistant starts the conversation, so the pill grows out of the orb and then waits */
   ask: [['ask', 'Would you like to open the windows?', 200, 3600, false, 'enter']],
 };
+/* thinking palettes, one per step of the work, all inside the assistant's blue–violet family */
+const VO_THINK = {
+  light: [
+    ['#2e9bea, #00b7ff 22%, #007aff 45%, #4f6bff 70%, #2e9bea', 'rgb(0 60 255 / .35)'],     /* analysing: clear blue */
+    ['#5b5bff, #7b61ff 25%, #af52de 50%, #6e5bff 75%, #5b5bff', 'rgb(90 0 200 / .3)'],      /* understanding: indigo → violet */
+    ['#af52de, #e055c8 25%, #ff5fa2 50%, #a35bff 75%, #af52de', 'rgb(200 0 120 / .28)'],    /* finding: violet → pink */
+    ['#00a0b8, #00b7ff 25%, #2e9bea 50%, #3a7bff 75%, #00a0b8', 'rgb(0 110 160 / .32)'],    /* browsing history: teal → blue */
+  ],
+  dark: [
+    ['#c2edff, #64d2ff 22%, #50a7ff 45%, #7d8cff 70%, #c2edff', 'rgb(255 255 255 / .95)'],
+    ['#b9b4ff, #8f86ff 25%, #c35ce6 50%, #9b8cff 75%, #b9b4ff', 'rgb(255 255 255 / .95)'],
+    ['#e7a8ff, #ff7ab8 25%, #ff9ad0 50%, #c38cff 75%, #e7a8ff', 'rgb(255 255 255 / .95)'],
+    ['#9ff3ff, #5ee0f0 25%, #64d2ff 50%, #6fa8ff 75%, #9ff3ff', 'rgb(255 255 255 / .95)'],
+  ],
+};
+const voTint = (el, i) => {
+  const [g, hi] = VO_THINK[document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light'][i % 4];
+  el.style.setProperty('--vo-tg', `linear-gradient(90deg, ${g})`);
+  el.style.setProperty('--vo-tg-hi', hi);
+};
 const VO_MAX = 448, VO_EASE = 'cubic-bezier(.33, 0, .2, 1)';
 const voSleep = ms => new Promise(r => setTimeout(r, ms));
 /* group appended segments into runs: one sentence, one schedule */
@@ -54,7 +74,7 @@ const voSyllables = w => Math.max(1, (w.toLowerCase().match(/[aeiouy]+/g) || [])
 const voStress = w => /\d/.test(w) ? 1 : /^[A-Z]/.test(w) ? .85 : w.length > 6 ? .7 : w.length < 4 ? .3 : .5;
 function voEngine(pill) {
   const box = pill.querySelector('.vo-text'), line = pill.querySelector('.vo-line');
-  const E = { pulses: [], wT: box.offsetWidth, w: box.offsetWidth, vw: 0, xT: 0, x: 0, vx: 0, lv: 0, pitch: .5, rot: 0, waiting: false, t0: performance.now() };
+  const E = { think: 0, pulses: [], wT: box.offsetWidth, w: box.offsetWidth, vw: 0, xT: 0, x: 0, vx: 0, lv: 0, pitch: .5, rot: 0, waiting: false, t0: performance.now() };
   /* words: [{w, at(ms from now), dur}]; question lifts pitch at the end */
   E.speak = (words, question) => {
     const now = performance.now();
@@ -141,6 +161,7 @@ async function voPlay(pill) {
             { duration: 460, easing: 'cubic-bezier(.4, 0, .6, 1)', fill: 'forwards' }).finished.then(() => ghost.remove(), () => ghost.remove());
           line.getAnimations().forEach(a => a.cancel());
           line.textContent = text;
+          voTint(line, runs.indexOf(r));
           line.classList.add('vo-write');
           E.wT = Math.min(Math.ceil(line.scrollWidth) + 2, VO_MAX);
           line.animate([
@@ -150,6 +171,7 @@ async function voPlay(pill) {
           await voSleep(160 + 820 + hold);
           continue;
         }
+        if (kind === 'thinking') voTint(line, runs.indexOf(r));
         line.innerHTML = text.split(' ').map(w => `<b class="vo-still">${w}</b>`).join(' '); line.style.transform = `translateX(${E.x}px)`;
         E.wT = Math.min(Math.ceil(line.scrollWidth) + 2, VO_MAX);
         fade(1, 640);
@@ -230,7 +252,7 @@ Motion: words appear one by one, each rising 6 px as it fades in; the pill grows
     prompt: `Design the thinking state of a car voice assistant on a 412 × 72 px canvas, pill centred.
 ${VO_BASE}
 The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (412 px with Inter). Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
-Motion: a richer gradient (cyan, blue, violet, pink) flows through the words in a loop; the line cycles “Understanding your request”, “Finding related features”, “Browsing your history”, each fading out and in with a short blur while the pill eases to the new width; inside the orb the grain drifts and flickers irregularly (no spinning).`,
+Motion: a gradient flows through the words in a loop, and each status has its own palette (clear blue; indigo to violet; violet to pink; teal to blue); the line cycles “Understanding your request”, “Finding related features”, “Browsing your history”, each fading out and in with a short blur while the pill eases to the new width; inside the orb the grain drifts and flickers irregularly (no spinning).`,
     wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 18 px', 'Too small at arm’s length.'], ['A ringed blue bead', 'The orb looks like a button.']],
     notes: [['One line in a gradient', 'The sweep shows work in progress.'], ['The library’s grain orb', 'It turns faster while thinking.'], ['No glow', 'The pill stays quiet until there is an answer.']],
   },
