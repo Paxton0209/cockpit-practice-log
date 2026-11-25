@@ -18,8 +18,8 @@
   --bg:#f7f7f7;--stage:#f2f2f2;--panel:#fff;--ink:#0a0a0a;--t2:#5c5c5c;--t3:#78787c;--line:rgba(0,0,0,.075);--fill:#efefef;--fill2:rgba(29,29,31,.08);--lift:0 1px 2px rgba(0,0,0,.04),0 0 0 1px rgba(0,0,0,.06);--lift2:0 12px 32px -14px rgba(0,0,0,.16),0 0 0 1px rgba(0,0,0,.08);--accent:#0a7cff;--preview-shadow:0 1px 2px rgb(18 24 38 / .05),0 5px 14px -3px rgb(18 24 38 / .08),0 14px 28px -10px rgb(18 24 38 / .08);
   --sbg:#f3f3f3;--ssf:#fff;--ssf2:#e6e6e6;--stx:#0a0a0a;--st2:#8a8a8a;--sln:#e8e8e8;--sac:#0a7cff;color-scheme:light}
 [data-theme=dark]{
-  --bg:#0a0a0a;--stage:#121212;--panel:#161616;--ink:#f5f5f5;--t2:#a3a3a3;--t3:#8a8a8e;--line:rgba(255,255,255,.08);--fill:#222;--fill2:rgba(255,255,255,.09);--lift:0 0 0 1px rgba(255,255,255,.07);--lift2:0 12px 32px -14px rgba(0,0,0,.4),0 0 0 1px rgba(255,255,255,.1);--accent:#2b8fff;--preview-shadow:0 1px 2px rgb(0 0 0 / .10),0 6px 16px -4px rgb(0 0 0 / .14);
-  --sbg:#0b0b0b;--ssf:#191919;--ssf2:#2a2a2a;--stx:#f5f5f5;--st2:#8a8a8a;--sln:#262626;--sac:#2b8fff;color-scheme:dark}
+  --bg:#0b0b0c;--stage:#121214;--panel:#161618;--ink:#f5f5f5;--t2:#a1a1a6;--t3:#8a8a8e;--line:rgba(255,255,255,.08);--fill:#202023;--fill2:rgba(255,255,255,.09);--lift:0 0 0 1px rgba(255,255,255,.07);--lift2:0 10px 28px -12px rgba(0,0,0,.38),0 0 0 1px rgba(255,255,255,.11);--accent:#2b8fff;--preview-shadow:0 1px 2px rgb(0 0 0 / .16);
+  --sbg:#0b0b0c;--ssf:#19191b;--ssf2:#2a2a2d;--stx:#f5f5f5;--st2:#8a8a8e;--sln:#262629;--sac:#2b8fff;color-scheme:dark}
 :root{--cv0:#eaedef;--cv1:#dde5e9;--cv2:#cbd5da;--cv3:#f1f4f5;--cv-mid:rgba(255,255,255,.32);--grain:.42;--bad:#E5484D;--good:#30A46C;--font:Inter,-apple-system,BlinkMacSystemFont,sans-serif;--mono:ui-monospace,"SF Mono",Menlo,monospace;--out:cubic-bezier(.22,1,.36,1);--ease:cubic-bezier(.2,0,0,1);--io:cubic-bezier(.65,0,.35,1)}
 *{box-sizing:border-box}
 html{background:var(--bg)}
@@ -102,29 +102,24 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
   radial-gradient(76% 68% at 82% 8%,var(--cv3) 0%,transparent 62%),
   linear-gradient(135deg,color-mix(in srgb,var(--cv1) 22%,var(--cv0)) 0%,var(--cv0) 52%,color-mix(in srgb,var(--cv2) 24%,var(--cv0)) 100%)}
 .thumb.cov,.hero3.cov{box-shadow:none}
-:root[data-theme=dark]{--cv0:#0e0f11;--cv1:#1a1c20;--cv2:#15181d;--cv3:#121417;--cv-mid:rgba(255,255,255,.02);--grain:.14} /* restrained obsidian studio lighting */
-:root[data-theme=dark] .thumb.cov{box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+/* dark covers: pure uniform anodized neutral surface, zero blotchy gradients, zero grain — crisp hairline carries elevation */
+:root[data-theme=dark] :is(.thumb.cov,.hero3.cov){background:linear-gradient(180deg,#161618 0%,#121214 100%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.065),inset 0 1px 0 rgba(255,255,255,.035)}
 /* cover backgrounds: quiet architectural mineral tones — barely-there temperature shifts so the HMI component and its own accents stay the sole focus. */
 [data-ctx=voice]{--cv0:#eceef1;--cv1:#e1e6ed;--cv2:#d1d7e2;--cv3:#f3f5f8}
 [data-ctx=med]{--cv0:#efedeb;--cv1:#e7e1dd;--cv2:#d9d0cb;--cv3:#f5f3f1}
 [data-ctx=cli]{--cv0:#eaeeec;--cv1:#dfe6e2;--cv2:#cdd7d2;--cv3:#f1f4f2}
 [data-ctx=veh]{--cv0:#ecece9;--cv1:#e3e4df;--cv2:#d2d5cf;--cv3:#f3f3ef}
 [data-ctx=inf]{--cv0:#eceeef;--cv1:#e2e4e8;--cv2:#d1d4db;--cv3:#f3f4f6}
-[data-theme=dark] [data-ctx=voice]{--cv0:#0e0f12;--cv1:#191c22;--cv2:#151822;--cv3:#121419}
-[data-theme=dark] [data-ctx=med]{--cv0:#100f0f;--cv1:#1d1a1a;--cv2:#191616;--cv3:#141212}
-[data-theme=dark] [data-ctx=cli]{--cv0:#0e100f;--cv1:#181d1b;--cv2:#141a18;--cv3:#111514}
-[data-theme=dark] [data-ctx=veh]{--cv0:#0f1010;--cv1:#1b1c1b;--cv2:#161817;--cv3:#131413}
-[data-theme=dark] [data-ctx=inf]{--cv0:#0e0f11;--cv1:#191b1f;--cv2:#15171c;--cv3:#121316}
 /* on a dark cover the After panel is the dark variant (the Before stays as AI made it) */
-[data-theme=dark] .cov .kp:not(.is-b) .t1{background:rgba(44,44,46,.7);color:#fff}
-[data-theme=dark] .cov .kp:not(.is-b) .t1::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+[data-theme=dark] .cov .kp:not(.is-b) .t1{background:#232326;color:#fff}
+[data-theme=dark] .cov .kp:not(.is-b) .t1::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),inset 0 1px 0 rgba(255,255,255,.06)}
 [data-theme=dark] .cov .kp:not(.is-b) .t1 .mn,[data-theme=dark] .cov .kp:not(.is-b) .t1 .mv,[data-theme=dark] .cov .kp:not(.is-b) .t1 .ni,[data-theme=dark] .cov .kp:not(.is-b) .t1 .nx b{color:#fff}
 [data-theme=dark] .cov .kp:not(.is-b) .t1 .dd i{color:rgba(255,255,255,.6)}
-[data-theme=dark] .cov .kp:not(.is-b) .t1 .bc{background:#3a3a3c;color:rgba(255,255,255,.6)}
+[data-theme=dark] .cov .kp:not(.is-b) .t1 .bc{background:#2e2e32;color:rgba(255,255,255,.64)}
 [data-theme=dark] .cov .kp:not(.is-b) .t1 .ni path[stroke="#B6B6B7"],[data-theme=dark] .cov .kp:not(.is-b) .t1 .mv path[stroke-opacity]{stroke:#606062;stroke-opacity:1}
 .hero3.cov{isolation:isolate;overflow:hidden}.hero3.cov>*{position:relative;z-index:1}.hero3.cov .cstage{z-index:1}
 .thumb.cov::after,.hero3.cov::after{content:"";position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.10;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.1' intercept='-0.52'/%3E%3CfeFuncG type='linear' slope='2.1' intercept='-0.52'/%3E%3CfeFuncB type='linear' slope='2.1' intercept='-0.52'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0 / 160px 160px}
-:root[data-theme=dark] :is(.thumb.cov,.hero3.cov)::after{mix-blend-mode:soft-light;opacity:.025}
+:root[data-theme=dark] :is(.thumb.cov,.hero3.cov)::after{opacity:0}
 .thumb.cov .cs{z-index:1;background:transparent}
 .thumb.cov .cs{position:absolute;left:50%;top:50%;width:95.24%;transform:translate(-50%,-50%)}
 .thumb.cov .cs .px{background:transparent}
@@ -376,13 +371,13 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* On a cover the panel stands alone, not over a map: the 65% glass + blur picks up the gradient and reads grey.
    So covers use a near-opaque surface and no blur (Figma's glass stays for map use). */
 .cov .kp:not(.is-b) .nv,.cov .kp:not(.is-b) .t1{background:rgba(255,255,255,.92);-webkit-backdrop-filter:none;backdrop-filter:none}
-[data-theme=dark] .cov .kp:not(.is-b) .nv,[data-theme=dark] .cov .kp:not(.is-b) .t1{background:rgba(44,44,46,.94)}
+[data-theme=dark] .cov .kp:not(.is-b) .nv,[data-theme=dark] .cov .kp:not(.is-b) .t1{background:#232326}
 /* nav panels 013–015, 1:1 from Figma (UI/UX Library · Examples). Tokens from the file's light / dark modes. Glass: the cover shows through, blurred. Figma strokes are inside, so they are inset shadows here. */
 .nv{--fg:#1d1d1f;--mfg:rgba(29,29,31,.65);--mat:rgba(255,255,255,.65);--edge:rgba(29,29,31,.05);--muted:rgba(29,29,31,.08);--strong:rgba(29,29,31,.15);--subtle:rgba(29,29,31,.05);--rec:#ededef;--pri:#007aff;--pri-e:#409cff;--info:#007aff;--info-bg:rgba(0,122,255,.1);--div:rgba(15,23,41,.1);--branch:#b6b6b7;
   box-sizing:border-box;position:relative;display:flex;color:var(--fg);background:var(--mat);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:inset 0 0 0 2px var(--edge),var(--preview-shadow);font:500 24px/32px var(--font);letter-spacing:0;white-space:nowrap}
 .nv *{box-sizing:border-box;margin:0}
 .nv svg{display:block;flex:none}
-[data-theme=dark] .cov .kp:not(.is-b) .nv{--fg:#fff;--mfg:rgba(255,255,255,.6);--mat:rgba(44,44,46,.7);--edge:rgba(255,255,255,.05);--muted:rgba(255,255,255,.1);--strong:rgba(255,255,255,.16);--subtle:rgba(255,255,255,.05);--rec:#333336;--pri:#0c6fd2;--pri-e:#0a84ff;--info:#0a84ff;--info-bg:rgba(10,132,255,.16);--div:rgba(255,255,255,.08);--branch:#606062}
+[data-theme=dark] .cov .kp:not(.is-b) .nv{--fg:#fff;--mfg:rgba(255,255,255,.6);--mat:#232326;--edge:rgba(255,255,255,.09);--muted:rgba(255,255,255,.1);--strong:rgba(255,255,255,.14);--subtle:rgba(255,255,255,.05);--rec:#2e2e32;--pri:#0c6fd2;--pri-e:#0a84ff;--info:#0a84ff;--info-bg:rgba(10,132,255,.16);--div:rgba(255,255,255,.08);--branch:#606062}
 .nv .m{color:var(--mfg)}
 .nv .back{position:relative;width:26px;height:48px;flex:none}.nv .back svg{position:absolute;left:-5px;top:0}
 .nv .act{display:flex;gap:16px}
@@ -416,7 +411,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* 015–019 settings components, 1:1 from Figma (UI/UX Library · Examples · Dashnote · App & device management, and System Settings). Tokens from the light / dark modes; strokes are inside, so inset shadows. */
 .st{--fg:#1d1d1f;--mfg:rgba(29,29,31,.65);--card:#fff;--edge:rgba(15,23,41,.1);--tile:rgba(29,29,31,.05);--ctl:rgba(0,0,0,.07);--pri:#007aff;--pri-e:#409cff;--on:#fff;--hl:rgba(255,255,255,.05);--ok:#1f9d3a;--acc:#007aff;--warn:#b86e00;--sel:#fff;--off:rgba(29,29,31,.5);--sh2:rgba(0,0,0,.08);
   box-sizing:border-box;width:772px;display:flex;flex-direction:column;gap:12px;color:var(--fg);font:500 28px/40px var(--font);letter-spacing:0;white-space:nowrap}
-[data-theme=dark] .cov .kp:not(.is-b) .st{--fg:#fff;--mfg:rgba(255,255,255,.6);--card:#262628;--edge:rgba(255,255,255,.08);--tile:rgba(255,255,255,.05);--ctl:rgba(255,255,255,.09);--pri:#0c6fd2;--pri-e:#0a84ff;--hl:rgba(255,255,255,.08);--ok:#32d74b;--acc:#0a84ff;--warn:#ffb340;--sel:rgba(255,255,255,.14);--off:rgba(255,255,255,.4);--sh2:rgba(0,0,0,.3)}
+[data-theme=dark] .cov .kp:not(.is-b) .st{--fg:#fff;--mfg:rgba(255,255,255,.6);--card:#222225;--edge:rgba(255,255,255,.09);--tile:rgba(255,255,255,.05);--ctl:rgba(255,255,255,.09);--pri:#0c6fd2;--pri-e:#0a84ff;--hl:rgba(255,255,255,.06);--ok:#32d74b;--acc:#0a84ff;--warn:#ffb340;--sel:rgba(255,255,255,.14);--off:rgba(255,255,255,.4);--sh2:rgba(0,0,0,.22)}
 .st *{box-sizing:border-box;margin:0}.st svg{display:block;flex:none}
 .st .lh{height:55px;padding-top:12px;font-size:24px;line-height:32px;color:var(--mfg)}.st .lh.s{height:32px;padding-top:0}
 .st .card{display:flex;flex-direction:column;gap:0;padding:24px 8px;border-radius:20px;background:var(--card);overflow:hidden}
@@ -703,7 +698,7 @@ body.lock{overflow:hidden}
 
 /* 011 Light and Dark car artwork exported from the tire-pressure instances. */
 .st.tp{--tp-surface:rgba(255,255,255,.65);position:relative;width:800px;height:400px;border-radius:20px;background:var(--tp-surface);backdrop-filter:blur(12px);box-shadow:inset 0 0 0 2px var(--edge),var(--preview-shadow)}
-[data-theme=dark] .cov .kp:not(.is-b) .st.tp{--tp-surface:rgba(44,44,46,.7)}
+[data-theme=dark] .cov .kp:not(.is-b) .st.tp{--tp-surface:#222225}
 .st.tp .tp-v{position:absolute;display:flex;align-items:baseline;gap:8px;font-size:48px;line-height:56px}
 .st.tp .tp-v span{font-size:32px;line-height:44px;color:var(--mfg)}
 .st.tp .tp-lt{left:84px;top:56px}.st.tp .tp-rt{right:84px;top:56px}
@@ -716,7 +711,7 @@ body.lock{overflow:hidden}
 
 /* 012 dial pad uses the Figma geometry with softer key shadows in the preview. */
 .st.dial{width:512px;height:582px;gap:20px}
-[data-theme=dark] .cov .kp:not(.is-b) .st.dial{--key:rgb(78 78 78 / .76)}
+[data-theme=dark] .cov .kp:not(.is-b) .st.dial{--key:rgb(255 255 255 / .11)}
 .st.dial .dp-n{position:relative;flex:none;height:76px}
 .st.dial .dp-value{position:absolute;left:76px;top:8px;width:360px;text-align:center;font-size:48px;line-height:56px}
 .st.dial .dp-n .dp-x{position:absolute;right:0;top:2px;color:var(--fg)}

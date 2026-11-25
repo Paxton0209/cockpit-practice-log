@@ -28,10 +28,10 @@
   line-height: 32px;
 }
 :root[data-theme=dark] .vo-pill {
-  --vo-fill: #2c2c2e;
-  --vo-edge: rgb(255 255 255 / 7%);
+  --vo-fill: #232326;
+  --vo-edge: rgb(255 255 255 / 10%);
   --vo-ink: #fff;
-  --vo-shadow: 0 2px 10px -2px rgb(0 0 0 / 16%);
+  --vo-shadow: 0 1px 2px rgb(0 0 0 / 20%);
 }
 
 /* ambient glow: an ellipse 41 px down, 18 px wider than the pill, blurred and clipped by it.
