@@ -4,7 +4,7 @@
   --vehicle-muted: rgb(29 29 31 / .65);
   --vehicle-border: rgb(15 23 41 / .1);
   --vehicle-control-border: rgb(0 0 0 / .07);
-  --vehicle-track: rgb(29 29 31 / .08);
+  --vehicle-track: rgb(29 29 31 / .11);
   --vehicle-selected: #fff;
   --vehicle-secondary: rgb(29 29 31 / .08);
   --vehicle-badge: color-mix(in srgb, #1d1d1f 8%, var(--vehicle-card));

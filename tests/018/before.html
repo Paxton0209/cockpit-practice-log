@@ -4,93 +4,99 @@
 <meta charset="utf-8">
 <title>Assistant thinking</title>
 <style>
-  html, body { margin: 0; background: transparent; }
-  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: transparent; }
+  body { font-family: Inter, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   .bar {
-    position: absolute; top: 0; left: 0;
-    width: 412px; height: 72px;
+    position: relative;
+    width: 548px; height: 72px; box-sizing: border-box;
+    display: flex; align-items: center; gap: 16px;
+    padding: 0 24px 0 14px;
     border-radius: 36px;
-    background: linear-gradient(180deg, #FFFFFF 0%, #F6F7FA 100%);
-    border: 1px solid #E3E6EC;
-    box-shadow: inset 0 1px 0 #FFFFFF;
-    display: flex; align-items: center;
-    padding: 0 24px 0 14px; gap: 14px;
-    font-family: Inter, system-ui, sans-serif;
+    background: linear-gradient(180deg, #ffffff 0%, #f6f8fb 100%);
+    border: 1px solid #e3e8ef;
+    box-shadow: 0 1px 2px rgba(16,24,40,.05), 0 8px 24px -10px rgba(30,60,120,.18);
     overflow: hidden;
   }
-  /* Orb */
-  .orb {
-    position: relative; flex: none;
-    width: 44px; height: 44px; border-radius: 50%;
-    background: #EEF1FF;
-    overflow: hidden;
-    isolation: isolate;
-    animation: breathe 2.4s ease-in-out infinite;
-  }
-  .orb::before {
-    content: ""; position: absolute; inset: -30%;
-    background: conic-gradient(from 0deg, #4F6BFF, #8E7CFF, #22C1C3, #4F6BFF);
-    filter: blur(6px);
-    animation: spin 3.2s linear infinite;
-  }
-  .orb::after {
-    content: ""; position: absolute; inset: 7px; border-radius: 50%;
-    background: radial-gradient(circle at 38% 32%, #FFFFFF 0%, rgba(255,255,255,.85) 40%, rgba(255,255,255,0) 75%);
-    animation: core 2.4s ease-in-out infinite;
-  }
-  .ring {
-    position: absolute; left: 14px; top: 13px;
-    width: 44px; height: 44px; border-radius: 50%;
-    border: 1.5px solid rgba(79,107,255,.35);
-    animation: ripple 2.4s ease-out infinite;
+  /* soft sweeping light across the bar */
+  .bar::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(100deg, transparent 30%, rgba(90,130,255,.07) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: sweep 3.2s cubic-bezier(.45,0,.25,1) infinite;
     pointer-events: none;
   }
-  .text { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
-  .label {
-    font-size: 11px; font-weight: 600; letter-spacing: .08em;
-    text-transform: uppercase; color: #5B6BE0;
-    display: flex; align-items: center; gap: 6px;
+  @keyframes sweep { to { transform: translateX(100%); } }
+
+  /* orb */
+  .orb { position: relative; width: 44px; height: 44px; flex: none; }
+  .orb .ring {
+    position: absolute; inset: 0; border-radius: 50%;
+    background: conic-gradient(from 0deg, #3b6cff, #7a5cff, #26c6da, #3b6cff);
+    -webkit-mask: radial-gradient(circle, transparent 17px, #000 18px);
+            mask: radial-gradient(circle, transparent 17px, #000 18px);
+    animation: spin 1.6s linear infinite;
   }
-  .dots { display: inline-flex; gap: 3px; }
-  .dots i {
-    width: 4px; height: 4px; border-radius: 50%; background: #5B6BE0;
-    animation: dot 1.2s ease-in-out infinite;
+  .orb .core {
+    position: absolute; inset: 9px; border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #8fb0ff 0%, #4a6dff 55%, #5b3fe0 100%);
+    animation: breathe 1.6s ease-in-out infinite;
   }
-  .dots i:nth-child(2) { animation-delay: .15s; }
-  .dots i:nth-child(3) { animation-delay: .3s; }
-  .main {
-    font-size: 18px; font-weight: 600; letter-spacing: -.01em;
-    white-space: nowrap;
-    color: #1A1F2C;
-    background: linear-gradient(90deg, #1A1F2C 0%, #1A1F2C 40%, #8C9BFF 50%, #1A1F2C 60%, #1A1F2C 100%);
-    background-size: 250% 100%;
-    -webkit-background-clip: text; background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: shimmer 2.4s linear infinite;
+  .orb .halo {
+    position: absolute; inset: -4px; border-radius: 50%;
+    border: 2px solid rgba(74,109,255,.35);
+    animation: ripple 1.6s ease-out infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
-  @keyframes breathe { 0%,100% { transform: scale(1); } 50% { transform: scale(.94); } }
-  @keyframes core { 0%,100% { opacity: .95; transform: scale(1); } 50% { opacity: .7; transform: scale(.85); } }
-  @keyframes ripple {
-    0% { transform: scale(1); opacity: .9; }
-    100% { transform: scale(1.3); opacity: 0; }
+  @keyframes breathe { 0%,100% { transform: scale(.86); } 50% { transform: scale(1); } }
+  @keyframes ripple { 0% { transform: scale(.8); opacity: .9; } 100% { transform: scale(1.25); opacity: 0; } }
+
+  .text { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+  .label {
+    font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: #6b7a90;
   }
-  @keyframes dot { 0%,80%,100% { opacity: .25; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-2px); } }
-  @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -50% 0; } }
+  .label .dots span { display: inline-block; animation: dot 1.2s ease-in-out infinite; }
+  .label .dots span:nth-child(2) { animation-delay: .15s; }
+  .label .dots span:nth-child(3) { animation-delay: .3s; }
+  @keyframes dot { 0%,60%,100% { opacity: .25; transform: translateY(0); } 30% { opacity: 1; transform: translateY(-2px); } }
+
+  .task {
+    font-size: 20px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap;
+    background: linear-gradient(90deg, #1b2433 0%, #1b2433 40%, #6d8cff 50%, #1b2433 60%, #1b2433 100%);
+    background-size: 250% 100%;
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: #1b2433;
+    animation: shimmer 2.4s linear infinite;
+  }
+  @keyframes shimmer { from { background-position: 100% 0; } to { background-position: -150% 0; } }
+
+  /* equalizer-like activity bars */
+  .eq { display: flex; align-items: center; gap: 4px; height: 28px; flex: none; }
+  .eq i {
+    display: block; width: 4px; height: 100%; border-radius: 2px;
+    background: linear-gradient(180deg, #7a5cff, #3b6cff);
+    transform: scaleY(.25); transform-origin: center;
+    animation: eq 1s ease-in-out infinite;
+  }
+  .eq i:nth-child(2) { animation-delay: .12s; }
+  .eq i:nth-child(3) { animation-delay: .24s; }
+  .eq i:nth-child(4) { animation-delay: .36s; }
+  .eq i:nth-child(5) { animation-delay: .48s; }
+  @keyframes eq { 0%,100% { transform: scaleY(.25); opacity: .5; } 50% { transform: scaleY(.9); opacity: 1; } }
+
   @media (prefers-reduced-motion: reduce) {
-    .orb, .orb::before, .orb::after, .ring, .dots i, .main { animation: none; }
-    .main { -webkit-text-fill-color: #1A1F2C; }
+    *, *::before, *::after { animation-duration: 0s !important; animation-iteration-count: 1 !important; }
   }
 </style>
 </head>
 <body>
-  <div class="bar" role="status" aria-live="polite" aria-label="Assistant is thinking: Analyzing target restaurant">
-    <div class="orb" aria-hidden="true"></div>
-    <div class="ring" aria-hidden="true"></div>
+  <div class="bar" role="status" aria-live="polite" aria-label="Assistant thinking: Analyzing target restaurant">
+    <div class="orb" aria-hidden="true"><div class="halo"></div><div class="ring"></div><div class="core"></div></div>
     <div class="text">
-      <div class="label">Thinking <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span></div>
-      <div class="main">Analyzing target restaurant</div>
+      <div class="label">Thinking<span class="dots"><span>.</span><span>.</span><span>.</span></span></div>
+      <div class="task">Analyzing target restaurant</div>
     </div>
+    <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
   </div>
 </body>
 </html>

@@ -14,7 +14,7 @@ const voPill = (kind, text, textW, cover, script) =>
     ${voHalo(kind)}<span class="vo-glow"><i></i><i></i><i></i><i></i><i></i></span>${voOrb(kind)}
     <span class="vo-text"><span class="vo-line">${text}</span></span>
   </div>`;
-const voStage = (w, pill, cover) => cover ? pill : `<div class="vo-stage" style="width:${w}px">${pill}</div>`;
+const voStage = (w, pill) => `<div class="vo-stage" style="width:548px">${pill}</div>`;   /* one 548 × 72 canvas for every voice card, covers included */
 
 /* scripts: [kind, words, word gap ms (0 = whole line at once), hold ms, continues the previous line?] */
 const VO_SCRIPTS = {
@@ -228,7 +228,7 @@ setInterval(() => {
   });
 }, 300);
 
-const VO_BASE = `Pill: 72 px tall, fully round (radius 36), padding 12 px left and 28 px right, items centred with 12 px gaps, clipped. Light theme: fill #FFFFFF, a 1 px inside stroke of #1D1D1F at 5%, drop shadow 0 4 16 in rgb(28,28,46) at 12%, background blur 40.
+const VO_BASE = `Pill: 72 px tall, fully round (radius 36), padding 12 px left and 28 px right, items centred with 12 px gaps, clipped. Light theme: fill #FFFFFF, a 1 px inside stroke of #1D1D1F at 9%, drop shadow 0 4 16 in rgb(28,28,46) at 12%, background blur 40.
 Orb: 48 × 48 at x 12, y 12. Words: Inter Medium 24/32, letter-spacing 0, one line, #1D1D1F.`;
 const VO_GLOW = (o, stops) => `Ambient glow inside the pill, under everything: an ellipse at x −11, y 41, 18 px wider than the pill and 56 px tall, layer blur 40 (CSS blur 20 px), opacity ${o}, clipped by the pill, filled with a horizontal gradient ${stops}.`;
 
@@ -246,14 +246,14 @@ Motion: words appear one by one, each rising 6 px as it fades in; the pill grows
     notes: [['24/32 at 70%', 'The driver’s words sit back from the assistant’s.'], ['The driver’s photo', 'The library’s 48 px avatar.'], ['A grey glow that drifts', 'The pill breathes while the mic is open.']],
   },
   VT: {
-    W: 700, before: () => voiceBefore('VT', 412), name: 'Thinking', cover: 1, fullStage: true, testReference: 'Figma',
-    html: (_, cover) => voStage(412, voPill('thinking', 'Analyzing target restaurant', 286, cover, 'thinking'), cover),
-    ask: 'Design the thinking state for a car voice assistant, 412 × 72 px, light theme. It shows the assistant working on “Analyzing target restaurant”. Animate it. Nothing else.',
-    prompt: `Design the thinking state of a car voice assistant on a 412 × 72 px canvas, pill centred.
+    W: 700, before: () => voiceBefore('VT', 548), name: 'Thinking', cover: 1, fullStage: true, testReference: 'Figma',
+    html: (_, cover) => voStage(548, voPill('thinking', 'Analyzing target restaurant', 286, cover, 'thinking'), cover),
+    ask: 'Design the thinking state for a car voice assistant, 548 × 72 px, light theme. It shows the assistant working on “Analyzing target restaurant”. Animate it. Nothing else.',
+    prompt: `Design the thinking state of a car voice assistant on a 548 × 72 px canvas, pill centred.
 ${VO_BASE}
 The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px (412 px with Inter). Orb: a pale, grainy glass sphere. Words: “Analyzing target restaurant”, filled with a horizontal gradient #2E9BEA → rgb(31,143,232) at 90% (25%) → #007AFF (60%) → rgb(88,86,214) at 90% (78%) → #AF52DE (100%). No glow.
 Motion: a gradient flows through the words in a loop, and each status has its own palette (clear blue; indigo to violet; violet to pink; teal to blue); the line cycles “Understanding your request”, “Finding related features”, “Browsing your history”, each fading out and in with a short blur while the pill eases to the new width; inside the orb the grain drifts and flickers irregularly (no spinning).`,
-    wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 18 px', 'Too small at arm’s length.'], ['A ringed blue bead', 'The orb looks like a button.']],
+    wrong: [['A “THINKING” label at 11 px', 'An all-caps label and three dots repeat what the orb says.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.'], ['A ringed blue bead', 'The orb looks like a button.']],
     notes: [['One line in a gradient', 'The sweep shows work in progress.'], ['The library’s grain orb', 'It turns faster while thinking.'], ['No glow', 'The pill stays quiet until there is an answer.']],
   },
   VA: {
@@ -277,7 +277,7 @@ ${VO_BASE}
 Orb: a violet glass sphere with a deep indigo swirl, and behind it, under the glow, a 96 px copy of the orb, concentric with it, at 16% opacity and blurred 18 px, clipped by the pill. Words: “Would you like to open the windows?”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px.
 ${VO_GLOW('0.45', 'rgb(123,100,255) at 0% → rgb(100,157,255) at 90% (25%) → rgb(129,71,238) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
 Motion: because the assistant starts the conversation, the pill first folds down to the orb and the orb gives a soft ping; then the question is spoken word by word like any reply, each word condensing from a short blur as the pill grows with it. While it waits for an answer the violet glow breathes slowly instead of moving like speech.`,
-    wrong: [['A “SUGGESTION” label at 11 px', 'An all-caps label says what the moment already shows.'], ['A mic pill on the right', 'An extra control competes with the question.'], ['Text at 18 px', 'Too small at arm’s length.']],
+    wrong: [['A “SUGGESTION” label at 11 px', 'An all-caps label says what the moment already shows.'], ['A mic pill on the right', 'An extra control competes with the question.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.']],
     notes: [['It grows out of the orb', 'The pill folds to the orb, pings, then unfolds with the question.'], ['The violet orb and glow', 'Proactive has its own colour, apart from replies.'], ['A slow breath while waiting', 'The glow stops moving like speech once the question is asked.']],
   },
 };
