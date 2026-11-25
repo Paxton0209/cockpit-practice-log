@@ -743,6 +743,7 @@ details.it-panel:not([open]) .it-chevron img{transform:rotate(-90deg)}
 .it-panel .it-edit{width:100%;font:inherit}
 </style>
 <link rel="stylesheet" href="vehicle/cards.css">
+<link rel="stylesheet" href="voice/card.css">
 </head>
 <body>
 <main id="app"></main>
@@ -750,12 +751,14 @@ details.it-panel:not([open]) .it-chevron img{transform:rotate(-90deg)}
 <div class="toast" id="toast"></div>
 
 <script src="vehicle/cards.js"></script>
+<script src="voice/before.js"></script>
+<script src="voice/card.js"></script>
 <script>
 const TOTAL=100;
 const CDESC={All:'Before/after fixes for AI-made car screens, one rule at a time.',Layout:'Canvas, splits and where things sit on a wide screen.',Hierarchy:'What gets read first in a one-second glance.',Controls:'Targets a moving hand can actually hit.',Color:'Contrast for day, night and glare.',Type:'Sizes and weights read at arm’s length.',Icons:'Shapes that read without labels.',Motion:'Movement that informs, never distracts.',States:'Loading, empty, error and disabled, in the car.','Voice & AI':'Say it once; the screen answers with the right amount.',Screens:'Full screens, put together.'};
 /* sidebar: what's published, by where it lives in the car; the rest is announced as coming soon */
-const CHAPTERS=['Navigation','Settings'],SOON=['Media','Climate','Driving assist','Voice & AI'];
-const CAT_OF={nav:'Navigation',inf:'Settings',veh:'Settings'};
+const CHAPTERS=['Navigation','Settings','Voice & AI'],SOON=['Media','Climate','Driving assist'];
+const CAT_OF={nav:'Navigation',inf:'Settings',veh:'Settings',voice:'Voice & AI'};
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pad=n=>String(n).padStart(3,'0');
 const ARROW_L='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>';
@@ -1204,6 +1207,7 @@ const ITINERARY_BEFORE=`<div class="nav-itinerary" role="region" aria-labelledby
 </div>`;
 const CMP={
 ...VEHICLE_CARDS,
+VC:VOICE_CARD,
 J:{W:1080,H:560,cv:{W:984,top:0},fullStage:true,name:'Multi-stop itinerary',cover:1,
   wrong:[['Header divider','A rule separates the destination count from the route.'],['Blue markers throughout','The origin and both destinations use blue markers.'],['Blue-tinted edit button','The footer action introduces another blue surface.']],
   notes:[['Space under the title','The header and timeline are separated by spacing.'],['Markers by stop type','Green origin, numbered waypoint, hollow segment and red arrival.'],['Secondary edit button','The existing secondary button keeps the focus on the itinerary.']],
@@ -2149,10 +2153,12 @@ const cmp=(s,v,cover=false)=>{const C=CMP[s];return `<div class="cs ${v}" data-w
 /* Covers share one scale: every component is drawn into a 1000 px wide canvas, so a 28 px label looks the same size on every card.
    Taller ones anchor to the top with a soft bottom fade; the few wider than the canvas (the keyboard) get a canvas just wide enough to show them whole. Sizes are measured once at start. */
 const COVER_W=1000,COVER_M=56,CSIZE={};
-for(const C of Object.values(CMP))C.H=Math.round(C.W*698/1245);
+for(const C of Object.values(CMP))C.H=C.stageHeight??Math.round(C.W*698/1245);
 const measureCovers=()=>{const box=document.createElement('div');box.style.cssText='position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none';document.body.appendChild(box);
   for(const s of Object.keys(CMP)){if(!CMP[s].cover)continue;box.innerHTML=`<div class="px kp nt" style="width:4000px;height:4000px;display:block">${CMP[s].html('a',true)}</div>`;const e=box.firstElementChild.firstElementChild;if(e)CSIZE[s]=[e.offsetWidth,e.offsetHeight]}box.remove()};
-const cvOf=s=>{const C=CMP[s];if(!C||!C.cover)return null;if(!Object.keys(CSIZE).length)measureCovers();const z=CSIZE[s]||[0,0],W=Math.max(COVER_W,z[0]+2*COVER_M),H=Math.round(W*C.H/C.W);return {W,H,top:z[1]>H-2*COVER_M,wide:false,P:COVER_M}};
+/* Small components get a tighter canvas so every cover carries about the same visual weight: aim for the component to cover ~35% of the cover, never wider than 85% of it, and never enlarge past the shared 1000 px scale for the big ones. */
+const COVER_FILL=.35,COVER_MAXW=.85;
+const cvOf=s=>{const C=CMP[s];if(!C||!C.cover)return null;if(!Object.keys(CSIZE).length)measureCovers();const z=CSIZE[s]||[0,0],byArea=Math.sqrt(z[0]*z[1]/(COVER_FILL*698/1245)),W=Math.round(Math.max(Math.min(COVER_W,byArea),z[0]/COVER_MAXW,z[0]+2*COVER_M)),H=Math.round(W*C.H/C.W);return {W,H,top:z[1]>H-2*COVER_M,wide:false,P:COVER_M}};
 const cmpCover=s=>{const C=CMP[s],v=cvOf(s);if(!v)return cmp(s,'a',true);return `<div class="cs a" data-w="${v.W}" style="aspect-ratio:${C.W}/${C.H}"><div class="px kp nt${v.top?' top':''}${v.wide?' wide':''}" style="width:${v.W}px;height:${v.H}px${v.top?`;padding-top:${v.P}px`:''}">${C.html('a',true)}</div></div>`};
 const scr=(s,side)=>{const S=SCENES[s];return `<div class="cs" data-w="${S.W}" style="aspect-ratio:${S.W}/${S.H}">${S[side]()}</div>`};
 
@@ -2173,14 +2179,14 @@ const DATA=[
 ['PM','Parking method'],
 ['DM','Drive modes'],
 ['EU','Energy use'],
-['SC','Smart comfort']];
+['VC','Voice card']];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much'],['Too much','Phone habits'],['Phone habits','Too small']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'veh'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
-const ARCHIVED_ENTRIES=new Set([4,17]);
+const ARCHIVED_ENTRIES=new Set([4]);
 const PUBLISHED_ENTRIES=ENTRIES.filter(e=>e.s&&!ARCHIVED_ENTRIES.has(e.n));
 const PUBLISHED=PUBLISHED_ENTRIES.length;
 const PROMPTS={
@@ -2425,7 +2431,7 @@ function copyButton(kind){
     </span>Copy
   </button>`;
 }
-const TESTED={T:97,R:92,P:98,U:99,O:93,L:99,D:93,K:99,S:95,W:92,N:96,J:92,PM:99,DM:98,EU:92};
+const TESTED={T:97,R:92,P:98,U:99,O:93,L:99,D:93,K:99,S:95,W:92,N:96,J:92,PM:99,DM:98,EU:92,VC:98};
 function sheetHTML(n){
   const e=ENTRIES[n-1],C=CMP[e.s],afterOnly=C.afterOnly;
   const [p0,p1]=C.prompt?[C.ask||'',C.prompt]:prompts(e);
@@ -2452,7 +2458,7 @@ function sheetHTML(n){
       <p class="cq">Before: AI’s first answer to “${(C.asks||[C.ask||p0]).join('” and “')}”</p>`}
       <div class="grp">
         <div class="phead"><b>Prompt</b>${copyButton('prompt')}<span class="cp-status" role="status"></span></div><div class="pclamp"><pre class="ptxt">${p1}</pre></div>
-          <div class="pfoot">${TESTED[e.s]?`<span class="tested">Tested on Claude Opus 5.5 · ${TESTED[e.s]}% match to Figma</span>`:'<span></span>'}${CMP[e.s].svg?copyButton('svg'):''}</div>
+          <div class="pfoot">${TESTED[e.s]?`<span class="tested">Tested on Claude Opus 5.5 · ${TESTED[e.s]}% match to ${C.testReference||'Figma'}</span>`:'<span></span>'}${CMP[e.s].svg?copyButton('svg'):''}</div>
       </div>
     </article></div>
   </div>`}
