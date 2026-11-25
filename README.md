@@ -2,7 +2,7 @@
 
 > A notebook on designing car screens with AI — what AI gets wrong, how to fix it, and the prompt that does it.
 
-**Live site:** https://paxton0209.github.io/cockpit-practice-log/
+**Live site:** https://paxton0209.github.io/dashnote/
 
 Dashnote collects real in-car HMI components (Navigation, Settings, Voice & AI, and more) with interactive **Before / After** comparisons, concise design notes, and copy-ready prompts tested against automotive UI guidelines.
 
