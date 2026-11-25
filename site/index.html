@@ -2408,11 +2408,11 @@ function springFromDot(dot,endRect,opening){
       {offset:1,transform:'translate(-50%,0px) scale(1,1)',borderRadius:'14px','--dialog-surface-opacity':1,'--dialog-copy-opacity':1,opacity:1}
     ],{duration:dur,easing:ease});
     const aBody=lensAnimate(body,[
-      {offset:0,opacity:0},
-      {offset:.14,opacity:0},
-      {offset:.52,opacity:1},
-      {offset:1,opacity:1}
-    ],{duration:dur,easing:'ease-out'});
+      {offset:0,opacity:0,filter:'blur(10px)'},
+      {offset:.14,opacity:0,filter:'blur(10px)'},
+      {offset:.62,opacity:1,filter:'blur(0px)'},
+      {offset:1,opacity:1,filter:'blur(0px)'}
+    ],{duration:dur,easing:'cubic-bezier(.22,1,.36,1)'});
     aSheet.startTime=start;aBody.startTime=start;
     return aSheet;
   }
@@ -2423,9 +2423,9 @@ function springFromDot(dot,endRect,opening){
     {offset:1,transform:`translate(calc(-50% + ${dx}px),${dy}px) scale(${sx},${sy})`,borderRadius:'56px','--dialog-surface-opacity':1,'--dialog-copy-opacity':0,opacity:0}
   ],{duration:dur,easing:ease});
   const aBody=lensAnimate(body,[
-    {offset:0,opacity:1},
-    {offset:.26,opacity:0},
-    {offset:1,opacity:0}
+    {offset:0,opacity:1,filter:'blur(0px)'},
+    {offset:.28,opacity:0,filter:'blur(6px)'},
+    {offset:1,opacity:0,filter:'blur(6px)'}
   ],{duration:dur,easing:'ease-in'});
   dot.style.opacity='';
   aSheet.startTime=start;aBody.startTime=start;
@@ -2619,14 +2619,17 @@ function openEntry(n){
   lensAnimate(veil,[{opacity:0},{opacity:1}],{duration:220,easing:lensEase});
   const done=()=>{if(gen===lensGen&&lensState==='open'){stopLens();sheet.style.transformOrigin=''}};
   if(lensCompact.matches){
+    lensAnimate(body,[{filter:'blur(6px)'},{filter:'blur(0px)'}],{duration:260,easing:'cubic-bezier(.22,1,.36,1)'});
     lensSpring(sheet,[100],[0],([y])=>({transform:`translateY(${y}%)`}),420,40).onfinish=done;
   }else if(dot){
     springFromDot(dot,end,true).onfinish=done;
   }else if(source){
     ghost(n,1);
+    lensAnimate(body,[{filter:'blur(6px)'},{filter:'blur(0px)'}],{duration:260,easing:'cubic-bezier(.22,1,.36,1)'});
     springDialog(source.cell,end,source.glyph,art,end,art,0,1).onfinish=done; /* one shot: the cover became the sheet, so its slot stays empty while open */
   }else{
     sheet.style.transformOrigin='50% 50%';
+    lensAnimate(body,[{filter:'blur(8px)'},{filter:'blur(0px)'}],{duration:280,easing:'cubic-bezier(.22,1,.36,1)'});
     lensSpring(sheet,[0],[1],([p])=>{const t=Math.max(0,p);return {transform:`translateX(-50%) scale(${.94+.06*t})`,opacity:Math.min(1,t*2.4),'--dialog-surface-opacity':1,'--dialog-copy-opacity':1}},480,38).onfinish=done;
   }
 }
