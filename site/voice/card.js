@@ -180,8 +180,12 @@ async function voPlay(pill) {
         else await voSleep(640 + hold);
         continue;
       }
-      if (r[0][5] === 'enter') {                         /* proactive entrance: fold to the orb, a soft ping, then speak */
-        E.wT = 0; await voSleep(900); if (!alive()) return;
+      const enter = r[0][5] === 'enter';
+      if (enter) {                                       /* proactive entrance: fold to the first word, a soft ping, then speak on */
+        const first = r[0][1].split(' ')[0];
+        line.getAnimations().forEach(a => a.cancel()); line.style.opacity = 1; line.style.filter = '';
+        line.innerHTML = `<b class="vo-still">${first}</b>`;
+        E.wT = Math.ceil(line.scrollWidth) + 2; await voSleep(900); if (!alive()) return;
         pill.querySelector('.vo-orb').animate([{ scale: 1 }, { scale: 1.1 }, { scale: 1 }], { duration: 800, easing: 'cubic-bezier(.3, 0, .2, 1)' });
         await voSleep(420);
       }
@@ -189,7 +193,7 @@ async function voPlay(pill) {
       const words = [], times = [], gaps = [];
       let t = 200;
       r.forEach(([, text, gap, hold], si) => { text.split(' ').forEach(w => { words.push(w); times.push(t); gaps.push(gap); t += gap; }); t += (si < r.length - 1 ? hold : 0); });
-      line.innerHTML = words.map((w, i) => `<b style="animation-delay:${times[i]}ms">${w}</b>`).join(' ');
+      line.innerHTML = words.map((w, i) => enter && i === 0 ? `<b class="vo-still">${w}</b>` : `<b style="animation-delay:${times[i]}ms">${w}</b>`).join(' ');
       line.getAnimations().forEach(a => a.cancel()); line.style.opacity = 1; line.style.filter = '';
       const rights = [...line.children].map(b => b.offsetLeft + b.offsetWidth + 2);
       E.speak(words.map((w, i) => ({ w, at: times[i], dur: gaps[i] })), /\?$/.test(words[words.length - 1]));
@@ -276,7 +280,7 @@ Motion: the reply streams in word by word, each word fading in from a short moti
 ${VO_BASE}
 Orb: a violet glass sphere with a deep indigo swirl, and behind it, under the glow, a 96 px copy of the orb, concentric with it, at 16% opacity and blurred 18 px, clipped by the pill. Words: “Would you like to open the windows?”. The pill hugs its content: 12 px + 48 px orb + 12 px + the words + 28 px.
 ${VO_GLOW('0.45', 'rgb(123,100,255) at 0% → rgb(100,157,255) at 90% (25%) → rgb(129,71,238) (60%) → rgb(94,92,230) at 90% (85%) → rgb(94,92,230) at 0%')}
-Motion: because the assistant starts the conversation, the pill first folds down to the orb and the orb gives a soft ping; then the question is spoken word by word like any reply, each word condensing from a short blur as the pill grows with it. While it waits for an answer the violet glow breathes slowly instead of moving like speech.`,
+Motion: because the assistant starts the conversation, the pill first folds down to the orb and its first word, “Would”, and the orb gives a soft ping; then the question is spoken word by word like any reply, each word condensing from a short blur as the pill grows with it. While it waits for an answer the violet glow breathes slowly instead of moving like speech.`,
     wrong: [['A “SUGGESTION” label at 11 px', 'An all-caps label says what the moment already shows.'], ['A mic pill on the right', 'An extra control competes with the question.'], ['Text at 20 px, label at 12', 'A “Thinking…” label sits above the line.']],
     notes: [['It grows out of the orb', 'The pill folds to the orb, pings, then unfolds with the question.'], ['The violet orb and glow', 'Proactive has its own colour, apart from replies.'], ['A slow breath while waiting', 'The glow stops moving like speech once the question is asked.']],
   },
