@@ -1,5 +1,7 @@
 # Reference board, sorted (2026-11-22)
 
+> 2026-11-26 完整版审美抽取、新增 6 张图拆解与复用路线见 [17-design-reference-deconstruction.md](17-design-reference-deconstruction.md)。
+
 Source: Figma "Design Reference", page node 1021:22, 18 images.
 Each one is filed under what we take from it. Nothing is copied whole.
 
