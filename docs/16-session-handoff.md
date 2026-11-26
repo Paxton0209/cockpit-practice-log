@@ -4,7 +4,7 @@
 
 ## 1. 仓库、预览与关键路径
 
-- Dashnote 网页仓库：`/Users/peixin/.gemini/antigravity/scratch/dashnote`（`main` 分支，线上 `https://paxton0209.github.io/dashnote/`）
+- Dashnote 网页仓库：`/Users/peixin/.gemini/antigravity/scratch/dashnote`（`main` 分支，线上 `https://paxton0209.github.io/dashnote/`，单组件短链格式 `https://paxton0209.github.io/dashnote/?021`，无 `#entry-`，兼容旧 `#entry-NNN`）
 - Dashline 图标仓库：`/Users/peixin/.gemini/antigravity/scratch/Dashline`（`main` 分支，线上 `https://paxton0209.github.io/Dashline/`）。注意本地 `Dashline/index.html` 可能保留用户未提交的改动，推送前先检查 `git status`，必要时用独立 worktree 推送。
 - Figma 组件库 `UI-UX-Library`：`fileKey = qiPTH6OH2yigVKfIavhQbI`
 - Figma 规范文档 `Guideline`：`fileKey = yxHbApCtnealXacguziLKe`
