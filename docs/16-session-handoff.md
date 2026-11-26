@@ -21,7 +21,7 @@
 - 完成并上线 **`021 Navigation search`**（`560 × 204 px`，Prompt 评测像素匹配度 `99.10%`）
   - 上下比例平衡为 `100 px` 顶部搜索区 + `104 px` 底部轻色带（浅色 `#1D1D1F 4.5%`、深色 `#FFFFFF 5%`），取消横向分割线。
   - 搜索、历史、充电图标统一使用 `56 px` `3 px` 线宽中性次要色（无蓝/红点缀），图标框到文字间距 `8 px`（视觉净距约 `20 px`）。
-  - 底部快捷目的地直接绑定标准字号 token：`24/32`（`en/body/m/medium`）+ `2 px` + `20/28`（`en/label/default`），左右等宽分布，中间 `2 × 48 px` 竖分割线（浅色 `rgba(15,23,41,.08)`，深色 `rgba(255,255,255,.08)`）两侧对称 `20 px`。
+  - 底部快捷目的地直接绑定标准字号 token：`24/32`（`en/body/m/medium`）+ `0 px` + `20/28`（`en/label/default`），左右等宽分布，中间 `2 × 48 px` 竖分割线（浅色 `rgba(15,23,41,.08)`，深色 `rgba(255,255,255,.08)`）两侧对称 `20 px`。
   - 右侧 Home / Work 快捷入口采用 `48 px` 纯面性图标（无描边，Home 门洞底部圆角 `R1.25`）。
   - 深色描边从 `2px` 改为 `::after` 顶层 `1px` 细描边（`rgba(255,255,255,.08)` + 顶部 `inset 0 1px 0 rgba(255,255,255,.05)`），避免紧凑卡片描边过重及底部色带叠加泛白，与 `001 Turn-by-turn`、`015 Drive modes`、`016 Energy use` 保持一致。
 
@@ -44,6 +44,7 @@
 ### 设计与开发
 
 - 第一性原理精简，没用到的字号、间距、变量直接删，不做无用堆砌。
+- 颜色变量命名严格遵循**先用途再强度权重（`<purpose>/<weight>`）**：`text/primary · secondary · tertiary · disabled · on-accent`、`icon/primary · secondary · tertiary · disabled · on-accent`、`surface/screen · canvas · panel · card · floating · floating-glass · dialog`、`fill/primary · secondary · tertiary · selected · pressed · disabled`、`border/primary · secondary · tertiary · selected · focus`、`accent/primary · fill · border · tertiary`、`status/{info,success,warning,danger}/{primary,subtle,fill}`。
 - Figma 分类页只放 Master Components，不手动复制浅色/深色两份。
 - Figma 规范页与 Foundations 页严格对齐 Guideline（`01 Color` / `02 Type` / `03 Size`）的瑞士极简排版：`#F5F5F7` 画布直接用 `1px` 细横线分行，左栏分组说明、右栏真样本与中性深色 token 名，不用厚重白底表格框、不用蓝字 token 链接、不用灰底规则框，间距条采用 `12%` 浅蓝填充加 `1px` `#007AFF` 细描边。
 - 同一个图标的线性版与面性版必须共享同一轮廓结构；面性图标保持纯填充不额外加描边。
