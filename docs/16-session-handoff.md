@@ -15,9 +15,13 @@
 
 ## 2. 本轮已完成内容
 
-### Dashnote 网页（当前 20 / 100）
+### Dashnote 网页（当前 21 / 100）
 
-- 首页已发布 20 个组件（`001–003`、`005–021`，`004` 已下架保留代码）。
+- 首页已发布 21 个组件（`001–003`、`005–022`，`004` 已下架保留代码），并正式解锁侧栏第 4 个分类 **`Driving assist`**。
+- 完成并上线 **`022 Driver alert`**（`576 × 284 px`，DMS 驾驶分心/手机使用提醒）
+  - 顶栏单行居中英文 `Keep your eyes on the road`（`en/title/medium` `32/44`），下方配纯中性哑光灰无面雕塑半身像（手持深色手机至耳边，底部柔和渐隐透明融入卡片底色，浅色与深色分别配备独立无白边透明 PNG 资产 `site/assets/dms-bust-light.png` 与 `dms-bust-dark.png`）。
+  - 零红色警戒横幅、零冗长法规说教、零关闭按钮（行驶中瞬态 DMS 提醒在视线回正后自动消失，避免诱发额外触屏操作）。
+  - 同步在 Figma `UI-UX-Library` 的 `Cards`（`6:62`）新增主组件 `driver-alert / phone-use`（`2354:10`），完整绑定 `surface/floating-glass`、`border/primary`、`text/primary` 与 `en/title/medium`。
 - 完成并上线 **`021 Navigation search`**（`560 × 204 px`，Prompt 评测像素匹配度 `99.10%`）
   - 上下比例平衡为 `100 px` 顶部搜索区 + `104 px` 底部轻色带（浅色 `#1D1D1F 4.5%`、深色 `#FFFFFF 5%`），取消横向分割线。
   - 搜索、历史、充电图标统一使用 `56 px` `3 px` 线宽中性次要色（无蓝/红点缀），图标框到文字间距 `8 px`（视觉净距约 `20 px`）。

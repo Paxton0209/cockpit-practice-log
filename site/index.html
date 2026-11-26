@@ -113,6 +113,7 @@ header.sc{box-shadow:inset 0 -1px 0 var(--line)}
 [data-ctx=cli]{--cv0:#eaeeec;--cv1:#dfe6e2;--cv2:#cdd7d2;--cv3:#f1f4f2}
 [data-ctx=veh]{--cv0:#ecece9;--cv1:#e3e4df;--cv2:#d2d5cf;--cv3:#f3f3ef}
 [data-ctx=inf]{--cv0:#eceeef;--cv1:#e2e4e8;--cv2:#d1d4db;--cv3:#f3f4f6}
+[data-ctx=adas]{--cv0:#eaedf0;--cv1:#dfe5ec;--cv2:#cdd5df;--cv3:#f1f4f7}
 /* on a dark cover the After panel is the dark variant (the Before stays as AI made it) */
 [data-theme=dark] .cov .kp:not(.is-b) .t1{background:#232326;color:#fff}
 [data-theme=dark] .cov .kp:not(.is-b) .t1::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.10),inset 0 1px 0 rgba(255,255,255,.06)}
@@ -420,6 +421,14 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nv.ns .ns-tx b{font-weight:500;font-size:24px;line-height:32px;color:var(--fg)}
 .nv.ns .ns-tx span{font-size:20px;line-height:28px;color:var(--mfg)}
 .nv.ns .ns-sep{flex:none;width:2px;height:48px;background:var(--ns-vsep)}
+/* 022 driver alert (DMS phone use) */
+.nv.da{position:relative;width:576px;height:284px;flex-direction:column;align-items:center;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
+.nv.da::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
+[data-theme=dark] .cov .kp:not(.is-b) .nv.da::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
+.nv.da .da-h{position:absolute;left:32px;right:32px;top:32px;margin:0;text-align:center;font-weight:500;font-size:32px;line-height:44px;color:var(--fg)}
+.nv.da .da-fig{position:absolute;left:166px;bottom:0;width:236px;height:196px;display:block;pointer-events:none;user-select:none}
+.nv.da .da-fig-dark,[data-theme=dark] .cov .kp:not(.is-b) .nv.da .da-fig-light{display:none}
+[data-theme=dark] .cov .kp:not(.is-b) .nv.da .da-fig-dark{display:block}
 .pl .hd{justify-content:space-between}.pl .ic{display:flex;gap:20px}
 .pl .inf{display:flex;flex-direction:column;gap:12px}.pl .nm{display:flex;flex-direction:column;gap:4px}
 .pl .tags{display:flex;gap:12px}.pl .tags i{font-style:normal;height:38px;min-width:80px;padding:0 16px;display:flex;align-items:center;justify-content:center;border-radius:999px;background:var(--muted);color:var(--mfg);font-size:20px;line-height:28px}
@@ -788,8 +797,8 @@ details.it-panel:not([open]) .it-chevron img{transform:rotate(-90deg)}
 const TOTAL=100;
 const CDESC={All:'Before/after fixes for AI-made car screens, one rule at a time.',Layout:'Canvas, splits and where things sit on a wide screen.',Hierarchy:'What gets read first in a one-second glance.',Controls:'Targets a moving hand can actually hit.',Color:'Contrast for day, night and glare.',Type:'Sizes and weights read at arm’s length.',Icons:'Shapes that read without labels.',Motion:'Movement that informs, never distracts.',States:'Loading, empty, error and disabled, in the car.','Voice & AI':'Say it once; the screen answers with the right amount.',Screens:'Full screens, put together.'};
 /* sidebar: what's published, by where it lives in the car; the rest is announced as coming soon */
-const CHAPTERS=['Navigation','Settings','Voice & AI'],SOON=['Media','Climate','Driving assist'];
-const CAT_OF={nav:'Navigation',inf:'Settings',veh:'Settings',voice:'Voice & AI'};
+const CHAPTERS=['Navigation','Settings','Voice & AI','Driving assist'],SOON=['Media','Climate'];
+const CAT_OF={nav:'Navigation',inf:'Settings',veh:'Settings',voice:'Voice & AI',adas:'Driving assist'};
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const pad=n=>String(n).padStart(3,'0');
 const ARROW_L='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3.5 5.5 8l4.5 4.5"/></svg>';
@@ -2222,6 +2231,39 @@ NS:{W:688,H:386,name:'Navigation search',cover:1,ask:'Design a navigation search
     <div class="ns-b-card"><span class="ns-b-pin ev"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></span><div><p class="ns-b-t">Palo Alto</p><p class="ns-b-s">Palo Alto, CA</p></div></div>
   </div>
 </div>`},
+DA:{W:760,H:426,name:'Driver alert',cover:1,
+  ask:'Design a driver distraction alert card for a car screen, 576 × 284 px, light theme. Content: warn the driver to keep their eyes on the road when using a phone. Nothing else.',
+  wrong:[['Red banner and lecture','A warning triangle and paragraph add alarm fatigue.'],['Buttons on a live alert','Forcing a tap to dismiss keeps eyes off the road longer.'],['14 px body copy','Unreadable at arm’s length in a moving car.']],
+  notes:[['One line, 32/44','Single instruction reads in under a second.'],['Calm sculptural figure','Neutral bust shows the phone without cartoon clutter.'],['Zero buttons','Transient DMS alert clears automatically once focused.']],
+  html:()=>`<div class="nv da" role="alert" aria-label="Driver alert">
+    <p class="da-h">Keep your eyes on the road</p>
+    <img class="da-fig da-fig-light" src="assets/dms-bust-light.png" width="236" height="196" alt="">
+    <img class="da-fig da-fig-dark" src="assets/dms-bust-dark.png" width="236" height="196" alt="">
+  </div>`,
+  before:()=>`<div class="da-b" role="alert" aria-label="Driver alert">
+  <style>
+    .da-b{box-sizing:border-box;width:576px;height:284px;padding:20px 24px;border-radius:18px;background:#fff;border:2px solid #fca5a5;box-shadow:0 6px 20px rgba(220,38,38,.12);display:flex;flex-direction:column;justify-content:space-between;font-family:var(--font);color:#0f172a;text-align:left}
+    .da-b *{box-sizing:border-box;margin:0}
+    .da-b-hd{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:12px;background:#fef2f2;border:1px solid #fecaca}
+    .da-b-ic{flex:none;width:40px;height:40px;border-radius:10px;background:#dc2626;color:#fff;display:grid;place-items:center}
+    .da-b-tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#dc2626}
+    .da-b-tt{font-size:19px;font-weight:700;line-height:24px;color:#991b1b;margin-top:2px}
+    .da-b-p{font-size:14px;line-height:20px;color:#475569;padding:0 2px}
+    .da-b-ft{display:flex;justify-content:flex-end;gap:10px}
+    .da-b-btn{height:38px;padding:0 16px;border-radius:10px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;justify-content:center}
+    .da-b-sec{background:#f1f5f9;color:#334155;border:1px solid #e2e8f0}
+    .da-b-pri{background:#dc2626;color:#fff}
+  </style>
+  <div class="da-b-hd">
+    <span class="da-b-ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg></span>
+    <div><p class="da-b-tag">Safety Warning</p><p class="da-b-tt">Phone Use Detected While Driving</p></div>
+  </div>
+  <p class="da-b-p">Using a handheld phone while driving significantly increases the risk of a collision. Please put your phone down and keep your eyes on the road ahead.</p>
+  <div class="da-b-ft">
+    <span class="da-b-btn da-b-sec">DMS Settings</span>
+    <span class="da-b-btn da-b-pri">Dismiss</span>
+  </div>
+</div>`},
 C:{W:640,H:360,name:'Climate control',notes:[['112 px value','The temperature reads at arm’s length; everything else steps back.'],['72 px targets','Minus and plus become full-width buttons on the bottom edge.'],['Quiet label','The label drops to a 22 px caption at 65%.'],['Radius 24','The card joins the same corner family as the other panels.']],html:()=>`<div class="c1" data-ga="radius 24" data-gb="radius 16"><small data-ga="22px" data-gb="13px">Temperature</small><div class="v" data-ga="112px" data-gb="40px">21.5°</div><div class="bt"><i>${I('minus',36)}</i><i>${I('plus',36)}</i></div></div>`},
 A:{W:640,H:220,name:'Settings row',notes:[['104 px row','A target you can hit while the road moves.'],['28 px label','Readable at arm’s length, not 30 cm.'],['88 × 52 switch','The thumb has room to land.'],['Radius 24','Same corner family as the panels.']],html:()=>`<div class="a1" data-ga="row 104" data-gb="row 44"><span data-ga="28px" data-gb="17px">Auto brightness</span><i class="sw" data-ga="88 × 52" data-gb="51 × 31"></i></div>`},
 B:{W:640,H:340,name:'Now playing',notes:[['232 px art','You know what is playing at a glance.'],['40 px title','The one line that matters leads.'],['104 × 88 play','The main action is a real button.'],['32 px rhythm','Prev, play and next sit on one even spacing.']],html:()=>`<div class="b1" data-ga="radius 28" data-gb="radius 12"><i class="ka" data-ga="232" data-gb="48"></i><span class="tt" data-ga="40px" data-gb="15px">Night Drive<small>Mira Okafor</small></span><span class="c"><span class="pv">${I('prev',40)}</span><span class="pl">${I('play',40)}</span><span class="nx2">${I('next',40)}</span></span></div>`}};
@@ -2261,17 +2303,23 @@ const DATA=[
 ['VT','Thinking'],
 ['VA','Assistant speech'],
 ['VP','Proactive'],
-['NS','Navigation search']];
+['NS','Navigation search'],
+['DA','Driver alert']];
 const SYMPTOMS=['Phone habits','Too small','Too much','No hierarchy'];
 const TAGS=[['Too much','No hierarchy'],['Too much','No hierarchy'],['No hierarchy','Phone habits'],['Too small','Too much'],['Too much'],['Too small'],['Too small','Phone habits'],['Too small','Too much'],['Phone habits','No hierarchy'],['Too small','Too much'],['Too much','Phone habits'],['Phone habits','Too small']];
 /* where each component lives in the car; sets its cover background (docs/08-cover-backgrounds.md) */
-const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice',20:'voice',21:'nav'};
+const CTX={1:'nav',2:'nav',3:'nav',4:'inf',5:'inf',6:'veh',7:'veh',8:'nav',9:'nav',10:'nav',11:'veh',12:'inf',13:'nav',14:'veh',15:'veh',16:'veh',17:'voice',18:'voice',19:'voice',20:'voice',21:'nav',22:'adas'};
 const ctxOf=n=>CTX[n]||'nav';
 const ENTRIES=Array.from({length:TOTAL},(_,i)=>{const d=DATA[i];return {n:i+1,cat:d?CAT_OF[CTX[i+1]]:null,s:d?.[0],title:d?.[1],sum:d?.[2],prin:d?.[3],cc:d?.[4]}});
 const ARCHIVED_ENTRIES=new Set([4]);
 const PUBLISHED_ENTRIES=ENTRIES.filter(e=>e.s&&!ARCHIVED_ENTRIES.has(e.n));
 const PUBLISHED=PUBLISHED_ENTRIES.length;
 const PROMPTS={
+DA:[`Design a driver distraction alert card for a car screen, 576 × 284 px, light theme. Content: warn the driver to keep their eyes on the road when using a phone. Nothing else.`,
+`Design a 576 × 284 px driver distraction alert card for a car screen in Inter Medium, light theme.
+Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a 3D driving scene; #222225 in dark), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No red border, no warning banner, no buttons.
+Top: one centred line “Keep your eyes on the road” in Inter Medium 32/44 (#1D1D1F in light, #FFFFFF in dark), 32 px from the top edge with 32 px horizontal padding.
+Bottom: a single minimalist faceless 3D greyscale sculptural mannequin bust (236 × 196 px), optically centred and anchored flush to the bottom edge, holding a slim matte dark smartphone up to its ear. Keep the figure neutral matte stone-grey with soft top-left studio lighting and a smooth bottom fade into transparency so it dissolves cleanly into the card surface. No warning triangles, no red icons, no legal paragraph, no dismiss buttons (the alert clears automatically when the driver looks back at the road).`],
 NS:[`Design a navigation search card for a car screen, 560 × 204 px, light theme. Content, exactly: a search bar with “Navigate” and Home and Work shortcuts, and two quick destinations below — “Galen Place” (“Galen Pl, Fremont”) as a recent stop and “Palo Alto” (“Palo Alto, CA”) as a charging station. Nothing else.`,
 `Design a 560 × 204 px navigation search card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a map), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No horizontal divider line; separate the top search band from the bottom destinations band using a subtle full-width tonal fill (#1D1D1F at 4.5% in light, #FFFFFF at 5% in dark) on the bottom band.
@@ -2394,7 +2442,7 @@ function viewHome(){
   </div>`}
 function gridFor(c){
   /* Index order is curated for rhythm, not number: no two voice pills, lists or tile grids side by side or stacked. Anything not listed follows, newest first. */
-  const MIX=[1,19,12, 16,15,18, 21,17,11, 13,14,9, 2,20,3, 6,10,7, 8,5];
+  const MIX=[1,22,12, 16,15,18, 21,17,11, 13,14,9, 2,20,3, 6,10,7, 8,5,19];
   const mixed=[...MIX.map(n=>PUBLISHED_ENTRIES.find(e=>e.n===n)).filter(Boolean),...PUBLISHED_ENTRIES.filter(e=>!MIX.includes(e.n)).reverse()];
   const list=c==='All'?[...mixed,...ENTRIES.slice(DATA.length,DATA.length+3)]:PUBLISHED_ENTRIES.filter(e=>e.cat===c);
   return list.map((e,i)=>{const soon=!e.s,C=!soon&&CMP[e.s]&&CMP[e.s].cover?CMP[e.s]:null;
@@ -2570,8 +2618,8 @@ function copyButton(kind){
     </span>Copy
   </button>`;
 }
-const TESTED={T:97,R:96,P:98,U:99,O:97,L:99,D:98,K:99,S:95,W:95,N:96,J:96,PM:99,DM:98,EU:97,VU:99,VT:97,VA:99,VP:99,NS:98};
-const TESTED_BY={R:'Gemini 4 Neon',O:'Gemini 4 Neon',D:'Gemini 4 Neon',W:'Gemini 4 Neon',J:'Gemini 4 Neon',EU:'Gemini 4 Neon',NS:'Gemini 4 Neon'};
+const TESTED={T:97,R:96,P:98,U:99,O:97,L:99,D:98,K:99,S:95,W:95,N:96,J:96,PM:99,DM:98,EU:97,VU:99,VT:97,VA:99,VP:99,NS:98,DA:98};
+const TESTED_BY={R:'Gemini 4 Neon',O:'Gemini 4 Neon',D:'Gemini 4 Neon',W:'Gemini 4 Neon',J:'Gemini 4 Neon',EU:'Gemini 4 Neon',NS:'Gemini 4 Neon',DA:'Gemini 4 Neon'};
 function sheetHTML(n){
   const e=ENTRIES[n-1],C=CMP[e.s],afterOnly=C.afterOnly;
   const [p0,p1]=C.prompt?[C.ask||'',C.prompt]:prompts(e);
