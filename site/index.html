@@ -425,7 +425,7 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nv.da{position:relative;width:576px;height:284px;flex-direction:column;align-items:center;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
 .nv.da::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.da::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
-.nv.da .da-h{position:absolute;left:32px;right:32px;top:32px;margin:0;text-align:center;font-weight:500;font-size:32px;line-height:44px;color:var(--fg)}
+.nv.da .da-h{position:absolute;left:32px;right:32px;top:24px;margin:0;text-align:center;font-weight:500;font-size:28px;line-height:40px;color:var(--fg)}
 .nv.da .da-fig{position:absolute;left:171px;bottom:0;width:226px;height:196px;display:block;pointer-events:none;user-select:none}
 .nv.da .da-fig-dark,[data-theme=dark] .cov .kp:not(.is-b) .nv.da .da-fig-light{display:none}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.da .da-fig-dark{display:block}
@@ -433,91 +433,103 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nv.ho{position:relative;width:576px;height:284px;flex-direction:column;align-items:center;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
 .nv.ho::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.ho::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
-.nv.ho .ho-h{position:absolute;left:32px;right:32px;top:22px;margin:0;text-align:center;font-weight:500;font-size:32px;line-height:44px;color:var(--fg)}
-.nv.ho .ho-s{position:absolute;left:32px;right:32px;top:68px;margin:0;text-align:center;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg)}
-.nv.ho .ho-fig{position:absolute;left:175px;bottom:12px;width:226px;height:164px;display:block;pointer-events:none;user-select:none}
+.nv.ho .ho-h{position:absolute;left:32px;right:32px;top:24px;margin:0;text-align:center;font-weight:500;font-size:28px;line-height:40px;color:var(--fg)}
+.nv.ho .ho-s{position:absolute;left:32px;right:32px;top:64px;margin:0;text-align:center;font-weight:500;font-size:20px;line-height:28px;color:var(--mfg)}
+.nv.ho .ho-fig{position:absolute;left:190px;top:110px;width:196px;height:152px;object-fit:contain;display:block;pointer-events:none;user-select:none}
 .nv.ho .ho-fig-dark,[data-theme=dark] .cov .kp:not(.is-b) .nv.ho .ho-fig-light{display:none}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.ho .ho-fig-dark{display:block}
 /* 024 mini player */
-.nv.mp{--mp-track:rgba(29,29,31,.12);--mp-fill:rgba(29,29,31,.55);--mp-grab:rgba(29,29,31,.16);position:relative;width:560px;height:248px;flex-direction:column;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
+.nv.mp{--mp-track:rgba(29,29,31,.12);--mp-fill:var(--fg);position:relative;width:560px;height:248px;flex-direction:column;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
 .nv.mp::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
-[data-theme=dark] .cov .kp:not(.is-b) .nv.mp{--mp-track:rgba(255,255,255,.16);--mp-fill:rgba(255,255,255,.72);--mp-grab:rgba(255,255,255,.22)}
+[data-theme=dark] .cov .kp:not(.is-b) .nv.mp{--mp-track:rgba(255,255,255,.16);--mp-fill:var(--fg)}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.mp::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
-.nv.mp .mp-grab{position:absolute;left:50%;top:12px;width:44px;height:4px;margin-left:-22px;border-radius:999px;background:var(--mp-grab)}
-.nv.mp .mp-top{display:flex;align-items:stretch;gap:20px;padding:28px 24px 0}
-.nv.mp .mp-art{flex:none;width:108px;height:108px;border-radius:14px;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,.14)}
-.nv.mp .mp-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:2px 0 4px}
+.nv.mp .mp-top{display:flex;align-items:stretch;gap:20px;padding:24px 24px 0}
+.nv.mp .mp-art{flex:none;width:108px;height:108px;border-radius:14px;object-fit:cover;box-shadow:0 2px 8px rgba(0,0,0,.10)}
+.nv.mp .mp-info{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:4px 0 4px}
 .nv.mp .mp-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.nv.mp .mp-t{margin:0;font-weight:500;font-size:32px;line-height:40px;color:var(--fg)}
-.nv.mp .mp-a{margin:2px 0 0;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nv.mp .mp-t{margin:0;font-weight:500;font-size:24px;line-height:32px;color:var(--fg)}
+.nv.mp .mp-a{margin:2px 0 0;font-weight:500;font-size:20px;line-height:28px;color:var(--mfg);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .nv.mp .mp-lyr{flex:none;width:48px;height:48px;border:0;padding:0;background:transparent;color:var(--mfg);display:grid;place-items:center;cursor:pointer;border-radius:12px;transition:color .18s,background .18s}
 .nv.mp .mp-lyr.on{color:var(--fg);background:var(--mp-track)}
 .nv.mp .mp-bar{height:6px;border-radius:999px;background:var(--mp-track);overflow:hidden}
 .nv.mp .mp-bar i{display:block;width:38%;height:100%;border-radius:999px;background:var(--mp-fill)}
-.nv.mp .mp-ctl{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 24px 6px}
-.nv.mp .mp-btn{width:68px;height:68px;border:0;padding:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;border-radius:16px;transition:transform .14s,color .18s}
+.nv.mp .mp-ctl{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 28px 4px}
+.nv.mp .mp-btn{width:64px;height:64px;border:0;padding:0;background:transparent;color:var(--fg);display:grid;place-items:center;cursor:pointer;border-radius:16px;transition:transform .14s,color .18s}
 .nv.mp .mp-btn:active{transform:scale(.92)}
 .nv.mp .mp-btn.fav{color:var(--mfg)}
 .nv.mp .mp-btn.fav.on{color:#FA243C}
-/* 025 call banner (animated spring morph across Incoming / Active / Calling) */
-.nv.cb{--cb-btn:rgba(29,29,31,.08);--cb-div:rgba(15,23,41,.10);--cb-grab:rgba(29,29,31,.16);--cb-ok:#1F9D3A;--cb-no:#D9362B;position:relative;height:108px;width:660px;display:flex;align-items:center;padding:0 28px 8px 20px;gap:20px;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow);transition:width .52s cubic-bezier(.22,1,.36,1)}
+/* 025 call banner (elastic spring morph across Incoming -> Active -> Calling) */
+.nv.cb{--cb-btn:rgba(29,29,31,.08);--cb-div:rgba(15,23,41,.10);--cb-grab:rgba(29,29,31,.16);--cb-ok:#14A085;--cb-no:#D9362B;--cb-sp:cubic-bezier(.34,1.22,.64,1);--cb-pop:cubic-bezier(.34,1.36,.64,1);position:relative;height:108px;width:660px;display:flex;align-items:center;justify-content:space-between;padding:0 28px 8px 20px;gap:20px;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow);will-change:width;transform:translateZ(0);transition:width .64s var(--cb-sp)}
 .nv.cb[data-st=calling]{width:568px}
 .nv.cb[data-st=active]{width:828px}
 .nv.cb::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
-[data-theme=dark] .cov .kp:not(.is-b) .nv.cb{--cb-btn:rgba(255,255,255,.12);--cb-div:rgba(255,255,255,.12);--cb-grab:rgba(255,255,255,.22);--cb-ok:#32D74B;--cb-no:#FF453A}
+[data-theme=dark] .cov .kp:not(.is-b) .nv.cb{--cb-btn:rgba(255,255,255,.12);--cb-div:rgba(255,255,255,.12);--cb-grab:rgba(255,255,255,.22);--cb-ok:#14A085;--cb-no:#FF453A}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.cb::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
+.nv.cb .cb-l{display:flex;align-items:center;gap:20px;min-width:0}
+.nv.cb .cb-r{display:flex;align-items:center;gap:20px;flex:none}
 .nv.cb .cb-acts{display:flex;align-items:center;gap:0}
-.nv.cb .cb-b{flex:none;width:64px;height:64px;margin-right:16px;border:0;padding:0;border-radius:999px;display:grid;place-items:center;cursor:pointer;position:relative;transition:width .44s cubic-bezier(.22,1,.36,1),margin .44s cubic-bezier(.22,1,.36,1),opacity .28s ease,transform .36s cubic-bezier(.22,1,.36,1),background .2s}
-.nv.cb .cb-b:last-child{margin-right:0}
-.nv.cb .cb-b.hide{width:0;margin-right:0;opacity:0;transform:scale(.6);pointer-events:none;overflow:hidden}
+.nv.cb .cb-slot{flex:none;width:64px;height:64px;margin-right:16px;display:grid;place-items:center;will-change:width,margin,opacity;transition:width .62s var(--cb-sp),margin .62s var(--cb-sp),opacity .32s ease}
+.nv.cb .cb-slot[data-slot=dev]{transition-delay:45ms}
+.nv.cb .cb-slot:last-child{margin-right:0}
+.nv.cb .cb-slot.hide{width:0;margin-right:0;opacity:0;pointer-events:none;transition-delay:0ms}
+.nv.cb .cb-slot.hide .cb-b{transform:scale(.42);opacity:0;filter:blur(2px)}
+.nv.cb .cb-b{width:64px;height:64px;border:0;padding:0;border-radius:999px;display:grid;place-items:center;cursor:pointer;position:relative;will-change:transform,opacity;transition:transform .54s var(--cb-pop),opacity .30s ease,filter .30s ease,background .22s}
+.nv.cb .cb-slot[data-slot=dev] .cb-b{transition-delay:55ms}
+.nv.cb .cb-slot.hide .cb-b{transition-delay:0ms}
+.nv.cb .cb-b.tap{transform:scale(.84);transition-duration:.18s}
 .nv.cb .cb-ans{background:var(--cb-ok);color:#fff}
 .nv.cb[data-st=incoming][data-live="1"] .cb-ans::before{content:"";position:absolute;inset:-4px;border-radius:999px;border:2px solid var(--cb-ok);animation:cbPulse 1.6s cubic-bezier(.2,0,.2,1) infinite}
-@keyframes cbPulse{0%{transform:scale(.95);opacity:.75}100%{transform:scale(1.26);opacity:0}}
+@keyframes cbPulse{0%{transform:scale(.95);opacity:.78}100%{transform:scale(1.28);opacity:0}}
 .nv.cb .cb-end{background:var(--cb-no);color:#fff}
 .nv.cb .cb-sec{background:var(--cb-btn);color:var(--fg)}
 .nv.cb .cb-sec.on{background:var(--fg);color:var(--bg,#fff)}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.cb .cb-sec.on{background:#fff;color:#141416}
 .nv.cb .cb-num{flex:none;font-weight:500;font-size:28px;line-height:40px;color:var(--fg);font-variant-numeric:tabular-nums;white-space:nowrap}
-.nv.cb .cb-tm{flex:none;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg);font-variant-numeric:tabular-nums;width:72px;opacity:1;transition:width .44s cubic-bezier(.22,1,.36,1),opacity .28s ease,margin .44s cubic-bezier(.22,1,.36,1);overflow:hidden;white-space:nowrap}
-.nv.cb:not([data-st=active]) .cb-tm{width:0;opacity:0;margin-left:-20px}
-.nv.cb .cb-div{flex:none;width:2px;height:32px;background:var(--cb-div);margin-left:auto}
-.nv.cb .cb-st{flex:none;font-weight:500;font-size:24px;line-height:32px;color:var(--cb-ok);white-space:nowrap;min-width:96px;text-align:right;transition:opacity .25s ease}
+.nv.cb .cb-tm{flex:none;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg);font-variant-numeric:tabular-nums;width:70px;opacity:1;transform:translateX(0) scale(1);filter:blur(0);transition:width .62s var(--cb-sp),opacity .36s ease,transform .56s var(--cb-sp),filter .36s ease,margin .62s var(--cb-sp);overflow:hidden;white-space:nowrap}
+.nv.cb:not([data-st=active]) .cb-tm{width:0;opacity:0;transform:translateX(-10px) scale(.92);filter:blur(2px);margin-left:-20px}
+.nv.cb .cb-div{flex:none;width:2px;height:32px;background:var(--cb-div)}
+.nv.cb .cb-st-w{position:relative;flex:none;width:108px;height:34px;overflow:hidden}
+.nv.cb .cb-st{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-end;font-weight:500;font-size:24px;line-height:32px;color:var(--cb-ok);white-space:nowrap;opacity:0;transform:translateY(85%) scale(.92);filter:blur(3px);pointer-events:none;transition:transform .56s var(--cb-sp),opacity .36s ease,filter .36s ease}
+.nv.cb .cb-st.is-cur{opacity:1;transform:translateY(0) scale(1);filter:blur(0)}
+.nv.cb .cb-st.is-prev{opacity:0;transform:translateY(-85%) scale(.92);filter:blur(3px)}
+.nv.cb[data-st=calling][data-live="1"] .cb-st.is-cur{animation:cbBreath 1.8s ease-in-out infinite}
+@keyframes cbBreath{0%,100%{opacity:1}50%{opacity:.52}}
 .nv.cb .cb-grab{position:absolute;left:50%;bottom:8px;width:48px;height:4px;margin-left:-24px;border-radius:999px;background:var(--cb-grab)}
-/* 026 scheduled charging */
-.sc-card{--sc-bg:#fff;--sc-bd:rgba(15,23,41,.10);--sc-acc:#007AFF;--sc-off:rgba(29,29,31,.35);--sc-wk-off:rgba(29,29,31,.42);width:772px;height:284px;border-radius:20px;background:var(--sc-bg);box-shadow:inset 0 0 0 2px var(--sc-bd),var(--preview-shadow);display:flex;flex-direction:column;font-family:var(--font);color:var(--fg);overflow:hidden}
-[data-theme=dark] .cov .kp:not(.is-b) .sc-card{--sc-bg:#222225;--sc-bd:rgba(255,255,255,.09);--sc-acc:#0A84FF;--sc-off:rgba(255,255,255,.32);--sc-wk-off:rgba(255,255,255,.40)}
+/* 026 scheduled charging (decluttered HeroUI v3 card anatomy) */
+.sc-card{--sc-bg:#fff;--sc-bd:rgba(15,23,41,.10);--sc-tile:rgba(29,29,31,.06);--sc-acc:#007AFF;--sc-off:rgba(29,29,31,.35);--sc-wk-off:rgba(29,29,31,.42);width:772px;height:320px;padding:28px 32px;border-radius:20px;background:var(--sc-bg);box-shadow:inset 0 0 0 2px var(--sc-bd),var(--preview-shadow);display:flex;flex-direction:column;gap:24px;font-family:var(--font);color:var(--fg);overflow:hidden;text-align:left}
+[data-theme=dark] .cov .kp:not(.is-b) .sc-card{--sc-bg:#222225;--sc-bd:rgba(255,255,255,.09);--sc-tile:rgba(255,255,255,.08);--sc-acc:#0A84FF;--sc-off:rgba(255,255,255,.32);--sc-wk-off:rgba(255,255,255,.40)}
 :root:not([data-color=on]) .sc-card{--sc-acc:var(--fg)}
-.sc-card .sc-top{flex:none;height:180px;display:flex;align-items:center;padding:0 36px;gap:48px}
+.sc-card .sc-hd{display:flex;align-items:center;justify-content:space-between;height:48px}
+.sc-card .sc-t{margin:0;font-weight:500;font-size:28px;line-height:40px;color:var(--fg)}
 .sc-card .sc-sw{flex:none;width:80px;height:48px;border:0;padding:4px;border-radius:999px;background:var(--sc-acc);display:flex;align-items:center;cursor:pointer;transition:background .22s}
 .sc-card .sc-sw i{display:block;width:40px;height:40px;border-radius:999px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.18);transform:translateX(32px);transition:transform .24s cubic-bezier(.22,1,.36,1)}
 :root:not([data-color=on]) [data-theme=dark] .sc-card .sc-sw i{background:#141416}
 .sc-card.is-off .sc-sw{background:var(--sc-off)}
 .sc-card.is-off .sc-sw i{transform:translateX(0)}
-.sc-card .sc-rng{display:flex;align-items:center;gap:48px;transition:opacity .22s}
-.sc-card.is-off .sc-rng,.sc-card.is-off .sc-bot{opacity:.42}
-.sc-card .sc-col{display:flex;flex-direction:column;gap:4px;text-align:left}
-.sc-card .sc-col span{font-weight:500;font-size:24px;line-height:32px;color:var(--mfg)}
-.sc-card .sc-col b{font-weight:500;font-size:48px;line-height:56px;font-variant-numeric:tabular-nums;color:var(--fg)}
-.sc-card .sc-arr{flex:none;color:var(--mfg);margin-top:28px}
-.sc-card .sc-line{height:1px;margin:0 32px;background:var(--sc-bd)}
-.sc-card .sc-bot{flex:1;display:flex;align-items:center;justify-content:space-between;padding:0 28px 0 36px;transition:opacity .22s}
-.sc-card .sc-d{border:0;background:transparent;padding:8px 10px;border-radius:10px;font-family:inherit;font-weight:500;font-size:24px;line-height:32px;color:var(--sc-wk-off);cursor:pointer;transition:color .16s,background .16s}
-.sc-card .sc-d.on{color:var(--fg)}
-.sc-card .sc-edit{width:48px;height:48px;border:0;padding:0;background:transparent;color:var(--mfg);display:grid;place-items:center;cursor:pointer}
-/* 027 display brightness (mode + slider) */
-.db-card{--db-bg:#fff;--db-bd:rgba(15,23,41,.10);--db-trk:rgba(29,29,31,.08);--db-row:rgba(29,29,31,.045);--db-bar:rgba(29,29,31,.15);--db-sel:#fff;--db-acc:#007AFF;width:772px;height:284px;padding:28px 32px;border-radius:20px;background:var(--db-bg);box-shadow:inset 0 0 0 2px var(--db-bd),var(--preview-shadow);display:flex;flex-direction:column;gap:20px;font-family:var(--font);color:var(--fg);text-align:left}
-[data-theme=dark] .cov .kp:not(.is-b) .db-card{--db-bg:#222225;--db-bd:rgba(255,255,255,.09);--db-trk:rgba(255,255,255,.08);--db-row:rgba(255,255,255,.05);--db-bar:rgba(255,255,255,.16);--db-sel:rgba(255,255,255,.14);--db-acc:#0A84FF}
+.sc-card .sc-slots{display:grid;grid-template-columns:1fr 1fr;gap:16px;transition:opacity .22s}
+.sc-card.is-off .sc-slots,.sc-card.is-off .sc-ft{opacity:.42}
+.sc-card .sc-slot{height:120px;padding:0 24px;border-radius:16px;background:var(--sc-tile);display:flex;flex-direction:column;justify-content:center;gap:2px}
+.sc-card .sc-slot span{font-weight:500;font-size:20px;line-height:28px;color:var(--mfg)}
+.sc-card .sc-slot b{font-weight:500;font-size:48px;line-height:56px;font-variant-numeric:tabular-nums;color:var(--fg)}
+.sc-card .sc-ft{height:48px;display:flex;align-items:center;justify-content:space-between;transition:opacity .22s}
+.sc-card .sc-days{display:flex;align-items:center;gap:10px}
+.sc-card .sc-d{width:52px;height:44px;border:0;background:transparent;border-radius:12px;font-family:inherit;font-weight:500;font-size:20px;line-height:28px;color:var(--sc-wk-off);cursor:pointer;transition:color .16s,background .16s}
+.sc-card .sc-d.on{background:var(--sc-tile);color:var(--fg)}
+.sc-card .sc-edit{width:48px;height:48px;border:0;padding:0;background:transparent;color:var(--mfg);display:grid;place-items:center;cursor:pointer;border-radius:12px}
+/* 027 display brightness (unified greys, spacious rhythm, white thumb) */
+.db-card{--db-bg:#fff;--db-bd:rgba(15,23,41,.10);--db-trk:rgba(29,29,31,.07);--db-sel:#fff;--db-acc:#007AFF;width:772px;height:316px;padding:32px;border-radius:20px;background:var(--db-bg);box-shadow:inset 0 0 0 2px var(--db-bd),var(--preview-shadow);display:flex;flex-direction:column;gap:28px;font-family:var(--font);color:var(--fg);text-align:left}
+[data-theme=dark] .cov .kp:not(.is-b) .db-card{--db-bg:#222225;--db-bd:rgba(255,255,255,.09);--db-trk:rgba(255,255,255,.09);--db-sel:rgba(255,255,255,.14);--db-acc:#0A84FF}
 :root:not([data-color=on]) .db-card{--db-acc:var(--fg)}
 .db-card .db-t{margin:0;font-weight:500;font-size:28px;line-height:40px;color:var(--fg)}
 .db-card .db-seg{height:64px;padding:4px;border-radius:16px;background:var(--db-trk);display:grid;grid-template-columns:repeat(3,1fr);gap:4px}
 .db-card .db-seg button{border:0;border-radius:12px;background:transparent;font-family:inherit;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg);cursor:pointer;transition:background .18s,color .18s,box-shadow .18s}
 .db-card .db-seg button.on{background:var(--db-sel);color:var(--fg);box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.db-card .db-srow{height:80px;padding:0 24px;border-radius:16px;background:var(--db-row);display:flex;align-items:center;gap:24px}
+.db-card .db-srow{height:60px;display:flex;align-items:center;gap:28px}
 .db-card .db-slbl{flex:none;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg)}
-.db-card .db-sl{position:relative;flex:1;height:40px;display:flex;align-items:center;cursor:pointer;touch-action:none}
-.db-card .db-sb{width:100%;height:8px;border-radius:999px;background:var(--db-bar);overflow:hidden}
-.db-card .db-sf{height:100%;width:30%;border-radius:999px;background:var(--db-acc)}
-.db-card .db-th{position:absolute;left:30%;top:4px;width:8px;height:32px;margin-left:-4px;border-radius:999px;background:var(--db-acc);box-shadow:0 0 0 2px var(--db-bg)}
+.db-card .db-sl{position:relative;flex:1;height:40px;display:flex;align-items:center;gap:6px;cursor:pointer;touch-action:none;--p:30%}
+.db-card .db-sf{height:10px;width:calc(var(--p) - 10px);min-width:0;flex:none;border-radius:999px;background:var(--db-acc)}
+.db-card .db-th{flex:none;width:8px;height:32px;border-radius:999px;background:var(--db-acc)}
+.db-card .db-sr{height:10px;flex:1;min-width:0;border-radius:999px;background:var(--db-trk)}
 .db-card .db-val{flex:none;width:48px;text-align:right;font-weight:500;font-size:28px;line-height:40px;font-variant-numeric:tabular-nums;color:var(--fg)}
 .pl .hd{justify-content:space-between}.pl .ic{display:flex;gap:20px}
 .pl .inf{display:flex;flex-direction:column;gap:12px}.pl .nm{display:flex;flex-direction:column;gap:4px}
@@ -2324,7 +2336,7 @@ NS:{W:688,H:386,name:'Navigation search',cover:1,ask:'Design a navigation search
 DA:{W:760,H:426,name:'Driver alert',cover:1,
   ask:'Design a driver distraction alert card for a car screen, 576 × 284 px, light theme. Content: warn the driver to keep their eyes on the road when using a phone. Nothing else.',
   wrong:[['Red banner and lecture','A warning triangle and paragraph add alarm fatigue.'],['Buttons on a live alert','Forcing a tap to dismiss keeps eyes off the road longer.'],['14 px body copy','Unreadable at arm’s length in a moving car.']],
-  notes:[['One line, 32/44','Single instruction reads in under a second.'],['Calm sculptural figure','Neutral bust shows the phone without cartoon clutter.'],['Zero buttons','Transient DMS alert clears automatically once focused.']],
+  notes:[['One line, 28/40','Single instruction reads in under a second with clear top breathing room.'],['Calm sculptural figure','Neutral bust shows the phone without cartoon clutter.'],['Zero buttons','Transient DMS alert clears automatically once focused.']],
   html:()=>`<div class="nv da" role="alert" aria-label="Driver alert">
     <p class="da-h">Keep your eyes on the road</p>
     <img class="da-fig da-fig-light" src="assets/dms-bust-light.png" width="226" height="196" alt="">
@@ -2356,13 +2368,13 @@ DA:{W:760,H:426,name:'Driver alert',cover:1,
 </div>`},
 HO:{W:760,H:426,name:'Hands-on alert',cover:1,
   ask:'Design an assisted driving hands-on steering wheel alert card for a car screen, 576 × 284 px, light theme. Content: tell the driver to hold the steering wheel or assisted driving will exit. Nothing else.',
-  wrong:[['Warning box and button','An amber modal with an Acknowledge button traps attention.'],['Same weight for both lines','Action and consequence fight for the first glance.'],['Branded wheel clutter','Badges and arrows add noise over the hand position.']],
-  notes:[['32/44 over 24/32','The action leads at 100%; consequence drops to 65%.'],['Unbranded wheel, red hands','Neutral wheel stays quiet while luminous hands show where to grip.'],['Zero buttons','Clears automatically the moment torque is detected.']],
+  wrong:[['Warning box and button','An amber modal with an Acknowledge button traps attention.'],['Same weight for both lines','Action and consequence fight for the first glance.'],['Photorealistic hands clutter','Detailed skin and branded hubs crowd a small alert card.']],
+  notes:[['28/40 over 20/28','Clear 1.4× step gives the wheel 18 px air above and 22 px below.'],['Red contour hand outlines','Stylized translucent outlines show grip placement without visual noise.'],['Zero buttons','Clears automatically the moment torque is detected.']],
   html:()=>`<div class="nv ho" role="alert" aria-label="Hands-on alert">
     <p class="ho-h">Hold the steering wheel</p>
     <p class="ho-s">Otherwise assisted driving will exit</p>
-    <img class="ho-fig ho-fig-light" src="assets/steer-hands-light.png" width="226" height="164" alt="">
-    <img class="ho-fig ho-fig-dark" src="assets/steer-hands-dark.png" width="226" height="164" alt="">
+    <img class="ho-fig ho-fig-light" src="assets/steer-hands-light.png" width="196" height="152" alt="">
+    <img class="ho-fig ho-fig-dark" src="assets/steer-hands-dark.png" width="196" height="152" alt="">
   </div>`,
   before:()=>`<div class="ho-b" role="alert" aria-label="Hands-on alert">
   <style>
@@ -2387,25 +2399,24 @@ HO:{W:760,H:426,name:'Hands-on alert',cover:1,
 MP:{W:760,H:426,name:'Mini player',cover:1,
   ask:'Design a compact floating media player card for a car screen, 560 × 248 px, light theme. Content: album art, track “HOME”, artist “Armand Amar · Gombodorj”, progress bar, lyrics toggle, previous, play, next, favorite, and an Apple Music source icon.',
   wrong:[['Phone-sized 24 px buttons','Six tiny controls crammed next to timestamps.'],['Loud blue scrubber thumb','Progress bar steals focus from the track and controls.'],['Cluttered extra actions','Shuffle, repeat, volume and queue crowd a mini card.']],
-  notes:[['Five 68 px targets','Prev, Play, Next, Favorite and Apple Music sit on one even row.'],['Bare 6 px progress bar','Neutral fill reads at a glance with no timestamps.'],['32/44 title, 24/32 artist','Paired cleanly beside a 108 px cover and bare Lyrics icon.']],
+  notes:[['Five 56 px icons on one row','Prev, Play, Next, Favorite and official Apple Music sit evenly spaced.'],['100% primary 6 px progress','Crisp fill reads at a glance with no grabber, knob or timestamps.'],['24/32 title, 20/28 artist','Balanced compact scale beside a 108 px cover and bare Lyrics icon.']],
   html:()=>`<div class="nv mp" role="region" aria-label="Mini player">
-    <span class="mp-grab" aria-hidden="true"></span>
     <div class="mp-top">
       <img class="mp-art" src="assets/album-home.jpg" width="108" height="108" alt="">
       <div class="mp-info">
         <div class="mp-head">
           <div style="min-width:0"><p class="mp-t">HOME</p><p class="mp-a">Armand Amar · Gombodorj</p></div>
-          <button class="mp-lyr" type="button" aria-label="Lyrics"><svg width="36" height="36" viewBox="0 0 36 36" fill="none"><rect x="6" y="7" width="24" height="18" rx="5" stroke="currentColor" stroke-width="2.2"/><path d="M13 25v4l4.5-4" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M13.5 14h2.5v3.5h-2.5V14zm6.5 0h2.5v3.5H20V14z" fill="currentColor"/></svg></button>
+          <button class="mp-lyr" type="button" aria-label="Lyrics"><svg width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 11h24M7 18h14M7 25h11"/><path d="M27 29.5V16.5l7-1.6"/><circle cx="24" cy="29.5" r="3"/></svg></button>
         </div>
         <div class="mp-bar"><i></i></div>
       </div>
     </div>
     <div class="mp-ctl">
-      <button class="mp-btn" type="button" aria-label="Previous"><svg width="36" height="36" viewBox="0 0 36 36" fill="currentColor"><rect x="7" y="8" width="3.5" height="20" rx="1.75"/><path d="M27.5 9.2c0-1.15-1.28-1.85-2.25-1.23L12.6 16.05a1.5 1.5 0 0 0 0 2.52l12.65 8.08c.97.62 2.25-.08 2.25-1.23V9.2z"/></svg></button>
-      <button class="mp-btn mp-play" type="button" aria-label="Play"><svg class="ic-play" width="40" height="40" viewBox="0 0 40 40" fill="currentColor"><path d="M13 9.4c0-1.3 1.44-2.1 2.55-1.42l16.2 10.6a1.65 1.65 0 0 1 0 2.84l-16.2 10.6C14.44 32.7 13 31.9 13 30.6V9.4z"/></svg></button>
-      <button class="mp-btn" type="button" aria-label="Next"><svg width="36" height="36" viewBox="0 0 36 36" fill="currentColor"><rect x="25.5" y="8" width="3.5" height="20" rx="1.75"/><path d="M8.5 9.2c0-1.15 1.28-1.85 2.25-1.23l12.65 8.08a1.5 1.5 0 0 1 0 2.52L10.75 26.65c-.97.62-2.25-.08-2.25-1.23V9.2z"/></svg></button>
-      <button class="mp-btn fav" type="button" aria-label="Favorite"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 29.5S6.5 22.4 6.5 13.8A6.3 6.3 0 0 1 18 10.2a6.3 6.3 0 0 1 11.5 3.6c0 8.6-11.5 15.7-11.5 15.7Z"/></svg></button>
-      <span class="mp-btn" aria-label="Apple Music"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"><defs><linearGradient id="amg24" x1="20" y1="0" x2="20" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#FB5C74"/><stop offset="1" stop-color="#FA243C"/></linearGradient></defs><rect width="40" height="40" rx="10" fill="url(#amg24)"/><path d="M27.5 10.6L16.8 12.7C16.2 12.82 15.8 13.34 15.8 13.95V24.9C15.1 24.58 14.2 24.5 13.3 24.75C11.65 25.2 10.55 26.6 10.85 27.95C11.15 29.3 12.7 30.05 14.35 29.6C15.9 29.18 16.95 27.9 16.95 26.55V17.4L26.2 15.55V22.9C25.5 22.58 24.6 22.5 23.7 22.75C22.05 23.2 20.95 24.6 21.25 25.95C21.55 27.3 23.1 28.05 24.75 27.6C26.3 27.18 27.35 25.9 27.35 24.55V11.85C27.35 11.1 26.65 10.45 27.5 10.6Z" fill="#FFFFFF"/></svg></span>
+      <button class="mp-btn" type="button" aria-label="Previous"><svg width="44" height="44" viewBox="0 0 44 44" fill="currentColor"><rect x="8.5" y="10" width="4" height="24" rx="2"/><path d="M33.5 11.4c0-1.35-1.5-2.18-2.65-1.45L15.4 19.6a1.75 1.75 0 0 0 0 2.95l15.45 9.65c1.15.73 2.65-.1 2.65-1.45V11.4z"/></svg></button>
+      <button class="mp-btn mp-play" type="button" aria-label="Play"><svg class="ic-play" width="48" height="48" viewBox="0 0 48 48" fill="currentColor"><path d="M15.5 11.2c0-1.55 1.72-2.5 3.04-1.68l19.4 12.6a1.95 1.95 0 0 1 0 3.36l-19.4 12.6c-1.32.82-3.04-.13-3.04-1.68V11.2z"/></svg></button>
+      <button class="mp-btn" type="button" aria-label="Next"><svg width="44" height="44" viewBox="0 0 44 44" fill="currentColor"><rect x="31.5" y="10" width="4" height="24" rx="2"/><path d="M10.5 11.4c0-1.35 1.5-2.18 2.65-1.45l15.45 9.65a1.75 1.75 0 0 1 0 2.95l-15.45 9.65c-1.15.73-2.65-.1-2.65-1.45V11.4z"/></svg></button>
+      <button class="mp-btn fav" type="button" aria-label="Favorite"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 35.8S8 27.2 8 16.8A7.7 7.7 0 0 1 22 12.4a7.7 7.7 0 0 1 14 4.4c0 10.4-14 19-14 19Z"/></svg></button>
+      <span class="mp-btn" aria-label="Apple Music"><svg width="30" height="30" viewBox="0 0 361 361" fill="none"><defs><linearGradient id="amg24" x1="180" y1="358.6" x2="180" y2="7.76" gradientUnits="userSpaceOnUse"><stop stop-color="#FA233B"/><stop offset="1" stop-color="#FB5C74"/></linearGradient></defs><path fill-rule="evenodd" clip-rule="evenodd" fill="url(#amg24)" d="M360,112.61c0-4.3,0-8.6-0.02-12.9c-0.02-3.62-0.06-7.24-0.16-10.86c-0.21-7.89-0.68-15.84-2.08-23.64c-1.42-7.92-3.75-15.29-7.41-22.49c-3.6-7.07-8.3-13.53-13.91-19.14c-5.61-5.61-12.08-10.31-19.15-13.91c-7.19-3.66-14.56-5.98-22.47-7.41c-7.8-1.4-15.76-1.87-23.65-2.08c-3.62-0.1-7.24-0.14-10.86-0.16C255.99,0,251.69,0,247.39,0H112.61c-4.3,0-8.6,0-12.9,0.02c-3.62,0.02-7.24,0.06-10.86,0.16C80.96,0.4,73,0.86,65.2,2.27c-7.92,1.42-15.28,3.75-22.47,7.41c-7.07,3.6-13.54,8.3-19.15,13.91c-5.61,5.61-10.31,12.07-13.91,19.14c-3.66,7.2-5.99,14.57-7.41,22.49c-1.4,7.8-1.87,15.76-2.08,23.64c-0.1,3.62-0.14,7.24-0.16,10.86C0,104.01,0,108.31,0,112.61v134.77c0,4.3,0,8.6,0.02,12.9c0.02,3.62,0.06,7.24,0.16,10.86c0.21,7.89,0.68,15.84,2.08,23.64c1.42,7.92,3.75,15.29,7.41,22.49c3.6,7.07,8.3,13.53,13.91,19.14c5.61,5.61,12.08,10.31,19.15,13.91c7.19,3.66,14.56,5.98,22.47,7.41c7.8,1.4,15.76,1.87,23.65,2.08c3.62,0.1,7.24,0.14,10.86,0.16c4.3,0.03,8.6,0.02,12.9,0.02h134.77c4.3,0,8.6,0,12.9-0.02c3.62-0.02,7.24-0.06,10.86-0.16c7.89-0.21,15.85-0.68,23.65-2.08c7.92-1.42,15.28-3.75,22.47-7.41c7.07-3.6,13.54-8.3,19.15-13.91c5.61-5.61,10.31-12.07,13.91-19.14c3.66-7.2,5.99-14.57,7.41-22.49c1.4-7.8,1.87-15.76,2.08-23.64c0.1-3.62,0.14-7.24,0.16-10.86c0.03-4.3,0.02-8.6,0.02-12.9V112.61z"/><path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M254.5,55c-0.87,0.08-8.6,1.45-9.53,1.64l-107,21.59l-0.04,0.01c-2.79,0.59-4.98,1.58-6.67,3c-2.04,1.71-3.17,4.13-3.6,6.95c-0.09,0.6-0.24,1.82-0.24,3.62c0,0,0,109.32,0,133.92c0,3.13-0.25,6.17-2.37,8.76c-2.12,2.59-4.74,3.37-7.81,3.99c-2.33,0.47-4.66,0.94-6.99,1.41c-8.84,1.78-14.59,2.99-19.8,5.01c-4.98,1.93-8.71,4.39-11.68,7.51c-5.89,6.17-8.28,14.54-7.46,22.38c0.7,6.69,3.71,13.09,8.88,17.82c3.49,3.2,7.85,5.63,12.99,6.66c5.33,1.07,11.01,0.7,19.31-0.98c4.42-0.89,8.56-2.28,12.5-4.61c3.9-2.3,7.24-5.37,9.85-9.11c2.62-3.75,4.31-7.92,5.24-12.35c0.96-4.57,1.19-8.7,1.19-13.26l0-116.15c0-6.22,1.76-7.86,6.78-9.08c0,0,88.94-17.94,93.09-18.75c5.79-1.11,8.52,0.54,8.52,6.61l0,79.29c0,3.14-0.03,6.32-2.17,8.92c-2.12,2.59-4.74,3.37-7.81,3.99c-2.33,0.47-4.66,0.94-6.99,1.41c-8.84,1.78-14.59,2.99-19.8,5.01c-4.98,1.93-8.71,4.39-11.68,7.51c-5.89,6.17-8.49,14.54-7.67,22.38c0.7,6.69,3.92,13.09,9.09,17.82c3.49,3.2,7.85,5.56,12.99,6.6c5.33,1.07,11.01,0.69,19.31-0.98c4.42-0.89,8.56-2.22,12.5-4.55c3.9-2.3,7.24-5.37,9.85-9.11c2.62-3.75,4.31-7.92,5.24-12.35c0.96-4.57,1-8.7,1-13.26V64.46C263.54,58.3,260.29,54.5,254.5,55z"/></svg></span>
     </div>
   </div>`,
   before:()=>`<div class="mp-b" role="region" aria-label="Mini player">
@@ -2431,20 +2442,28 @@ MP:{W:760,H:426,name:'Mini player',cover:1,
   <div class="mp-b-ctl"><span class="mp-b-ic">SH</span><span class="mp-b-ic">⏮</span><span class="mp-b-ic p">▶</span><span class="mp-b-ic">⏭</span><span class="mp-b-ic">RP</span><span class="mp-b-ic">♡</span><span class="mp-b-ic">LYR</span></div>
 </div>`},
 CB:{W:980,H:550,name:'Call banner',cover:1,
-  ask:'Design a floating phone call banner for a car screen that transitions from Incoming to Active call, 660–828 × 108 px, light theme. Content: circular action buttons, phone number +1 (415) 555-0192, live timer on active call, and call status.',
+  ask:'Design a floating phone call banner for a car screen that transitions from Incoming to Active call, 660–828 × 108 px, light theme. Content: circular action buttons, phone number +86 17713032268, live timer on active call, and call status.',
   wrong:[['Phone notification toast','Two tiny text buttons (“Accept / Decline”) in a narrow box.'],['Static layout jump','Switching states rebuilds the banner instead of morphing width.'],['No mute or audio route','Active calls force opening the full phone app.']],
-  notes:[['64 px circular actions','Green answer and red decline stay hit-safe at speed.'],['Spring width morph','Banner expands smoothly from 660 to 828 px as Mute and Audio enter.'],['Live tabular timer','00:27 counts without shifting the caller number or status.']],
+  notes:[['64 px circular actions','Teal-green (#14A085) answer and red decline center 36 px library icons.'],['Cohesive spring morph','Slot wrappers expand smoothly 660 → 828 → 568 px with zero icon squish.'],['Right-locked status','Divider and status crossfade cleanly while the live timer counts from 00:00.']],
   html:(v,cover)=>`<div class="nv cb" data-st="${cover?'incoming':'incoming'}"${cover?'':' data-live="1"'} role="region" aria-label="Call banner">
-    <div class="cb-acts">
-      <button class="cb-b cb-ans" data-act="ans" type="button" aria-label="Answer"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button>
-      <button class="cb-b cb-end" data-act="end" type="button" aria-label="End call"><svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor"><path d="M23.7 15.1a16.8 16.8 0 0 0-23.4 0 1 1 0 0 0 0 1.4l2.5 2.5a1 1 0 0 0 1.38.03l3-2.5a1 1 0 0 0 .36-.77v-2.7a12.8 12.8 0 0 1 8.92 0v2.7a1 1 0 0 0 .36.77l3 2.5a1 1 0 0 0 1.38-.03l2.5-2.5a1 1 0 0 0 0-1.4z"/></svg></button>
-      <button class="cb-b cb-sec hide" data-act="mute" type="button" aria-label="Mute"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V5a3 3 0 0 0-5.94-.6M17 16.95A7 7 0 0 1 5 12v-1m14 0v1a7 7 0 0 1-.11 1.23M12 19v3m-4 0h8M3 3l18 18"/></svg></button>
-      <button class="cb-b cb-sec hide" data-act="dev" type="button" aria-label="Audio route"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round"><rect x="6" y="3" width="12" height="18" rx="2.5"/><path d="M11 17.5h2"/></svg></button>
+    <div class="cb-l">
+      <div class="cb-acts">
+        <span class="cb-slot" data-slot="ans"><button class="cb-b cb-ans" data-act="ans" type="button" aria-label="Answer"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button></span>
+        <span class="cb-slot" data-slot="end"><button class="cb-b cb-end" data-act="end" type="button" aria-label="End call"><svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" style="transform:rotate(135deg)"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg></button></span>
+        <span class="cb-slot hide" data-slot="mute"><button class="cb-b cb-sec" data-act="mute" type="button" aria-label="Mute"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 9v3a3 3 0 0 0 5.12 2.12M15 9.34V5a3 3 0 0 0-5.94-.6M17 16.95A7 7 0 0 1 5 12v-1m14 0v1a7 7 0 0 1-.11 1.23M12 19v3m-4 0h8M3 3l18 18"/></svg></button></span>
+        <span class="cb-slot hide" data-slot="dev"><button class="cb-b cb-sec" data-act="dev" type="button" aria-label="Audio route"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6.5" y="3" width="11" height="18" rx="2.5"/><path d="M11 17.5h2"/></svg></button></span>
+      </div>
+      <span class="cb-num">+86 17713032268</span>
+      <span class="cb-tm">00:00</span>
     </div>
-    <span class="cb-num">+1 (415) 555-0192</span>
-    <span class="cb-tm">00:27</span>
-    <span class="cb-div" aria-hidden="true"></span>
-    <span class="cb-st">Incoming</span>
+    <div class="cb-r">
+      <span class="cb-div" aria-hidden="true"></span>
+      <span class="cb-st-w" aria-live="polite">
+        <span class="cb-st is-cur" data-lbl="incoming">Incoming</span>
+        <span class="cb-st" data-lbl="active">On call</span>
+        <span class="cb-st" data-lbl="calling">Calling</span>
+      </span>
+    </div>
     <span class="cb-grab" aria-hidden="true"></span>
   </div>`,
   before:()=>`<div class="cb-b0" role="region" aria-label="Call banner">
@@ -2460,26 +2479,25 @@ CB:{W:980,H:550,name:'Call banner',cover:1,
     .cb-b0-no{background:#fee2e2;color:#b91c1c}
     .cb-b0-ok{background:#16a34a;color:#fff}
   </style>
-  <div class="cb-b0-l"><span class="cb-b0-av">C</span><div><p class="cb-b0-t">+1 (415) 555-0192</p><p class="cb-b0-s">Incoming Bluetooth Call…</p></div></div>
+  <div class="cb-b0-l"><span class="cb-b0-av">C</span><div><p class="cb-b0-t">+86 17713032268</p><p class="cb-b0-s">Incoming Bluetooth Call…</p></div></div>
   <div class="cb-b0-r"><span class="cb-b0-bt cb-b0-no">Decline</span><span class="cb-b0-bt cb-b0-ok">Accept</span></div>
 </div>`},
-SC:{W:960,H:538,name:'Scheduled charging',cover:1,
-  ask:'Design a scheduled charging card for a car settings screen, 772 × 284 px, light theme. Content: enable switch, Start 22:00 to End 07:00, weekdays Mon through Sun, and an edit icon.',
-  wrong:[['Form inputs for time','Two boxed time pickers and a tiny 16 px checkbox.'],['Tiny weekday chips','Seven boxed pills crowd the bottom row at 13 px.'],['No hierarchy on times','Start and End sit at the same 18 px weight as labels.']],
-  notes:[['48/56 tabular times','22:00 and 07:00 lead with 24/32 Start and End labels above.'],['80 × 48 primary switch','Single toggle dims the whole schedule when turned off.'],['Bare 24/32 weekdays','Active days stay 100%, inactive drop to 42%; one Edit icon right.']],
+SC:{W:960,H:540,name:'Scheduled charging',cover:1,
+  ask:'Design a scheduled charging card for a car settings screen, 772 × 320 px, light theme. Content: title, enable switch, Start 22:00 and End 07:00 time tiles, single-letter weekdays M through S, and an edit icon.',
+  wrong:[['Form inputs for time','Two boxed time pickers and a tiny 16 px checkbox.'],['Flat unsorted row','Switch, arrow and times crowd one band with no card header.'],['Crowded 3-letter day row','Seven wide pills squeeze right into the edit icon.']],
+  notes:[['Header · Content · Footer','HeroUI v3 card anatomy pairs one title and switch above two time tiles.'],['48/56 tabular time tiles','22:00 and 07:00 sit inside soft radius-16 surface bands.'],['Compact M–S day chips','52 × 44 single-letter pills leave 236 px air before the library Edit icon.']],
   html:()=>`<div class="sc-card" role="region" aria-label="Scheduled charging">
-    <div class="sc-top">
+    <div class="sc-hd">
+      <p class="sc-t">Scheduled charging</p>
       <button class="sc-sw" type="button" aria-label="Toggle schedule" aria-pressed="true"><i></i></button>
-      <div class="sc-rng">
-        <div class="sc-col"><span>Start</span><b>22:00</b></div>
-        <svg class="sc-arr" width="16" height="18" viewBox="0 0 16 18" fill="currentColor" aria-hidden="true"><path d="M3 2.5L13.5 9L3 15.5V2.5Z"/></svg>
-        <div class="sc-col"><span>End</span><b>07:00</b></div>
-      </div>
     </div>
-    <div class="sc-line" aria-hidden="true"></div>
-    <div class="sc-bot">
-      <button class="sc-d on" type="button">Mon</button><button class="sc-d on" type="button">Tue</button><button class="sc-d on" type="button">Wed</button><button class="sc-d on" type="button">Thu</button><button class="sc-d on" type="button">Fri</button><button class="sc-d" type="button">Sat</button><button class="sc-d" type="button">Sun</button>
-      <button class="sc-edit" type="button" aria-label="Edit schedule"><svg width="36" height="36" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 14H15a3 3 0 0 0-3 3v16a3 3 0 0 0 3 3h16a3 3 0 0 0 3-3v-7M31.5 12.5l4 4M23 25l12-12"/></svg></button>
+    <div class="sc-slots">
+      <div class="sc-slot"><span>Start</span><b>22:00</b></div>
+      <div class="sc-slot"><span>End</span><b>07:00</b></div>
+    </div>
+    <div class="sc-ft">
+      <div class="sc-days"><button class="sc-d on" type="button" aria-label="Monday">M</button><button class="sc-d on" type="button" aria-label="Tuesday">T</button><button class="sc-d on" type="button" aria-label="Wednesday">W</button><button class="sc-d on" type="button" aria-label="Thursday">T</button><button class="sc-d on" type="button" aria-label="Friday">F</button><button class="sc-d" type="button" aria-label="Saturday">S</button><button class="sc-d" type="button" aria-label="Sunday">S</button></div>
+      <button class="sc-edit" type="button" aria-label="Edit schedule"><svg width="44" height="44" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 13.5H16C15.2044 13.5 14.4413 13.8161 13.8787 14.3787C13.3161 14.9413 13 15.7044 13 16.5V32.5C13 33.2956 13.3161 34.0587 13.8787 34.6213C14.4413 35.1839 15.2044 35.5 16 35.5H32C32.7956 35.5 33.5587 35.1839 34.1213 34.6213C34.6839 34.0587 35 33.2956 35 32.5V24.5"/><path d="M35.5 13L23.5 25"/></svg></button>
     </div>
   </div>`,
   before:()=>`<div class="sc-b" role="region" aria-label="Scheduled charging">
@@ -2502,18 +2520,19 @@ SC:{W:960,H:538,name:'Scheduled charging',cover:1,
   <div class="sc-b-in"><div class="sc-b-f"><span>Start Time</span><b>22:00</b></div><div class="sc-b-f"><span>End Time</span><b>07:00</b></div></div>
   <div class="sc-b-d"><i class="on">Mon</i><i class="on">Tue</i><i class="on">Wed</i><i class="on">Thu</i><i class="on">Fri</i><i>Sat</i><i>Sun</i><span class="sc-b-sv">Save</span></div>
 </div>`},
-DB:{W:960,H:538,name:'Display brightness',cover:1,
-  ask:'Design a display brightness settings card for a car screen, 772 × 284 px, light theme. Content: title “Display brightness”, 3-way mode selector (Auto, Day, Night), and a brightness slider set to 30.',
-  wrong:[['Thin 4 px web slider','Tiny circular handle is hard to grab while driving.'],['Small 16 px segment tabs','Options lose hit area and concentric corner alignment.'],['Unstable value readout','Number jumps horizontally when digits change width.']],
-  notes:[['Concentric 20 › 16 › 12','Card, 64 px track and 56 px segments share one corner family.'],['Inset 80 px slider row','Soft tonal band pairs 24/32 label, pill thumb and tabular value.'],['Fixed 48 px numeral','Right-aligned 28/40 value stays steady while dragging.']],
+DB:{W:960,H:540,name:'Display brightness',cover:1,
+  ask:'Design a display brightness settings card for a car screen, 772 × 316 px, light theme. Content: title “Display brightness”, 3-way mode selector (Auto, Day, Night), and a brightness slider set to 30.',
+  wrong:[['Thin 4 px web slider','Tiny circular handle is hard to grab while driving.'],['Layered competing greys','Extra grey box around the slider creates three grey tones on one card.'],['Cramped vertical rhythm','Tight 20 px gaps crowd title, tabs and slider together.']],
+  notes:[['One unified fill token','Card surface plus one secondary grey shared by segment track and slider track.'],['6 px Boolean cutout thumb','Accent vertical bar splits fill and track cleanly with zero shadows.'],['Spacious 32 px / 28 px rhythm','Generous padding and 28 px gaps give every control room to breathe.']],
   html:()=>`<div class="db-card" role="region" aria-label="Display brightness">
     <p class="db-t">Display brightness</p>
     <div class="db-seg" role="group" aria-label="Display mode"><button class="on" type="button">Auto</button><button type="button">Day</button><button type="button">Night</button></div>
     <div class="db-srow">
       <span class="db-slbl">Brightness</span>
       <div class="db-sl" role="slider" aria-label="Brightness" aria-valuemin="0" aria-valuemax="100" aria-valuenow="30">
-        <div class="db-sb"><div class="db-sf"></div></div>
+        <span class="db-sf"></span>
         <span class="db-th"></span>
+        <span class="db-sr"></span>
       </div>
       <span class="db-val">30</span>
     </div>
@@ -2594,37 +2613,37 @@ const ARCHIVED_ENTRIES=new Set([4]);
 const PUBLISHED_ENTRIES=ENTRIES.filter(e=>e.s&&!ARCHIVED_ENTRIES.has(e.n));
 const PUBLISHED=PUBLISHED_ENTRIES.length;
 const PROMPTS={
-DB:[`Design a display brightness settings card for a car screen, 772 × 284 px, light theme. Content: title “Display brightness”, 3-way mode selector (Auto, Day, Night), and a brightness slider set to 30.`,
-`Design a 772 × 284 px display brightness settings card for a car screen in Inter Medium, light theme.
-Card: white (#222225 in dark), radius 20, 28 px top/bottom and 32 px side padding, 20 px vertical gaps, a 2 px inside border at rgba(15,23,41,0.1) and a soft 0 1 2 shadow at 5%.
+DB:[`Design a display brightness settings card for a car screen, 772 × 316 px, light theme. Content: title “Display brightness”, 3-way mode selector (Auto, Day, Night), and a brightness slider set to 30.`,
+`Design a 772 × 316 px display brightness settings card for a car screen in Inter Medium, light theme.
+Card: white (#222225 in dark), radius 20, 32 px padding on all sides, 28 px vertical gaps, a 2 px inside border at rgba(15,23,41,0.1) and a soft 0 1 2 shadow at 5%. Use only two tonal layers: card surface plus one unified fill/secondary grey (#1D1D1F at 7% in light, #FFFFFF at 9% in dark).
 Title: “Display brightness” in Inter Medium 28/40 (#1D1D1F).
-Mode selector: 64 px tall segmented track, radius 16, fill #1D1D1F at 8%, 4 px padding and 4 px gaps. Three equal options (Auto, Day, Night), 56 px tall, radius 12, labels in 24/32 at 65%; Auto is selected in solid white with a 0 1 3 shadow at 8% and text at 100%.
-Slider row: 80 px tall inset container, radius 16, fill #1D1D1F at 4.5%, 24 px horizontal padding, 24 px gaps. Left label “Brightness” in 24/32 at 65%; flexible horizontal track 8 px tall (radius 999, fill #1D1D1F at 15%) with 30% filled in primary accent blue (#007AFF) and an 8 × 32 px vertical rounded-pill thumb in #007AFF ringed by 2 px white; right value “30” in 28/40 tabular figures, 48 px fixed width, right-aligned.`],
-SC:[`Design a scheduled charging card for a car settings screen, 772 × 284 px, light theme. Content: enable switch, Start 22:00 to End 07:00, weekdays Mon through Sun, and an edit icon.`,
-`Design a 772 × 284 px scheduled charging card for a car screen in Inter Medium, light theme.
-Card: white (#222225 in dark), radius 20, a 2 px inside border at rgba(15,23,41,0.1) and a soft 0 1 2 shadow at 5%.
-Top band, 180 px tall, 36 px horizontal padding, 48 px gaps, vertically centred: an 80 × 48 px pill switch on the left (on in #007AFF with a 40 px white knob on the right), followed by two time columns separated by a 16 px right-pointing triangle at 65%. First column: “Start” in 24/32 at 65% over “22:00” in 48/56 tabular figures (#1D1D1F), 4 px gap. Second column: “End” in 24/32 at 65% over “07:00” in 48/56 tabular figures.
-Inset 1 px hairline (32 px from left and right edges, rgba(15,23,41,0.1)).
-Bottom band, 103 px tall, 36 px left and 28 px right padding: seven bare weekday labels (Mon Tue Wed Thu Fri Sat Sun) in 24/32 evenly spaced across the row — Mon–Fri at 100% (#1D1D1F), Sat–Sun at 42% — followed by a bare 48 px outline edit icon at 65%. No boxed pills around days, no form borders.`],
-CB:[`Design a floating phone call banner for a car screen that transitions from Incoming to Active call, 660–828 × 108 px, light theme. Content: circular action buttons, phone number +1 (415) 555-0192, live timer on active call, and call status.`,
+Mode selector: 64 px tall segmented track, radius 16, fill/secondary, 4 px padding and 4 px gaps. Three equal options (Auto, Day, Night), 56 px tall, radius 12, labels in 24/32 at 65%; Auto is selected in solid white with a 0 1 3 shadow at 8% and text at 100%.
+Slider row: sits directly on the card surface (no extra grey container box), 60 px tall, 28 px gaps. Left label “Brightness” in 24/32 at 65%; flexible Boolean-cut horizontal slider (10 px tall fill in #007AFF on the left, 6 px transparent cutout gap, 8 × 32 px rounded vertical pill thumb in #007AFF with zero shadow, 6 px transparent cutout gap, 10 px tall unfilled track in unified fill/secondary on the right); right value “30” in 28/40 tabular figures, 48 px fixed width, right-aligned.`],
+SC:[`Design a scheduled charging card for a car settings screen, 772 × 320 px, light theme. Content: title, enable switch, Start 22:00 and End 07:00 time tiles, single-letter weekdays M through S, and an edit icon.`,
+`Design a 772 × 320 px scheduled charging card for a car screen in Inter Medium, light theme, structured with HeroUI v3 card anatomy (Header, Content, Footer).
+Card: white (#222225 in dark), radius 20, 28 px top/bottom and 32 px side padding, 24 px vertical gaps, a 2 px inside border at rgba(15,23,41,0.1) and a soft 0 1 2 shadow at 5%.
+Card Header (48 px): single clean line “Scheduled charging” in 28/40 (#1D1D1F) on the left (no redundant subtitle), paired with an 80 × 48 px pill switch (#007AFF on with 40 px white knob) on the right.
+Card Content (120 px): two equal side-by-side inset time tiles (16 px gap, radius 16, fill/secondary, 24 px horizontal padding) — left tile “Start” (20/28 at 65%) over “22:00” (48/56 tabular), right tile “End” over “07:00”.
+Card Footer (48 px): seven compact 52 × 44 px single-letter weekday chips (M T W T F S S, radius 12, 10 px gap) with active M–F filled in fill/secondary at 100% text and inactive S–S transparent at 42%, leaving generous breathing room before a 48 px system general/edit icon at 65% on the far right.`],
+CB:[`Design a floating phone call banner for a car screen that transitions from Incoming to Active call, 660–828 × 108 px, light theme. Content: circular action buttons, phone number +86 17713032268, live timer on active call, and call status.`,
 `Design an animated floating phone call banner for a car screen in Inter Medium, light theme, 108 px tall, radius 20, floating glass surface (#FFFFFF at 92% or 65% with 12 px blur; #222225 in dark), 1 px inside border, soft elevation shadow, and a centred 48 × 4 px bottom grabber pill.
-Incoming state (660 px wide): 20 px left and 28 px right padding, 20 px gaps. Two 64 × 64 px circular action buttons 16 px apart — green Answer (#1F9D3A with a subtle pulsing outer ring) and red Decline (#D9362B), each with a 30 px white handset icon — followed by “+1 (415) 555-0192” in 28/40 tabular figures, a 2 × 32 px hairline divider, and “Incoming” in 24/32 green (#1F9D3A).
-Active state (morphs smoothly with a 520 ms spring to 828 px wide): green Answer collapses out while two 64 × 64 px neutral circular controls (#1D1D1F at 8%, Mute microphone and Audio device icons) slide in beside red End; a live ticking tabular timer “00:27” in 24/32 at 65% appears right of the number; status switches to “On call”.`],
+Incoming state (660 px wide): space-between layout with 20 px left and 28 px right padding. Left group (20 px gap): two 64 × 64 px circular buttons 16 px apart — teal-green Answer (#14A085 with subtle pulsing ring) and red Decline (#D9362B), each dead-centering a 32–36 px filled white library handset icon — followed by “+86 17713032268” in 28/40 tabular figures. Right group (20 px gap, locked flush right): a 2 × 32 px hairline divider and “Incoming” in 24/32 teal-green (#14A085).
+Active state (morphs smoothly with a 580 ms spring to 828 px wide): Answer scales down smoothly out of its slot while two 64 × 64 px neutral circular controls (#1D1D1F at 8%, Mute mic-off and Audio phone-frame icons) bloom in beside red End; live ticking tabular timer starting from “00:00” in 24/32 at 65% glides in right of the number; right-locked status crossfades smoothly to “On call”.`],
 MP:[`Design a compact floating media player card for a car screen, 560 × 248 px, light theme. Content: album art, track “HOME”, artist “Armand Amar · Gombodorj”, progress bar, lyrics toggle, previous, play, next, favorite, and an Apple Music source icon.`,
 `Design a 560 × 248 px floating mini media player for a car screen in Inter Medium, light theme.
-Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px blur; #222225 in dark), radius 20, 1 px inside border, soft elevation shadow, and a centred 44 × 4 px top grabber pill at y 12.
-Top section (28 px top, 24 px side padding, 20 px gap): a 108 × 108 px rounded square (radius 14) Earth-horizon “HOME” album cover on the left. On the right, track title “HOME” in 32/40 (#1D1D1F) over artist “Armand Amar · Gombodorj” in 24/32 at 65%, a bare 48 px quote-bubble Lyrics icon at 65% pinned top right, and a bare 6 px full-width pill progress track (38% filled in neutral secondary, no knob, no timestamps) aligned with the bottom of the cover art.
-Bottom transport row (24 px side padding): five evenly spaced 68 × 68 px touch targets — filled Previous, filled Play (optically nudged 1 px right), filled Next, outline Heart at 65%, and a 40 × 40 px rounded-square (radius 10) Apple Music icon (#FB5C74 to #FA243C gradient with white beamed eighth note) on the far right.`],
+Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px blur; #222225 in dark), radius 20, 1 px inside border, and soft elevation shadow. No top grabber bar.
+Top section (24 px top and side padding, 20 px gap): a 108 × 108 px rounded square (radius 14) abstract blue-wave album cover on the left. On the right, track title “HOME” in 24/32 (#1D1D1F) over artist “Armand Amar · Gombodorj” in 20/28 at 65%, a clean non-overlapping 48 px outline Lyrics-note icon at 65% pinned top right, and a bare 6 px full-width pill progress track (38% filled in 100% primary foreground, no knob, no timestamps) aligned with the bottom of the cover art.
+Bottom transport row (28 px side padding): five evenly spaced 64 × 64 px touch targets — filled Previous, filled Play, filled Next, outline Heart at 65%, and an optically balanced 30 × 30 px squircle Apple Music icon (#FB5C74 to #FA233B gradient with white beamed eighth note) on the far right.`],
 HO:[`Design an assisted driving hands-on steering wheel alert card for a car screen, 576 × 284 px, light theme. Content: tell the driver to hold the steering wheel or assisted driving will exit. Nothing else.`,
 `Design a 576 × 284 px assisted driving hands-on alert card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px blur; #222225 in dark), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No warning banner, no amber frame, no buttons.
-Top: two centred lines with clear hierarchy — “Hold the steering wheel” in Inter Medium 32/44 (#1D1D1F in light, #FFFFFF in dark) at y 24, followed 2 px below by “Otherwise assisted driving will exit” in 24/32 at 65% (60% in dark).
-Bottom: a front-facing minimalist matte dark-graphite round 3-spoke steering wheel (completely blank unbranded centre airbag pad with zero logo) centred near the bottom edge, gripped at 9 and 3 o’clock by two translucent glowing crimson-red 3D hands fading softly at the wrists. Zero dismiss buttons (clears automatically when grip torque is detected).`],
+Top: two centred lines with clear 1.4× hierarchy — “Hold the steering wheel” in Inter Medium 28/40 (#1D1D1F in light, #FFFFFF in dark) at y 24, followed cleanly at y 64 by “Otherwise assisted driving will exit” in 20/28 at 65% (60% in dark).
+Bottom: a front-facing minimalist matte dark-graphite round 3-spoke steering wheel (completely blank unbranded centre airbag pad with zero logo, 196 × 152 px centred at y 110 with 18 px air above and 22 px margin below), gripped at 9 and 3 o’clock by stylized translucent red contour-outline hand silhouettes (clean glowing red outlines, no realistic skin or fingers) fading softly at the wrists. Zero dismiss buttons.`],
 DA:[`Design a driver distraction alert card for a car screen, 576 × 284 px, light theme. Content: warn the driver to keep their eyes on the road when using a phone. Nothing else.`,
 `Design a 576 × 284 px driver distraction alert card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a 3D driving scene; #222225 in dark), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No red border, no warning banner, no buttons.
-Top: one centred line “Keep your eyes on the road” in Inter Medium 32/44 (#1D1D1F in light, #FFFFFF in dark), 32 px from the top edge with 32 px horizontal padding.
-Bottom: a single minimalist faceless 3D greyscale sculptural mannequin bust (236 × 196 px), optically centred and anchored flush to the bottom edge, holding a slim matte dark smartphone up to its ear. Keep the figure neutral matte stone-grey with soft top-left studio lighting and a smooth bottom fade into transparency so it dissolves cleanly into the card surface. No warning triangles, no red icons, no legal paragraph, no dismiss buttons (the alert clears automatically when the driver looks back at the road).`],
+Top: one centred line “Keep your eyes on the road” in Inter Medium 28/40 (#1D1D1F in light, #FFFFFF in dark), 24 px from the top edge with 32 px horizontal padding.
+Bottom: a single minimalist faceless 3D greyscale sculptural mannequin bust (226 × 196 px), optically centred and anchored flush to the bottom edge, holding a slim matte dark smartphone up to its ear. Keep the figure neutral matte stone-grey with soft top-left studio lighting and a smooth bottom fade into transparency so it dissolves cleanly into the card surface. No warning triangles, no red icons, no legal paragraph, no dismiss buttons (the alert clears automatically when the driver looks back at the road).`],
 NS:[`Design a navigation search card for a car screen, 560 × 204 px, light theme. Content, exactly: a search bar with “Navigate” and Home and Work shortcuts, and two quick destinations below — “Galen Place” (“Galen Pl, Fremont”) as a recent stop and “Palo Alto” (“Palo Alto, CA”) as a charging station. Nothing else.`,
 `Design a 560 × 204 px navigation search card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a map), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No horizontal divider line; separate the top search band from the bottom destinations band using a subtle full-width tonal fill (#1D1D1F at 4.5% in light, #FFFFFF at 5% in dark) on the bottom band.
@@ -3033,32 +3052,43 @@ function wireSheet(){
     if(fav)fav.onclick=()=>fav.classList.toggle('on');
     if(pl)pl.onclick=()=>{const p=pl.dataset.p==='1';pl.dataset.p=p?'0':'1';pl.innerHTML=p?'<svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor"><path d="M13 9.4c0-1.3 1.44-2.1 2.55-1.42l16.2 10.6a1.65 1.65 0 0 1 0 2.84l-16.2 10.6C14.44 32.7 13 31.9 13 30.6V9.4z"/></svg>':'<svg width="40" height="40" viewBox="0 0 40 40" fill="currentColor"><rect x="11" y="9" width="6" height="22" rx="2"/><rect x="23" y="9" width="6" height="22" rx="2"/></svg>'};
   }
-  // 025 animated call banner (Incoming -> Active -> Calling spring morph + live timer)
+  // 025 animated call banner (elastic spring morph + simultaneous vertical roller status labels)
   const cb=$('.nv.cb[data-live="1"]',st);
   if(cb){
-    const bAns=$('[data-act=ans]',cb),bMute=$('[data-act=mute]',cb),bDev=$('[data-act=dev]',cb),tm=$('.cb-tm',cb),lbl=$('.cb-st',cb);
-    let sec=24,pausedUntil=0,step=0;
+    const sAns=$('[data-slot=ans]',cb),sMute=$('[data-slot=mute]',cb),sDev=$('[data-slot=dev]',cb);
+    const bAns=$('[data-act=ans]',cb),bEnd=$('[data-act=end]',cb),bMute=$('[data-act=mute]',cb),bDev=$('[data-act=dev]',cb);
+    const tm=$('.cb-tm',cb),lbls=$$('.cb-st',cb);
+    let sec=0,pausedUntil=0,step=0,curSt='incoming';
     const fmt=s=>`00:${String(s).padStart(2,'0')}`;
-    const setSt=s=>{
+    const pulseTap=btn=>{if(!btn)return;btn.classList.add('tap');setTimeout(()=>btn.classList.remove('tap'),180)};
+    const setSt=(s,via)=>{
+      if(via)pulseTap(via);
+      const prev=curSt;
+      curSt=s;
       cb.dataset.st=s;
-      bAns.classList.toggle('hide',s!=='incoming');
-      bMute.classList.toggle('hide',s!=='active');
-      bDev.classList.toggle('hide',s!=='active');
-      lbl.textContent=s==='incoming'?'Incoming':s==='active'?'On call':'Calling';
-      if(s==='active'){sec=24;tm.textContent=fmt(sec)}
+      sAns.classList.toggle('hide',s!=='incoming');
+      sMute.classList.toggle('hide',s!=='active');
+      sDev.classList.toggle('hide',s!=='active');
+      if(s!=='active'){bMute.classList.remove('on');bDev.classList.remove('on')}
+      lbls.forEach(el=>{
+        const k=el.dataset.lbl;
+        el.classList.toggle('is-cur',k===s);
+        el.classList.toggle('is-prev',k===prev&&k!==s);
+      });
+      if(s==='active'){sec=0;tm.textContent=fmt(sec)}
     };
-    bAns.onclick=()=>{pausedUntil=Date.now()+8000;setSt('active')};
-    $('[data-act=end]',cb).onclick=()=>{pausedUntil=Date.now()+6000;setSt(cb.dataset.st==='calling'?'incoming':'calling')};
-    bMute.onclick=()=>{pausedUntil=Date.now()+8000;bMute.classList.toggle('on')};
-    bDev.onclick=()=>{pausedUntil=Date.now()+8000;bDev.classList.toggle('on')};
+    bAns.onclick=()=>{pausedUntil=Date.now()+9000;setSt('active',bAns)};
+    bEnd.onclick=()=>{pausedUntil=Date.now()+7000;setSt(cb.dataset.st==='calling'?'incoming':'calling',bEnd)};
+    bMute.onclick=()=>{pausedUntil=Date.now()+9000;pulseTap(bMute);bMute.classList.toggle('on')};
+    bDev.onclick=()=>{pausedUntil=Date.now()+9000;pulseTap(bDev);bDev.classList.toggle('on')};
     const iv=setInterval(()=>{
       if(!cb.isConnected){clearInterval(iv);return}
       if(cb.dataset.st==='active'){sec++;tm.textContent=fmt(sec)}
       if(RM.matches||Date.now()<pausedUntil)return;
       step++;
-      if(step===3)setSt('active');
-      else if(step===8)setSt('calling');
-      else if(step===11){step=0;setSt('incoming')}
+      if(step===3){pulseTap(bAns);setTimeout(()=>{if(cb.isConnected&&Date.now()>=pausedUntil)setSt('active')},160)}
+      else if(step===9){pulseTap(bEnd);setTimeout(()=>{if(cb.isConnected&&Date.now()>=pausedUntil)setSt('calling')},160)}
+      else if(step===12){step=0;setSt('incoming')}
     },1000);
   }
   // 026 scheduled charging interactive switch & weekdays
@@ -3073,9 +3103,9 @@ function wireSheet(){
   if(db){
     const bs=$$('.db-seg button',db);
     bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.remove('on'));b.classList.add('on')});
-    const sl=$('.db-sl',db),sf=$('.db-sf',db),th=$('.db-th',db),vl=$('.db-val',db);
+    const sl=$('.db-sl',db),vl=$('.db-val',db);
     if(sl){
-      const upd=e=>{const r=sl.getBoundingClientRect(),p=Math.max(0,Math.min(100,Math.round((e.clientX-r.left)/r.width*100)));sf.style.width=p+'%';th.style.left=p+'%';vl.textContent=p;sl.setAttribute('aria-valuenow',p)};
+      const upd=e=>{const r=sl.getBoundingClientRect(),p=Math.max(0,Math.min(100,Math.round((e.clientX-r.left)/r.width*100)));sl.style.setProperty('--p',p+'%');vl.textContent=p;sl.setAttribute('aria-valuenow',p)};
       let drag=false;
       sl.onpointerdown=e=>{drag=true;sl.setPointerCapture(e.pointerId);upd(e)};
       sl.onpointermove=e=>{if(drag)upd(e)};
