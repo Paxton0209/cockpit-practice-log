@@ -406,8 +406,10 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 /* 015 place details */
 .pl{width:560px;flex-direction:column;gap:24px;padding:24px;border-radius:20px}
 /* 021 navigation search */
-.nv.ns{--ns-band:rgba(29,29,31,.045);--ns-vsep:rgba(15,23,41,.08);width:560px;height:204px;flex-direction:column;border-radius:20px;overflow:hidden}
-[data-theme=dark] .cov .kp:not(.is-b) .nv.ns{--ns-band:rgba(255,255,255,.05);--ns-vsep:rgba(255,255,255,.1)}
+.nv.ns{--ns-band:rgba(29,29,31,.045);--ns-vsep:rgba(15,23,41,.08);width:560px;height:204px;flex-direction:column;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
+.nv.ns::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
+[data-theme=dark] .cov .kp:not(.is-b) .nv.ns{--ns-band:rgba(255,255,255,.05);--ns-vsep:rgba(255,255,255,.08)}
+[data-theme=dark] .cov .kp:not(.is-b) .nv.ns::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
 .nv.ns .ns-top{flex:none;height:100px;display:flex;align-items:center;gap:12px;padding:0 20px 0 16px}
 .nv.ns .ns-in{flex:1;min-width:0;display:flex;align-items:center;gap:8px;color:var(--mfg);font-size:28px;line-height:40px}
 .nv.ns .ns-acts{flex:none;display:flex;align-items:center;gap:16px;color:var(--mfg)}
