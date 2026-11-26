@@ -15,13 +15,14 @@
 
 ## 2. 本轮已完成内容
 
-### Dashnote 网页（当前 21 / 100）
+### Dashnote 网页（当前 26 / 100）
 
-- 首页已发布 21 个组件（`001–003`、`005–022`，`004` 已下架保留代码），并正式解锁侧栏第 4 个分类 **`Driving assist`**。
-- 完成并上线 **`022 Driver alert`**（`576 × 284 px`，DMS 驾驶分心/手机使用提醒）
-  - 顶栏单行居中英文 `Keep your eyes on the road`（`en/title/medium` `32/44`），下方配纯中性哑光灰无面雕塑半身像（手持深色手机至耳边，底部柔和渐隐透明融入卡片底色，浅色与深色分别配备独立无白边透明 PNG 资产 `site/assets/dms-bust-light.png` 与 `dms-bust-dark.png`）。
-  - 零红色警戒横幅、零冗长法规说教、零关闭按钮（行驶中瞬态 DMS 提醒在视线回正后自动消失，避免诱发额外触屏操作）。
-  - 同步在 Figma `UI-UX-Library` 的 `Cards`（`6:62`）新增主组件 `driver-alert / phone-use`（`2354:10`），完整绑定 `surface/floating-glass`、`border/primary`、`text/primary` 与 `en/title/medium`。
+- 首页已发布 26 个组件（`001–003`、`005–027`，`004` 已下架保留代码），正式解锁 **`Driving assist`** 与 **`Media`** 两个新分类，侧栏五大分类已就位（仅剩 `Climate` 待解锁）。
+- 完成并上线 **`022 Driver alert`**（`576 × 284 px`，DMS 手机分心提醒，已按反馈优化为更轻盈的浅灰调、低圆领与更自然的头身比例）与 **`023 Hands-on alert`**（`576 × 284 px`，去标无 logo 哑光方向盘配透亮红手提醒，`32/44` + `24/32` 双行层级，零按钮）。
+- 完成并上线 **`024 Mini player`**（`560 × 248 px`，解锁 `Media` 分类，含 `HOME` 地球地平线封面、英文字幕切换图标、5 枚 `68 px` 等距播控键与右下角 `Apple Music` 矢量图标）。
+- 完成并上线 **`025 Call banner`**（`568 / 660 / 828 × 108 px`，三态弹簧动效在 `Incoming` → `Active` 实时计时 → `Calling` 间平滑变形，支持点击接听/挂断/静音交互）。
+- 完成并上线 **`026 Scheduled charging`**（`772 × 284 px`，`80 × 48` 开关 + `48/56` `22:00 → 07:00` + 可点击 `Mon–Sun` 重复日）与 **`027 Display brightness`**（`772 × 284 px`，同心圆角三档分段控件 + `80 px` 浅色槽竖条滑块实时读数）。
+- 同步在 Figma `UI-UX-Library` 的 `Cards`（`6:62`）和 `Banner`（`6:59`）补齐全部 6 个主组件（`driver-alert / phone-use`、`driver-alert / hands-on`、`media / mini-player`、`call-banner`、`charging / schedule`、`settings / mode-slider`）。
 - 完成并上线 **`021 Navigation search`**（`560 × 204 px`，Prompt 评测像素匹配度 `99.10%`）
   - 上下比例平衡为 `100 px` 顶部搜索区 + `104 px` 底部轻色带（浅色 `#1D1D1F 4.5%`、深色 `#FFFFFF 5%`），取消横向分割线。
   - 搜索、历史、充电图标统一使用 `56 px` `3 px` 线宽中性次要色（无蓝/红点缀），图标框到文字间距 `8 px`（视觉净距约 `20 px`）。
