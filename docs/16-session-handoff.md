@@ -37,7 +37,11 @@
   - `Cards`（`6:62`）、`Popup`（`6:67`）、`Navigation`（`6:80`）、`Search`（`6:72`）、新建 `Voice & AI`（`2298:6095`）、`Toggle`、`List`、`Icons`。
 - 按第一性原理清理了 73 项零引用死资产（空页面 `Getting Started`、13 个死文字样式含全部 `zh/*`、13 个死 `Type` 变量、4 个死 `Size` 变量、21 个死 `Color` 变量、21 个死 `Primitives` 变量）。
 - 补全此前空白的 3 个 Foundations 规范板：`Color`（`6:88`）、`Typography`（`6:98`）、`Layout`（`6:108`），全部绑定真实变量与样式。
-- `Guideline` 同步更新 `02 Type`、`03 Size`、`Voice & AI Guide`（`7799:867`），并新增 `Navigation search & Energy use Guide`（`7808:860`）。
+- 全库 QA 与清理完成
+  - 删除中间变量集合 `Icon`（`foreground`），全库图标与组件实例直接绑定 `Color → icon/primary · icon/secondary · icon/tertiary · icon/disabled · icon/on-accent`，Figma 右侧 `Selection colors` 直接显示语义色名。
+  - 修复 4 处几何裁切与溢出 bug：`Progress` 线性进度条蓝条高度 `12 → 10`（圆角不再被平切）与环形进度圆环 `103 × 103 → 86 × 86`（不再溢出组件框）、`Menu` 的 `side-nav` 纵向尺寸从 `FILL`（被压扁到 `88 px`）改回 `HUG`（恢复完整 `722 px` 9 项菜单）、`Search` 的 `keyboard-key` 容器高度 `84 → 91`（取消底边 `7 px` 裁切）以及 `search-quick-destinations` 关闭 `strokesIncludedInLayout` 消除 `1 px` 偏移。
+  - 补全 15 个分类页（`Tabs`、`Buttons`、`Input field`、`List`、`Chips`、`Picker`、`Tags`、`Menu`、`Search`、`Navigation`、`Popup`、`Steppers`、`System Bars`、`Panel`、`Cards`）共 100 余处漏绑的标准 `en/*` 文字样式，并补绑 `Navigation` 的 `Recommendation tag`（`accent/primary`）与 `Cards` 胎压四轮色块（`fill/primary`）。
+- `Guideline` 同步更新 `01 Color`（全部旧名对齐 `<purpose>/<weight>` 命名体系）、`02 Type`（清理 `Regular 400` 与错位字号行、统一英文 Inter 两档字重）、`03 Size`（对齐全贴边 `740 + 1180 + 110` 版位、更正间距顺序与 `border/primary · border/tertiary · surface/floating-glass` 命名）、`04 Icons`（`BASE-08` 改为直接绑定 `Color → icon/*`）、`Voice & AI Guide`（`7799:867`），并新增 `Navigation search & Energy use Guide`（`7808:860`）。
 
 ## 3. 用户偏好与硬性约束（新对话务必遵守）
 
