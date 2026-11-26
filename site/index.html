@@ -433,9 +433,9 @@ footer{margin-top:160px;padding:20px 0 48px;display:flex;justify-content:space-b
 .nv.ho{position:relative;width:576px;height:284px;flex-direction:column;align-items:center;border-radius:20px;overflow:hidden;box-shadow:var(--preview-shadow)}
 .nv.ho::after{content:"";position:absolute;inset:0;border-radius:inherit;corner-shape:inherit;box-shadow:inset 0 0 0 1px rgba(29,29,31,.05);pointer-events:none}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.ho::after{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08),inset 0 1px 0 rgba(255,255,255,.05)}
-.nv.ho .ho-h{position:absolute;left:32px;right:32px;top:24px;margin:0;text-align:center;font-weight:500;font-size:32px;line-height:44px;color:var(--fg)}
-.nv.ho .ho-s{position:absolute;left:32px;right:32px;top:70px;margin:0;text-align:center;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg)}
-.nv.ho .ho-fig{position:absolute;left:138px;bottom:14px;width:300px;height:144px;display:block;pointer-events:none;user-select:none}
+.nv.ho .ho-h{position:absolute;left:32px;right:32px;top:22px;margin:0;text-align:center;font-weight:500;font-size:32px;line-height:44px;color:var(--fg)}
+.nv.ho .ho-s{position:absolute;left:32px;right:32px;top:68px;margin:0;text-align:center;font-weight:500;font-size:24px;line-height:32px;color:var(--mfg)}
+.nv.ho .ho-fig{position:absolute;left:175px;bottom:12px;width:226px;height:164px;display:block;pointer-events:none;user-select:none}
 .nv.ho .ho-fig-dark,[data-theme=dark] .cov .kp:not(.is-b) .nv.ho .ho-fig-light{display:none}
 [data-theme=dark] .cov .kp:not(.is-b) .nv.ho .ho-fig-dark{display:block}
 /* 024 mini player */
@@ -2361,8 +2361,8 @@ HO:{W:760,H:426,name:'Hands-on alert',cover:1,
   html:()=>`<div class="nv ho" role="alert" aria-label="Hands-on alert">
     <p class="ho-h">Hold the steering wheel</p>
     <p class="ho-s">Otherwise assisted driving will exit</p>
-    <img class="ho-fig ho-fig-light" src="assets/steer-hands-light.png" width="300" height="144" alt="">
-    <img class="ho-fig ho-fig-dark" src="assets/steer-hands-dark.png" width="300" height="144" alt="">
+    <img class="ho-fig ho-fig-light" src="assets/steer-hands-light.png" width="226" height="164" alt="">
+    <img class="ho-fig ho-fig-dark" src="assets/steer-hands-dark.png" width="226" height="164" alt="">
   </div>`,
   before:()=>`<div class="ho-b" role="alert" aria-label="Hands-on alert">
   <style>
@@ -2619,7 +2619,7 @@ HO:[`Design an assisted driving hands-on steering wheel alert card for a car scr
 `Design a 576 × 284 px assisted driving hands-on alert card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px blur; #222225 in dark), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No warning banner, no amber frame, no buttons.
 Top: two centred lines with clear hierarchy — “Hold the steering wheel” in Inter Medium 32/44 (#1D1D1F in light, #FFFFFF in dark) at y 24, followed 2 px below by “Otherwise assisted driving will exit” in 24/32 at 65% (60% in dark).
-Bottom: a front-facing minimalist matte dark-graphite half-yoke steering wheel (300 × 144 px, completely blank unbranded centre airbag pad with zero logo) centred at bottom 14 px, gripped at 9 and 3 o’clock by two translucent glowing crimson-red 3D hands fading softly at the wrists. Zero dismiss buttons (clears automatically when grip torque is detected).`],
+Bottom: a front-facing minimalist matte dark-graphite round 3-spoke steering wheel (completely blank unbranded centre airbag pad with zero logo) centred near the bottom edge, gripped at 9 and 3 o’clock by two translucent glowing crimson-red 3D hands fading softly at the wrists. Zero dismiss buttons (clears automatically when grip torque is detected).`],
 DA:[`Design a driver distraction alert card for a car screen, 576 × 284 px, light theme. Content: warn the driver to keep their eyes on the road when using a phone. Nothing else.`,
 `Design a 576 × 284 px driver distraction alert card for a car screen in Inter Medium, light theme.
 Surface: light floating glass (#FFFFFF at 92% on a cover or 65% with 12 px backdrop blur over a 3D driving scene; #222225 in dark), radius 20, a 1 px inside border (#1D1D1F at 5% in light, #FFFFFF at 8% in dark), and a soft elevation shadow. No red border, no warning banner, no buttons.
