@@ -1,6 +1,6 @@
 # 16 · Dashnote 交接（2026-11-26）
 
-本文件用于新开对话快速接手，汇总当前仓库状态、Figma 资产、视频工作流、用户偏好与表达规范。设计规范主文档见 [15-card-guideline.md](15-card-guideline.md)。
+本文件用于新开对话快速接手，汇总当前仓库状态、Figma 资产、视频工作流、用户偏好与表达规范。视觉规范主文档见 [15-card-guideline.md](15-card-guideline.md)，交互与动效规范见 [18-interaction-motion-spec.md](18-interaction-motion-spec.md)。
 
 ## 1. 仓库、预览与关键路径
 
